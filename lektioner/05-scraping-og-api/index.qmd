@@ -1,0 +1,31 @@
+---
+title: "Scraping og API-kald"
+lektion: 5
+date: 2026-09-17
+description: "Indsamling af data fra nettet: web scraping med Beautiful Soup og API-kald med requests."
+status: anden        # klar | kommer | anden | moodle
+slides: false
+underviser: "Anden underviser"
+litteratur:
+  - "Severance (2016), kap. 12 og 13"
+  - "Krotov, Redd & Silva (2020)"
+---
+
+::: {.lektion-knapper}
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+kl. 12.30–16.15
+
+## Om lektionen
+
+Vi introducerer indsamling af data fra internettet via web scraping og API-kald i Python. Vi ser specifikt på scraping af "råt" hjemmesideindhold med `Beautiful Soup` og API-kald med `requests`.
+
+Slides og notebooks til denne gang ligger på [Moodle]({{< var moodle >}}).
+
+## Forberedelse og litteratur
+
+- [Severance (2016)](http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf), kapitel 12 (*Networked Programs*) og 13 (*Python and Web Services*). De skal ikke læses i alle tekniske detaljer. Fokusér på, hvordan en computer henter indhold via HTTP, forskellen mellem HTML og JSON, og forskellen mellem scraping og brug af et API.
+- Krotov, V., Redd, L. & Silva, L. (2020): "Legality and Ethics of Web Scraping." *Communications of the Association for Information Systems*, 47, 539–563. Grundlag for diskussionen af jura og etik.
+- Supplerende: MDN Contributors, "How the Web Works" og "Basic HTML Syntax".
+- Dokumentation: [Requests: Quickstart](https://requests.readthedocs.io/en/latest/user/quickstart/), [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/), dokumentationen til Statistikbankens API.

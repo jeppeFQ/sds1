@@ -1,0 +1,595 @@
+/* =====================================================================
+   SDS1 · DESIGNSYSTEM FOR SLIDES            (én fil for hele kurset)
+   ---------------------------------------------------------------------
+   1. Variable (farver, skrift, mål)  ← ret her, så følger alt andet med
+   2. Grundtypografi
+   3. De seks layouts: titel · sektion · udsagn · indhold · kodelab · opgave
+   4. De tre celler:   Demo · Prøv selv · Øvelse
+   5. Interaktive dele: gæt først, skyder, linjefokus, fold-ud
+   6. Værktøjer: status, mørk tilstand, kopiér link, ordliste, timer
+   7. Tilgængelighed, smal skærm, print
+   Filen hentes automatisk af sds1.lua. Den skal ikke kopieres ud i lektionerne.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------- 1 · variable */
+:root {
+  /* AAU. Primærfarven er AAU Blå. Sekundærfarverne er PLADSHOLDERE, indtil de
+     officielle HEX-værdier er sat ind (se README → "Farver"). Hver farve har
+     -dyb (tekst/flader, ≥ 4,5:1 mod hvid), grundfarve og -lys (til mørk baggrund). */
+  --aau-blaa: #211A52;
+  --lyseblaa-dyb: #2F6FB0; --lyseblaa: #5295D4; --lyseblaa-lys: #8DBBE8; --lyseblaa-tone: #E6F0FA;
+  --turkis-dyb:   #13756F; --turkis:   #1FA39A; --turkis-lys:   #5CCFC6; --turkis-tone:   #E3F4F2;
+  --orange-dyb:   #B4501F; --orange:   #E8793F; --orange-lys:   #F2A277; --orange-tone:   #FCEDE4;
+  --lilla-dyb:    #5E449E; --lilla:    #7A5CC0; --lilla-lys:    #B19CE3; --lilla-tone:    #EFEAF8;
+  --gul-dyb:      #8A6100; --gul:      #F2B53A; --gul-lys:      #F2B53A; --gul-tone:      #FDF4DF;
+
+  /* Lektionens accentfarve. Sættes med  accent: turkis  i lektionens YAML. */
+  --accent-dyb: var(--lyseblaa-dyb); --accent: var(--lyseblaa);
+  --accent-lys: var(--lyseblaa-lys); --accent-tone: var(--lyseblaa-tone);
+
+  /* Lyst tema */
+  --papir: #FFFFFF;
+  --tekst: var(--aau-blaa);
+  --tekst-svag: #55536A;
+  --linje: #DCDBE6;
+  --flade: #F6F6FA;
+  --accent-tekst: var(--accent-dyb);      /* links, fremhævet tekst */
+  --accent-flade: var(--accent-dyb);      /* knapper, sektionsslides (hvid tekst ovenpå) */
+  --accent-svag: var(--accent-tone);      /* lyse fremhævninger */
+
+  /* Kodepaneler er mørke i begge temaer */
+  --kode-bg: #16132E;
+  --kode-bg-2: #211D42;
+  --kode-linje: #35315A;
+  --kode-tekst: #E8E6F5;
+  --kode-svag: #9A97BD;
+  --kode-fokus: rgba(255, 255, 255, 0.10);
+  --output-bg: var(--flade);
+  --output-tekst: #1C1B26;
+  --ok: #1B7A46; --ok-tone: #E2F3E9;
+  --fejl: #B3261E; --fejl-tone: #FBE9E7;
+
+  /* Skrift: to tekststørrelser. Overskrifter er ét trin over normal, kode og fold-ud ét trin under. */
+  --skrift: "Barlow", Arial, "Helvetica Neue", sans-serif;
+  --skrift-kode: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  --str-stor: 2.3em;
+  --str-normal: 1em;
+  --str-overskrift: 1.3em;
+  --str-lille: 0.58em;
+  --str-kode: 0.6em;
+  --radius: 10px;
+  --luft: 1.1em;
+}
+html[data-accent="lyseblaa"] { --accent-dyb: var(--lyseblaa-dyb); --accent: var(--lyseblaa); --accent-lys: var(--lyseblaa-lys); --accent-tone: var(--lyseblaa-tone); }
+html[data-accent="turkis"]   { --accent-dyb: var(--turkis-dyb);   --accent: var(--turkis);   --accent-lys: var(--turkis-lys);   --accent-tone: var(--turkis-tone); }
+html[data-accent="orange"]   { --accent-dyb: var(--orange-dyb);   --accent: var(--orange);   --accent-lys: var(--orange-lys);   --accent-tone: var(--orange-tone); }
+html[data-accent="lilla"]    { --accent-dyb: var(--lilla-dyb);    --accent: var(--lilla);    --accent-lys: var(--lilla-lys);    --accent-tone: var(--lilla-tone); }
+html[data-accent="gul"]      { --accent-dyb: var(--gul-dyb);      --accent: var(--gul);      --accent-lys: var(--gul-lys);      --accent-tone: var(--gul-tone); }
+
+html[data-tema="moerk"] {
+  --papir: #121022;
+  --tekst: #ECEBF5;
+  --tekst-svag: #B4B2C8;
+  --linje: #35315A;
+  --flade: #1C1934;
+  --accent-tekst: var(--accent-lys);
+  --accent-svag: #26224A;
+  --kode-bg: #070614;                 /* mørkere end papiret, så panelet stadig står frem */
+  --kode-bg-2: #121022;
+  --kode-linje: #4A4580;
+  --output-bg: #1C1934;
+  --output-tekst: #ECEBF5;
+  --ok: #6FD39B; --ok-tone: #12301F;
+  --fejl: #FF9A90; --fejl-tone: #3A1614;
+}
+
+/* reveal.js' egne variable følger designsystemet (temaet indlæses efter denne fil, derfor html:root) */
+html:root {
+  --r-link-color: var(--accent-tekst); --r-link-color-hover: var(--accent-tekst); --r-link-color-dark: var(--accent-dyb);
+  --r-heading-color: var(--tekst); --r-main-color: var(--tekst); --r-background-color: var(--papir);
+}
+
+/* ---------------------------------------------------------------- 2 · grundtypografi */
+.reveal-viewport, html[data-tema] body { background: var(--papir); }
+.reveal { font-family: var(--skrift); color: var(--tekst); font-size: 28px; }
+.reveal .slides { text-align: left; }
+.reveal .slides section { color: var(--tekst); }
+.reveal h1, .reveal h2, .reveal h3, .reveal .slides section h1, .reveal .slides section h2, .reveal .slides section h3 {
+  font-family: var(--skrift); color: var(--tekst); text-transform: none;
+  letter-spacing: -0.01em; line-height: 1.12; text-align: left;
+  border: 0; text-decoration: none; background: none;      /* ingen streg under overskrifter */
+}
+.reveal h2 { font-size: var(--str-overskrift); font-weight: 600; margin: 0 0 0.7em; }
+.reveal h3 { font-size: var(--str-normal); font-weight: 600; margin: 0 0 0.4em; }
+.reveal p, .reveal li { line-height: 1.42; }
+.reveal p { margin: 0 0 0.7em; }
+.reveal ul, .reveal ol { margin: 0 0 0.7em 1.1em; }
+.reveal li { margin: 0.28em 0; }
+.reveal ul li::marker { color: var(--accent-tekst); }
+.reveal ol li::marker { color: var(--accent-tekst); font-weight: 600; }
+.reveal strong { font-weight: 600; }
+.reveal a { color: var(--accent-tekst); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+.reveal a:hover { text-decoration-thickness: 2px; }
+.reveal .lille, .reveal .aside, .reveal figcaption { font-size: var(--str-lille); color: var(--tekst-svag); }
+.reveal .aside { margin-top: 0.8em; }
+.reveal .fremhaev { color: var(--accent-tekst); font-weight: 600; }
+.reveal blockquote {
+  margin: 0 0 0.8em; padding: 0 0 0 0.8em; width: auto; box-shadow: none; font-style: normal;
+  border-left: 4px solid var(--accent); color: var(--tekst);
+}
+.reveal blockquote p { color: var(--tekst); font-size: 1.15em; font-weight: 500; }
+.reveal .aside, .reveal .aside p { color: var(--tekst-svag); }
+.reveal :not(pre) > code {
+  font-family: var(--skrift-kode); font-size: 0.86em; color: inherit;
+  background: var(--flade); border: 1px solid var(--linje); border-radius: 5px; padding: 0.05em 0.3em;
+}
+.reveal img { max-width: 100%; height: auto; }
+html .reveal .slide-number { font-family: var(--skrift); font-size: 13px; color: var(--tekst-svag); background: transparent; }
+.reveal .slide-number a { color: inherit; text-decoration: none; }
+.reveal .progress { color: var(--accent); height: 4px; }
+.reveal .controls { color: var(--accent-tekst); }
+.reveal math { font-size: 1.1em; }
+
+.reveal table:not(.mini):not(.dataframe) { font-size: 0.72em; border-collapse: collapse; margin: 0 0 0.7em; width: 100%; }
+.reveal table:not(.mini):not(.dataframe) th { text-align: left; font-weight: 700; color: var(--accent-tekst); border-bottom: 2px solid var(--accent); padding: 0.3em 0.6em 0.3em 0; }
+.reveal table:not(.mini):not(.dataframe) td { text-align: left; border-bottom: 1px solid var(--linje); padding: 0.32em 0.6em 0.32em 0; vertical-align: top; }
+.reveal .kilder p { font-size: 0.62em; margin: 0 0 0.45em; line-height: 1.35; }
+
+/* ---------------------------------------------------------------- 3 · layouts */
+
+/* 3.1 Titel: hvid flade, bølger i bunden, lektions-chip, QR-kode til slides */
+.reveal .slides section.lay-titel { height: 100%; text-align: left; }
+.reveal .slides section#title-slide.lay-titel, .reveal .slides section#title-slide.lay-titel * { text-align: left; }
+.reveal .slides section#title-slide.lay-titel .titel-ramme > div:first-child > * { margin-left: 0; margin-right: auto; }
+.lay-titel .titel-ramme, .lay-titel .titel-ramme * { text-align: left !important; }
+.lay-titel .titel-ramme .titel-qr, .lay-titel .titel-ramme .titel-qr * { text-align: center !important; }
+.reveal .slides section#title-slide.lay-titel .titel-qr, .reveal .slides section#title-slide.lay-titel .titel-qr * { text-align: center; }
+.lay-titel .titel-ramme { display: grid; grid-template-columns: 1fr auto; gap: 1.5em; align-items: start; padding-top: 1.2em; }
+.lay-titel .chip, .reveal .chip {
+  display: inline-block; font-size: var(--str-lille); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #fff; background: var(--accent-flade); border-radius: 999px; padding: 0.35em 0.9em; margin: 0 0 1.4em;
+}
+.lay-titel h1.title { font-size: var(--str-stor); font-weight: 700; margin: 0 0 0.35em; max-width: 14em; }
+.lay-titel .titel-kursus, .lay-titel .titel-forfatter { color: var(--tekst-svag); font-size: 0.8em; margin: 0 0 0.3em; }
+.lay-titel .titel-qr { text-align: center; width: 190px; }
+.lay-titel .titel-qr svg { width: 170px; height: 170px; display: block; margin: 0 auto 6px; background: #fff; border-radius: 8px; padding: 8px; box-sizing: border-box; }
+.lay-titel .titel-qr a { font-size: 13px; word-break: break-all; line-height: 1.25; display: block; }
+.lay-titel .titel-qr .qr-tekst { font-size: 13px; color: var(--tekst-svag); margin: 0 0 4px; }
+.lay-titel .titel-hjaelp { font-size: 13px; color: var(--tekst-svag); margin-top: 2.2em; }
+.lay-titel kbd { font-family: var(--skrift-kode); font-size: 0.9em; border: 1px solid var(--linje); border-radius: 4px; padding: 0 0.35em; }
+.aau-logo { display: block; width: 176px; height: 44px; margin-top: 1.6em;
+  background: url("grafik/aau-logo.png") left center / contain no-repeat; }
+html[data-tema="moerk"] .aau-logo { background-image: url("grafik/aau-logo-hvid.png"); }
+/* Bølgerne ligger på slidets baggrund (sds1.js giver baggrunden samme klasse som slidet) */
+.reveal .slide-background.lay-titel .slide-background-content {
+  background: url("grafik/boelge-blaa.webp") center bottom / 100% auto no-repeat;
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 58%, #000 82%);
+          mask-image: linear-gradient(to bottom, transparent 58%, #000 82%);
+}
+html[data-tema="moerk"] .reveal .slide-background.lay-titel .slide-background-content { background-image: url("grafik/boelge-hvid.webp"); background-size: cover; opacity: 0.18; }
+
+/* 3.2 Sektion: accentfarvet flade, stort nummer, én linje om hvad der kommer */
+.reveal .slide-background.lay-sektion { background: var(--accent-flade); }
+.reveal .slide-background.lay-sektion .slide-background-content {
+  background: url("grafik/boelge-hvid.webp") right bottom / 150% auto no-repeat;
+  opacity: 0.22;
+  -webkit-mask-image: linear-gradient(to top left, #000 0%, transparent 48%);
+          mask-image: linear-gradient(to top left, #000 0%, transparent 48%);   /* kun et hjørne */
+}
+.reveal .slides section.lay-sektion, .reveal .slides section.lay-sektion * { color: #fff; text-align: left !important; }
+.reveal .lay-sektion h1, .reveal .lay-sektion p { text-align: left; margin-left: 0; }
+.lay-sektion .sektion-nr { display: block; font-size: 4.6em; font-weight: 700; line-height: 1; color: #fff; opacity: 0.9; margin: 0 0 0.12em; font-variant-numeric: tabular-nums; }
+.reveal .slides section.lay-sektion h1 { font-size: var(--str-stor); font-weight: 700; color: #fff; margin: 0 0 0.35em; }
+.reveal .lay-sektion p { color: #fff; max-width: 26em; }
+.reveal .lay-sektion a { color: #fff; }
+
+/* 3.3 Udsagn: én sætning eller ét tal, meget stort */
+.reveal .slides section.lay-udsagn { padding-top: 3.2em; }
+.reveal .lay-udsagn > h2:empty { display: none; }
+.reveal .lay-udsagn > p:first-of-type, .reveal .lay-udsagn .stort {
+  font-size: var(--str-stor); font-weight: 600; line-height: 1.14; letter-spacing: -0.015em; max-width: 15em; margin: 0 0 0.5em;
+}
+.reveal .lay-udsagn > p:first-of-type strong, .reveal .lay-udsagn .stort strong { color: var(--accent-tekst); font-weight: 700; }
+.reveal .lay-udsagn > p + p { color: var(--tekst-svag); max-width: 30em; }
+
+/* 3.4 Indhold: overskrift + tekst, eller tekst ved siden af en figur */
+.reveal .to-kol { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.6em; align-items: start; }
+.reveal .to-kol.smal-bred { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.reveal .to-kol.bred-smal { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.reveal .to-kol > div > :last-child { margin-bottom: 0; }
+.reveal .figur { margin: 0; }
+.reveal .figur svg { display: block; width: 100%; height: auto; }
+
+/* 3.5 Kodelab: cellen fylder slidet, editor til venstre, output til højre */
+.reveal .slides section.lay-kodelab > h2 { margin-bottom: 0.45em; }
+.reveal .lay-kodelab > p { margin-bottom: 0.45em; }
+
+/* 3.6 Opgave: opgave + timer til venstre, editor til højre */
+.reveal .slides section.lay-opgave.present, .reveal-scroll .reveal .slides section.lay-opgave {
+  display: grid !important; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: 0 1.4em; align-content: start;
+}
+.lay-opgave > h2 { grid-column: 1 / -1; }
+.lay-opgave > .opgavetekst { grid-column: 1; }
+.lay-opgave > .celle, .lay-opgave > .panel-tabset { grid-column: 2; grid-row: 2 / span 3; min-width: 0; align-self: start; }
+.lay-opgave .opgavetekst ol { margin-left: 1em; }
+
+/* 3.7 Sidst i dag: afslutning med links til øvelser og næste lektion */
+.reveal .lay-sidst .kort-raekke { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 1em; margin-top: 0.6em; }
+.reveal .lay-sidst .kort-raekke > div { border: 1px solid var(--linje); border-top: 5px solid var(--accent); border-radius: var(--radius); padding: 0.8em 0.9em; background: var(--papir); font-size: 0.8em; }
+.reveal .lay-sidst .kort-raekke > div > p:first-child { color: var(--accent-tekst); font-size: 0.8em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4em; }
+.reveal .lay-sidst .kort-raekke p:last-child { margin: 0; }
+.reveal .lay-sidst .aau-logo { margin-top: 1.2em; }
+
+/* ---------------------------------------------------------------- 4 · celler */
+.reveal .celle {
+  position: relative; margin: 0 0 0.6em; border: 1px solid var(--kode-linje); border-radius: var(--radius);
+  background: var(--kode-bg); overflow: hidden; font-size: 1rem;
+}
+/* Mærkat i hjørnet */
+.reveal .celle::before {
+  content: attr(data-maerke); position: absolute; top: 0; right: 0; z-index: 3;
+  font: 600 12px/1 var(--skrift); letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 7px 12px 7px; border-bottom-left-radius: var(--radius);
+  color: var(--kode-tekst); background: var(--kode-linje);
+}
+.reveal .celle.proev::before, .reveal .celle.oevelse::before { color: #fff; background: var(--accent-flade); }
+
+/* Fælles: kode mørk, output lys */
+.reveal .celle .exercise-cell { margin: 0; }
+.reveal .celle .card.exercise-editor { margin: 0 !important; border: 0; border-radius: 0; background: var(--kode-bg); --exercise-font-size: 17px; }
+.reveal .celle .exercise-editor-header {
+  background: var(--kode-bg-2) !important; border-bottom: 1px solid var(--kode-linje) !important; padding: 6px 110px 6px 10px !important;
+  font: 500 13px/1.2 var(--skrift); color: var(--kode-svag); flex-direction: row; justify-content: flex-start !important; gap: 8px;
+}
+.reveal .celle .exercise-editor-header > div:first-child > div:first-child { display: none; }
+.reveal .celle .exercise-editor-header > div:last-child { order: -1; }        /* billedtekst: mærkatet viser typen */
+.reveal .celle .btn.btn-exercise-editor {
+  font: 600 13px/1 var(--skrift); padding: 7px 11px; border-radius: 7px; border: 1px solid var(--kode-linje);
+  color: var(--kode-tekst) !important; background: transparent !important; text-decoration: none;
+}
+.reveal .celle .btn.btn-exercise-editor:hover { background: var(--kode-fokus) !important; color: #fff !important; }
+.reveal .celle .btn.exercise-editor-btn-run-code, .reveal .celle .btn.exercise-editor-btn-run-code:hover { background: var(--accent-flade) !important; border-color: var(--accent-flade); color: #fff !important; padding: 7px 14px; }
+.reveal .celle .btn.exercise-editor-btn-run-code:hover { filter: brightness(1.15); }
+.reveal .celle .btn-group-exercise-editor { gap: 6px; display: inline-flex; }
+.reveal .celle .btn-group > .btn { border-radius: 7px !important; margin: 0 !important; }
+.reveal .celle .cm-editor { background: var(--kode-bg); color: var(--kode-tekst); font-size: 17px; }
+.reveal .celle .cm-editor.cm-focused { outline: none; }
+.reveal .celle .cm-content { font-family: var(--skrift-kode); caret-color: #fff; padding: 10px 0; }
+.reveal .celle .cm-gutters { background: var(--kode-bg); color: var(--kode-svag); border-right: 1px solid var(--kode-linje); font-family: var(--skrift-kode); }
+.reveal .celle .cm-activeLine, .reveal .celle .cm-activeLineGutter { background: var(--kode-fokus); }
+.reveal .celle .cm-cursor { border-left-color: #fff; }
+.reveal .celle .cm-selectionBackground, .reveal .celle .cm-content ::selection { background: rgba(130, 170, 255, 0.35) !important; }
+.reveal .celle .cm-tooltip { background: var(--kode-bg-2); color: var(--kode-tekst); border: 1px solid var(--kode-linje); }
+.reveal .celle .cm-scroller { line-height: 1.5; }
+
+/* Ældre decks, der endnu ikke bruger Demo / Prøv selv / Øvelse: samme mørke editor, lyst output */
+.reveal .exercise-cell .cm-editor { background: var(--kode-bg); color: var(--kode-tekst); font-size: 17px; }
+.reveal .exercise-cell .cm-content { font-family: var(--skrift-kode); caret-color: #fff; }
+.reveal .exercise-cell .cm-gutters { background: var(--kode-bg); color: var(--kode-svag); border-right: 1px solid var(--kode-linje); }
+.reveal .exercise-cell .cm-activeLine, .reveal .exercise-cell .cm-activeLineGutter { background: var(--kode-fokus); }
+.reveal .exercise-cell .cell-output pre, .reveal .exercise-cell .exercise-cell-output pre { background: var(--output-bg); border: 0; border-radius: 0; }
+.reveal .exercise-cell .cell-output pre code, .reveal .exercise-cell .exercise-cell-output pre code { color: var(--output-tekst) !important; white-space: pre-wrap; }
+.reveal .kode-split .exercise-cell { background: var(--output-bg); border: 1px solid var(--kode-linje); border-radius: var(--radius); overflow: hidden; }
+.reveal .kode-split .card.exercise-editor { margin: 0 !important; border-radius: 0; border: 0; }
+
+/* Statisk kode (Demo-celler og almindelige ```python-blokke) */
+.reveal div.sourceCode, .reveal pre.sourceCode, .reveal .celle div.sourceCode { background: var(--kode-bg); border: 0; margin: 0; }
+.reveal div.sourceCode { border-radius: var(--radius); margin: 0 0 0.6em; border: 1px solid var(--kode-linje); overflow: hidden; }
+.reveal .celle div.sourceCode { border-radius: 0; border: 0; margin: 0 !important; }
+.reveal pre { width: 100%; margin: 0; box-shadow: none; font-size: 17px; }
+.reveal pre:not(.sourceCode) { background: var(--kode-bg); border: 1px solid var(--kode-linje); border-radius: var(--radius); margin: 0 0 0.6em; }
+.reveal .celle pre:not(.sourceCode) { border: 0; border-radius: 0; margin: 0; }
+.reveal pre code, .reveal pre.sourceCode code {
+  font-family: var(--skrift-kode); color: var(--kode-tekst) !important; background: transparent; line-height: 1.5;
+  padding: 12px 16px; max-height: none; overflow: auto; display: block; white-space: pre;
+}
+.reveal .celle.demo pre.sourceCode code { padding-right: 90px; }
+.reveal .code-copy-button { opacity: 0.6; filter: invert(1); }
+
+.reveal pre code { background: transparent !important; font-size: 1em !important; }
+.reveal code, .reveal pre, .reveal .cm-content, .reveal .mono { font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; }   /* vis != og == som de tastes */
+.reveal pre code span { color: inherit; }
+.reveal p.caption { font-size: var(--str-lille); color: var(--tekst-svag); margin-top: 0.4em; }
+
+/* Syntaksfarver på mørk baggrund (alle ≥ 6:1) — både editor og statisk kode */
+.reveal .celle, .reveal .exercise-cell, .reveal div.sourceCode {
+  --exercise-editor-hl-kw: #C792EA; --exercise-editor-hl-cf: #C792EA; --exercise-editor-hl-op: #89DDFF;
+  --exercise-editor-hl-ot: #89DDFF; --exercise-editor-hl-st: #C3E88D; --exercise-editor-hl-ss: #C3E88D;
+  --exercise-editor-hl-co: #9A97BD; --exercise-editor-hl-va: #E8E6F5; --exercise-editor-hl-fu: #82AAFF;
+  --exercise-editor-hl-dv: #F78C6C; --exercise-editor-hl-cn: #F78C6C; --exercise-editor-hl-at: #FFCB6B;
+  --exercise-editor-hl-er: #F07178;
+}
+.reveal pre code span.kw, .reveal pre code span.cf, .reveal pre code span.im { color: #C792EA; }
+.reveal pre code span.st, .reveal pre code span.ss, .reveal pre code span.ch, .reveal pre code span.vs { color: #C3E88D; }
+.reveal pre code span.co, .reveal pre code span.do { color: #9A97BD; font-style: normal; }
+.reveal pre code span.dv, .reveal pre code span.fl, .reveal pre code span.bn, .reveal pre code span.cn { color: #F78C6C; }
+.reveal pre code span.fu, .reveal pre code span.bu { color: #82AAFF; }
+.reveal pre code span.op, .reveal pre code span.ot { color: #89DDFF; }
+.reveal pre code span.va, .reveal pre code span.at { color: #FFCB6B; }
+.reveal pre code span.tok-comment, .reveal .celle .cm-editor span.tok-comment { font-style: normal; }
+
+/* Output: tydeligt adskilt, lyst felt med lille etiket */
+.reveal .celle .exercise-cell-output, .reveal .celle .cell-output-display, .reveal .celle .cell-output {
+  background: var(--output-bg); color: var(--output-tekst); margin: 0; text-align: left;
+}
+.reveal .celle .exercise-cell-output pre, .reveal .celle .cell-output pre { background: transparent; }
+.reveal .celle .exercise-cell-output pre code, .reveal .celle .cell-output pre code {
+  color: var(--output-tekst) !important; white-space: pre-wrap; word-break: break-word; padding: 10px 16px; font-size: 16px;
+}
+.reveal .celle .exercise-cell-output pre code span.cell-output-stderr, .reveal .celle .cell-output-stderr pre code { color: var(--fejl); }
+.reveal .celle .cell-output-display { padding: 8px 12px; text-align: center; }
+.reveal .celle .cell-output-display canvas, .reveal .celle .cell-output-display img { max-width: 100%; height: auto !important; max-height: 330px; width: auto !important; border-radius: 6px; }
+
+/* Side om side: på {.kodelab}-slides og med klassen .side (og den gamle .kode-split). .stak slår det fra. */
+.reveal .lay-kodelab .celle:not(.demo):not(.stak) .exercise-cell, .reveal .celle.side:not(.demo) .exercise-cell, .reveal .kode-split .exercise-cell,
+.reveal .lay-kodelab .celle.demo:not(.stak) .cell-output-container, .reveal .celle.demo.side .cell-output-container {
+  display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); align-items: stretch; align-content: start;
+  background: linear-gradient(to right, var(--kode-bg) 0, var(--kode-bg) 52.83%, var(--output-bg) 52.83%);   /* højre kolonne er outputfeltet */
+}
+.reveal .lay-kodelab .celle:not(.demo):not(.stak) .exercise-cell > .observablehq:first-child, .reveal .celle.side:not(.demo) .exercise-cell > .observablehq:first-child,
+.reveal .kode-split .exercise-cell > .observablehq:first-child { grid-column: 1; grid-row: 1 / span 4; min-width: 0; background: var(--kode-bg); }
+.reveal .lay-kodelab .celle:not(.demo):not(.stak) .exercise-cell > .observablehq:not(:first-child), .reveal .celle.side:not(.demo) .exercise-cell > .observablehq:not(:first-child),
+.reveal .kode-split .exercise-cell > .observablehq:not(:first-child) { grid-column: 2; min-width: 0; }
+.reveal .lay-kodelab .celle.demo:not(.stak) .cell-output-container > .sourceCode, .reveal .celle.demo.side .cell-output-container > .sourceCode { grid-column: 1; grid-row: 1 / span 6; min-width: 0; }
+.reveal .lay-kodelab .celle.demo:not(.stak) .cell-output-container > :not(.sourceCode), .reveal .celle.demo.side .cell-output-container > :not(.sourceCode) { grid-column: 2; min-width: 0; overflow: auto; border-left: 1px solid var(--kode-linje); }
+.reveal .lay-kodelab .celle:not(.demo):not(.stak) .cell-output-container, .reveal .celle.side:not(.demo) .cell-output-container { border-top: 0; border-left: 1px solid var(--kode-linje); max-height: 430px; overflow: auto; height: 100%; }
+
+/* Outputfeltet (rent CSS: quarto-live tegner selv indholdet om ved hver kørsel) */
+.reveal .celle:not(.demo) .cell-output-container { position: relative; background: var(--output-bg); min-height: 46px; border-top: 1px solid var(--kode-linje); }
+.reveal .celle:not(.demo) .cell-output-container::before, .reveal .celle.demo .cell-output-container > .sourceCode + *::before {
+  content: "Output"; display: block; font: 600 11px/1 var(--skrift); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--tekst-svag); padding: 9px 16px 0; text-align: left;
+}
+.reveal .celle:not(.demo) .cell-output-container:empty::after { content: "Tryk Kør for at se resultatet"; display: block; font: 400 14px/1.3 var(--skrift); color: var(--tekst-svag); padding: 6px 16px 12px; }
+.reveal .celle.demo .cell-output-container > :not(.sourceCode) { border-top: 1px solid var(--kode-linje); }
+.reveal .celle .cell-output-pyodide table, .reveal .celle table { font: 14px/1.3 var(--skrift); margin: 6px 12px 12px; border-collapse: collapse; color: var(--output-tekst); width: auto; }
+.reveal .celle table th, .reveal .celle table td { padding: 3px 8px; border: 0; border-bottom: 1px solid var(--linje); text-align: right; white-space: nowrap; }
+.reveal .celle .cell-output-display:has(table) { text-align: left; overflow: auto; padding: 0 0 4px; }
+.reveal .celle .exercise-cell > .quarto-ojs-hide { display: none; }
+.reveal .celle .observablehq--error { color: var(--fejl); font: 14px/1.4 var(--skrift-kode); padding: 8px 16px; background: var(--output-bg); }
+
+/* "Prøv selv"-forslaget under editoren */
+.reveal .celle .forslag {
+  margin: 0; padding: 8px 16px; font-size: 16px; line-height: 1.35; color: var(--kode-tekst);
+  background: var(--kode-bg-2); border-top: 1px solid var(--kode-linje);
+}
+.reveal .celle .forslag::before { content: "Prøv selv  "; font-weight: 700; color: var(--accent-lys); letter-spacing: 0.02em; }
+.reveal .celle .forslag p { display: inline; margin: 0; }
+.reveal .celle .forslag code { background: rgba(255, 255, 255, 0.08); border-color: transparent; color: #fff; }
+
+/* Øvelse: tilbagemelding, hint og løsning */
+.reveal .celle .alert.exercise-grade { margin: 0; border: 0; border-radius: 0; padding: 10px 16px; font: 600 16px/1.35 var(--skrift); }
+.reveal .celle .alert.exercise-grade.alert-success { background: var(--ok-tone); color: var(--ok); }
+.reveal .celle .alert.exercise-grade.alert-success::before { content: "✓ "; }
+.reveal .celle .alert.exercise-grade.alert-danger, .reveal .celle .alert.exercise-grade.alert-warning { background: var(--fejl-tone); color: var(--fejl); }
+.reveal .celle .alert.exercise-grade.alert-info { background: var(--accent-svag); color: var(--tekst); font-weight: 500; }
+.reveal .celle .hjaelp-raekke { display: flex; gap: 8px; padding: 8px 12px; background: var(--kode-bg-2); border-top: 1px solid var(--kode-linje); flex-wrap: wrap; }
+.reveal .celle .hjaelp-raekke button {
+  font: 600 13px/1 var(--skrift); padding: 8px 12px; border-radius: 7px; cursor: pointer;
+  color: var(--kode-tekst); background: transparent; border: 1px solid var(--kode-linje);
+}
+.reveal .celle .hjaelp-raekke button:hover, .reveal .celle .hjaelp-raekke button[aria-expanded="true"] { background: var(--kode-fokus); color: #fff; }
+.reveal .celle .hjaelp-panel { padding: 10px 16px; font-size: 16px; line-height: 1.4; color: var(--kode-tekst); background: var(--kode-bg-2); border-top: 1px dashed var(--kode-linje); }
+.reveal .celle .hjaelp-panel[hidden] { display: none; }
+.reveal .celle .hjaelp-panel p { margin: 0 0 0.4em; }
+.reveal .celle .hjaelp-panel div.sourceCode { border: 1px solid var(--kode-linje); border-radius: 7px; margin: 4px 0 !important; }
+.reveal .celle .hjaelp-panel pre { font-size: 15px; }
+.reveal .celle .hjaelp-panel :not(pre) > code { background: rgba(255, 255, 255, 0.08); border-color: transparent; color: #fff; }
+.reveal .celle .hjaelp-panel .indsaet { margin-top: 4px; }
+
+/* Faner (Python | R) */
+.reveal .panel-tabset { margin: 0; }
+.reveal .panel-tabset .nav-tabs, .reveal .panel-tabset ul.panel-tabset-tabby { display: flex; gap: 4px; list-style: none; margin: 0 0 6px; padding: 0; border: 0; }
+.reveal .panel-tabset .panel-tabset-tabby li { margin: 0; }
+.reveal .panel-tabset .panel-tabset-tabby a {
+  display: block; font: 600 14px/1 var(--skrift); padding: 7px 14px; border-radius: 999px; text-decoration: none;
+  color: var(--tekst-svag); background: transparent; border: 1px solid var(--linje);
+}
+.reveal .panel-tabset .panel-tabset-tabby a[aria-selected="true"] { color: #fff; background: var(--aau-blaa); border-color: var(--aau-blaa); }
+html[data-tema="moerk"] .reveal .panel-tabset .panel-tabset-tabby a[aria-selected="true"] { background: var(--accent-flade); border-color: var(--accent-flade); }
+.reveal .panel-tabset .tab-content, .reveal .panel-tabset [role="tabpanel"] { border: 0; padding: 0; }
+
+/* ---------------------------------------------------------------- 5 · interaktive dele */
+
+/* 5.1 Fold-ud-forklaring (lille skrift) med linjefokus */
+.reveal details.forklaring { font-size: 15px; line-height: 1.45; color: var(--tekst); margin: 0 0 0.6em; border: 1px solid var(--linje); border-radius: var(--radius); background: var(--papir); }
+.reveal .celle details.forklaring { margin: 0; border: 0; border-top: 1px solid var(--kode-linje); border-radius: 0; background: var(--papir); }
+.reveal details.forklaring > summary { cursor: pointer; list-style: none; padding: 8px 16px; font-weight: 600; color: var(--tekst-svag); }
+.reveal details.forklaring > summary::-webkit-details-marker { display: none; }
+.reveal details.forklaring > summary::before { content: "▸"; display: inline-block; width: 1.1em; color: var(--accent-tekst); transition: transform 0.15s; }
+.reveal details.forklaring[open] > summary::before { transform: rotate(90deg); }
+.reveal details.forklaring[open] > summary { border-bottom: 1px solid var(--linje); color: var(--tekst); }
+.reveal details.forklaring .forklaring-indhold { padding: 8px 16px 10px; max-height: 250px; overflow: auto; }
+.reveal details.forklaring .forklaring-indhold p { margin: 0 0 0.4em; }
+.reveal details.forklaring ol, .reveal details.forklaring ul { margin: 0 0 0.3em 1.3em; }
+.reveal details.forklaring li { margin: 0; padding: 3px 6px; border-radius: 6px; }
+.reveal details.forklaring li[data-linjer] { cursor: pointer; }
+.reveal details.forklaring li[data-linjer]:hover, .reveal details.forklaring li.aktiv { background: var(--accent-svag); }
+.reveal details.forklaring li[data-linjer]::after { content: " linje " attr(data-linjer); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--accent-tekst); white-space: nowrap; }
+.reveal .celle .linje-fokus { background: rgba(255, 203, 107, 0.20) !important; box-shadow: inset 3px 0 0 #FFCB6B; }
+.reveal .celle.har-fokus .cm-line:not(.linje-fokus), .reveal .celle.har-fokus .kl:not(.linje-fokus) { opacity: 0.45; }
+.reveal .celle .kl { display: block; margin: 0 -16px; padding: 0 16px; }
+
+/* 5.2 Gæt først: output er skjult, indtil der er gættet og kørt */
+.reveal .celle .gaet-boks { padding: 10px 16px 12px; background: var(--kode-bg-2); border-top: 1px solid var(--kode-linje); color: var(--kode-tekst); font-size: 16px; }
+.reveal .celle .gaet-boks legend, .reveal .celle .gaet-boks .gaet-sp { font-weight: 600; margin: 0 0 8px; padding: 0; float: none; width: auto; font-size: 16px; }
+.reveal .celle .gaet-boks fieldset { border: 0; margin: 0; padding: 0; }
+.reveal .celle .gaet-valg { display: flex; flex-wrap: wrap; gap: 8px; }
+.reveal .celle .gaet-valg label { cursor: pointer; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--kode-linje); border-radius: 999px; padding: 6px 13px; font: 500 15px/1.2 var(--skrift-kode); }
+.reveal .celle .gaet-valg label:has(input:checked) { background: var(--accent-flade); border-color: var(--accent-flade); color: #fff; }
+.reveal .celle .gaet-valg input { accent-color: var(--accent); margin: 0; }
+.reveal .celle .gaet-status { margin: 8px 0 0; font-size: 14px; color: var(--kode-svag); min-height: 1.2em; }
+.reveal .celle.gaet:not(.afsloeret) .cell-output-container > * { visibility: hidden; }
+.reveal .celle.gaet:not(.afsloeret) .cell-output-container::after { content: "Skjult, indtil I har gættet og trykket Kør"; visibility: visible; display: block; font: 400 14px/1.3 var(--skrift); color: var(--tekst-svag); padding: 6px 16px 12px; }
+.reveal .celle.gaet:not(.afsloeret) .cell-output-container { max-height: 70px; overflow: hidden; }
+
+/* 5.3 Skyder og rullemenu (styrer en celle, der tegner om) */
+.reveal .styring { display: flex; align-items: center; gap: 12px; margin: 0 0 0.5em; font-size: 0.72em; flex-wrap: wrap; }
+.reveal .figur .styring { font-size: 20px; margin-top: 8px; }
+.reveal .figur .styring select { font-size: 20px; }
+.reveal .styring label { font-weight: 600; }
+.reveal .styring output { font: 700 1em/1 var(--skrift-kode); min-width: 4.5em; color: var(--accent-tekst); }
+.reveal .styring input[type="range"] { flex: 1 1 220px; max-width: 420px; accent-color: var(--accent-dyb); height: 28px; }
+.reveal .styring select { font: 500 1em var(--skrift); padding: 5px 10px; border-radius: 7px; border: 1px solid var(--linje); background: var(--papir); color: var(--tekst); }
+.reveal .cell:has(> .cell-output-display .styring) { margin: 0; }
+.reveal .cell > .code-copy-outer-scaffold:has(.hidden), .reveal .cell > .sourceCode.hidden { display: none; }
+
+/* 5.4 Begrebsfigurer (SVG, bygget af figurer.js) */
+.reveal .figur text { font-family: var(--skrift); fill: var(--tekst); }
+.reveal .figur .mono { font-family: var(--skrift-kode); }
+.reveal .figur .svag { fill: var(--tekst-svag); }
+.reveal .figur .kasse { fill: var(--flade); stroke: var(--linje); }
+.reveal .figur .kasse-accent { fill: var(--accent-svag); stroke: var(--accent); }
+.reveal .figur .streg { stroke: var(--tekst-svag); fill: none; }
+.reveal .figur .accent-fyld { fill: var(--accent); }
+.reveal .figur .accent-streg { stroke: var(--accent); fill: none; }
+.reveal .figur .accent-tekst { fill: var(--accent-tekst); }
+.reveal .figur .daempet { opacity: 0.25; }
+.reveal .figur * { transition: opacity 0.35s, fill 0.35s, transform 0.5s; }
+.reveal .figur-knapper { display: flex; gap: 8px; align-items: center; margin-top: 8px; font-size: 17px; color: var(--tekst-svag); }
+.reveal .figur-knapper button, .reveal button.knap {
+  white-space: nowrap; flex: none;
+  font: 600 16px/1 var(--skrift); padding: 9px 14px; border-radius: 7px; cursor: pointer;
+  color: #fff; background: var(--accent-flade); border: 1px solid var(--accent-flade);
+}
+.reveal .figur-knapper button.sek { color: var(--tekst); background: transparent; border-color: var(--linje); }
+
+/* 5.4b Figurer med små tabeller (join, pivot, tæller) */
+.reveal .figur-resultat { font-size: 0.72em; margin: 0.4em 0 0; min-height: 1.5em; }
+.reveal .figur-tabeller { display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+.reveal .figur-pil { align-self: center; font-size: 1.3em; color: var(--accent-tekst); }
+.reveal .figur table.mini { font: 19px/1.25 var(--skrift-kode); border-collapse: separate; border-spacing: 0; margin: 0; width: auto; }
+.reveal .figur table.mini caption { caption-side: top; text-align: left; font: 600 16px/1.2 var(--skrift); color: var(--tekst-svag); padding: 0 0 4px; }
+.reveal .figur table.mini th, .reveal .figur table.mini td { padding: 5px 11px; border: 1px solid var(--linje); text-align: left; transition: opacity 0.35s, background 0.35s; }
+.reveal .figur table.mini th { font-weight: 700; background: var(--flade); }
+.reveal .figur table.mini th.noegle { color: var(--accent-tekst); }
+.reveal .figur table.mini tr.ude td { opacity: 0.3; text-decoration: line-through; }
+.reveal .figur table.mini td.nan { color: var(--fejl); font-style: italic; }
+.reveal .figur table.mini tr.nu td { background: var(--accent-svag); font-weight: 700; }
+.reveal .figur td.nk0, .reveal .figur .v0 { background: #D9ECF9; color: #16132E; } .reveal .figur td.nk1, .reveal .figur .v1 { background: #FBE3C8; color: #16132E; }
+.reveal .figur td.nk2, .reveal .figur .v2 { background: #DDF2DC; color: #16132E; } .reveal .figur td.nk3 { background: #EADCF6; color: #16132E; }
+.reveal .figur td.nk4 { background: #FBE0E4; color: #16132E; } .reveal .figur td.nk5 { background: #F3EFC2; color: #16132E; }
+.reveal .figur-tabeller.om table.mini td.om-var, .reveal .figur-tabeller.om table.mini td.om-val, .reveal .figur-tabeller.om table.mini th.om-var { opacity: 1; }
+.reveal .figur-tabeller.om[data-trin="0"] table:last-of-type, .reveal .figur-tabeller.om[data-trin="0"] .figur-pil { opacity: 0; }
+.reveal .figur-tabeller.om[data-trin="1"] table:last-of-type .om-val { color: transparent; }
+.reveal .figur-tabeller.om[data-trin="1"] .om-val:not(th) { background: transparent; }
+.reveal .figur-tabeller.om[data-trin="1"] table:first-of-type th.om-var, .reveal .figur-tabeller.om[data-trin="2"] table:first-of-type th.om-val { outline: 3px solid var(--accent); }
+.reveal .figur-tabeller.om table { transition: opacity 0.4s; }
+.reveal .figur-ord { font: 20px/2 var(--skrift-kode); margin: 0 0 0.5em; }
+.reveal .figur-ord span { padding: 3px 6px; border-radius: 6px; border: 1px solid transparent; }
+.reveal .figur-ord span.nu { background: var(--accent-flade); color: #fff; }
+.reveal .figur-ord span.set { color: var(--tekst-svag); }
+.reveal .figur-kode { font-size: 1.2em !important; }
+
+.reveal .anatomi { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0; margin: 0.6em 0 0.8em; background: var(--kode-bg); border: 1px solid var(--kode-linje); border-radius: var(--radius); padding: 18px 18px 12px; }
+.reveal .anatomi span { display: inline-flex; flex-direction: column; align-items: center; }
+.reveal .anatomi code { font: 400 24px/1.3 var(--skrift-kode) !important; color: var(--kode-tekst) !important; background: transparent !important; border: 0 !important; padding: 2px 0 !important; white-space: pre; }
+.reveal .anatomi .del code { border-bottom: 3px solid currentColor !important; border-radius: 0 !important; }
+.reveal .anatomi small { font: 700 13px/1 var(--skrift); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px; }
+.reveal .anatomi .d0, .reveal .anatomi .d0 code { color: #FFCB6B !important; } .reveal .anatomi .d1, .reveal .anatomi .d1 code { color: #C3E88D !important; }
+.reveal .anatomi .d2, .reveal .anatomi .d2 code { color: #82AAFF !important; } .reveal .anatomi .d3, .reveal .anatomi .d3 code { color: #F78C6C !important; }
+
+.reveal .figur-ord.rens span { border-color: var(--linje); display: inline-block; line-height: 1.3; margin: 3px 0; transition: opacity 0.3s, background 0.3s; }
+.reveal .figur-ord.rens span.vaek { text-decoration: line-through; opacity: 0.35; }
+.reveal .figur table.mini td.nul { color: var(--tekst-svag); opacity: 0.55; }
+.reveal .figur table.mini tr.set td { opacity: 0.45; }
+
+.reveal .figur table.mini.tegn td { text-align: center; font-size: 15px; }
+.reveal .figur table.mini.tegn td.stor { font-size: 26px; font-weight: 700; color: var(--accent-tekst); }
+.reveal .figur-ord span.fundet { border-color: var(--accent); position: relative; }
+.reveal .figur-ord span.fundet::after { content: attr(data-v); position: absolute; left: 50%; top: -1.25em; transform: translateX(-50%); font: 700 15px/1 var(--skrift-kode); color: var(--accent-tekst); }
+.reveal .figur-ord { padding-top: 0.6em; }
+
+.reveal .figur-grupper { display: flex; flex-direction: column; gap: 8px; transition: opacity 0.4s; }
+.reveal .figur-tabeller > table, .reveal .figur-tabeller > .figur-pil { transition: opacity 0.4s; }
+
+/* 5.5 Trin-kort: en proces bygget op ét kort ad gangen (brug sammen med .fragment) */
+.reveal .trin-kort { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 0.7em; margin: 0.4em 0 0.6em; }
+.reveal .trin-kort > div { border: 1px solid var(--linje); border-top: 5px solid var(--accent); border-radius: var(--radius); padding: 0.6em 0.7em; background: var(--papir); font-size: 0.74em; line-height: 1.35; }
+.reveal .trin-kort > div > p:first-child { font-size: 0.78em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-tekst); margin: 0 0 0.35em; }
+.reveal .trin-kort > div > p:last-child { margin: 0; }
+.reveal .trin-kort div.sourceCode { margin: 0.3em 0 0; }
+.reveal .trin-kort pre { font-size: 14px; }
+.reveal .trin-kort pre code { padding: 8px 10px; white-space: pre-wrap; }
+.reveal .to-kol pre { font-size: 15px; }
+
+/* ---------------------------------------------------------------- 6 · værktøjer */
+#exercise-loading-indicator { display: none !important; }          /* erstattet af #sds1-status */
+#sds1-status {
+  position: fixed; left: 14px; bottom: 12px; z-index: 40; display: inline-flex; align-items: center; gap: 8px;
+  font: 500 13px/1 var(--skrift); color: var(--tekst-svag); background: var(--papir);
+  border: 1px solid var(--linje); border-radius: 999px; padding: 7px 12px 7px 10px; transition: opacity 0.4s, padding 0.3s;
+}
+#sds1-status .prik { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: none; }
+#sds1-status.henter .prik { animation: sds1-puls 1.1s ease-in-out infinite; }
+#sds1-status.klar .prik { background: var(--ok); }
+#sds1-status.fejl { color: var(--fejl); border-color: var(--fejl); }
+#sds1-status.fejl .prik { background: var(--fejl); }
+#sds1-status.lille { padding: 6px; opacity: 0.55; }
+#sds1-status.lille .tekst { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@keyframes sds1-puls { 0%, 100% { opacity: 0.25; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.1); } }
+
+#sds1-vaerktoej { position: fixed; top: 10px; right: 12px; z-index: 40; display: flex; gap: 6px; }
+#sds1-vaerktoej button {
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; padding: 0;
+  color: var(--tekst-svag); background: var(--papir); border: 1px solid var(--linje); opacity: 0.7;
+}
+#sds1-vaerktoej button:hover, #sds1-vaerktoej button:focus-visible { opacity: 1; color: var(--tekst); }
+#sds1-vaerktoej svg { width: 17px; height: 17px; }
+#sds1-besked {
+  position: fixed; top: 52px; right: 12px; z-index: 41; font: 500 13px/1.3 var(--skrift); color: #fff; background: var(--aau-blaa);
+  border-radius: 8px; padding: 8px 12px; opacity: 0; transform: translateY(-4px); transition: opacity 0.2s, transform 0.2s; pointer-events: none;
+}
+#sds1-besked.vis { opacity: 1; transform: none; }
+
+/* Ordliste: forklaring ved hover eller fokus */
+.reveal .ord { border-bottom: 2px dotted var(--accent); cursor: help; }
+#sds1-ordboks {
+  position: fixed; z-index: 45; max-width: 340px; font: 400 15px/1.4 var(--skrift); color: #fff; background: var(--aau-blaa);
+  border-radius: 9px; padding: 10px 13px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25); pointer-events: none;
+}
+#sds1-ordboks[hidden] { display: none; }
+#sds1-ordboks strong { display: block; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; margin-bottom: 2px; }
+html[data-tema="moerk"] #sds1-ordboks, html[data-tema="moerk"] #sds1-besked { background: #2B2760; border: 1px solid var(--linje); }
+
+/* Nedtælling */
+.reveal button.timer {
+  font: 700 0.8em/1 var(--skrift-kode); padding: 0.45em 0.8em; border-radius: 9px; cursor: pointer;
+  color: var(--accent-tekst); background: var(--papir); border: 2px solid var(--accent); font-variant-numeric: tabular-nums;
+}
+.reveal button.timer.faerdig { color: #fff; background: var(--fejl); border-color: var(--fejl); }
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------------------------------------------------------------- 7 · tilgængelighed, smal skærm, print */
+.reveal a:focus-visible, .reveal button:focus-visible, .reveal summary:focus-visible, .reveal [tabindex]:focus-visible,
+.reveal input:focus-visible, .reveal select:focus-visible, .reveal .btn:focus-visible, #sds1-vaerktoej button:focus-visible,
+.reveal .cm-editor.cm-focused {
+  outline: 3px solid #FFB000; outline-offset: 2px;
+}
+.reveal .celle .cm-editor.cm-focused { outline-offset: -3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal *, #sds1-status, #sds1-status .prik, #sds1-besked { animation: none !important; transition: none !important; }
+}
+
+/* Smal skærm (telefon, delt vindue): alt stables, og læsevisningen bliver brugbar */
+@media (max-width: 760px) {
+  .reveal .to-kol, .reveal .to-kol.smal-bred, .reveal .to-kol.bred-smal,
+  .reveal .celle .exercise-cell, .reveal .kode-split .exercise-cell, .reveal .celle .cell-output-container,
+  .lay-titel .titel-ramme, .reveal .lay-sidst .kort-raekke { grid-template-columns: minmax(0, 1fr) !important; }
+  .reveal .slides section.lay-opgave.present, .reveal-scroll .reveal .slides section.lay-opgave { grid-template-columns: minmax(0, 1fr); }
+  .lay-opgave > .celle, .lay-opgave > .panel-tabset, .lay-opgave > .opgavetekst { grid-column: 1; grid-row: auto; }
+  .reveal .celle .exercise-cell > *, .reveal .celle .cell-output-container > * { grid-column: 1 !important; grid-row: auto !important; }
+  .reveal .celle .cell-output-container { border-left: 0 !important; max-height: none !important; }
+  .reveal .lay-kodelab .celle .cm-editor { min-height: 0; }
+  .lay-titel .titel-qr { display: none; }
+  :root { --str-stor: 1.8em; }
+}
+
+@media print {
+  #sds1-status, #sds1-vaerktoej, #sds1-besked { display: none !important; }
+  .reveal details.forklaring .forklaring-indhold { max-height: none; }
+}
+.reveal-scroll .reveal details.forklaring .forklaring-indhold { max-height: none; }

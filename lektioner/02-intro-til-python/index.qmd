@@ -1,0 +1,46 @@
+---
+title: "Intro til Python"
+lektion: 2
+date: 2026-09-08
+description: "De grundlæggende begreber i Python: variable, typer, funktioner, metoder, biblioteker og booleans."
+status: klar        # klar | kommer | anden | moodle
+slides: true
+underviser: "Jeppe Fjeldgaard Qvist"
+litteratur:
+  - "e-kursus: *Introduktion til Python for Samfundsvidenskab*"
+---
+
+::: {.lektion-knapper}
+[Åbn slides](slides.html){.primaer}
+
+[Læsevisning](slides.html?view=scroll)
+
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jeppe Fjeldgaard Qvist · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi gennemgår de fundamentale koncepter i Python og veksler mellem forelæsning og øvelser i grupper og plenum. Vi går fra *tanke → algoritme → kode → maskinsprog* og videre til notebooks, `print()`, variable, typer, funktioner, metoder, biblioteker og booleans.
+
+**Efter lektionen kan I**
+
+- gemme værdier i variable og forklare, hvad en type er
+- skrive og kalde en simpel funktion
+- bruge metoder og biblioteker, og filtrere en tabel med booleans
+
+## Forberedelse og litteratur
+
+- Gennemfør e-kurset [Introduktion til Python for Samfundsvidenskab](https://caldiss-aau.github.io/workshop_python-intro/). Det er vigtigt.
+
+## Materiale
+
+::: {.materiale}
+- [handout]{.type} [Gæt outputtet (PDF)](materiale/SDS1_l2_handout.pdf)
+- [handout]{.type} [Recap (PDF)](materiale/SDS1_l2_handout_recap.pdf)
+- [notebook]{.type} [Øvelser: tekst som data (.ipynb)](materiale/SDS1_l2_notebook.ipynb)
+- [data]{.type} [sales_data.csv]({{< var data >}}sales_data.csv)
+:::
+
+Svarark udleveres efter øvelserne.

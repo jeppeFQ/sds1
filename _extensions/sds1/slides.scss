@@ -1,0 +1,22 @@
+/*-- scss:defaults --*/
+// SDS1 · slides. Her står kun det, reveal.js skal vide ved kompilering.
+// Farver, layouts og celler ligger i resources/design.css (CSS-variable),
+// så de kan skifte med lektionens accent og med mørk tilstand.
+$font-family-sans-serif: "Barlow", Arial, "Helvetica Neue", sans-serif;
+$font-family-monospace: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+$presentation-heading-font: $font-family-sans-serif;
+$presentation-font-size-root: 28px;
+$presentation-line-height: 1.42;
+$presentation-heading-text-transform: none;
+$body-bg: #ffffff;
+$body-color: #211A52;
+$presentation-heading-color: #211A52;
+$link-color: #2F6FB0;
+$code-block-bg: #16132E;
+$code-block-font-size: 1em;
+$code-block-height: 560px;
+
+/*-- scss:rules --*/
+// Ældre decks: "Prøv selv"-afsnit inde i en forklaring og små hjælpeklasser
+.reveal .forklaring-indhold .proev { margin-top: 0.4em; padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--accent-svag); border-radius: 0 6px 6px 0; }
+.reveal .center { text-align: center; }

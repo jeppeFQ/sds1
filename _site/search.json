@@ -1,0 +1,520 @@
+[
+  {
+    "objectID": "workshops/seminardag-2/index.html",
+    "href": "workshops/seminardag-2/index.html",
+    "title": "Seminardag 2",
+    "section": "",
+    "text": "Alle workshops\n\nVi holder det nærmere indhold på seminardagene fleksibelt, så vi kan tilpasse det til holdets aktuelle behov. Programmet meldes ud på Moodle.\nTag med: jeres datamateriale (eller idéer til et), jeres notebook, og de spørgsmål, I sidder fast i.\n\n\n\n Tilbage til toppen"
+  },
+  {
+    "objectID": "workshops/index.html",
+    "href": "workshops/index.html",
+    "title": "Workshops og seminardage",
+    "section": "",
+    "text": "Seminardagene er til for, at I kan arbejde med jeres eget datamateriale og få sparring. Indholdet holdes fleksibelt, så vi kan tilpasse det til holdets behov. Ekstra workshops i løbet af året dukker også op her.\n\n\n\nS1\n\n\nNr. S1: Seminardag 1 fredag 9. oktober 2026 Kommer\n\n\nKl. 10.00–16.15. Arbejde med egne data og sparring om portfolioen.\n\n\n\n\nS2\n\n\nNr. S2: Seminardag 2 fredag 6. november 2026 Kommer\n\n\nKl. 10.00–16.15. Arbejde med egne data og sparring om portfolioen.\n\n\n\n\nIngen resultater\n\n\n\n\n\n Tilbage til toppen"
+  },
+  {
+    "objectID": "lektioner/11-dataanalyse-i-python-1/index.html",
+    "href": "lektioner/11-dataanalyse-i-python-1/index.html",
+    "title": "Dataanalyse i Python 1",
+    "section": "",
+    "text": "Alle lektioner\nkl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/11-dataanalyse-i-python-1/index.html#om-lektionen",
+    "href": "lektioner/11-dataanalyse-i-python-1/index.html#om-lektionen",
+    "title": "Dataanalyse i Python 1",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nDe sidste to lektioner bygger bro mellem kursets enkelte værktøjer og jeres afsluttende eksamensprojekt. Vi ser på, hvordan man binder forskellige data science-teknikker sammen i ét projekt for at besvare et samfundsvidenskabeligt spørgsmål. Vi har også fokus på håndværket bag et godt eksamensprojekt: best practices for opbygning og formidling i en Python-notebook, konstruktiv og ansvarlig brug af AI som sparringspartner, og praktiske tips til projektarbejdet.\nDagens notebook ligger på Moodle."
+  },
+  {
+    "objectID": "lektioner/09-lyd-og-multimodal/index.html",
+    "href": "lektioner/09-lyd-og-multimodal/index.html",
+    "title": "Messy data i praksis: lyd og multimodal",
+    "section": "",
+    "text": "Alle lektioner\nkl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/09-lyd-og-multimodal/index.html#om-lektionen",
+    "href": "lektioner/09-lyd-og-multimodal/index.html#om-lektionen",
+    "title": "Messy data i praksis: lyd og multimodal",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nTidligere har vi arbejdet med tekst- og billeddata. Nu udvider vi værktøjskassen og arbejder med lyd og multimodale data. Vi diskuterer, hvornår lyd kan være en relevant datakilde, og ser eksempler på, hvordan lyd kan transskriberes, repræsenteres og analyseres i Python. En vigtig pointe er, at analyse af lyd grundlæggende følger den samme arbejdsgang, som vi kender fra andre datatyper.\nSlides og notebook (diarization) ligger på Moodle."
+  },
+  {
+    "objectID": "lektioner/05-scraping-og-api/index.html",
+    "href": "lektioner/05-scraping-og-api/index.html",
+    "title": "Scraping og API-kald",
+    "section": "",
+    "text": "Alle lektioner\nkl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/05-scraping-og-api/index.html#om-lektionen",
+    "href": "lektioner/05-scraping-og-api/index.html#om-lektionen",
+    "title": "Scraping og API-kald",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi introducerer indsamling af data fra internettet via web scraping og API-kald i Python. Vi ser specifikt på scraping af “råt” hjemmesideindhold med Beautiful Soup og API-kald med requests.\nSlides og notebooks til denne gang ligger på Moodle."
+  },
+  {
+    "objectID": "lektioner/05-scraping-og-api/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/05-scraping-og-api/index.html#forberedelse-og-litteratur",
+    "title": "Scraping og API-kald",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nSeverance (2016), kapitel 12 (Networked Programs) og 13 (Python and Web Services). De skal ikke læses i alle tekniske detaljer. Fokusér på, hvordan en computer henter indhold via HTTP, forskellen mellem HTML og JSON, og forskellen mellem scraping og brug af et API.\nKrotov, V., Redd, L. & Silva, L. (2020): “Legality and Ethics of Web Scraping.” Communications of the Association for Information Systems, 47, 539–563. Grundlag for diskussionen af jura og etik.\nSupplerende: MDN Contributors, “How the Web Works” og “Basic HTML Syntax”.\nDokumentation: Requests: Quickstart, Beautiful Soup, dokumentationen til Statistikbankens API."
+  },
+  {
+    "objectID": "lektioner/04-datavisualisering/index.html",
+    "href": "lektioner/04-datavisualisering/index.html",
+    "title": "Datavisualisering",
+    "section": "",
+    "text": "Åbn slides\nLæsevisning\nAlle lektioner\nUnderviser: Jeppe Fjeldgaard Qvist · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/04-datavisualisering/index.html#om-lektionen",
+    "href": "lektioner/04-datavisualisering/index.html#om-lektionen",
+    "title": "Datavisualisering",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi taler om principper for datavisualisering, diskuterer formålet med at synliggøre kompleksitet og kigger på gode og dårlige eksempler. Slides indeholder et galleri af figurtyper, som I kan bruge som opslagsværk.\nEfter lektionen kan I\n\nforklare, hvordan akser, andele og skalaer kan vildlede\nbygge en figur lag for lag med data + mapping + geom\nvælge en figurtype, der passer til spørgsmålet"
+  },
+  {
+    "objectID": "lektioner/04-datavisualisering/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/04-datavisualisering/index.html#forberedelse-og-litteratur",
+    "title": "Datavisualisering",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nKirk, A. (2019): Data Visualisation: A Handbook for Data Driven Design. Sage, s. 61–94 (ligger på Moodle)."
+  },
+  {
+    "objectID": "lektioner/04-datavisualisering/index.html#materiale",
+    "href": "lektioner/04-datavisualisering/index.html#materiale",
+    "title": "Datavisualisering",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nhandout Øvelsesark (PDF)\nhandout Figur-ark (PDF)\nhandout Tabeller (PDF)\nnotebook Figurer (.ipynb)\ndata data_tweets_2016_kilde_a.csv\n\n\nSvarark udleveres efter øvelserne."
+  },
+  {
+    "objectID": "lektioner/03-data-wrangling/index.html",
+    "href": "lektioner/03-data-wrangling/index.html",
+    "title": "Data wrangling i Python: filer, datastrukturer og transformationer",
+    "section": "",
+    "text": "Åbn slides\nLæsevisning\nAlle lektioner\nUnderviser: Jeppe Fjeldgaard Qvist · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/03-data-wrangling/index.html#om-lektionen",
+    "href": "lektioner/03-data-wrangling/index.html#om-lektionen",
+    "title": "Data wrangling i Python: filer, datastrukturer og transformationer",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi gør Python-introen færdig (lister, tuples, dictionaries, løkker og if) og går så til data wrangling: at koble tabeller (merge), stable dem (concat) og skifte mellem langt og bredt format (pivot, melt).\nEfter lektionen kan I\n\nvælge, ændre og gennemløbe elementer i lister og dictionaries\nkoble to tabeller og forudsige antallet af rækker ved de fire join-typer\nomforme en tabel mellem langt og bredt format"
+  },
+  {
+    "objectID": "lektioner/03-data-wrangling/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/03-data-wrangling/index.html#forberedelse-og-litteratur",
+    "title": "Data wrangling i Python: filer, datastrukturer og transformationer",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nDet vigtigste er e-kurset Introduktion til Python for Samfundsvidenskab. Mængden af litteratur kan virke voldsom, så prioritér det.\nSeverance (2016), kapitel 1, 2 og 4.\nMcKinney (2022), kapitel 8, afsnit 8.2 og 8.3."
+  },
+  {
+    "objectID": "lektioner/03-data-wrangling/index.html#materiale",
+    "href": "lektioner/03-data-wrangling/index.html#materiale",
+    "title": "Data wrangling i Python: filer, datastrukturer og transformationer",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nhandout Øvelsesark (PDF)\nnotebook Tweets som data (.ipynb)\ndata data_tweets_2016_kilde_a.csv\ndata data_tweets_2016_kilde_b.csv\ndata data_maaneder.csv\n\n\nSvarark udleveres efter øvelserne."
+  },
+  {
+    "objectID": "lektioner/02-intro-til-python/index.html",
+    "href": "lektioner/02-intro-til-python/index.html",
+    "title": "Intro til Python",
+    "section": "",
+    "text": "Åbn slides\nLæsevisning\nAlle lektioner\nUnderviser: Jeppe Fjeldgaard Qvist · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/02-intro-til-python/index.html#om-lektionen",
+    "href": "lektioner/02-intro-til-python/index.html#om-lektionen",
+    "title": "Intro til Python",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi gennemgår de fundamentale koncepter i Python og veksler mellem forelæsning og øvelser i grupper og plenum. Vi går fra tanke → algoritme → kode → maskinsprog og videre til notebooks, print(), variable, typer, funktioner, metoder, biblioteker og booleans.\nEfter lektionen kan I\n\ngemme værdier i variable og forklare, hvad en type er\nskrive og kalde en simpel funktion\nbruge metoder og biblioteker, og filtrere en tabel med booleans"
+  },
+  {
+    "objectID": "lektioner/02-intro-til-python/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/02-intro-til-python/index.html#forberedelse-og-litteratur",
+    "title": "Intro til Python",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nGennemfør e-kurset Introduktion til Python for Samfundsvidenskab. Det er vigtigt."
+  },
+  {
+    "objectID": "lektioner/02-intro-til-python/index.html#materiale",
+    "href": "lektioner/02-intro-til-python/index.html#materiale",
+    "title": "Intro til Python",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nhandout Gæt outputtet (PDF)\nhandout Recap (PDF)\nnotebook Øvelser: tekst som data (.ipynb)\ndata sales_data.csv\n\n\nSvarark udleveres efter øvelserne."
+  },
+  {
+    "objectID": "lektioner/01-messy-data-og-python/index.html",
+    "href": "lektioner/01-messy-data-og-python/index.html",
+    "title": "Introduktion til faget",
+    "section": "",
+    "text": "Åbn slides\nLæsevisning\nAlle lektioner\nUnderviser: Jeppe Fjeldgaard Qvist · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/01-messy-data-og-python/index.html#om-lektionen",
+    "href": "lektioner/01-messy-data-og-python/index.html#om-lektionen",
+    "title": "Introduktion til faget",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi introducerer faget, læringsmålene og planen for semestret. Vi gennemgår eksamen, og hvordan portfolioen bygges op undervejs. Derefter øvelser om, hvad data overhovedet er, når tekst, billeder og kategorier skal gøres til noget, en computer kan arbejde med. Til sidst et første kig på kode.\nEfter lektionen kan I\n\nforklare forskellen på at analysere data med kode og med peg-og-klik\nnævne fire fordele ved kode: reproducerbar, skalerbar, fleksibel, automatiserbar\nkøre et lille stykke Python og R i browseren og læse, hvad det gør"
+  },
+  {
+    "objectID": "lektioner/01-messy-data-og-python/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/01-messy-data-og-python/index.html#forberedelse-og-litteratur",
+    "title": "Introduktion til faget",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nDer er ikke noget læsestof til første gang.\nLog ind på UCloud, og tjek, at I har adgang (se Værktøjer).\nKig i idébanken, og tænk over, hvilket datamateriale der kunne interessere jer."
+  },
+  {
+    "objectID": "lektioner/01-messy-data-og-python/index.html#materiale",
+    "href": "lektioner/01-messy-data-og-python/index.html#materiale",
+    "title": "Introduktion til faget",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nhandout Øvelsesark: tekst, billede og klassifikation (PDF)\ndata sales_data.csv\n\n\nSvarark udleveres efter øvelserne."
+  },
+  {
+    "objectID": "kursus/portfolio.html",
+    "href": "kursus/portfolio.html",
+    "title": "Portfolio og eksamen",
+    "section": "",
+    "text": "Prøveform\nMundtlig på baggrund af projekt (portfolio)\n\n\nOmfang\n10 ECTS\n\n\nBedømmelse\n7-trins-skala, intern prøve\n\n\nAflevering\nfredag den 18. december 2026 kl. 10.00 i Digital Eksamen\n\n\nMundtligt forsvar\n11.–15. januar 2027\n\n\n\nVurderingskriterierne følger universitetets eksamensordning. De officielle regler og eksamensinformation ligger på Moodle. Hvis noget her afviger fra Moodle, er det Moodle, der gælder."
+  },
+  {
+    "objectID": "kursus/portfolio.html#kort-fortalt",
+    "href": "kursus/portfolio.html#kort-fortalt",
+    "title": "Portfolio og eksamen",
+    "section": "",
+    "text": "Prøveform\nMundtlig på baggrund af projekt (portfolio)\n\n\nOmfang\n10 ECTS\n\n\nBedømmelse\n7-trins-skala, intern prøve\n\n\nAflevering\nfredag den 18. december 2026 kl. 10.00 i Digital Eksamen\n\n\nMundtligt forsvar\n11.–15. januar 2027\n\n\n\nVurderingskriterierne følger universitetets eksamensordning. De officielle regler og eksamensinformation ligger på Moodle. Hvis noget her afviger fra Moodle, er det Moodle, der gælder."
+  },
+  {
+    "objectID": "kursus/portfolio.html#formalia-for-opgaven",
+    "href": "kursus/portfolio.html#formalia-for-opgaven",
+    "title": "Portfolio og eksamen",
+    "section": "Formalia for opgaven",
+    "text": "Formalia for opgaven\n\nFormat. Opgaven skrives som en Python-notebook (.ipynb) og afleveres som HTML. I skal altså rendere notebooken. Vejledningen til konvertering ligger på Moodle.\nOmfang. Teksten må højst fylde 10 normalsider (à 2.400 tegn), og koden må højst fylde 10 normalsider (à 2.400 tegn).\nTegntælling. Brug den obligatoriske ord- og tegntæller fra Moodle. Begge tal skal angives på opgaven.\nPortfolio-skema. Skemaet fra Moodle følger jer gennem kurset.\nPython. Det forventes, at I selv bruger Python i opgaven."
+  },
+  {
+    "objectID": "kursus/portfolio.html#hvor-meget-output-skal-med",
+    "href": "kursus/portfolio.html#hvor-meget-output-skal-med",
+    "title": "Portfolio og eksamen",
+    "section": "Hvor meget output skal med?",
+    "text": "Hvor meget output skal med?\nDet er en del af opgaven at vælge, hvor meget output fra koden der bliver vist. Sæt en af disse linjer øverst i en kodecelle:\n#| output: false\n#| output: true\nHvad gør de to linjer?\n\n\nLinjer, der starter med #|, er instrukser til Quarto, som laver jeres HTML-fil. Python selv ser dem som kommentarer og springer dem over.\n\n\n#| output: false kører koden, men skjuler resultatet i den færdige HTML-fil. Brug den til mellemregninger og lange udskrifter.\n\n\n#| output: true viser resultatet. Det er standard, så linjen er kun nødvendig, hvis I har slået output fra for hele dokumentet.\n\n\nLinjen skal stå øverst i cellen, før al anden kode."
+  },
+  {
+    "objectID": "kursus/portfolio.html#en-god-opbygning",
+    "href": "kursus/portfolio.html#en-god-opbygning",
+    "title": "Portfolio og eksamen",
+    "section": "En god opbygning",
+    "text": "En god opbygning\nDer er ikke én rigtig skabelon, men en portfolio, der er let at følge, har typisk disse dele:\n\nSpørgsmål. Hvilket samfundsvidenskabeligt spørgsmål undersøger I, og hvorfor er det interessant?\nData. Hvor kommer data fra, hvordan er de indsamlet, og hvad er en række? Hvilke valg og fravalg har I truffet?\nOprydning. Hvad har I gjort ved data, i hvilken rækkefølge, og hvad betyder det for resultatet?\nAnalyse. Metoderne fra kurset, brugt på jeres spørgsmål. Forklar hvert trin med ord, før eller efter koden.\nVisualisering. Få, gennemtænkte figurer med titler og aksetekster.\nDiskussion. Hvad kan I sige, hvad kan I ikke sige, og hvad ville I gøre anderledes?\n\nSkriv teksten til en læser, der ikke har set jeres data. Kommentér koden, så I selv kan forstå den til det mundtlige forsvar."
+  },
+  {
+    "objectID": "kursus/portfolio.html#eksempel-på-en-tidligere-portfolio",
+    "href": "kursus/portfolio.html#eksempel-på-en-tidligere-portfolio",
+    "title": "Portfolio og eksamen",
+    "section": "Eksempel på en tidligere portfolio",
+    "text": "Eksempel på en tidligere portfolio\nPå Moodle ligger et eksempel på en tidligere opgave. Læg mærke til tre ting:\n\nEksemplet bruger metoder, der ikke er pensum i år. Det er bevidst, så det ikke bliver en skabelon. Det, I skal tage med, er formen, ikke indholdet.\nEksemplet har relativt lidt tekst. I må gerne skrive længere beskrivelser, også for jeres egen skyld, bare I holder jer inden for sidetallet.\nEksemplet viser forholdsvis meget kode-output. Det er ikke et krav."
+  },
+  {
+    "objectID": "kursus/portfolio.html#find-et-datamateriale",
+    "href": "kursus/portfolio.html#find-et-datamateriale",
+    "title": "Portfolio og eksamen",
+    "section": "Find et datamateriale",
+    "text": "Find et datamateriale\nBrug idébanken til inspiration: taler i Folketingssalen, jobopslag, filmanmeldelser, opslag på fora og sociale medier og meget andet. Seminardagene er til for, at I kan arbejde med jeres eget materiale og få sparring."
+  },
+  {
+    "objectID": "kursus/portfolio.html#brug-af-ai",
+    "href": "kursus/portfolio.html#brug-af-ai",
+    "title": "Portfolio og eksamen",
+    "section": "Brug af AI",
+    "text": "Brug af AI\nKurset er AI-positivt med klare forbehold. Brug gerne AI som sparringspartner til at forstå fejlbeskeder og få forklaret kode. Men I skal selv kunne læse, forklare og stå inde for hver linje til det mundtlige forsvar. Reglerne om eksamenssnyd og plagiat står på Moodle."
+  },
+  {
+    "objectID": "kursus/opgaver.html",
+    "href": "kursus/opgaver.html",
+    "title": "Opgaver og øvelser",
+    "section": "",
+    "text": "Til de fleste lektioner hører der øvelser: øvelsesark på papir (PDF) og notebooks (.ipynb), som I åbner i UCloud. Svarark udleveres efter undervisningen."
+  },
+  {
+    "objectID": "kursus/opgaver.html#sådan-åbner-i-en-notebook",
+    "href": "kursus/opgaver.html#sådan-åbner-i-en-notebook",
+    "title": "Opgaver og øvelser",
+    "section": "Sådan åbner I en notebook",
+    "text": "Sådan åbner I en notebook\n\nHøjreklik på notebook-linket, og vælg Gem link som.\nStart JupyterLab i UCloud (se Værktøjer), og upload filen.\nKør cellerne oppefra og ned med Shift + Enter."
+  },
+  {
+    "objectID": "kursus/opgaver.html#oversigt",
+    "href": "kursus/opgaver.html#oversigt",
+    "title": "Opgaver og øvelser",
+    "section": "Oversigt",
+    "text": "Oversigt\n\n\n\nLektion\nØvelsesark\nNotebooks\n\n\n\n\n1 · Introduktion\nTekst, billede og klassifikation\n\n\n\n2 · Intro til Python\nGæt outputtet · Recap\nTekst som data\n\n\n3 · Data wrangling\nØvelsesark\nTweets som data\n\n\n4 · Datavisualisering\nØvelsesark · Figur-ark · Tabeller\nFigurer\n\n\n6 · Oprydning i tekst\nDimensioner · Læs koden\nPreprocessing\n\n\n7 · Tekstanalyse\nArk 1: korpus · Ark 2: læs koden\nTekstanalyse · Sentiment · Klynger\n\n\n\nØvelser til lektion 5 og 8–12 ligger på lektionens side eller på Moodle."
+  },
+  {
+    "objectID": "kursus/opgaver.html#data",
+    "href": "kursus/opgaver.html#data",
+    "title": "Opgaver og øvelser",
+    "section": "Data",
+    "text": "Data\nDatasættene fra slides ligger i mappen data/ og kan læses direkte i Python:\nimport pandas as pd\n\nurl = \"https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/sales_data.csv\"\ndata = pd.read_csv(url)\nForklaring af koden, trin for trin\n\n\nimport pandas as pd henter biblioteket pandas og giver det kaldenavnet pd.\n\n\nurl = \"...\" gemmer filens adresse som tekst. Adressen starter med raw.githubusercontent.com, fordi det er selve filen og ikke GitHubs webside om filen.\n\n\npd.read_csv(url) henter filen fra nettet og læser den ind som en tabel, der gemmes som data.\n\n\nSkift sales_data.csv ud med et andet filnavn fra tabellen herunder for at hente et andet datasæt.\n\n\n\n\n\n\n\n\n\n\n\nFil\nIndhold\nBruges i\n\n\n\n\nsales_data.csv\nLille salgstabel\nLektion 1–2\n\n\ndata_tweets_2016_kilde_a.csv, data_tweets_2016_kilde_b.csv, data_maaneder.csv\nTweets fra 2016 i to overlappende udtræk og en månedstabel\nLektion 3–4\n\n\njobopslag_udsnit.csv\nUdsnit af danske jobopslag fra efteråret 2023\nLektion 6\n\n\nft_udsnit.csv\nUdsnit af debatter i Folketinget 2007–2022\nLektion 7"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Social Data Science I",
+    "section": "",
+    "text": "Hvordan bliver tekst, billeder, lyd og opslag på nettet til data, man kan analysere? På SDS1 lærer I at hente, rydde op i, visualisere og analysere messy samfundsdata med Python. I lærer det ved selv at skrive koden, og alle mine slides kan køre koden direkte i browseren.\n\n\n\n10 ECTS\n12 undervisningsgange og 2 seminardage\nMundtlig eksamen på baggrund af en portfolio\nPython (med R ved siden af i slides)"
+  },
+  {
+    "objectID": "index.html#lektioner",
+    "href": "index.html#lektioner",
+    "title": "Social Data Science I",
+    "section": "Lektioner",
+    "text": "Lektioner\n\n\n\n1\n\n\nNr. 1: Introduktion til faget 3. september\n\n\nKurset, eksamen og portfolio. Hvad er data, og hvorfor skriver vi kode frem for at klikke i Excel?\n\n slides læsevisning materiale og øvelser \n\n\n\n2\n\n\nNr. 2: Intro til Python 8. september\n\n\nDe grundlæggende begreber i Python: variable, typer, funktioner, metoder, biblioteker og booleans.\n\n slides læsevisning materiale og øvelser \n\n\n\n3\n\n\nNr. 3: Data wrangling i Python: filer, datastrukturer og transformationer 10. september\n\n\nLister, tuples, dictionaries, løkker og betingelser. Derefter: kobl, stabl og omform tabeller med pandas.\n\n slides læsevisning materiale og øvelser \n\n\n\n4\n\n\nNr. 4: Datavisualisering 15. september\n\n\nPrincipper for gode figurer, gode og dårlige eksempler, og et galleri af figurtyper i plotnine og ggplot2.\n\n slides læsevisning materiale og øvelser \n\n\n\n5\n\n\nNr. 5: Scraping og API-kald 17. september Anden underviser\n\n\nIndsamling af data fra nettet: web scraping med Beautiful Soup og API-kald med requests.\n\n\n\n\n6\n\n\nNr. 6: Messy data i praksis: oprydning i tekst 22. september\n\n\nFra rå tekst til analysérbare datastrukturer: indlæsning, tokens, stopord, DTM og spaCy.\n\n slides læsevisning materiale og øvelser \n\n\n\n7\n\n\nNr. 7: Messy data i praksis: tekstanalyse 24. september\n\n\nOverblik over computationel tekstanalyse: ordbøger og sentiment, sprogmodeller, PCA og k-means.\n\n slides læsevisning materiale og øvelser \n\n\n\n8\n\n\nNr. 8: Messy data i praksis: oprydning af data 29. september Anden underviser\n\n\nTabeldata: faldgruber, bias og protokoller, og hvordan data renses i Python.\n\n\n\n\n9\n\n\nNr. 9: Messy data i praksis: lyd og multimodal 6. oktober Materiale på Moodle\n\n\nLyd som datakilde: transskribering, repræsentation og analyse, og kombination med tekst og billeder.\n\n\n\n\n10\n\n\nNr. 10: Messy data i praksis: oprydning af billeder 13. oktober Anden underviser\n\n\nBilleder som data: use cases og præprocessering (greyscaling, resizing, feature extraction, augmentation).\n\n\n\n\n11\n\n\nNr. 11: Dataanalyse i Python 1 20. oktober Materiale på Moodle\n\n\nFra enkelte værktøjer til et samlet projekt: opbygning af en god notebook og ansvarlig brug af AI.\n\n\n\n\n12\n\n\nNr. 12: Dataanalyse i Python 2 22. oktober Materiale på Moodle\n\n\nFortsættelse: vi samler trådene og arbejder videre mod eksamensprojektet.\n\n\n\n\nIngen resultater"
+  },
+  {
+    "objectID": "index.html#sådan-bruger-i-slides",
+    "href": "index.html#sådan-bruger-i-slides",
+    "title": "Social Data Science I",
+    "section": "Sådan bruger I slides",
+    "text": "Sådan bruger I slides\nKodeboksene i slides kan redigeres og køres med Run Code. Under hver kodeboks ligger en lille fold-ud, Forklaring af koden, trin for trin, som forklarer koden linje for linje. Den er skrevet til jer, der aldrig har kodet før. Tryk M for menuen og ? for alle genveje, eller vælg læsevisning nederst, hvis I vil læse slides som én lang side, fx på mobilen. Mere om slides og værktøjer."
+  },
+  {
+    "objectID": "kursus/om-kurset.html",
+    "href": "kursus/om-kurset.html",
+    "title": "Om kurset",
+    "section": "",
+    "text": "Formålet med modulet er, at I tilegner jer en anvendelsesorienteret forståelse for computationelle og dataintensive metoder. Fokus er på analyseteknikker, datahåndtering, datavisualisering og dataudforskning på strukturerede og ustrukturerede data, der er relevante for samfundsvidenskabelige problemstillinger.\nKurset giver en indføring i computationel tænkning. Datahåndtering introduceres i Python, og derefter gennemgås en række udvalgte metoder, herunder klyngeanalyse, mapping-metoder og simple tekstanalyseteknikker. Den røde tråd er sammenhængen mellem valg af datasæt, analyse, visualisering og det samfundsvidenskabelige spørgsmål."
+  },
+  {
+    "objectID": "kursus/om-kurset.html#formål",
+    "href": "kursus/om-kurset.html#formål",
+    "title": "Om kurset",
+    "section": "",
+    "text": "Formålet med modulet er, at I tilegner jer en anvendelsesorienteret forståelse for computationelle og dataintensive metoder. Fokus er på analyseteknikker, datahåndtering, datavisualisering og dataudforskning på strukturerede og ustrukturerede data, der er relevante for samfundsvidenskabelige problemstillinger.\nKurset giver en indføring i computationel tænkning. Datahåndtering introduceres i Python, og derefter gennemgås en række udvalgte metoder, herunder klyngeanalyse, mapping-metoder og simple tekstanalyseteknikker. Den røde tråd er sammenhængen mellem valg af datasæt, analyse, visualisering og det samfundsvidenskabelige spørgsmål."
+  },
+  {
+    "objectID": "kursus/om-kurset.html#hvad-forventer-vi-af-jer",
+    "href": "kursus/om-kurset.html#hvad-forventer-vi-af-jer",
+    "title": "Om kurset",
+    "section": "Hvad forventer vi af jer?",
+    "text": "Hvad forventer vi af jer?\n\nTid. 10 ECTS svarer til 275 timers arbejde. Spred dem ud over semestret.\nForberedelse. Læs det, der står under Forberedelse på lektionens side. Gennemfør e-kurset Introduktion til Python for Samfundsvidenskab inden lektion 2.\nSkriv koden selv. Man lærer at kode ved at kode. Brug øvelserne, og kør og ændr koden i slides.\nByg portfolioen undervejs. Eksamen bygger på en portfolio, I arbejder på gennem hele kurset. Se Portfolio og eksamen.\nAI. Kurset er AI-positivt med klare forbehold: I skal kunne forstå, forklare og stå inde for alt, I afleverer."
+  },
+  {
+    "objectID": "kursus/om-kurset.html#hvad-kan-i-forvente-af-os",
+    "href": "kursus/om-kurset.html#hvad-kan-i-forvente-af-os",
+    "title": "Om kurset",
+    "section": "Hvad kan I forvente af os?",
+    "text": "Hvad kan I forvente af os?\n\nSlides, øvelser og data ligger på denne side inden undervisningen.\nHver kodeboks i mine slides har en trinvis forklaring, I kan folde ud.\nSvarark til øvelserne udleveres efter undervisningen.\nBeskeder, afleveringer og litteratur, der ikke må ligge frit, findes på Moodle."
+  },
+  {
+    "objectID": "kursus/om-kurset.html#undervisningsform",
+    "href": "kursus/om-kurset.html#undervisningsform",
+    "title": "Om kurset",
+    "section": "Undervisningsform",
+    "text": "Undervisningsform\nKurset afvikles som en kombination af forelæsninger, øvelser og e-læring. En typisk undervisningsgang veksler mellem korte oplæg, øvelser på papir, øvelser i grupper og kode, vi skriver sammen."
+  },
+  {
+    "objectID": "kursus/om-kurset.html#læringsmål",
+    "href": "kursus/om-kurset.html#læringsmål",
+    "title": "Om kurset",
+    "section": "Læringsmål",
+    "text": "Læringsmål\nViden\n\nViden om metoder og teknikker til at analysere og visualisere strukturerede datatyper med henblik på samfundsvidenskabelige analyser\nViden om strukturerede og ustrukturerede datatyper\nViden om relevante computervidenskabelige koncepter inden for dataintensive teknikker og metoder\nGrundlæggende indsigt i nyere digitale metoder, deres grundbegreber, teoretiske ophav og praktiske anvendelse\nViden om metodernes samspil med sociale data og sociale fænomener\n\nFærdigheder\n\nKan gengive og redegøre for grundbegreber og centrale forståelser inden for nyere digitale metoder\nKan anvende nyere digitale metoder til dataudforskning\nKan reflektere over og analysere en aktuel samfundsvidenskabelig problemstilling eller tematik ved hjælp af nyere digitale metoder\nKan relatere, sammenligne og diskutere styrker og svagheder ved nyere digitale metoder og deres forskellige analysestrategier\nKan kritisk vurdere og vælge den passende analyseteknik til strukturerede datasæt\n\nKompetencer\n\nKan udvælge, belyse, diskutere og analysere problemstillinger med inddragelse af relevante metodiske tilgange og digitale metoder\nKan identificere og diskutere udfordringer og løsninger i arbejdet med dataudforskningsteknikker"
+  },
+  {
+    "objectID": "kursus/om-kurset.html#undervisere",
+    "href": "kursus/om-kurset.html#undervisere",
+    "title": "Om kurset",
+    "section": "Undervisere",
+    "text": "Undervisere\n\nJeppe Fjeldgaard Qvist: lektion 1–4 og 6–7\nJakob Bruhn Krøjgaard Skelmose: lektion 8 og 10\nØvrige undervisningsgange: se den enkelte lektion og Moodle.\n\nKontaktoplysninger og beskeder findes på Moodle."
+  },
+  {
+    "objectID": "kursus/plan.html",
+    "href": "kursus/plan.html",
+    "title": "Lektionsplan",
+    "section": "",
+    "text": "Hver lektion har sin egen side med beskrivelse, forberedelse, slides og øvelser. Litteraturen herunder er den korte udgave. De fulde henvisninger står på lektionens side."
+  },
+  {
+    "objectID": "kursus/plan.html#vigtige-datoer",
+    "href": "kursus/plan.html#vigtige-datoer",
+    "title": "Lektionsplan",
+    "section": "Vigtige datoer",
+    "text": "Vigtige datoer\n\n\n\nDato\nHvad\n\n\n\n\nFredag 9. oktober 2026, kl. 10.00–16.15\nSeminardag 1\n\n\nFredag 6. november 2026, kl. 10.00–16.15\nSeminardag 2\n\n\nFredag 18. december 2026, kl. 10.00\nAflevering af projekt i Digital Eksamen\n\n\n11.–15. januar 2027\nMundtligt forsvar af projekt"
+  },
+  {
+    "objectID": "kursus/plan.html#grundbøger",
+    "href": "kursus/plan.html#grundbøger",
+    "title": "Lektionsplan",
+    "section": "Grundbøger",
+    "text": "Grundbøger\nBegge bøger er frit tilgængelige:\n\nMcKinney, W. (2022): Python for Data Analysis, 3. udgave. O’Reilly Media.\nSeverance, C. (2016): Python for Everybody."
+  },
+  {
+    "objectID": "kursus/vaerktoejer.html",
+    "href": "kursus/vaerktoejer.html",
+    "title": "Værktøjer",
+    "section": "",
+    "text": "Vi bruger Python gennem hele kurset, og vi kører det i UCloud, en online platform, hvor Python er sat op på forhånd.\n\nFør kursusstart skal I logge ind på UCloud og sikre jer, at I har adgang. Følg introduktionsvideoen på Moodle.\nUCloud tildeler ressourcer (beregningstid) gennem et fælles projekt. Linket til kursets UCloud-projekt ligger på Moodle.\nSørg for, at I har skiftet til fællesprojektet, inden I starter et job.\n\nVi hjælper ikke med lokale installationer af Python."
+  },
+  {
+    "objectID": "kursus/vaerktoejer.html#ucloud",
+    "href": "kursus/vaerktoejer.html#ucloud",
+    "title": "Værktøjer",
+    "section": "",
+    "text": "Vi bruger Python gennem hele kurset, og vi kører det i UCloud, en online platform, hvor Python er sat op på forhånd.\n\nFør kursusstart skal I logge ind på UCloud og sikre jer, at I har adgang. Følg introduktionsvideoen på Moodle.\nUCloud tildeler ressourcer (beregningstid) gennem et fælles projekt. Linket til kursets UCloud-projekt ligger på Moodle.\nSørg for, at I har skiftet til fællesprojektet, inden I starter et job.\n\nVi hjælper ikke med lokale installationer af Python."
+  },
+  {
+    "objectID": "kursus/vaerktoejer.html#kom-i-gang-med-python",
+    "href": "kursus/vaerktoejer.html#kom-i-gang-med-python",
+    "title": "Værktøjer",
+    "section": "Kom i gang med Python",
+    "text": "Kom i gang med Python\n\ne-kursus: Introduktion til Python for Samfundsvidenskab. Gennemfør det inden lektion 2.\nGrundbøger (begge frit tilgængelige): McKinney, Python for Data Analysis, og Severance, Python for Everybody.\nPandas cheat sheet (PDF)."
+  },
+  {
+    "objectID": "kursus/vaerktoejer.html#sådan-bruger-i-slides",
+    "href": "kursus/vaerktoejer.html#sådan-bruger-i-slides",
+    "title": "Værktøjer",
+    "section": "Sådan bruger I slides",
+    "text": "Sådan bruger I slides\nSlides er hjemmesider, ikke PowerPoint. Det giver nogle muligheder:\nKør koden. Kodeboksene med knappen Run Code kører Python (og R) direkte i jeres browser. I kan ændre i koden og køre igen. Start Over bringer den oprindelige kode tilbage. Første gang tager det lidt tid, fordi Python skal hentes ned i browseren.\nFold forklaringen ud. Under hver kodeboks ligger Forklaring af koden, trin for trin. Klik på den (eller brug Tab og Enter) for at få koden forklaret linje for linje. Mange forklaringer slutter med et Prøv selv.\nSkift mellem Python og R. De fleste eksempler findes i begge sprog. Brug fanerne over kodeboksen.\nFind rundt.\n\n\n\n\n\n\n\nTast\nFunktion\n\n\n\n\n→ / ← eller mellemrum\nNæste / forrige slide\n\n\nM\nMenu med alle slides\n\n\nO\nOversigt\n\n\nF\nFuld skærm\n\n\nCtrl + Shift + F\nSøg i slides\n\n\n?\nAlle genveje\n\n\n\nLæsevisning. Linket læsevisning nederst på hvert slide viser alle slides under hinanden. Det er godt på mobilen og til at læse op på stoffet.\nGem som PDF. Tryk E i slides, og brug så browserens Udskriv → Gem som PDF.\nLink til et bestemt slide. Adressen i browseren ændrer sig for hvert slide, så I kan kopiere den og sende den til jeres gruppe."
+  },
+  {
+    "objectID": "kursus/vaerktoejer.html#tilgængelighed",
+    "href": "kursus/vaerktoejer.html#tilgængelighed",
+    "title": "Værktøjer",
+    "section": "Tilgængelighed",
+    "text": "Tilgængelighed\n\nSlides kan betjenes med tastaturet alene, og fold-ud-forklaringerne virker med skærmlæser.\nBrug browserens zoom (Ctrl/Cmd og +), hvis teksten er for lille.\nFigurer, der ikke er lavet med kode, har en tekstbeskrivelse.\nOplever I noget, der ikke virker for jer, så skriv til underviseren."
+  },
+  {
+    "objectID": "lektioner/06-oprydning-i-tekst/index.html",
+    "href": "lektioner/06-oprydning-i-tekst/index.html",
+    "title": "Messy data i praksis: oprydning i tekst",
+    "section": "",
+    "text": "Åbn slides\nLæsevisning\nAlle lektioner\nUnderviser: Jeppe Fjeldgaard Qvist · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/06-oprydning-i-tekst/index.html#om-lektionen",
+    "href": "lektioner/06-oprydning-i-tekst/index.html#om-lektionen",
+    "title": "Messy data i praksis: oprydning i tekst",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi ser på oprydning i tekst, eller mere specifikt: dimensionalitetsreduktion af tekstdata. Fokus er arbejdet med at gå fra rå tekst til analysérbare datastrukturer (text preprocessing). Vi bruger også moderne sprogmodeller fra spaCy. Formålet er at nå frem til datastrukturer, der kan analyseres med bl.a. PCA og k-means.\nEfter lektionen kan I\n\nindlæse en besværlig tekstfil og forklare separator, tegnsæt og rækker, der skal springes over\ngennemføre de typiske oprydningstrin og følge, hvad hvert trin gør ved tokens og typer\nbygge en document-term matrix og forklare, hvad sparsity er"
+  },
+  {
+    "objectID": "lektioner/06-oprydning-i-tekst/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/06-oprydning-i-tekst/index.html#forberedelse-og-litteratur",
+    "title": "Messy data i praksis: oprydning i tekst",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nDenny, M. & Spirling, A. (2017): “Text Preprocessing for Unsupervised Learning: Why It Matters, When It Misleads, and What to Do about It”, SSRN. Fokusér på s. 1–13.\nHunston, S. (2002): “Methods in corpus linguistics: Beyond the concordance line.” I Corpora in Applied Linguistics, s. 79–95. Cambridge University Press (tilgås via AUB).\nSupplerende: Ledolter, J. & VanderVelde, L. (2022): “Clustering of documents.” I Analyzing textual information, s. 97–109. SAGE.\nDokumentation: spaCy 101."
+  },
+  {
+    "objectID": "lektioner/06-oprydning-i-tekst/index.html#materiale",
+    "href": "lektioner/06-oprydning-i-tekst/index.html#materiale",
+    "title": "Messy data i praksis: oprydning i tekst",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nhandout Dimensioner (PDF)\nhandout Læs koden (PDF)\nnotebook Preprocessing (.ipynb)\nopslag Pandas cheat sheet (PDF)\ndata jobopslag_udsnit.csv\n\n\nSvarark udleveres efter øvelserne."
+  },
+  {
+    "objectID": "lektioner/07-computationel-tekstanalyse/index.html",
+    "href": "lektioner/07-computationel-tekstanalyse/index.html",
+    "title": "Messy data i praksis: tekstanalyse",
+    "section": "",
+    "text": "Åbn slides\nLæsevisning\nAlle lektioner\nUnderviser: Jeppe Fjeldgaard Qvist · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/07-computationel-tekstanalyse/index.html#om-lektionen",
+    "href": "lektioner/07-computationel-tekstanalyse/index.html#om-lektionen",
+    "title": "Messy data i praksis: tekstanalyse",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi skaber et overblik over mulighederne med computationel tekstanalyse. Fokusér ikke så meget på de metode-specifikke termer i teksterne, men på eksemplerne, mulighederne og udfordringerne. Vi ser også på, hvordan man analyserer tekst med ordbøger (dictionary models, fx sentimentanalyse) og med sprogmodeller i Python.\nEfter lektionen kan I\n\nbygge og validere en simpel ordbog og forklare dens begrænsninger\nforklare, hvad TF-IDF, PCA og k-means gør ved en document-term matrix\ndiskutere selektion, tilskæring og annotering af et korpus"
+  },
+  {
+    "objectID": "lektioner/07-computationel-tekstanalyse/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/07-computationel-tekstanalyse/index.html#forberedelse-og-litteratur",
+    "title": "Messy data i praksis: tekstanalyse",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nBonikowski, B. & Nelson, L. K. (2022): “From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research.” Sociological Methods & Research, 51(4), 1469–1483.\nMacanovic, A. (2022): “Text mining for social science: The state and the future of computational text analysis in sociology.” Social Science Research, 108, 102784.\nHunston, S. (2002): “The corpus as object: Design and purpose.” I Corpora in Applied Linguistics, s. 25–37. Cambridge University Press (tilgås via AUB).\nSupplerende: Thelwall, M. (2023): “Sentiment Analysis.” I The SAGE Handbook of Social Media Research Methods.\nDokumentation: spaCy 101 og asent."
+  },
+  {
+    "objectID": "lektioner/07-computationel-tekstanalyse/index.html#materiale",
+    "href": "lektioner/07-computationel-tekstanalyse/index.html#materiale",
+    "title": "Messy data i praksis: tekstanalyse",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nhandout Ark 1: korpus (PDF)\nhandout Ark 2: læs koden (PDF)\nnotebook Tekstanalyse (.ipynb)\nnotebook Sentiment med asent (.ipynb)\nnotebook Klynger (.ipynb)\nnotebook Supplement: spaCy (.ipynb)\nnotebook Sådan er korpusset lavet, trin for trin (.ipynb)\ndata ft_udsnit.csv\n\n\nSvarark udleveres efter øvelserne."
+  },
+  {
+    "objectID": "lektioner/08-oprydning-af-data/index.html",
+    "href": "lektioner/08-oprydning-af-data/index.html",
+    "title": "Messy data i praksis: oprydning af data",
+    "section": "",
+    "text": "Alle lektioner\nUnderviser: Jakob Bruhn Krøjgaard Skelmose · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/08-oprydning-af-data/index.html#om-lektionen",
+    "href": "lektioner/08-oprydning-af-data/index.html#om-lektionen",
+    "title": "Messy data i praksis: oprydning af data",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi kigger på tabeldata (tabular data), den mest brugte form for data i samfundsvidenskabelig analyse. Vi kender den fra surveys, finansielle rapporter og udtræk fra Excel. Vi gennemgår faldgruber, bias og protokoller for tabeldata og viser, hvordan data renses i Python."
+  },
+  {
+    "objectID": "lektioner/08-oprydning-af-data/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/08-oprydning-af-data/index.html#forberedelse-og-litteratur",
+    "title": "Messy data i praksis: oprydning af data",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nMcKinney (2022), kapitel 7.\nSkelmose m.fl. (2026): Dynamic Risk Prediction, kapitel 3.\nSekundær: Ryan & Massaron (2025): Machine Learning for Tabular Data, kap. 1 og 2. Manning."
+  },
+  {
+    "objectID": "lektioner/08-oprydning-af-data/index.html#materiale",
+    "href": "lektioner/08-oprydning-af-data/index.html#materiale",
+    "title": "Messy data i praksis: oprydning af data",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nslides Slides (Google Slides)\nnotebook Følg med (Colab)\nnotebook Øvelser (Colab)"
+  },
+  {
+    "objectID": "lektioner/10-oprydning-af-billeder/index.html",
+    "href": "lektioner/10-oprydning-af-billeder/index.html",
+    "title": "Messy data i praksis: oprydning af billeder",
+    "section": "",
+    "text": "Alle lektioner\nUnderviser: Jakob Bruhn Krøjgaard Skelmose · kl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/10-oprydning-af-billeder/index.html#om-lektionen",
+    "href": "lektioner/10-oprydning-af-billeder/index.html#om-lektionen",
+    "title": "Messy data i praksis: oprydning af billeder",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nVi introducerer billeder som datatype. Vi får en forståelse af billeder som data, taler om forskellige use cases, og ser på, hvordan billeder forberedes til analyse: greyscaling, resizing, feature extraction og data augmentation."
+  },
+  {
+    "objectID": "lektioner/10-oprydning-af-billeder/index.html#forberedelse-og-litteratur",
+    "href": "lektioner/10-oprydning-af-billeder/index.html#forberedelse-og-litteratur",
+    "title": "Messy data i praksis: oprydning af billeder",
+    "section": "Forberedelse og litteratur",
+    "text": "Forberedelse og litteratur\n\nElgendy, M. (2020): Deep Learning for Vision Systems, kapitel 1. Manning (tilgås via AUB).\nPatel, M. (2023): “The Complete Guide to Image Preprocessing Techniques in Python.” Medium."
+  },
+  {
+    "objectID": "lektioner/10-oprydning-af-billeder/index.html#materiale",
+    "href": "lektioner/10-oprydning-af-billeder/index.html#materiale",
+    "title": "Messy data i praksis: oprydning af billeder",
+    "section": "Materiale",
+    "text": "Materiale\n\n\nslides Slides (Google Slides)\nnotebook Øvelser (Colab)\nnotebook Følg med (Colab)"
+  },
+  {
+    "objectID": "lektioner/12-dataanalyse-i-python-2/index.html",
+    "href": "lektioner/12-dataanalyse-i-python-2/index.html",
+    "title": "Dataanalyse i Python 2",
+    "section": "",
+    "text": "Alle lektioner\nkl. 12.30–16.15"
+  },
+  {
+    "objectID": "lektioner/12-dataanalyse-i-python-2/index.html#om-lektionen",
+    "href": "lektioner/12-dataanalyse-i-python-2/index.html#om-lektionen",
+    "title": "Dataanalyse i Python 2",
+    "section": "Om lektionen",
+    "text": "Om lektionen\nAnden del af broen mellem kursets værktøjer og eksamensprojektet. Se beskrivelsen under Dataanalyse i Python 1."
+  },
+  {
+    "objectID": "workshops/seminardag-1/index.html",
+    "href": "workshops/seminardag-1/index.html",
+    "title": "Seminardag 1",
+    "section": "",
+    "text": "Alle workshops\n\nVi holder det nærmere indhold på seminardagene fleksibelt, så vi kan tilpasse det til holdets aktuelle behov. Programmet meldes ud på Moodle.\nTag med: jeres datamateriale (eller idéer til et), jeres notebook, og de spørgsmål, I sidder fast i.\n\n\n\n Tilbage til toppen"
+  }
+]

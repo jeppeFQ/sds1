@@ -1,0 +1,294 @@
+/*-- scss:defaults --*/
+
+@import "farver";
+// Skrifterne ligger i _extensions/sds1/resources/skrift/ og hentes ind af sds1.lua (ingen Google Fonts).
+
+$font-family-sans-serif: $skrift;
+$font-family-monospace: $skrift-kode;
+$font-size-root: 18px;
+$line-height-base: 1.6;
+$headings-font-weight: 600;
+$headings-color: $aau-blaa;
+$body-color: $tekst;
+$body-bg: #ffffff;
+$link-color: $aau-lyseblaa-dyb;
+$link-decoration: underline;
+$code-color: $sek-lilla-dyb;
+$primary: $aau-blaa;
+$secondary: $tekst-svag;
+$info: $aau-lyseblaa-dyb;
+$success: $sek-turkis-dyb;
+$warning: $sek-gul-dyb;
+$danger: $sek-orange-dyb;
+
+$navbar-bg: #ffffff;
+$navbar-fg: $tekst;
+$navbar-hl: $aau-blaa;
+$footer-bg: #ffffff;
+$footer-fg: $tekst-svag;
+
+$grid-body-width: 780px;
+$grid-sidebar-width: 220px;
+$grid-margin-width: 220px;
+
+$callout-color-note: $aau-lyseblaa-dyb;
+$callout-color-tip: $sek-turkis-dyb;
+$callout-color-important: $sek-orange-dyb;
+$callout-color-warning: $sek-gul-dyb;
+$callout-color-caution: $sek-orange-dyb;
+
+/*-- scss:rules --*/
+
+// ---------------------------------------------------------- top: farvestribe + menu
+#quarto-header::before {
+  content: "";
+  display: block;
+  height: 6px;
+  background: linear-gradient(90deg,
+    $aau-blaa 0 34%,
+    $sek-turkis 34% 47%,
+    $sek-orange 47% 60%,
+    $aau-lyseblaa 60% 73%,
+    $sek-lilla 73% 86%,
+    $sek-gul 86% 100%);
+}
+.navbar {
+  border-bottom: 1px solid $linje;
+  box-shadow: none;
+}
+.navbar-brand .navbar-title {
+  font-weight: 700;
+  color: $aau-blaa;
+  letter-spacing: 0.01em;
+}
+.navbar .nav-link {
+  color: $tekst !important;
+  font-weight: 500;
+}
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+  color: $aau-blaa !important;
+  text-decoration: underline;
+  text-decoration-color: $sek-orange;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35em;
+}
+
+// ---------------------------------------------------------- tekst
+body { -webkit-font-smoothing: antialiased; }
+main.content { margin-top: 1.5rem; }
+
+h1.title, .quarto-title h1 {
+  font-size: 2.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.quarto-title .subtitle, .quarto-title-block .subtitle {
+  color: $tekst-svag;
+  font-weight: 400;
+  font-size: 1.15rem;
+}
+h2 {
+  font-size: 1.4rem;
+  margin-top: 2.4rem;
+  border-bottom: none !important;
+  padding-bottom: 0;
+}
+h3 { font-size: 1.1rem; margin-top: 1.6rem; color: $tekst; }
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-color: $sek-orange; }
+
+:focus-visible {
+  outline: 3px solid $sek-gul !important;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+blockquote {
+  border-left: 4px solid $aau-blaa;
+  background: $aau-blaa-tone;
+  padding: 0.6rem 1rem;
+  color: $tekst;
+}
+
+table { font-size: 0.92rem; }
+.table > :not(caption) > * > * { padding: 0.45rem 0.6rem; }
+thead th { color: $aau-blaa; border-bottom: 2px solid $aau-blaa !important; }
+
+code { font-size: 0.88em; }
+kbd {
+  font-family: $skrift-kode;
+  font-size: 0.8em;
+  color: $tekst;
+  background: $flade;
+  border: 1px solid $linje;
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+}
+
+// ---------------------------------------------------------- forside
+.forside-lede {
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: $tekst;
+  max-width: 40rem;
+}
+.forside-fakta ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  list-style: none;
+  font-size: 0.95rem;
+  color: $tekst-svag;
+}
+.forside-fakta ul li > * { display: inline; margin: 0; }
+.forside-fakta ul li::before { content: "▪ "; color: $sek-orange; }
+
+.genveje {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.6rem 0 0.4rem 0;
+}
+.genveje p { margin: 0; }
+.genveje a {
+  display: block;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  color: $aau-blaa;
+  background: $flade;
+  border-top: 4px solid $aau-blaa;
+}
+.genveje a span { display: block; font-weight: 400; font-size: 0.85rem; color: $tekst-svag; }
+.genveje p:nth-child(6n+2) a { border-top-color: $sek-turkis; }
+.genveje p:nth-child(6n+3) a { border-top-color: $sek-orange; }
+.genveje p:nth-child(6n+4) a { border-top-color: $aau-lyseblaa; }
+.genveje p:nth-child(6n+5) a { border-top-color: $sek-lilla; }
+.genveje p:nth-child(6n+6) a { border-top-color: $sek-gul; }
+.genveje a:hover { background: $aau-blaa-tone; }
+
+// ---------------------------------------------------------- lektionsliste (artefakt-rækker)
+ol.lektionsliste {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+ol.lektionsliste > li {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 0 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid $linje;
+}
+ol.lektionsliste > li:first-child { border-top: 1px solid $linje; }
+.lektion-nr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  background: $aau-blaa;
+}
+@each $farve in $farvecyklus-dyb {
+  $i: index($farvecyklus-dyb, $farve) - 1;
+  .farve-#{$i} .lektion-nr { background: $aau-blaa; }
+}
+.status-kommer .lektion-nr,
+.status-moodle .lektion-nr,
+.status-anden .lektion-nr { background: $flade !important; color: $tekst-svag; border: 1px dashed $linje; }
+.lektion-hoved { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; }
+.lektion-titel { font-weight: 600; font-size: 1.08rem; color: $aau-blaa; text-decoration: none; }
+.lektion-titel:hover { text-decoration: underline; text-decoration-color: $sek-orange; }
+.lektion-dato { color: $tekst-svag; font-size: 0.9rem; }
+.lektion-beskrivelse { margin: 0.15rem 0 0.3rem 0; color: $tekst; }
+.lektion-litteratur { margin: 0.2rem 0 0.3rem 0; font-size: 0.92rem; color: $tekst-svag; }
+.lektion-litteratur em { color: $tekst; }
+.lektion-links { font-size: 0.9rem; }
+.lektion-links a { margin-right: 0.9rem; }
+.lektion-links a::before { content: "→ "; color: $sek-orange; text-decoration: none; display: inline-block; }
+.lektion-etiket {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.05rem 0.45rem;
+  border-radius: 4px;
+  background: $sek-gul-tone;
+  color: $sek-gul-dyb;
+}
+
+// ---------------------------------------------------------- lektionsside
+.lektion-knapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0 1.4rem 0;
+}
+.lektion-knapper a {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid $aau-blaa;
+  color: $aau-blaa;
+}
+.lektion-knapper a.primaer { background: $aau-blaa; color: #fff; }
+.lektion-knapper a:hover { background: $aau-blaa-tone; color: $aau-blaa; }
+.lektion-knapper a.primaer:hover { background: $aau-lyseblaa-dyb; border-color: $aau-lyseblaa-dyb; color: #fff; }
+
+.materiale ul { list-style: none; padding-left: 0; }
+.materiale ul li { padding: 0.35rem 0; border-bottom: 1px dotted $linje; }
+.materiale ul li .type {
+  display: inline-block;
+  min-width: 4.2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $sek-turkis-dyb;
+}
+
+// ---------------------------------------------------------- fold-ud på sider
+details.forklaring {
+  margin: 0.6rem 0 1rem 0;
+  font-size: 0.92rem;
+  border: 1px solid $linje;
+  border-left: 5px solid $sek-turkis;
+  border-radius: 6px;
+}
+details.forklaring > summary {
+  cursor: pointer;
+  padding: 0.45rem 0.9rem;
+  font-weight: 600;
+  color: $sek-turkis-dyb;
+}
+details.forklaring .forklaring-indhold { padding: 0.4rem 1.1rem 0.6rem 1.1rem; background: $sek-turkis-tone; }
+
+// ---------------------------------------------------------- bundlinje
+.nav-footer {
+  border-top: 1px solid $linje;
+  font-size: 0.85rem;
+}
+.nav-footer img.footer-logo { height: 30px; width: auto; vertical-align: middle; margin-right: 0.6rem; }
+
+// ---------------------------------------------------------- forside: AAU-bølger bag introen
+.forside-hero {
+  background-repeat: no-repeat;
+  background-position: right -120px center;
+  background-size: 70% auto;
+  padding: 0.4rem 0 1.4rem 0;
+  border-bottom: 1px solid $linje;
+}

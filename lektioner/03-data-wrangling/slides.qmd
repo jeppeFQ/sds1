@@ -1,0 +1,1636 @@
+---
+title: "Data wrangling i Python"
+subtitle: "Lektion 03"
+author: "Jeppe Fjeldgaard Qvist"
+format: sds1-revealjs
+engine: markdown
+accent: orange
+pyodide:
+  packages:
+    - pandas
+    - numpy
+webr:
+  packages:
+    - dplyr
+    - tidyr
+---
+
+## I dag
+
+1. **Opsamling** på øvelserne fra lektion 2.
+2. **Datastrukturer.** Lister, tuples og dictionaries.
+3. **Kontrolstrukturer.** Løkker og `if`-betingelser.
+4. **Data wrangling.** Koble tabeller sammen og ændre deres form.
+5. **Øvelser.**
+
+::: {.lille}
+Litteratur: Severance, *Python for Everybody* · McKinney, *Python for Data Analysis* (kap. 8).
+:::
+
+# Opsamling på lektion 2
+
+Tre ting fra øvelserne, som er værd at tage med videre.
+
+## Tre ting, der er værd at tage med videre
+
+1. **Metoder ændrer ikke originalen.** `tekst.upper()` giver en ny tekst tilbage. Den gamle står uændret, medmindre I gemmer resultatet.
+
+2. **Store og små bogstaver er to forskellige ting.** At tælle `regeringen` i den rå tekst gav **0**.
+
+3. **Manglende værdier kan være kodet, fremfor tomme (NA).** `999` er ikke en alder. Maskinen "ser" det ikke, men giver 192 år i gennemsnit.
+
+## Metoder returnerer noget nyt {.kodelab}
+
+`tekst.upper()` ændrer ikke teksten. Den giver en **ny** tekst tilbage, som I selv skal gemme.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev forslag="Gem resultatet under et nyt navn i stedet, fx `stor = tekst.upper()`. Så har I begge versioner."}
+```{pyodide}
+tekst = "hej"
+
+tekst.upper()      # resultatet forsvinder
+print(tekst)
+
+tekst = tekst.upper()   # her gemmes det
+print(tekst)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den viser, at en metode som `.upper()` ikke ændrer den oprindelige tekst. Den giver en *ny* tekst tilbage.
+
+1. {1} `tekst = "hej"` gemmer teksten `hej`.
+2. {3} `tekst.upper()` laver en ny tekst med store bogstaver, `HEJ`. Men vi gemmer den ingen steder, så den forsvinder igen.
+3. {4} `print(tekst)` viser derfor stadig `hej`.
+4. {6} `tekst = tekst.upper()` gemmer den nye tekst **under det gamle navn**. Nu peger `tekst` på `HEJ`.
+5. {4} Det andet `print(tekst)` viser `HEJ`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+tekst <- "hej"
+
+toupper(tekst)     # resultatet forsvinder
+print(tekst)
+
+tekst <- toupper(tekst)
+print(tekst)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R: `toupper()` laver en ny tekst, men ændrer ikke den gamle.
+
+1. {1} `tekst <- "hej"` gemmer teksten.
+2. {3} `toupper(tekst)` laver `"HEJ"`. R viser resultatet på skærmen, fordi det står alene på en linje, men det bliver ikke **gemt**.
+3. {4} `print(tekst)` viser derfor stadig `"hej"`.
+4. {6} `tekst <- toupper(tekst)` gemmer den nye tekst under det gamle navn. Det andet `print(tekst)` viser `"HEJ"`.
+:::
+::::
+:::::
+
+# Datastrukturer
+
+Tre måder at samle flere værdier på: lister, tuples og dictionaries.
+
+## Lister {.kodelab}
+
+En **liste** er en række værdier i en bestemt rækkefølge. Værdierne kaldes **elementer** og behøver ikke have samme type.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+tal = [10, 20, 30, 40]
+ord = ["hus", "bil", "have"]
+blandet = ["hus", 2.0, 5, [10, 20]]
+tom = []
+
+print(tal)
+print(len(blandet))    # den "indre liste" tæller som ét element
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver fire lister og viser, at en liste kan indeholde alt muligt.
+
+1. {1} `[10, 20, 30, 40]`: firkantede parenteser med elementer adskilt af komma er en **liste**.
+2. {2} `ord` er en liste af tekster. `blandet` blander tekst, kommatal, heltal og en liste inden i listen.
+3. {4} `tom = []` er en tom liste. Den kan fyldes senere.
+4. {7} `len(blandet)` giver `4`. Den indre liste `[10, 20]` tæller som ét element.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+tal <- c(10, 20, 30, 40)
+ord <- c("hus", "bil", "have")
+blandet <- list("hus", 2.0, 5, c(10, 20))
+tom <- c()
+
+print(tal)
+print(length(blandet))   # den indre vektor tæller som ÉT element
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver det tætteste, R har på lister: **vektorer** med `c()` og **lister** med `list()`.
+
+1. {1} `c(10, 20, 30, 40)` er en vektor. Alle elementer i en vektor skal være af samme type.
+2. {2} `c("hus", "bil", "have")` er en vektor af tekst.
+3. {3} Vil man blande typer, skal man bruge `list(...)`, som i `blandet`.
+4. {4} `tom <- c()` giver en tom værdi (R kalder den `NULL`).
+5. {7} `length(blandet)` giver `4`. Den indre vektor `c(10, 20)` tæller som ét element.
+:::
+::::
+:::::
+
+::: {.lille}
+I har allerede mødt en liste: `.split()` gav en liste af ord i sidste øvelse. I R kræver `c()`, at alt har samme type. Skal typerne blandes, bruger man `list()`.
+:::
+
+## Hvert element har et nummer
+
+::: {.figur figur="indeks" elementer="a,b,c,d,e,f" navn="t"}
+:::
+
+- **Python tæller fra 0, R tæller fra 1.** Det er den forskel, der giver flest fejl, når man skifter sprog.
+- Et **slice** `t[start:slut]` tager `start` med, men **ikke** `slut`. Træk i skyderne.
+
+## Indeksering: hent ét element {.kodelab}
+
+Firkantede parenteser henter ét element. Læg mærke til sidste linje.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+t = ["a", "b", "c", "d", "e", "f"]
+
+print(t[0])     # det FØRSTE element
+print(t[2])
+print(t[-1])    # negativt tal tæller bagfra
+print("c" in t) # findes den?
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den henter enkelte elementer ud af en liste med deres **position** (indeks).
+
+1. {3} `t[0]` er det **første** element, `"a"`. Python begynder at tælle ved 0.
+2. {4} `t[2]` er det tredje element, `"c"`.
+3. {5} `t[-1]` tæller bagfra: det sidste element, `"f"`.
+4. {6} `"c" in t` spørger, om `"c"` findes i listen. Svaret er `True`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+t <- c("a", "b", "c", "d", "e", "f")
+
+print(t[1])       # det FØRSTE element
+print(t[3])
+print(t[length(t)])
+print("c" %in% t)
+
+print(t[-1])      # i R betyder minus "fjern dette element"
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den henter elementer ud af en vektor i R. R begynder at tælle ved 1.
+
+1. {3} `t[1]` er det første element, `"a"`. `t[3]` er det tredje, `"c"`.
+2. {5} `t[length(t)]` er det sidste: `length(t)` er 6, så det er `t[6]`.
+3. {6} `"c" %in% t` spørger, om `"c"` findes i vektoren: `TRUE`.
+4. {8} `t[-1]` betyder i R **alt undtagen det første element**. Det er det modsatte af Python!
+:::
+::::
+:::::
+
+::: {.lille}
+`t[-1]` betyder to forskellige ting: i Python *det sidste element*, i R *alt undtagen det første*.
+:::
+
+## Slicing: hent flere elementer {.kodelab}
+
+Start er **med**, slut er **ikke med**. Antallet af elementer er altid *slut minus start*.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+t = ["a", "b", "c", "d", "e", "f"]
+
+print(t[1:3])   # fra og med 1, til men IKKE med 3
+print(t[:4])    # fra begyndelsen
+print(t[3:])    # til enden
+print(t[:])     # en kopi af hele listen
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den henter **flere** elementer på én gang med et *slice*: `start:slut`.
+
+1. {3} `t[1:3]` starter ved position 1 (`"b"`) og stopper **før** position 3. Resultatet er `['b', 'c']`.
+2. {4} `t[:4]` uden start betyder *fra begyndelsen*: `['a', 'b', 'c', 'd']`.
+3. {5} `t[3:]` uden slut betyder *til enden*: `['d', 'e', 'f']`.
+4. {6} `t[:]` uden noget er hele listen, som en kopi.
+
+Huskeregel: antallet af elementer i resultatet er altid *slut minus start*.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+t <- c("a", "b", "c", "d", "e", "f")
+
+print(t[2:3])   # i R er BEGGE ender inklusive
+print(t[1:4])
+print(t[4:length(t)])
+print(t[])
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Flere elementer på én gang i R. Her er **begge ender med**.
+
+1. {3} `t[2:3]` giver element 2 og 3: `"b" "c"`.
+2. {4} `t[1:4]` giver de første fire.
+3. {5} `t[4:length(t)]` giver fra nummer 4 til det sidste.
+4. {6} `t[]` med tom parentes giver hele vektoren.
+:::
+::::
+:::::
+
+## Lister kan ændres {.kodelab}
+
+En liste er **mutable**: elementer kan udskiftes, tilføjes og fjernes. En tekst er **immutable** og må erstattes af en ny.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+tal = [17, 123]
+tal[1] = 5           # virker
+print(tal)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den udskifter et element i en liste.
+
+1. {1} `tal = [17, 123]` laver en liste med to tal.
+2. {2} `tal[1] = 5` udskifter elementet på position 1 (det andet!) med 5.
+3. {3} `print(tal)` viser `[17, 5]`. Listen er ændret *på stedet*. Det kaldes, at listen er **mutable**.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+tal <- c(17, 123)
+tal[2] <- 5
+print(tal)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den udskifter et element i en vektor i R.
+
+1. {1} `tal <- c(17, 123)` laver vektoren.
+2. {2} `tal[2] <- 5` udskifter det **andet** element (R tæller fra 1) med 5.
+3. {3} `print(tal)` viser `17 5`.
+:::
+::::
+:::::
+
+## Listemetoder {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+t = ["a", "b", "c"]
+
+t.append("d")        # tilføj ét element til sidst
+print(t)
+
+t.extend(["e", "f"]) # tilføj alle elementer fra en anden liste
+print(t)
+
+t.remove("b")        # fjern efter værdi
+print(t)
+
+x = t.pop(0)         # fjern efter position, og giv værdien tilbage
+print(x, t)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den bruger listens egne metoder til at tilføje og fjerne elementer.
+
+1. {3} `t.append("d")` sætter ét element på til sidst.
+2. {6} `t.extend(["e", "f"])` sætter **alle** elementerne fra en anden liste på til sidst.
+3. {9} `t.remove("b")` fjerner elementet med *værdien* `"b"`.
+4. {12} `x = t.pop(0)` fjerner elementet på *position* 0 og giver det tilbage, så vi kan gemme det som `x`.
+5. {13} `print(x, t)` viser det fjernede element og resten af listen.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+t <- c("a", "b", "c")
+
+t <- c(t, "d")            # tilføj til sidst
+print(t)
+
+t <- c(t, c("e", "f"))
+print(t)
+
+t <- t[t != "b"]          # fjern efter værdi
+print(t)
+
+x <- t[1]; t <- t[-1]     # fjern efter position
+print(x); print(t)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R. Vektorer har ingen metoder, så vi laver en ny vektor og gemmer den under samme navn.
+
+1. {3} `t <- c(t, "d")` sætter `"d"` på til sidst.
+2. {6} `t <- c(t, c("e", "f"))` sætter to elementer på.
+3. {9} `t <- t[t != "b"]` beholder alt, der **ikke** er `"b"`. `t != "b"` giver `TRUE`/`FALSE` for hvert element, og `t[...]` beholder dem med `TRUE`.
+4. {12} `x <- t[1]; t <- t[-1]` gemmer det første element som `x` og fjerner det bagefter. Semikolon `;` adskiller to kommandoer på samme linje.
+:::
+::::
+:::::
+
+## Fælden: listemetoder giver `None` tilbage {.kodelab}
+
+For tekst gav metoden en ny tekst tilbage. **For lister er det omvendt:** metoden ændrer listen på stedet og giver `None` tilbage.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev gaet="Linje 7 gemmer resultatet af u.sort() i u. Hvad skriver sidste linje ud?" valg="[1, 2, 3]|None|En fejl"}
+```{pyodide}
+t = [3, 1, 2]
+
+print(t.sort())    # metoden returnerer None ...
+print(t)           # ... men listen ER sorteret
+
+u = [3, 1, 2]
+u = u.sort()       # FORKERT... nu er u lig None
+print(u)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den viser en klassisk fælde: listemetoder ændrer listen, men giver `None` tilbage.
+
+1. {3} `t.sort()` sorterer listen **på stedet**. Metoden giver ikke noget tilbage, kun `None` (Pythons ord for *ingenting*). Derfor viser `print(t.sort())` `None`.
+2. {4} `print(t)` viser bagefter den sorterede liste `[1, 2, 3]`.
+3. {7} `u = u.sort()` sorterer først `u`, men gemmer så `None` under navnet `u`. Listen er væk. `print(u)` viser `None`.
+
+Huskeregel: tekst-metoder giver en ny tekst tilbage (gem den!). Liste-metoder ændrer listen selv (gem **ikke** resultatet). Vil I have en sorteret kopi, brug `sorted(u)`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+t <- c(3, 1, 2)
+
+print(sort(t))   # sort() returnerer en ny vektor ...
+print(t)         # ... og den gamle står uændret
+
+t <- sort(t)     # sådan gemmes resultatet
+print(t)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** I R giver `sort()` en **ny** vektor tilbage, så det gamle er uændret.
+
+1. {3} `print(sort(t))` viser den sorterede vektor.
+2. {4} `print(t)` viser, at `t` stadig er usorteret.
+3. {6} `t <- sort(t)` gemmer den sorterede vektor under navnet `t`.
+:::
+::::
+:::::
+
+::: {.lille}
+`word = word.strip()` er rigtigt. `t = t.sort()` er forkert. **Hvorfor?**
+:::
+
+## Aliasing: to navne, ét objekt
+
+`b = a` giver ikke en kopi. Det giver et **nyt navn til den samme liste**. Tryk *Næste trin*, før I kører koden.
+
+:::::: {.to-kol }
+::: {.kol}
+::: {.figur figur="alias"}
+:::
+:::
+
+::::::: {.kol}
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+a = [1, 2, 3]
+b = a           # IKKE en kopi
+b[0] = 17
+print(a)        # a er også ændret!
+print(a is b)
+
+c = [1, 2, 3]
+d = c[:]        # en rigtig kopi
+d[0] = 99
+print(c, d)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den viser, at `b = a` ikke laver en kopi, men et nyt navn til **samme** liste.
+
+1. {1} `a = [1, 2, 3]` laver en liste.
+2. {2} `b = a` giver listen et ekstra navn. Der er stadig kun én liste.
+3. {3} `b[0] = 17` ændrer listen via navnet `b`. Derfor er `a` også ændret: `[17, 2, 3]`.
+4. {5} `a is b` spørger, om de to navne peger på præcis det samme objekt: `True`.
+5. {8} `d = c[:]` laver en rigtig kopi med et slice. Ændrer vi `d`, er `c` uændret.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+a <- c(1, 2, 3)
+b <- a          # R laver en kopi
+b[1] <- 17
+print(a)        # a er uændret
+print(b)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** I R får man en kopi, når man ændrer.
+
+1. {2} `b <- a` giver `b` den samme værdi som `a`.
+2. {3} `b[1] <- 17` ændrer `b`. I det øjeblik laver R en kopi, så `a` er uændret.
+3. {4} `print(a)` viser `1 2 3`, og `print(b)` viser `17 2 3`.
+:::
+::::
+:::::
+:::::::
+::::::
+
+::: {.lille}
+Her er sprogene fundamentalt forskellige: R kopierer, så snart man ændrer.
+:::
+
+## Lister og tekst hænger sammen {.kodelab}
+
+`.split()` laver en tekst om til en liste. `.join()` samler listen til en tekst igen.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+s = "en sætning med fem ord"
+
+t = s.split()          # tekst  ->  liste af ord
+print(t)
+
+print(" ".join(t))     # liste  ->  tekst igen
+print("-".join(t))     # med en anden adskiller
+
+print(list("spam"))    # tekst  ->  liste af ENKELTE tegn
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den går fra tekst til liste og tilbage igen.
+
+1. {3} `s.split()` deler teksten ved mellemrum og giver en liste af ord.
+2. {6} `" ".join(t)` limer ordene sammen igen med et mellemrum imellem. Læg mærke til, at metoden kaldes på **limen** (`" "`), ikke på listen.
+3. {7} `"-".join(t)` bruger bindestreg som lim.
+4. {9} `list("spam")` deler teksten op i enkelte tegn: `['s', 'p', 'a', 'm']`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+s <- "en sætning med fem ord"
+
+t <- strsplit(s, " ")[[1]]     # tekst -> vektor af ord
+print(t)
+
+print(paste(t, collapse = " "))
+print(paste(t, collapse = "-"))
+
+print(strsplit("spam", "")[[1]])
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Fra tekst til vektor og tilbage i R.
+
+1. {3} `strsplit(s, " ")` deler teksten ved mellemrum. Svaret er en *liste* (fordi man kan dele mange tekster på én gang), så `[[1]]` henter den første og eneste vektor ud.
+2. {6} `paste(t, collapse = " ")` limer ordene sammen med mellemrum. `collapse = "-"` bruger bindestreg.
+3. {9} `strsplit("spam", "")[[1]]`: med en tom tekst som skilletegn deles teksten i enkelte tegn.
+:::
+::::
+:::::
+
+## Tuples {.kodelab}
+
+En **tuple** er en liste, der **ikke kan ændres**. Derfor kan den bruges som nøgle i en dictionary, hvor intet må ændre sig bag ryggen på os.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+t = ("a", "b", "c")
+print(t[0])
+print(t[1:3])
+
+# t[0] = "A"          # fjern #-tegnet: TypeError
+
+en = ("a",)           # ét element KRÆVER et komma
+ikke_en_tuple = ("a") # uden komma er det bare en tekst
+print(type(en), type(ikke_en_tuple))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver en **tuple**: en liste, der ikke kan ændres.
+
+1. {1} `t = ("a", "b", "c")`: runde parenteser og komma laver en tuple.
+2. {2} `t[0]` og `t[1:3]` virker som på en liste.
+3. {5} Linjen `# t[0] = "A"` er sat ud af drift med `#`. Fjern `#`, og I får en `TypeError`, fordi tuplen ikke kan ændres.
+4. {7} `("a",)`: en tuple med ét element **skal** have et komma. Uden komma er `("a")` bare teksten `"a"` i en parentes. `type()` viser forskellen.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+# R har ikke tuples. Det tætteste er en liste,
+# man beslutter sig for ikke at ændre.
+t <- list("a", "b", "c")
+print(t[[1]])
+print(t[2:3])
+```
+
+::: {.forklaring}
+**Hvad gør koden?** R har ikke tuples. Det nærmeste er en liste, man lader være med at ændre.
+
+1. {3} `list("a", "b", "c")` laver en liste med tre elementer.
+2. {4} `t[[1]]` med **dobbelte** klammer henter selve elementet ud: `"a"`.
+3. {5} `t[2:3]` med enkelte klammer giver en mindre *liste* med element 2 og 3.
+:::
+::::
+:::::
+
+## Dictionaries {.kodelab}
+
+En **dictionary** er som en liste, hvor indekset ikke er et tal, men en **nøgle** (`key`), typisk en tekst. Det, der ligger på pladsen, er **værdien** (`value`).
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+alder = {"ida": 34, "omar": 41, "sara": 29}
+
+print(alder["omar"])       # slå op med nøglen
+alder["nikolaj"] = 52      # tilføj et nyt par
+print(alder)
+
+print(len(alder))
+print("ida" in alder)      # tjekker NØGLER
+print(34 in alder)         # ... ikke værdier!
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver en **dictionary**, hvor hver værdi slås op med en nøgle i stedet for et tal.
+
+1. {1} `{"ida": 34, "omar": 41, "sara": 29}`: krøllede parenteser og `nøgle: værdi`-par adskilt af komma.
+2. {3} `alder["omar"]` slår op med nøglen `"omar"` og giver `41`.
+3. {4} `alder["nikolaj"] = 52` tilføjer et nyt par.
+4. {7} `len(alder)` tæller parrene: 4.
+5. {8} `"ida" in alder` spørger, om `"ida"` er en **nøgle**: `True`. `34 in alder` giver `False`, fordi `in` kun kigger på nøglerne, ikke på værdierne.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+alder <- list(ida = 34, omar = 41, sara = 29)
+
+print(alder[["omar"]])
+alder[["nikolaj"]] <- 52
+print(names(alder))
+
+print(length(alder))
+print("ida" %in% names(alder))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det nærmeste på en dictionary i R: en liste med navne.
+
+1. {1} `list(ida = 34, omar = 41, sara = 29)` laver en liste, hvor hvert element har et navn.
+2. {3} `alder[["omar"]]` slår op med navnet og giver `41`.
+3. {4} `alder[["nikolaj"]] <- 52` tilføjer et nyt element.
+4. {5} `names(alder)` viser alle navnene. `"ida" %in% names(alder)` tjekker, om navnet findes.
+:::
+::::
+:::::
+
+::: {.lille}
+Findes nøglen ikke, får I en `KeyError`. Det er ikke en fejl i koden, kun en besked om, at der ikke er nogen værdi at hente.
+:::
+
+## Hvorfor ikke bare bruge en liste?
+
+:::: {.to-kol}
+::: {.kol}
+**Liste**
+
+Maskinen må lede fra den ene ende. Dobbelt så lang liste, dobbelt så lang tid.
+:::
+
+::: {.kol}
+**Dictionary**
+
+Python slår nøglen direkte op (en *hash-tabel*). Det tager omtrent lige lang tid med 10 og med 10 millioner nøgler.
+:::
+::::
+
+Med 19 ord og 8 stopord betyder det ingenting. Med 50.000 tekster og 10.000 stopord gør det. Derfor gemmes stopordslister som dictionaries eller *sets*, ikke som lister.
+
+## Dictionary som tæller
+
+Sidst talte I ét ord med `.count()`. Nu tæller vi **alle** ord på én gang. Resultatet er et **histogram**: hvor mange gange optræder hver værdi?
+
+:::::: {.to-kol }
+::: {.kol}
+::: {.figur figur="taeller" tekst="regeringen har fremlagt et nyt udspil regeringen mener"}
+:::
+:::
+
+::::::: {.kol}
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+tekst = "regeringen har fremlagt et nyt udspil regeringen mener"
+ordliste = tekst.split()
+
+antal = dict()
+for o in ordliste:
+    if o not in antal:
+        antal[o] = 1        # første gang vi ser ordet
+    else:
+        antal[o] = antal[o] + 1
+print(antal)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den tæller, hvor mange gange hvert ord forekommer, med en dictionary som tæller.
+
+1. {2} `tekst.split()` deler teksten i ord og gemmer listen som `ordliste`.
+2. {4} `antal = dict()` laver en tom dictionary.
+3. {5} `for o in ordliste:` gennemgår ordene ét ad gangen.
+4. {6} `if o not in antal:` hvis ordet ikke er set før, gemmes det med tallet 1.
+5. {8} `else:` ellers lægges 1 til det tal, der allerede står: `antal[o] = antal[o] + 1`.
+6. {10} `print(antal)` viser fx `'regeringen': 2`, fordi ordet står to gange.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+tekst <- "regeringen har fremlagt et nyt udspil regeringen mener"
+ordliste <- strsplit(tekst, " ")[[1]]
+
+print(table(ordliste))   # R har en indbygget funktion til netop dette
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den tæller ordene i R med den indbyggede funktion `table()`.
+
+1. {2} `strsplit(tekst, " ")[[1]]` deler teksten i ord.
+2. {4} `table(ordliste)` tæller, hvor mange gange hver værdi forekommer, og sorterer ordene alfabetisk. Det er præcis det, Python-løkken byggede op trin for trin.
+:::
+::::
+:::::
+:::::::
+::::::
+
+# Kontrolstrukturer
+
+Gentag noget for hvert element, og gør kun noget, hvis en betingelse er opfyldt.
+
+## Løkker {.kodelab}
+
+En **løkke** gentager de samme linjer for hvert element. `for` kører én gang pr. element. `while` kører, så længe en betingelse er sand, og altså for evigt, hvis den aldrig bliver falsk.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+venner = ["Ida", "Omar", "Sara"]
+
+for ven in venner:            # 'ven' er løkkevariablen
+    print("Godt nytår,", ven)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** En `for`-løkke, der hilser på hver ven.
+
+1. `venner = [...]` er en liste med tre navne.
+2. {3} `for ven in venner:` tager første navn, kalder det `ven` og kører den indrykkede linje. Så det næste, og så videre.
+3. {4} `print("Godt nytår,", ven)` skriver hilsenen ud. Den køres tre gange, én gang per navn.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+venner <- c("Ida", "Omar", "Sara")
+
+for (ven in venner) {
+  cat("Godt nytår,", ven, "\n")
+}
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme løkke i R.
+
+1. `for (ven in venner) { ... }` kører koden i `{ }` én gang for hvert navn.
+2. {4} `cat("Godt nytår,", ven, "\n")` skriver hilsenen og en ny linje.
+:::
+::::
+:::::
+
+## Løkkemønstre: før, undervejs, efter
+
+De fleste løkker følger samme skabelon. Følg variablen `total` gennem løkken:
+
+:::::: {.to-kol }
+::: {.kol}
+1. **Før:** sæt en variabel.
+2. **Undervejs:** opdater den for hvert element.
+3. **Efter:** aflæs resultatet.
+
+::: {.figur figur="spor" tal="3,41,12,9,74,15" maal="sum"}
+:::
+:::
+
+::::::: {.kol}
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+tal = [3, 41, 12, 9, 74, 15]
+
+total = 0                # 1. før
+for t in tal:
+    total = total + t    # 2. undervejs (en 'akkumulator')
+print("Sum:", total)     # 3. efter
+
+stoerste = None
+for t in tal:
+    if stoerste is None or t > stoerste:
+        stoerste = t
+print("Største:", stoerste)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** To løkker efter samme skabelon: sæt op før, opdater undervejs, aflæs efter.
+
+1. {3} `total = 0` er startværdien, **før** løkken går i gang.
+2. {5} `total = total + t` lægger hvert tal til den løbende sum. Sådan en variabel kaldes en **akkumulator**.
+3. {6} `print("Sum:", total)` aflæser resultatet **efter** løkken. Linjen er ikke rykket ind, så den køres kun én gang.
+4. {8} `stoerste = None` betyder *intet fundet endnu*.
+5. {10} `if stoerste is None or t > stoerste:` hvis vi ikke har fundet noget endnu, eller tallet er større end det hidtil største, gemmes det.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+tal <- c(3, 41, 12, 9, 74, 15)
+
+total <- 0
+for (t in tal) {
+  total <- total + t
+}
+cat("Sum:", total, "\n")
+
+cat("Sum (indbygget):", sum(tal), "\n")
+cat("Største:", max(tal), "\n")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Summen med en løkke i R, og så de indbyggede genveje.
+
+1. {3} `total <- 0` er startværdien. Inde i løkken lægges hvert tal til: `total <- total + t`.
+2. {7} `cat("Sum:", total, "\n")` aflæser resultatet efter løkken.
+3. {9} `sum(tal)` og `max(tal)` giver det samme på én linje. I praksis bruger man dem.
+:::
+::::
+:::::
+:::::::
+::::::
+
+::: {.lille}
+I praksis bruger man `sum()` og `max()`. Men mønstret er det samme i al kode, I kommer til at læse.
+:::
+
+## `if`: gør kun noget, hvis ... {.kodelab}
+
+`if` stiller et ja/nej-spørgsmål og kører kun de indrykkede linjer, hvis svaret er `True`. **Indrykningen er ikke pynt. Den er syntaks.**
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev forslag="Skift `alder = 17` til `alder = 18`."}
+```{pyodide}
+alder = 17
+
+if alder >= 18:
+    print("Myndig")
+else:
+    print("Ikke myndig")
+
+print("Denne linje køres altid")   # ikke rykket ind
+```
+
+::: {.forklaring}
+**Hvad gør koden?** En `if`-sætning, der vælger mellem to tekster.
+
+1. {1} `alder = 17` gemmer alderen.
+2. {3} `if alder >= 18:` stiller spørgsmålet. Er det sandt, køres den indrykkede linje under.
+3. {5} `else:` er *ellers*. Den indrykkede linje under køres kun, hvis spørgsmålet var falsk. Her vises `Ikke myndig`.
+4. {4} Den sidste `print` er ikke rykket ind. Den hører hverken til `if` eller `else` og køres altid.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+alder <- 17
+
+if (alder >= 18) {
+  print("Myndig")
+} else {
+  print("Ikke myndig")
+}
+
+print("Denne linje køres altid")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme `if`/`else` i R.
+
+1. `if (alder >= 18) { ... }`: betingelsen står i runde parenteser, koden i krøllede.
+2. {5} `} else { ... }`: `else` skal stå på samme linje som den afsluttende `}`, ellers bliver R forvirret.
+3. {4} Den sidste `print` står uden for begge blokke og køres altid.
+:::
+::::
+:::::
+
+## `elif`: flere end to muligheder {.kodelab}
+
+Betingelserne tjekkes **oppefra og ned**. Den første, der er sand, vinder. Resten springes over.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+def aldersgruppe(alder):
+    if alder < 18:
+        return "under 18"
+    elif alder < 30:
+        return "18-29"
+    elif alder < 60:
+        return "30-59"
+    else:
+        return "60+"
+
+for a in [12, 25, 45, 71]:
+    print(a, "->", aldersgruppe(a))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** En funktion med `elif`, der lægger en alder i en aldersgruppe, og en løkke, der prøver den på fire aldre.
+
+1. {1} `def aldersgruppe(alder):` laver funktionen.
+2. {3} Betingelserne tjekkes **oppefra og ned**. Den første, der er sand, bestemmer svaret. `return` giver svaret tilbage og afslutter funktionen.
+3. {4} `elif` betyder *ellers hvis*. `else` fanger alt, der ikke passede ovenfor.
+4. {11} `for a in [12, 25, 45, 71]:` prøver funktionen på fire aldre. `print(a, "->", aldersgruppe(a))` viser alder og gruppe.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+aldersgruppe <- function(alder) {
+  if (alder < 18) {
+    "under 18"
+  } else if (alder < 30) {
+    "18-29"
+  } else if (alder < 60) {
+    "30-59"
+  } else {
+    "60+"
+  }
+}
+
+for (a in c(12, 25, 45, 71)) {
+  cat(a, "->", aldersgruppe(a), "\n")
+}
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme aldersgruppe-funktion i R.
+
+1. {4} `else if` er R's ord for `elif`.
+2. Hver gren giver en tekst. Da det er det sidste, der sker i funktionen, bliver teksten givet tilbage.
+3. {14} Løkken nederst prøver funktionen på fire aldre og skriver resultatet med `cat`.
+:::
+::::
+:::::
+
+::: {.lille}
+Rækkefølgen er ikke ligegyldig: byt de to første om, og alle under 30, også børnene, havner i gruppen "18-29".
+:::
+
+# Data wrangling
+
+Data ligger sjældent i én færdig tabel. Vi kobler tabeller sammen og ændrer deres form.
+
+## Hvad er data wrangling?
+
+Tre operationer dækker det meste:
+
+::::: {.trin-kort}
+:::: {.kol}
+`merge`
+
+Kobl rækker fra to tabeller sammen ved hjælp af en **nøgle**.
+::::
+
+:::: {.kol}
+`concat`
+
+Stabl tabeller **oven på hinanden**.
+::::
+
+:::: {.kol}
+`combine_first`
+
+**Lap huller** i én tabel med værdier fra en anden.
+::::
+
+:::: {.kol}
+`pivot` / `melt`
+
+Skift tabellens **form** mellem langt og bredt.
+::::
+:::::
+
+## Hvorfor det fylder så meget
+
+Registerdata er spredt ud: uddannelse ét sted, indkomst et andet, bopæl et tredje. Hver tabel har sin egen enhed og sin egen tidsopløsning.
+
+Hver kobling er et **valg**, ikke en teknikalitet. Hvem ryger ud? Hvem tælles med to gange?
+
+> Derfor fylder wrangling typisk mere i et projekt end selve modellen.
+
+## Vores data i dag {.kodelab}
+
+To små tabeller: **personer** (individdata) og **kommuner** (områdedata). Læg mærke til, hvad der *ikke* går op: `Aalborg` findes kun i den ene, `Esbjerg` kun i den anden.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+import pandas as pd
+
+personer = pd.DataFrame({
+    "id":      [1, 2, 3, 4, 5],
+    "kommune": ["København", "Aarhus", "København", "Odense", "Aalborg"],
+    "alder":   [34, 41, 29, 52, 45]
+})
+
+kommuner = pd.DataFrame({
+    "kommune":    ["København", "Aarhus", "Odense", "Esbjerg"],
+    "region":     ["Hovedstaden", "Midtjylland", "Syddanmark", "Syddanmark"],
+    "indbyggere": [660000, 360000, 210000, 115000]
+})
+
+print(personer)
+print(kommuner)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver to små tabeller, vi bruger resten af lektionen. Cellen kører af sig selv.
+
+1. `pd.DataFrame({...})` laver en tabel ud fra en dictionary. Hver **nøgle** bliver et kolonnenavn, og hver **liste** bliver kolonnens værdier.
+2. {3} `personer` har én række per person: id, kommune og alder.
+3. {9} `kommuner` har én række per kommune: region og indbyggertal.
+4. {3} `print(...)` viser begge tabeller. Læg mærke til, at Aalborg kun står i `personer`, og Esbjerg kun i `kommuner`.
+:::
+::::
+
+### R
+
+:::: {.demo}
+```{webr}
+personer <- data.frame(
+  id      = c(1, 2, 3, 4, 5),
+  kommune = c("København", "Aarhus", "København", "Odense", "Aalborg"),
+  alder   = c(34, 41, 29, 52, 45)
+)
+
+kommuner <- data.frame(
+  kommune    = c("København", "Aarhus", "Odense", "Esbjerg"),
+  region     = c("Hovedstaden", "Midtjylland", "Syddanmark", "Syddanmark"),
+  indbyggere = c(660000, 360000, 210000, 115000)
+)
+
+print(personer)
+print(kommuner)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** De samme to tabeller i R.
+
+1. `data.frame(id = c(...), kommune = c(...), ...)` laver en tabel. Hver kolonne skrives som `navn = vektor`.
+2. Alle vektorer i samme tabel skal være lige lange.
+3. {13} `print(personer)` og `print(kommuner)` viser tabellerne.
+:::
+::::
+:::::
+
+## Koblingen afgør, hvem der er med
+
+::: {.figur figur="join" noegle="kommune" venstrenavn="personer" hoejrenavn="kommuner" venstre="id,kommune,alder;1,København,34;2,Aarhus,41;3,København,29;4,Odense,52;5,Aalborg,45" hoejre="kommune,region;København,Hovedstaden;Aarhus,Midtjylland;Odense,Syddanmark;Esbjerg,Syddanmark"}
+:::
+
+Skift `how` og se, hvilke rækker der overlever. (`indbyggere` er udeladt i figuren for pladsens skyld.)
+
+## `merge`: at koble på en nøgle {.kodelab}
+
+Standardvalget er `inner`: kun nøgler, der findes i **begge** tabeller, overlever.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+samlet = pd.merge(personer, kommuner, on="kommune")
+
+print(samlet)
+print("Rækker før:", len(personer), "- efter:", len(samlet))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den kobler de to tabeller sammen på kolonnen `kommune`.
+
+1. {1} `pd.merge(personer, kommuner, on="kommune")` finder rækker med samme kommune i begge tabeller og sætter dem ved siden af hinanden.
+2. Standard er en *inner join*: kun kommuner, der findes i **begge** tabeller, kommer med.
+3. {1} `len(...)` tæller rækker før og efter: 5 personer ind, 4 rækker ud. Aalborg mangler i `kommuner` og forsvinder.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+samlet <- merge(personer, kommuner, by = "kommune")
+
+print(samlet)
+cat("Rækker før:", nrow(personer), "- efter:", nrow(samlet), "\n")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme kobling i R.
+
+1. {1} `merge(personer, kommuner, by = "kommune")` kobler på kolonnen `kommune`. Også her er standard en *inner join*.
+2. `nrow(...)` tæller rækker. Igen bliver 5 til 4.
+:::
+::::
+:::::
+
+Fem personer gik ind. Fire kom ud. **Aalborg forsvandt**, uden fejl og uden advarsel.
+
+## De fire join-typer {.kodelab}
+
+`how=` bestemmer, hvilke nøgler der beholdes: `inner` (begge), `left` (venstre), `right` (højre), `outer` (alle).
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+for hvordan in ["inner", "left", "right", "outer"]:
+    r = pd.merge(personer, kommuner, on="kommune", how=hvordan)
+    print(hvordan, "->", len(r), "rækker")
+
+print()
+print(pd.merge(personer, kommuner, on="kommune", how="left"))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den prøver alle fire join-typer og tæller rækker for hver.
+
+1. {1} `for hvordan in ["inner", "left", "right", "outer"]:` gennemgår de fire typer.
+2. {2} `how=hvordan` bestemmer typen. Resultatet gemmes som `r`, og `len(r)` tæller rækkerne.
+3. {5} `print()` uden noget i giver en tom linje.
+4. Til sidst vises *left join*: alle personer er med, men Aalborg har `NaN` (manglende værdi) i `region` og `indbyggere`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+cat("inner ->", nrow(merge(personer, kommuner, by = "kommune")), "\n")
+cat("left  ->", nrow(merge(personer, kommuner, by = "kommune", all.x = TRUE)), "\n")
+cat("right ->", nrow(merge(personer, kommuner, by = "kommune", all.y = TRUE)), "\n")
+cat("outer ->", nrow(merge(personer, kommuner, by = "kommune", all = TRUE)), "\n")
+
+print(merge(personer, kommuner, by = "kommune", all.x = TRUE))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** De fire join-typer i R.
+
+1. {2} `all.x = TRUE` beholder alle rækker fra den venstre tabel (*left*).
+2. {3} `all.y = TRUE` beholder alle fra den højre (*right*).
+3. {4} `all = TRUE` beholder alle fra begge (*outer*).
+4. Den sidste linje viser *left join*. Manglende værdier står som `NA`.
+:::
+::::
+:::::
+
+::: {.lille}
+I dplyr hedder de `inner_join()`, `left_join()`, `right_join()` og `full_join()`.
+:::
+
+## Fælden: dublerede nøgler {.kodelab}
+
+Er nøglen ikke unik i **begge** tabeller, ganges rækkerne sammen. Person 1 har to job og to kurser og bliver til **fire** rækker, uden fejlbesked.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+A = pd.DataFrame({"id": [1, 1, 2], "job":  ["lærer", "sælger", "sygeplejerske"]})
+B = pd.DataFrame({"id": [1, 1, 2], "kursus": ["IT", "ledelse", "førstehjælp"]})
+
+resultat = pd.merge(A, B, on="id")
+
+print(resultat)
+print(len(A), "x", len(B), "->", len(resultat), "rækker")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den viser, hvad der sker, når nøglen ikke er unik.
+
+1. Tabellerne `A` og `B` har begge id 1 to gange.
+2. {4} `pd.merge(A, B, on="id")` parrer **alle** kombinationer for id 1: 2 job gange 2 kurser = 4 rækker. Plus én række for id 2.
+3. Den sidste linje viser: 3 rækker og 3 rækker blev til 5. Ingen fejlbesked advarer om det.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+A <- data.frame(id = c(1, 1, 2), job = c("lærer", "sælger", "sygeplejerske"))
+B <- data.frame(id = c(1, 1, 2), kursus = c("IT", "ledelse", "førstehjælp"))
+
+resultat <- merge(A, B, by = "id")
+
+print(resultat)
+cat(nrow(A), "x", nrow(B), "->", nrow(resultat), "rækker\n")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme fælde i R.
+
+1. {4} `merge(A, B, by = "id")` parrer alle kombinationer, når nøglen står flere gange.
+2. `cat(nrow(A), "x", nrow(B), "->", nrow(resultat), ...)` viser, at 3 og 3 rækker giver 5.
+:::
+::::
+:::::
+
+> Gør det til en vane: **tæl rækker før og efter hver kobling.**
+
+## `concat`: at "stable" data {.kodelab}
+
+`merge` sætter tabeller ved siden af hinanden. `concat` lægger dem **oven på** hinanden, typisk når data kommer i årgange eller filer med samme kolonner.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+runde1 = pd.DataFrame({"id": [1, 2], "svar": ["ja", "nej"]})
+runde2 = pd.DataFrame({"id": [3, 4], "svar": ["ja", "ja"]})
+
+print(pd.concat([runde1, runde2]))
+print()
+print(pd.concat([runde1, runde2], ignore_index=True))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den stabler to tabeller med samme kolonner oven på hinanden.
+
+1. {1} `runde1` og `runde2` har de samme kolonner: `id` og `svar`.
+2. {4} `pd.concat([runde1, runde2])` lægger dem oven på hinanden. Tabellerne gives som en **liste** i firkantede parenteser.
+3. Læg mærke til rækkenumrene: 0, 1, 0, 1. Hver tabel har taget sit eget indeks med.
+4. {6} `ignore_index=True` giver nye, fortløbende numre: 0, 1, 2, 3.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+runde1 <- data.frame(id = c(1, 2), svar = c("ja", "nej"))
+runde2 <- data.frame(id = c(3, 4), svar = c("ja", "ja"))
+
+print(rbind(runde1, runde2))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Stabler to tabeller i R.
+
+1. {4} `rbind(runde1, runde2)` (*row bind*) lægger rækkerne fra `runde2` under rækkerne fra `runde1`.
+2. Kolonnerne skal have samme navne i begge tabeller.
+:::
+::::
+:::::
+
+::: {.lille}
+Se rækkenumrene i det første resultat: 0, 1, 0, 1. Indekset følger med fra hver tabel. `ignore_index=True` giver nye, fortløbende numre.
+:::
+
+## `combine_first`: at "lappe" huller {.kodelab}
+
+To kilder til samme oplysning, hvor den ene har huller. `combine_first` fylder hullerne, men lader eksisterende værdier stå.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+import numpy as np
+
+primaer = pd.DataFrame({"alder": [34.0, np.nan, 29.0]}, index=[1, 2, 3])
+reserve = pd.DataFrame({"alder": [33.0, 41.0, 30.0]}, index=[1, 2, 3])
+
+print(primaer.combine_first(reserve))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den udfylder huller i én tabel med værdier fra en anden.
+
+1. {1} `import numpy as np` henter numpy. `np.nan` betyder *manglende værdi*.
+2. {3} `primaer` mangler alderen for person 2. `reserve` har alle tre aldre. `index=[1, 2, 3]` giver rækkerne numrene 1, 2 og 3, så de to tabeller kan matches.
+3. {6} `primaer.combine_first(reserve)` beholder alle værdier fra `primaer` og henter kun værdier fra `reserve`, hvor `primaer` har et hul.
+4. Resultatet er 34, 41, 29. Person 1 beholder 34, selvom reserven siger 33.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+library(dplyr)
+
+primaer <- c(34, NA, 29)
+reserve <- c(33, 41, 30)
+
+print(coalesce(primaer, reserve))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R med `coalesce()` fra dplyr.
+
+1. {1} `library(dplyr)` indlæser dplyr.
+2. {3} `NA` er R's manglende værdi.
+3. {6} `coalesce(primaer, reserve)` tager værdien fra `primaer`, og kun hvis den er `NA`, tager den værdien fra `reserve`. Resultatet er 34, 41, 29.
+:::
+::::
+:::::
+
+::: {.lille}
+Rækkefølgen betyder noget: den tabel, I kalder metoden på, har forrang. Person 1 beholder sine 34 og får ikke reservens 33.
+:::
+
+## Samme data, to former
+
+::: {.figur figur="omform" kol="kommune,aar,ledighed" raekker="København,2022,4.2;København,2023,3.8;Aarhus,2022,3.9;Aarhus,2023,3.5;Odense,2022,5.1;Odense,2023,4.7"}
+:::
+
+**Langt:** én række pr. observation. Sådan ligger data i registre. **Bredt:** én række pr. enhed. Sådan vil man ofte have data til en tabel eller figur.
+
+## Det lange format {.kodelab}
+
+Seks rækker: én pr. kommune og år.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+ledighed = pd.DataFrame({
+    "kommune":  ["København", "København", "Aarhus",
+                 "Aarhus", "Odense", "Odense"],
+    "aar":      [2022, 2023, 2022, 2023, 2022, 2023],
+    "ledighed": [4.2, 3.8, 3.9, 3.5, 5.1, 4.7]
+})
+
+print(ledighed)   # langt format: 6 rækker, én per kommune-år
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver en tabel med ledighed i **langt format**: én række per kommune og år.
+
+1. `pd.DataFrame({...})` laver tabellen med tre kolonner: kommune, år og ledighed.
+2. Hver kommune står to gange, én gang for hvert år. Derfor er der 6 rækker.
+3. {2} Listen for `kommune` fylder to linjer. Det er tilladt i Python, så længe den står inden i parenteser.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ledighed <- data.frame(
+  kommune  = c("København", "København", "Aarhus",
+               "Aarhus", "Odense", "Odense"),
+  aar      = c(2022, 2023, 2022, 2023, 2022, 2023),
+  ledighed = c(4.2, 3.8, 3.9, 3.5, 5.1, 4.7)
+)
+
+print(ledighed)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme lange tabel i R.
+
+1. `data.frame(...)` med tre kolonner og 6 rækker.
+2. `c(...)` kan godt fortsætte på næste linje, fordi parentesen ikke er lukket endnu.
+:::
+::::
+:::::
+
+## `pivot`: langt til bredt {.kodelab}
+
+Tre argumenter: hvad står i **rækkerne** (`index`), hvad bliver til **kolonner** (`columns`), og hvor står **værdierne** (`values`).
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+bred = ledighed.pivot(index="kommune",
+                      columns="aar",
+                      values="ledighed")
+print(bred)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver den lange tabel om til bred med `pivot`.
+
+1. {1} `index="kommune"`: hvad der skal stå i **rækkerne**.
+2. {2} `columns="aar"`: hvilken kolonne der skal blive til **kolonnenavne**.
+3. {3} `values="ledighed"`: hvilken kolonne der indeholder **tallene**.
+4. Resultatet har kommunerne som rækkenavne (indeks) og årene som kolonner.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+library(tidyr)
+
+bred <- pivot_wider(ledighed,
+                    names_from = aar,
+                    values_from = ledighed)
+print(bred)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Fra langt til bredt i R med `pivot_wider()` fra tidyr.
+
+1. {1} `library(tidyr)` indlæser tidyr.
+2. {4} `names_from = aar`: årene bliver kolonnenavne.
+3. {5} `values_from = ledighed`: ledighedstallene fylder cellerne.
+4. Inden i tidyr-funktioner skriver man kolonnenavne uden anførselstegn.
+:::
+::::
+:::::
+
+Seks rækker blev til tre. Intet er gået tabt. Årstallet er gået fra at være **data** til at være et **kolonnenavn**.
+
+## `melt`: bredt til langt {.kodelab}
+
+`id_vars` er de kolonner, der identificerer enheden. Resten foldes sammen til to kolonner: variabelnavn og værdi.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+lang = bred.reset_index().melt(
+    id_vars="kommune",
+    var_name="aar",
+    value_name="ledighed")
+
+print(lang)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver den brede tabel tilbage til lang med `melt`.
+
+1. {1} `bred.reset_index()` flytter kommunenavnene fra rækkenavnene (indekset) tilbage til en almindelig kolonne. Det er nødvendigt, fordi `pivot` havde lagt dem i indekset.
+2. `.melt(...)` folder kolonnerne sammen:
+    - `id_vars="kommune"`: den kolonne, der skal blive stående.
+    - `var_name="aar"`: navnet på den nye kolonne med de gamle kolonnenavne (årene).
+    - `value_name="ledighed"`: navnet på den nye kolonne med tallene.
+3. Resultatet har igen 6 rækker.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+lang <- pivot_longer(bred,
+                     cols = -kommune,
+                     names_to = "aar",
+                     values_to = "ledighed")
+print(lang)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Fra bredt til langt i R med `pivot_longer()`.
+
+1. {2} `cols = -kommune`: fold alle kolonner **undtagen** `kommune` sammen. Minus betyder *ikke*.
+2. {3} `names_to = "aar"`: de gamle kolonnenavne kommer i kolonnen `aar`.
+3. {4} `values_to = "ledighed"`: tallene kommer i kolonnen `ledighed`.
+4. {3} Bemærk: `aar` er nu tekst (`<chr>`), fordi den kom fra kolonnenavne. Skal den bruges som tal, laves den om med `as.integer()`.
+:::
+::::
+:::::
+
+::: {.lille}
+`reset_index()` skal til først, fordi `pivot` lagde kommunenavnet i indekset.
+:::
+
+## Opsamling
+
+- **Lister** kan ændres. Python tæller fra 0, og slutindekset er ikke med.
+- **Tuples** kan ikke ændres og kan derfor bruges som nøgler.
+- **Dictionaries** kobler nøgle til værdi og er den rigtige struktur til at tælle.
+- **Løkker** har et fast mønster: før, undervejs, efter.
+- **`merge`** kobler på en nøgle. Hvilke rækker der overlever, er et fagligt valg.
+- **Langt og bredt** er samme data i to former.
+
+# Øvelser
+
+Prøv selv. Cellerne fortæller, om svaret er rigtigt.
+
+## Øvelse 1: et slice {.opgave}
+
+::: {.opgavetekst}
+Hent de **tre midterste** bogstaver: `c`, `d` og `e`.
+
+1. Udfyld start og slut.
+2. Husk: slut er ikke med.
+
+[3 min]{.timer tid=180}
+:::
+
+:::: {.oevelse}
+```{pyodide}
+t = ["a", "b", "c", "d", "e", "f", "g"]
+t[______:______]
+```
+
+::: {.hint}
+`c` står på plads 2. `e` står på plads 4, så slut skal være én højere.
+:::
+
+::: {.loesning}
+```python
+t = ["a", "b", "c", "d", "e", "f", "g"]
+t[2:5]
+```
+:::
+
+```{pyodide}
+#| check: true
+ok = result == ["c", "d", "e"]
+feedback = {"correct": ok, "message": "Rigtigt! Start 2 er med, slut 5 er ikke med." if ok else "Ikke helt. Resultatet skal være ['c', 'd', 'e']."}
+feedback
+```
+::::
+
+## Øvelse 2: behold alle personer {.opgave}
+
+::: {.opgavetekst}
+Kobl `personer` og `kommuner`, så **alle fem personer** er med, også den fra Aalborg.
+
+1. Vælg den rigtige `how`.
+2. Hvad står der i `region` for Aalborg?
+
+[4 min]{.timer tid=240}
+:::
+
+:::: {.oevelse}
+```{pyodide}
+alle = pd.merge(personer, kommuner, on="kommune", how="______")
+alle
+```
+
+::: {.hint}
+`personer` er den **venstre** tabel i kaldet.
+:::
+
+::: {.loesning}
+```python
+alle = pd.merge(personer, kommuner, on="kommune", how="left")
+alle
+```
+:::
+
+```{pyodide}
+#| check: true
+try:
+    ok = len(result) == len(personer) and "Aalborg" in list(result["kommune"]) and "Esbjerg" not in list(result["kommune"])
+except Exception:
+    ok = False
+feedback = {"correct": ok, "message": "Rigtigt! Alle fem personer er med, og Aalborg har NaN i region." if ok else "Ikke helt. Alle fem personer skal med, men ikke kommuner uden personer."}
+feedback
+```
+::::
+
+## Sidst i dag {.sidst}
+
+:::: {.kort-raekke}
+::: {.kol}
+**Det vigtigste**
+
+Tæl rækker før og efter hver kobling. Det, der forsvinder, forsvinder uden advarsel.
+:::
+
+::: {.kol}
+**Øvelser**
+
+Se [lektionens side](index.html) for dagens notebook og øvelser.
+:::
+
+::: {.kol}
+**Næste gang**
+
+[Lektion 4: Datavisualisering](../04-datavisualisering/index.html).
+:::
+::::
+
+[Tilbage til lektionens side](index.html) · [Alle lektioner](../../kursus/plan.html)
+
+[]{.aau-logo role="img" aria-label="Aalborg Universitet"}

@@ -1,0 +1,19 @@
+---
+title: "Dataanalyse i Python 2"
+lektion: 12
+date: 2026-10-22
+description: "Fortsættelse: vi samler trådene og arbejder videre mod eksamensprojektet."
+status: moodle       # klar | kommer | anden | moodle
+slides: false
+underviser: "Se Moodle"
+---
+
+::: {.lektion-knapper}
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+kl. 12.30–16.15
+
+## Om lektionen
+
+Anden del af broen mellem kursets værktøjer og eksamensprojektet. Se beskrivelsen under [Dataanalyse i Python 1](../11-dataanalyse-i-python-1/index.qmd).

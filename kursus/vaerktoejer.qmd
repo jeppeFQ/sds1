@@ -1,0 +1,54 @@
+---
+title: "Værktøjer"
+subtitle: "UCloud, Python og sådan bruger I slides"
+---
+
+## UCloud
+
+Vi bruger Python gennem hele kurset, og vi kører det i [UCloud]({{< var ucloud >}}), en online platform, hvor Python er sat op på forhånd.
+
+- **Før kursusstart** skal I logge ind på UCloud og sikre jer, at I har adgang. Følg introduktionsvideoen på [Moodle]({{< var moodle >}}).
+- UCloud tildeler ressourcer (beregningstid) gennem et fælles projekt. Linket til **kursets UCloud-projekt** ligger på Moodle.
+- Sørg for, at I har skiftet til fællesprojektet, **inden** I starter et job.
+
+Vi hjælper ikke med lokale installationer af Python.
+
+## Kom i gang med Python
+
+- e-kursus: [Introduktion til Python for Samfundsvidenskab]({{< var ekursus >}}). Gennemfør det inden lektion 2.
+- Grundbøger (begge frit tilgængelige): McKinney, [*Python for Data Analysis*](https://wesmckinney.com/book/), og Severance, [*Python for Everybody*](http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf).
+- [Pandas cheat sheet (PDF)](../lektioner/06-oprydning-i-tekst/materiale/Pandas_Cheat_Sheet.pdf).
+
+## Sådan bruger I slides
+
+Slides er hjemmesider, ikke PowerPoint. Det giver nogle muligheder:
+
+**Kør koden.** Kodeboksene med knappen **Run Code** kører Python (og R) direkte i jeres browser. I kan ændre i koden og køre igen. **Start Over** bringer den oprindelige kode tilbage. Første gang tager det lidt tid, fordi Python skal hentes ned i browseren.
+
+**Fold forklaringen ud.** Under hver kodeboks ligger *Forklaring af koden, trin for trin*. Klik på den (eller brug <kbd>Tab</kbd> og <kbd>Enter</kbd>) for at få koden forklaret linje for linje. Mange forklaringer slutter med et *Prøv selv*.
+
+**Skift mellem Python og R.** De fleste eksempler findes i begge sprog. Brug fanerne over kodeboksen.
+
+**Find rundt.**
+
+| Tast | Funktion |
+|---|---|
+| <kbd>→</kbd> / <kbd>←</kbd> eller <kbd>mellemrum</kbd> | Næste / forrige slide |
+| <kbd>M</kbd> | Menu med alle slides |
+| <kbd>O</kbd> | Oversigt |
+| <kbd>F</kbd> | Fuld skærm |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> | Søg i slides |
+| <kbd>?</kbd> | Alle genveje |
+
+**Læsevisning.** Linket *læsevisning* nederst på hvert slide viser alle slides under hinanden. Det er godt på mobilen og til at læse op på stoffet.
+
+**Gem som PDF.** Tryk <kbd>E</kbd> i slides, og brug så browserens *Udskriv* → *Gem som PDF*.
+
+**Link til et bestemt slide.** Adressen i browseren ændrer sig for hvert slide, så I kan kopiere den og sende den til jeres gruppe.
+
+## Tilgængelighed
+
+- Slides kan betjenes med tastaturet alene, og fold-ud-forklaringerne virker med skærmlæser.
+- Brug browserens zoom (<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> og <kbd>+</kbd>), hvis teksten er for lille.
+- Figurer, der ikke er lavet med kode, har en tekstbeskrivelse.
+- Oplever I noget, der ikke virker for jer, så skriv til underviseren.

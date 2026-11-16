@@ -1,0 +1,36 @@
+---
+title: "Messy data i praksis: oprydning af data"
+lektion: 8
+date: 2026-09-29
+description: "Tabeldata: faldgruber, bias og protokoller, og hvordan data renses i Python."
+status: anden        # klar | kommer | anden | moodle
+slides: false
+underviser: "Jakob Bruhn Krøjgaard Skelmose"
+litteratur:
+  - "McKinney (2022), kap. 7"
+  - "Skelmose m.fl. (2026), kap. 3"
+---
+
+::: {.lektion-knapper}
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jakob Bruhn Krøjgaard Skelmose · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi kigger på tabeldata (*tabular data*), den mest brugte form for data i samfundsvidenskabelig analyse. Vi kender den fra surveys, finansielle rapporter og udtræk fra Excel. Vi gennemgår faldgruber, bias og protokoller for tabeldata og viser, hvordan data renses i Python.
+
+## Forberedelse og litteratur
+
+- [McKinney (2022)](https://wesmckinney.com/book/), kapitel 7.
+- Skelmose m.fl. (2026): [*Dynamic Risk Prediction*, kapitel 3](https://hds-sandbox.github.io/Dyn_Risk_Pred_Course/lectures/data_preprocessing.html).
+- Sekundær: Ryan & Massaron (2025): *Machine Learning for Tabular Data*, kap. 1 og 2. Manning.
+
+## Materiale
+
+::: {.materiale}
+- [slides]{.type} [Slides (Google Slides)](https://docs.google.com/presentation/d/1Rc5L0XhjvGTE0VPvaJ0McTu_hDhsWuAaSXYGwEZeeVI/edit?usp=sharing)
+- [notebook]{.type} [Følg med (Colab)](https://colab.research.google.com/drive/1tbPJzijK-6r5YhBsDFJUi9BvSwGeraDb?usp=sharing)
+- [notebook]{.type} [Øvelser (Colab)](https://colab.research.google.com/drive/1DZg3pB_8VRakGWE5De4g10dbENnXYQoW?usp=sharing)
+:::

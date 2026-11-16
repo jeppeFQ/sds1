@@ -1,0 +1,13 @@
+{
+  "listingMap": {
+    "kursus/plan.qmd": [
+      "../lektioner/*/index.qmd"
+    ],
+    "workshops/index.qmd": [
+      "*/index.qmd"
+    ],
+    "index.qmd": [
+      "lektioner/*/index.qmd"
+    ]
+  }
+}

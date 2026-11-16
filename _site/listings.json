@@ -1,0 +1,43 @@
+[
+  {
+    "listing": "/workshops/index.html",
+    "items": [
+      "/workshops/seminardag-1/index.html",
+      "/workshops/seminardag-2/index.html"
+    ]
+  },
+  {
+    "listing": "/kursus/plan.html",
+    "items": [
+      "/lektioner/01-messy-data-og-python/index.html",
+      "/lektioner/02-intro-til-python/index.html",
+      "/lektioner/03-data-wrangling/index.html",
+      "/lektioner/04-datavisualisering/index.html",
+      "/lektioner/05-scraping-og-api/index.html",
+      "/lektioner/06-oprydning-i-tekst/index.html",
+      "/lektioner/07-computationel-tekstanalyse/index.html",
+      "/lektioner/08-oprydning-af-data/index.html",
+      "/lektioner/09-lyd-og-multimodal/index.html",
+      "/lektioner/10-oprydning-af-billeder/index.html",
+      "/lektioner/11-dataanalyse-i-python-1/index.html",
+      "/lektioner/12-dataanalyse-i-python-2/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/lektioner/01-messy-data-og-python/index.html",
+      "/lektioner/02-intro-til-python/index.html",
+      "/lektioner/03-data-wrangling/index.html",
+      "/lektioner/04-datavisualisering/index.html",
+      "/lektioner/05-scraping-og-api/index.html",
+      "/lektioner/06-oprydning-i-tekst/index.html",
+      "/lektioner/07-computationel-tekstanalyse/index.html",
+      "/lektioner/08-oprydning-af-data/index.html",
+      "/lektioner/09-lyd-og-multimodal/index.html",
+      "/lektioner/10-oprydning-af-billeder/index.html",
+      "/lektioner/11-dataanalyse-i-python-1/index.html",
+      "/lektioner/12-dataanalyse-i-python-2/index.html"
+    ]
+  }
+]

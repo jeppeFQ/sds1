@@ -1,0 +1,32 @@
+---
+title: "Lektionsplan"
+subtitle: "{{< var semester >}} · undervisningen ligger kl. 12.30–16.15"
+listing:
+  id: plan
+  contents: "../lektioner/*/index.qmd"
+  template: ../_extensions/sds1/lektionsplan.ejs
+  sort: "lektion"
+  date-format: "dddd D. MMMM"
+  fields: [lektion, title, date, description, status, slides, litteratur]
+---
+
+Hver lektion har sin egen side med beskrivelse, forberedelse, slides og øvelser. Litteraturen herunder er den korte udgave. De fulde henvisninger står på lektionens side.
+
+::: {#plan}
+:::
+
+## Vigtige datoer
+
+| Dato | Hvad |
+|---|---|
+| Fredag 9. oktober 2026, kl. 10.00–16.15 | [Seminardag 1](../workshops/seminardag-1/index.qmd) |
+| Fredag 6. november 2026, kl. 10.00–16.15 | [Seminardag 2](../workshops/seminardag-2/index.qmd) |
+| Fredag 18. december 2026, kl. 10.00 | Aflevering af projekt i Digital Eksamen |
+| 11.–15. januar 2027 | Mundtligt forsvar af projekt |
+
+## Grundbøger
+
+Begge bøger er frit tilgængelige:
+
+- McKinney, W. (2022): [*Python for Data Analysis*, 3. udgave](https://wesmckinney.com/book/). O'Reilly Media.
+- Severance, C. (2016): [*Python for Everybody*](http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf).

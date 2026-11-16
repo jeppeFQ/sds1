@@ -1,0 +1,44 @@
+---
+title: "Introduktion til faget"
+lektion: 1
+date: 2026-09-03
+description: "Kurset, eksamen og portfolio. Hvad er data, og hvorfor skriver vi kode frem for at klikke i Excel?"
+status: klar        # klar | kommer | anden | moodle
+slides: true
+underviser: "Jeppe Fjeldgaard Qvist"
+---
+
+::: {.lektion-knapper}
+[Åbn slides](slides.html){.primaer}
+
+[Læsevisning](slides.html?view=scroll)
+
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jeppe Fjeldgaard Qvist · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi introducerer faget, læringsmålene og planen for semestret. Vi gennemgår eksamen, og hvordan portfolioen bygges op undervejs. Derefter øvelser om, hvad data overhovedet *er*, når tekst, billeder og kategorier skal gøres til noget, en computer kan arbejde med. Til sidst et første kig på kode.
+
+**Efter lektionen kan I**
+
+- forklare forskellen på at analysere data med kode og med peg-og-klik
+- nævne fire fordele ved kode: reproducerbar, skalerbar, fleksibel, automatiserbar
+- køre et lille stykke Python og R i browseren og læse, hvad det gør
+
+## Forberedelse og litteratur
+
+- Der er ikke noget læsestof til første gang.
+- Log ind på UCloud, og tjek, at I har adgang (se [Værktøjer](../../kursus/vaerktoejer.qmd)).
+- Kig i [idébanken]({{< var idebank >}}), og tænk over, hvilket datamateriale der kunne interessere jer.
+
+## Materiale
+
+::: {.materiale}
+- [handout]{.type} [Øvelsesark: tekst, billede og klassifikation (PDF)](materiale/SDS1_l1_handouts.pdf)
+- [data]{.type} [sales_data.csv]({{< var data >}}sales_data.csv)
+:::
+
+Svarark udleveres efter øvelserne.

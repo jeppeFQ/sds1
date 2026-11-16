@@ -1,0 +1,16 @@
+---
+title: "Seminardag 2"
+lektion: "S2"
+date: 2026-11-06
+description: "Kl. 10.00–16.15. Arbejde med egne data og sparring om portfolioen."
+status: kommer        # klar | kommer | anden | moodle
+slides: false
+---
+
+::: {.lektion-knapper}
+[Alle workshops](../index.qmd)
+:::
+
+Vi holder det nærmere indhold på seminardagene fleksibelt, så vi kan tilpasse det til holdets aktuelle behov. Programmet meldes ud på [Moodle]({{< var moodle >}}).
+
+**Tag med:** jeres datamateriale (eller idéer til et), jeres notebook, og de spørgsmål, I sidder fast i.

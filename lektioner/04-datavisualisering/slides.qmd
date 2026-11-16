@@ -1,0 +1,2154 @@
+---
+title: "Datavisualisering"
+subtitle: "Lektion 04"
+author: "Jeppe Fjeldgaard Qvist"
+format: sds1-revealjs
+engine: markdown
+accent: lilla
+pyodide:
+  packages:
+    - pandas
+    - plotnine
+webr:
+  packages:
+    - dplyr
+    - ggplot2
+    - tidyr
+---
+
+## I dag
+
+1. **Hvorfor visualisere?** En figur er en række valg, ikke et neutralt vindue.
+2. **Formålet.** At synliggøre kompleksitet uden at komplicere.
+3. **Plotnine.** Grammatikken bag figurer.
+4. **Galleri.** Alle plottyper ét sted, sorteret efter budskab.
+5. **Øvelser.**
+
+::: {.lille}
+Eksemplerne bygger på tweet-datasættet fra lektion 3. Ingen nye data: vi ser på de samme tal med andre øjne.
+:::
+
+## Vores data {.kodelab}
+
+3.945 tweets fra 2016. Cellen kører af sig selv og gør tabellen `tweets` klar til resten af lektionen.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+import pandas as pd
+from plotnine import *
+
+url = "https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/data_tweets_2016_kilde_a.csv"
+tweets = pd.read_csv(url)
+
+# Det I lærte i lektion 3: gør datoen til en dato, og træk måneden ud
+tweets["dato"] = pd.to_datetime(tweets["date"])
+tweets["maaned"] = tweets["dato"].dt.month
+tweets["har_hashtag"] = tweets["hashtags"].notna()
+tweets["antal_ord"] = tweets["content"].str.split().str.len()
+
+print(tweets.shape)
+print(tweets[["maaned", "retweets", "favorites", "har_hashtag", "antal_ord"]].head())
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den indlæser tweet-datasættet fra lektion 3 og laver fire nye kolonner, som figurerne i dag bygger på. Cellen kører af sig selv.
+
+1. {1} `import pandas as pd` henter pandas. `from plotnine import *` henter **alle** funktioner fra plotnine (`ggplot`, `aes`, `geom_col` osv.), så vi kan bruge dem uden præfiks.
+2. {5} `tweets = pd.read_csv(url)` læser filen og gemmer tabellen som `tweets`.
+3. {8} `pd.to_datetime(tweets["date"])` laver tekstkolonnen `date` om til rigtige datoer og gemmer dem i en ny kolonne, `dato`.
+4. {9} `tweets["dato"].dt.month` trækker måneden ud (1–12). `.dt` giver adgang til dato-funktioner.
+5. {10} `tweets["hashtags"].notna()` er `True`, hvis tweetet har mindst ét hashtag (feltet er ikke tomt).
+6. {11} `.str.split().str.len()` deler hver tekst i ord og tæller dem.
+7. {13} `tweets.shape` viser (rækker, kolonner): 3.945 tweets.
+:::
+::::
+
+### R
+
+:::: {.demo}
+```{webr}
+library(dplyr); library(ggplot2)
+
+url <- "https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/data_tweets_2016_kilde_a.csv"
+tweets <- read.csv(url, na.strings = c("", "NA"))
+
+tweets$dato        <- as.POSIXct(tweets$date, tz = "UTC")
+tweets$maaned      <- as.integer(format(tweets$dato, "%m"))
+tweets$har_hashtag <- !is.na(tweets$hashtags)
+tweets$antal_ord   <- lengths(strsplit(tweets$content, " "))
+
+print(dim(tweets))
+head(tweets[, c("maaned", "retweets", "favorites", "har_hashtag", "antal_ord")])
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den indlæser tweet-datasættet i R og laver de samme fire kolonner.
+
+1. {1} `library(dplyr); library(ggplot2)` indlæser to pakker. Semikolon lader os skrive to kommandoer på én linje.
+2. {4} `read.csv(url, na.strings = c("", "NA"))` læser filen. `na.strings` fortæller R, at tomme felter skal tælle som manglende (`NA`).
+3. {6} `as.POSIXct(tweets$date, tz = "UTC")` laver teksten om til tidspunkter.
+4. {7} `format(tweets$dato, "%m")` giver måneden som tekst ("01"), og `as.integer()` laver den om til et tal.
+5. {8} `!is.na(tweets$hashtags)`: `is.na()` er `TRUE` for tomme felter, og `!` vender det om.
+6. {9} `lengths(strsplit(tweets$content, " "))` deler hver tekst ved mellemrum og tæller ordene.
+7. {11} `dim(tweets)` viser antal rækker og kolonner.
+:::
+::::
+:::::
+
+::: {.lille}
+Al wrangling fra sidste uge er forudsætningen for alt, hvad vi laver i dag.
+:::
+
+# Hvorfor visualisere?
+
+En figur ligner et vindue til data. Men nogen har valgt, hvad I skal se.
+
+## I har allerede erfaring
+
+Find et eksempel, hvor I selv har visualiseret data i et projekt, en opgave eller til eksamen.
+
+- Hvilken **type** visualisering var det?
+- Hvilken **forskel** gjorde det, at det blev *vist* frem for *skrevet*?
+
+[3 min]{.timer tid=180}
+
+## Visualisering er ikke et neutralt vindue
+
+En figur ser ud, som om den bare **viser** data. Det gør den ikke. Den er resultatet af en række valg, og valgene er usynlige i den færdige figur.
+
+- **Analytisk distance.** Tallene kommer til at se ud, som om de findes uafhængigt af den, der har lavet dem.
+- **Formen udfører objektivitet.** Akser, gitterlinjer og en pæn skrift signalerer troværdighed, uanset hvad der står.
+
+> "This sense that systematized data have authority is an important aspect of the rhetorical power of data visualizations" (Rettberg 2020, 39).
+
+## Grim, dårlig eller forkert?
+
+Tre ord for tre forskellige slags problemer (Wilke 2019):
+
+::::: {.trin-kort}
+:::: {.kol}
+Grim
+
+Æstetiske problemer, men figuren er klar. Skrigende farver, tre skrifttyper, et dominerende gitter.
+::::
+
+:::: {.kol}
+Dårlig
+
+Problemer med **perceptionen**. Uklar, forvirrende, overkompliceret eller vildledende.
+::::
+
+:::: {.kol}
+Forkert
+
+Problemer med **matematikken**. Figuren er objektivt ukorrekt.
+::::
+:::::
+
+Grænsen mellem grim og dårlig er flydende.
+
+## Samme data: version A {.kodelab}
+
+Det gennemsnitlige antal **ord pr. tweet** for hver måned i 2016.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+gns = tweets.groupby("maaned")["antal_ord"].mean().reset_index()
+
+a = (ggplot(gns, aes(x="factor(maaned)", 
+                    y="antal_ord"))
+     + geom_col()
+     + labs(title="Version A", 
+            x="Måned", 
+            y="Gns. antal ord"))
+
+a.show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den beregner det gennemsnitlige antal ord per tweet for hver måned og tegner det som søjler.
+
+1. {1} `tweets.groupby("maaned")["antal_ord"].mean()` giver gennemsnittet per måned. `.reset_index()` gør `maaned` til en almindelig kolonne igen, så plotnine kan bruge den. Tabellen gemmes som `gns`.
+2. {1} `ggplot(gns, aes(...))` starter en figur med tabellen `gns`. `aes()` kobler kolonner til akser: måned på x, antal ord på y.
+3. {3} `factor(maaned)` får måned til at blive behandlet som kategorier (1, 2, 3 ...) i stedet for et kontinuerligt tal.
+4. {5} `+ geom_col()` tegner en søjle per måned, lige så høj som y-værdien.
+5. `+ labs(...)` sætter titel og aksetekster.
+6. {10} Hele udtrykket står i en parentes, så det kan fortsætte over flere linjer. Det gemmes som `a`, og `a.show()` viser figuren.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+gns <- tweets |>
+  group_by(maaned) |>
+  summarise(antal_ord = mean(antal_ord))
+
+ggplot(gns, aes(x = factor(maaned), y = antal_ord)) +
+  geom_col() +
+  labs(title = "Version A", x = "Måned", y = "Gns. antal ord")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R med dplyr og ggplot2.
+
+1. {1-2} `tweets |> group_by(maaned) |> summarise(antal_ord = mean(antal_ord))`: `|>` sender tabellen videre. Læs det som: tag `tweets`, *og så* grupper efter måned, *og så* beregn gennemsnittet.
+2. {5} `ggplot(gns, aes(x = factor(maaned), y = antal_ord))` starter figuren. I R står kolonnenavne **uden** anførselstegn.
+3. `+ geom_col()` tegner søjlerne, og `+ labs(...)` sætter teksterne.
+4. I R skal `+` stå i **slutningen** af linjen, så R ved, at udtrykket fortsætter.
+:::
+::::
+:::::
+
+## Samme data: version B {.kodelab}
+
+Én linje er ændret. Træk y-aksens start ned mod 0, og se "eksplosionen" forsvinde.
+
+```{ojs}
+//| echo: false
+viewof ystart = sds1.skyder({ label: "y-aksen starter ved", min: 0, max: 16, value: 16, enhed: "ord" })
+```
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+#| input:
+#|   - ystart
+gns = tweets.groupby("maaned")["antal_ord"].mean().reset_index()
+
+b = (ggplot(gns, aes(x="factor(maaned)", y="antal_ord"))
+     + geom_col()
+     + coord_cartesian(ylim=(ystart, 22))    # <- den ene linje
+     + labs(title="Version B", x="Måned", y="Gns. antal ord")
+     + theme(figure_size=(6, 3.6)))
+
+b.show()
+```
+
+::: {.forklaring}
+1. {1} Samme tabel som før: gennemsnitligt antal ord pr. måned.
+2. {3-4} Samme data, samme kobling og samme søjler som i version A.
+3. {5} `coord_cartesian(ylim=...)` bestemmer, hvor y-aksen begynder og slutter. `ystart` er tallet fra skyderen. Det er den eneste forskel fra version A.
+4. {6-7} Titler og figurens størrelse.
+5. {9} `.show()` tegner figuren.
+
+Søjlens **længde** er det, øjet aflæser. Når aksen ikke starter i nul, passer længden ikke længere med tallet.
+:::
+::::
+
+### R
+
+:::: {.demo}
+```{webr}
+#| input:
+#|   - ystart
+gns <- tweets |> group_by(maaned) |> summarise(antal_ord = mean(antal_ord))
+
+ggplot(gns, aes(x = factor(maaned), y = antal_ord)) +
+  geom_col() +
+  coord_cartesian(ylim = c(ystart, 22)) +    # <- den ene linje
+  labs(title = "Version B", x = "Måned", y = "Gns. antal ord")
+```
+
+::: {.forklaring}
+1. {1} Gennemsnitligt antal ord pr. måned.
+2. {3-4} Samme data og samme søjler som i version A.
+3. {5} `coord_cartesian(ylim = ...)` bestemmer, hvor y-aksen begynder. `ystart` er tallet fra skyderen.
+4. {6} Titler.
+:::
+::::
+:::::
+
+## Hvad skete der?
+
+Tallene går fra **16,6** til **21,3** ord. Ingen data er ændret, fjernet eller manipuleret.
+
+:::: {.to-kol}
+::: {.kol}
+**Version A siger**
+
+Tweetlængden er nogenlunde konstant hele året.
+:::
+
+::: {.kol}
+**Version B siger**
+
+April var et markant dyk, og november og december en eksplosion.
+:::
+::::
+
+Begge figurer er sande. Kun den ene er ærlig.
+
+## Så må man aldrig zoome? {.kodelab}
+
+Jo. Brug bare en anden geometri. Et **punkt** koder kun værdien i sin placering. Der er ingen længde, der kan modsige den.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+(ggplot(gns, aes(x="factor(maaned)", y="antal_ord"))
+ + geom_point(size=4)
+ + coord_cartesian(ylim=(16, 22))
+ + labs(title="Punkter tåler et zoom", 
+        x="Måned", 
+        y="Gns. antal ord")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den viser de samme tal som punkter i stedet for søjler, med det samme zoom.
+
+1. {2} `geom_point(size=4)` tegner ét punkt per måned. `size=4` gør punkterne store nok at se.
+2. {3} `coord_cartesian(ylim=(16, 22))` zoomer som før. Et punkt har ingen længde, så zoomet snyder ikke øjet.
+3. {6} `.show()` står direkte efter den afsluttende parentes. Vi gemmer ikke figuren først.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(gns, aes(x = factor(maaned), y = antal_ord)) +
+  geom_point(size = 4) +
+  coord_cartesian(ylim = c(16, 22)) +
+  labs(title = "Punkter tåler et zoom", x = "Måned", y = "Gns. antal ord")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme punktfigur i R.
+
+1. {2} `geom_point(size = 4)` tegner store punkter.
+2. {3} `coord_cartesian(ylim = c(16, 22))` zoomer ind.
+:::
+::::
+:::::
+
+::: {.lille}
+Derfor er zoom legitimt her og "forbudt" i søjlefiguren. Det samme gælder skyggede arealer: skyggen tilføjer en længde, der skal starte i nul.
+:::
+
+## Absolutte tal {.kodelab}
+
+Endnu et sted, hvor samme data giver to historier: hvor mange af månedens tweets indeholder et hashtag?
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+h = (tweets.groupby("maaned")
+     .agg(antal_hashtag=("har_hashtag", "sum"), 
+          antal=("id", "size"))
+     .reset_index())
+h["andel"] = h["antal_hashtag"] / h["antal"]
+
+print(h.head())
+
+(ggplot(h, aes(x="factor(maaned)", y="antal_hashtag"))
+ + geom_col()
+ + labs(title="Absolutte tal", 
+        x="Måned", 
+        y="Antal tweets med hashtag")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den tæller tweets med hashtag per måned, beregner andelen og tegner de **absolutte** tal.
+
+1. `tweets.groupby("maaned").agg(...)` laver flere beregninger per måned på én gang:
+    - `antal_hashtag=("har_hashtag", "sum")`: summen af `True`/`False` er antallet af tweets med hashtag.
+    - `antal=("id", "size")`: antallet af tweets i måneden.
+2. {4} `.reset_index()` gør `maaned` til en kolonne igen. Tabellen gemmes som `h`.
+3. {5} `h["andel"] = h["antal_hashtag"] / h["antal"]` laver en ny kolonne med andelen. Pandas dividerer række for række.
+4. {7} `print(h.head())` viser de første rækker, og figuren viser antallet af tweets med hashtag.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+h <- tweets |>
+  group_by(maaned) |>
+  summarise(antal_hashtag = sum(har_hashtag), antal = n()) |>
+  mutate(andel = antal_hashtag / antal)
+
+print(h)
+
+ggplot(h, aes(x = factor(maaned), y = antal_hashtag)) +
+  geom_col() +
+  labs(title = "Absolutte tal", x = "Måned", y = "Antal tweets med hashtag")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R.
+
+1. {3} `summarise(antal_hashtag = sum(har_hashtag), antal = n())`: `n()` tæller rækker i hver gruppe.
+2. {4} `mutate(andel = antal_hashtag / antal)` tilføjer en kolonne med andelen.
+3. {6} `print(h)` viser tabellen, og `ggplot(...) + geom_col()` tegner de absolutte tal.
+:::
+::::
+:::::
+
+## Relative tal {.kodelab}
+
+Nævneren er antallet af tweets den måned. Det svinger fra 131 til 477.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+(ggplot(h, aes(x="factor(maaned)", y="andel"))
+ + geom_col()
+ + labs(title="Relative tal", 
+        x="Måned", 
+        y="Andel med hashtag")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den tegner de samme data som **andele** i stedet for antal.
+
+1. {1} `y="andel"` er den eneste forskel fra figuren før. Nu er højden andelen af månedens tweets, der har et hashtag.
+2. Andelen tager højde for, at der ikke bliver tweetet lige meget hver måned.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(h, aes(x = factor(maaned), y = andel)) +
+  geom_col() +
+  labs(title = "Relative tal", x = "Måned", y = "Andel med hashtag")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Andelsfiguren i R: `y = andel` i stedet for `y = antal_hashtag`.
+:::
+::::
+:::::
+
+::: {.lille}
+**April** er nummer fem i absolutte tal, men nummer to i relative. **Januar** er nummer tre i absolutte tal, men nummer syv i relative. Hvilken figur ville I sætte i en artikel, og hvad ville I skrive i figurteksten?
+:::
+
+## Tekst eller figur?
+
+| Brug tekst | Brug en figur |
+|---|---|
+| Sammenhænge, mekanismer, fortolkning | Mønstre og relationer, der ses på et øjeblik |
+| Få tal, eller tal der skal aflæses præcist | Mange observationer, hvor mønsteret er pointen |
+| Teoretiske argumenter og afgrænsninger | Når læseren skal forstå hurtigt |
+
+**Case 1:** 28,5 % af tweetsene i januar havde et hashtag, mod 48,4 % i oktober.
+
+**Case 2:** Fordelingen af retweets på tværs af alle 3.945 tweets.
+
+[3 min]{.timer tid=180}
+
+# Formålet
+
+Spørgsmålet styrer figuren, ikke omvendt.
+
+## Idealer for en god figur
+
+::::: {.trin-kort}
+:::: {.kol}
+1 · Troværdig
+
+Er håndteringen af data rimelig og tro mod emnet?
+::::
+
+:::: {.kol}
+2 · Tilgængelig
+
+Er fremstillingen forståelig for dem, der skal læse den?
+::::
+
+:::: {.kol}
+3 · Elegant
+
+Er den tiltalende at se på?
+::::
+:::::
+
+Rækkefølgen er ikke tilfældig. En elegant figur, der ikke er troværdig, er værre end ingen figur.
+
+## Kompleksitet er ikke komplikation
+
+- **Kompleksitet i data**: retweet-fordelingen er skæv. Det *skal* figuren vise.
+- **Komplikation i fremstillingen**: 3D-effekter, tolv farver, dobbelte y-akser, mønstre i baggrunden.
+
+## At synliggøre kompleksitet {.kodelab}
+
+Gennemsnittet for retweets i 2016 er **6.502**. Medianen er **4.593**. Hvad fortæller ét tal os?
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+print(tweets["retweets"].describe().round(0))
+
+(ggplot(tweets, aes(x="retweets"))
+ + geom_histogram(bins=50)
+ + labs(title="Fordelingen af retweets", 
+        x="Retweets", 
+        y="Antal tweets")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den beskriver fordelingen af retweets med tal og med et histogram.
+
+1. {1} `tweets["retweets"].describe()` giver en række nøgletal: antal, gennemsnit (`mean`), standardafvigelse (`std`), minimum, kvartiler (25 %, 50 % = medianen, 75 %) og maksimum. `.round(0)` afrunder.
+2. {4} `geom_histogram(bins=50)` deler retweet-tallene op i 50 lige store intervaller og tegner en søjle med antallet af tweets i hvert interval.
+3. Fordelingen er meget **skæv**: de fleste tweets har få retweets, og nogle få har rigtig mange.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+print(summary(tweets$retweets))
+
+ggplot(tweets, aes(x = retweets)) +
+  geom_histogram(bins = 50) +
+  labs(title = "Fordelingen af retweets", x = "Retweets", y = "Antal tweets")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Nøgletal og histogram i R.
+
+1. {1} `summary(tweets$retweets)` giver minimum, kvartiler, median, gennemsnit og maksimum.
+2. {4} `geom_histogram(bins = 50)` tegner histogrammet med 50 intervaller.
+:::
+::::
+:::::
+
+::: {.lille}
+Det mest delte tweet står alene for 1,1 % af alle retweets i hele året. De øverste 1 % står for knap 9 %.
+:::
+
+## Samme data, log-skala {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+(ggplot(tweets, aes(x="retweets"))
+ + geom_histogram(bins=50)
+ + scale_x_log10()
+ + labs(title="Fordelingen af retweets (log-skala)",
+        x="Retweets (log)", y="Antal tweets")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme histogram, men med en **logaritmisk** x-akse.
+
+1. {3} `scale_x_log10()` gør x-aksen logaritmisk: afstanden fra 100 til 1.000 er den samme som fra 1.000 til 10.000.
+2. Det spreder de mange små værdier ud, så man kan se formen på fordelingen.
+3. Tweets med **0** retweets kan ikke vises på en log-skala (log af 0 findes ikke). De falder ud af figuren, og Python kan skrive en advarsel om det.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(tweets, aes(x = retweets)) +
+  geom_histogram(bins = 50) +
+  scale_x_log10() +
+  labs(title = "Fordelingen af retweets (log-skala)",
+       x = "Retweets (log)", y = "Antal tweets")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Log-histogrammet i R. `scale_x_log10()` virker på samme måde. R advarer også om rækker, der fjernes.
+:::
+::::
+:::::
+
+> "The greatest value of a picture is when it forces us to notice what we never expected to see" (Tukey 1977).
+
+::: {.lille}
+Er denne figur mere eller mindre ærlig end den forrige? Hvad kræver den af modtageren?
+:::
+
+## Modtagerens afkodning (Kirk 2019)
+
+1. **At se**: kan jeg overhovedet aflæse den? Afhænger af læsbarhed og rent design.
+
+2. **At fortolke**: hvad betyder det? Er det meget eller lidt, forventet eller overraskende?
+
+3. **At forstå**: hvad betyder det **for mig**? Hvad har jeg lært, og skal jeg gøre noget?
+
+> Visualisering **letter** forståelsen. Den garanterer den ikke.
+
+# Plotnine
+
+Alle figurer bygges af de samme byggeklodser. Lær grammatikken, så kan I lave dem alle.
+
+## Hvorfor plotnine?
+
+- Plotnine er en oversættelse af R-pakken **ggplot2** til Python.
+
+- `gg` står for **grammar of graphics**: alle figurer bygges af de samme byggeklodser, uanset type.
+
+- Fordele med dette bibliotek er, at alle plottyper har samme struktur, og elementerne kan kombineres frit.
+
+## Hvad betyder "grammatik"?
+
+:::: {.to-kol}
+::: {.kol}
+En sætning bygges af ord med bestemte roller. En figur bygges af **komponenter med bestemte roller**, som lægges sammen med `+`.
+
+De tre første er obligatoriske. Resten er valgfrit.
+
+Tryk *Næste trin*, og byg figuren lag for lag.
+:::
+
+::: {.figur figur="stak" faste="3" lag="Data|ggplot(tweets, ...)|hvilken tabel?;Mapping|aes(x=..., y=...)|hvilke kolonner styrer hvad?;Geom|geom_point()|hvilken form tegnes?;Skala|scale_x_log10()|hvordan bliver tal til positioner og farver?;Facet|facet_wrap(...)|skal figuren deles op i småfigurer?;Tema|theme_minimal()|hvordan ser alt det, der ikke er data, ud?"}
+:::
+::::
+
+## Forskellen på R og Python {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+# Kolonnenavne står i anførselstegn, 
+# og hele udtrykket i parenteser
+(ggplot(tweets, aes(x="retweets"))
+ + geom_histogram(bins=30)).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det mindst mulige plotnine-plot: data, mapping og geom.
+
+1. {3} `ggplot(tweets, aes(x="retweets"))` siger: brug tabellen `tweets`, og læg `retweets` på x-aksen.
+2. {4} `+ geom_histogram(bins=30)` tegner et histogram med 30 intervaller.
+3. I plotnine står kolonnenavnet i **anførselstegn**, og hele udtrykket står i **parenteser**.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+# Kolonnenavne uden anførselstegn, ingen ydre parenteser
+ggplot(tweets, aes(x = retweets)) +
+  geom_histogram(bins = 30)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme mindste plot i ggplot2.
+
+1. {2} Kolonnenavnet `retweets` står **uden** anførselstegn.
+2. Der er ingen ydre parentes. I stedet står `+` sidst på linjen, så R ved, at der kommer mere.
+:::
+::::
+:::::
+
+To forskelle, og kun to: kolonnenavne skal i **anførselstegn** i plotnine, og hele udtrykket skal i **ydre parenteser**, så `+` kan fortsætte på næste linje.
+
+## Tre nødvendige komponenter
+
+::: {.figur figur="anatomi" dele='(ggplot(;tweets;, ;aes(x="retweets");) + ;geom_histogram();)' navne=';data;;mapping;;geom;'}
+:::
+
+1. **Data:** en DataFrame med én række pr. observation.
+2. **Mapping:** hvilke kolonner hører til hvilke visuelle egenskaber. Det er `aes()`.
+3. **Geom:** hvilken form skal tegnes. Punkter, søjler, linjer.
+
+Kører I kun de to første, får I et **tomt koordinatsystem**. Det er ikke en fejl. I har bare ikke sagt, hvad der skal tegnes.
+
+## Aesthetics: variable styrer visuelle egenskaber
+
+:::: {.to-kol}
+::: {.kol}
+En **aesthetic** er en visuel egenskab, der kan varieres: position, farve, størrelse, form, stregtykkelse, gennemsigtighed.
+
+At lave en figur er at bestemme, **hvilken variabel der skal styre hvilken egenskab**.
+:::
+
+::: {.figur figur="kobling" par="maaned>x (position);antal_ord>y (position);har_hashtag>color (farve);retweets>size (størrelse)"}
+:::
+::::
+
+::: {.lille}
+"All data visualizations map data values into quantifiable features of the resulting graphic. We refer to these features as aesthetics" (Wilke 2019, kap. 2).
+:::
+
+## Hvilke aesthetics findes der?
+
+:::: {.to-kol}
+::: {.kol}
+**Kan bære kontinuerlige data**
+
+- `x`, `y`: position
+- `color`, `fill`: farve
+- `size`: størrelse
+- `alpha`: gennemsigtighed
+:::
+
+::: {.kol}
+**Kan kun bære diskrete data**
+
+- `shape`: punktets form
+- `linetype`: stiplet, prikket, fuldt optrukket
+:::
+::::
+
+**Tommelfingerregel:** handler det om en **variabel**, skal det ind i `aes()`. Er det en fast værdi, skal det udenfor.
+
+## Variabeltyper
+
+| Type | Eksempel | I vores data |
+|---|---|---|
+| Kontinuerlig | 1,3 ; 5,7 ; 83 | `retweets`, `favorites` |
+| Diskret (tal) | 1 ; 2 ; 3 | `antal_ord` |
+| Kategorisk uden orden | ja ; nej | `har_hashtag` |
+| Kategorisk med orden | lav ; middel ; høj | — |
+| Dato eller tid | 5. jan. 2016 | `dato` |
+| Tekst | fri tekst | `content` |
+
+::: {.lille}
+`maaned` står som tal, men er i virkeligheden **kategorisk med orden**. Derfor skriver vi `factor(maaned)`. Ellers behandler plotnine måned 6,5 som noget, der findes.
+:::
+
+## Skalaer: fra data til position og farve
+
+En **skala** er den konkrete oversættelse: hvilken talværdi bliver til hvilken position, og hvilken kategori bliver til hvilken farve.
+
+Plotnine vælger selv en skala. Med `scale_...()` overtager I valget:
+
+- `scale_x_log10()`, `scale_y_log10()`: logaritmisk akse
+- `scale_fill_brewer(type="qual", palette="Set2")`: farvepalet
+- `scale_x_continuous(breaks=[...])`: hvor tallene står
+- `scale_y_continuous(limits=...)` **fjerner** data uden for grænserne
+- `coord_cartesian(ylim=...)` **zoomer** uden at fjerne noget
+
+Forskellen på de to sidste er ikke kosmetisk. Den ene smider observationer væk.
+
+## Inde i eller uden for `aes()` {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev forslag="Flyt farven ind i `aes()`: `aes(x=\"retweets\", y=\"favorites\", color=\"har_hashtag\")`, og fjern `color=` fra `geom_point`."}
+```{pyodide}
+# UDEN FOR aes(): alle punkter får samme farve
+(ggplot(tweets, aes(x="retweets", y="favorites"))
+ + geom_point(color="darkorange", alpha=0.2)
+ + scale_x_log10() + scale_y_log10()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et punktdiagram, hvor alle punkter får den **samme** farve.
+
+1. {2} `aes(x="retweets", y="favorites")`: retweets på x-aksen, favorites på y-aksen. Ét punkt per tweet.
+2. {3} `geom_point(color="darkorange", alpha=0.2)`: farven står **uden for** `aes()`, fordi den ikke afhænger af en variabel. `alpha=0.2` gør punkterne 80 % gennemsigtige, så man kan se, hvor de klumper sig.
+3. {4} `scale_x_log10() + scale_y_log10()` gør begge akser logaritmiske.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(tweets, aes(x = retweets, y = favorites)) +
+  geom_point(color = "darkorange", alpha = 0.2) +
+  scale_x_log10() + scale_y_log10()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme punktdiagram i R. `color = "darkorange"` står uden for `aes()`, og begge akser er logaritmiske.
+:::
+::::
+:::::
+
+## Plotnine forventer "tidy" data
+
+- Hver **variabel** er en kolonne.
+- Hver **observation** er en række.
+- Hver **celle** er én måling.
+
+Det er præcis det **lange format** fra lektion 3. Derfor er `melt()` nogle gange nødvendig: plotnine kan ikke tegne bredt format.
+
+> Skal I vise tre ord over tolv måneder, skal data ligge som 36 rækker, ikke som en 3 × 12-tabel.
+
+## Ofte brugte `geom`s
+
+- `geom_col` og `geom_bar`: **søjler**
+- `geom_point` og `geom_jitter`: **punkter**
+- `geom_line`, `geom_step`, `geom_smooth`: **linjer**
+- `geom_histogram`, `geom_density`, `geom_boxplot`: **fordelinger**
+- `geom_tile`: **heatmaps**
+- `geom_text` og `geom_label`: **tekst**
+
+::: {.lille}
+Nogle få geoms fra ggplot2 mangler i plotnine, og der findes en række R-pakker, der udvider ggplot2, som ikke har en modsvarighed. Grundstammen er dog den samme.
+:::
+
+## `geom_bar` eller `geom_col`? {.kodelab}
+
+`geom_bar` **tæller selv** rækkerne. `geom_col` bruger den y-værdi, I giver den, og kræver, at I har aggregeret først.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+# geom_bar TÆLLER selv rækkerne
+(ggplot(tweets, aes(x="factor(maaned)"))
+ + geom_bar()
+ + labs(title="geom_bar: tæller rækker", 
+        x="Måned", 
+        y="Antal tweets")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** `geom_bar` tæller selv, hvor mange rækker der er i hver kategori.
+
+1. {2} `aes(x="factor(maaned)")`: der er kun en x-værdi. Vi giver ingen y.
+2. {3} `geom_bar()` tæller tweets per måned og bruger antallet som søjlehøjde. Vi behøver altså ikke selv lave `groupby` først.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(tweets, aes(x = factor(maaned))) +
+  geom_bar() +
+  labs(title = "geom_bar: tæller rækker", x = "Måned", y = "Antal tweets")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** `geom_bar()` i R tæller også selv rækkerne per måned.
+:::
+::::
+:::::
+
+::: {.lille}
+Skal I vise et **gennemsnit**, skal det altid være `geom_col`.
+:::
+
+## Statistiske transformationer
+
+:::::: {.to-kol .smal-bred}
+::: {.kol}
+Nogle geoms tegner data direkte. Andre **regner først**:
+
+- `geom_point`: ingen beregning.
+- `geom_bar` **tæller** rækker.
+- `geom_histogram` **inddeler** i intervaller og tæller.
+- `geom_boxplot` beregner **kvartiler**.
+- `geom_smooth` **tilpasser en model**.
+
+`bins` er et argument til beregningen. Det ændrer, hvad figuren viser.
+:::
+
+::::::: {.kol}
+```{ojs}
+//| echo: false
+viewof bins = sds1.skyder({ label: "bins", min: 3, max: 200, value: 30 })
+```
+
+:::: {.demo}
+```{pyodide}
+#| input:
+#|   - bins
+(ggplot(tweets, aes(x="retweets"))
+ + geom_histogram(bins=bins)
+ + scale_x_log10()
+ + theme(figure_size=(5.6, 3.2))).show()
+```
+
+::: {.forklaring}
+1. {1} Data er `tweets`, og `retweets` ligger på x-aksen.
+2. {2} `geom_histogram` deler x-aksen i `bins` lige brede intervaller og tæller tweets i hvert. `bins` kommer fra skyderen.
+3. {3} Logaritmisk x-akse, fordi fordelingen er meget skæv.
+4. {4} Figurens størrelse, og `.show()` tegner den.
+:::
+::::
+:::::::
+::::::
+
+## Temaer og titler {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+(ggplot(h, aes(x="factor(maaned)", y="andel"))
+ + geom_col(fill="steelblue")
+ + labs(title="Andel af tweets med mindst ét hashtag",
+        subtitle="@realDonaldTrump, 2016",
+        x="Måned", y="Andel",
+        caption="Data: egen indsamling")
+ + theme_minimal()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme andelsfigur som før, nu med titler og et pænere tema.
+
+1. {2} `geom_col(fill="steelblue")` farver søjlerne. `fill` er udfyldningen, `color` ville være kanten.
+2. {6} `labs(...)` sætter titel, undertitel, aksetekster og en `caption` (tekst nederst, fx datakilden).
+3. {7} `+ theme_minimal()` fjerner den grå baggrund og de fleste streger.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(h, aes(x = factor(maaned), y = andel)) +
+  geom_col(fill = "steelblue") +
+  labs(title = "Andel af tweets med mindst ét hashtag",
+       subtitle = "@realDonaldTrump, 2016",
+       x = "Måned", y = "Andel",
+       caption = "Data: egen indsamling") +
+  theme_minimal()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme pyntede figur i R. Argumenterne hedder det samme: `fill`, `labs(title = ..., subtitle = ..., caption = ...)` og `theme_minimal()`.
+:::
+::::
+:::::
+
+::: {.lille}
+Prøv `theme_minimal()`, `theme_bw()`, `theme_classic()` og `theme_void()`. Standardtemaet med grå baggrund er en smagssag, ikke en regel.
+:::
+
+## Sortér, når kategorierne ikke har en rækkefølge {.kodelab}
+
+Måneder har en naturlig rækkefølge. Hashtags har ikke. Sortér efter værdien, og vend figuren, så etiketterne kan læses.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+top = (tweets["hashtags"].dropna()
+       .str.split(",").explode()
+       .value_counts().head(10)
+       .rename_axis("hashtag").reset_index(name="antal"))
+
+# rækkefølgen på aksen: mindst nederst, størst øverst
+top["hashtag"] = pd.Categorical(top["hashtag"],
+                                categories=top["hashtag"][::-1])
+
+(ggplot(top, aes(x="hashtag", y="antal"))
+ + geom_col()
+ + coord_flip()
+ + labs(title="De ti hyppigste hashtags", 
+        x=None, 
+        y="Antal")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den finder de ti hyppigste hashtags og tegner dem som liggende søjler.
+
+1. {1} `tweets["hashtags"].dropna()` fjerner tweets uden hashtag.
+2. {2} `.str.split(",")` deler feltet ved komma, fordi ét tweet kan have flere hashtags: `"#Biloxi,#Mississippi"` bliver til en liste med to.
+3. {2} `.explode()` giver hvert hashtag sin egen række.
+4. {3} `.value_counts().head(10)` tæller hvert hashtag og beholder de ti hyppigste.
+5. {4} `.rename_axis("hashtag").reset_index(name="antal")` laver optællingen om til en tabel med kolonnerne `hashtag` og `antal`.
+6. {8} `pd.Categorical(..., categories=top["hashtag"][::-1])` bestemmer rækkefølgen på aksen. `[::-1]` vender listen om, så det største hashtag kommer øverst.
+7. {12} `coord_flip()` vender figuren, så søjlerne ligger ned, og de lange navne kan læses.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+top <- tweets |>
+  filter(!is.na(hashtags)) |>
+  tidyr::separate_rows(hashtags, sep = ",") |>
+  count(hashtags, sort = TRUE) |>
+  head(10)
+
+ggplot(top, aes(x = reorder(hashtags, n), y = n)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "De ti hyppigste hashtags", x = NULL, y = "Antal")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** De ti hyppigste hashtags i R.
+
+1. {2} `filter(!is.na(hashtags))` fjerner tweets uden hashtag.
+2. {3} `tidyr::separate_rows(hashtags, sep = ",")` deler feltet ved komma og giver hvert hashtag sin egen række. `tidyr::` henter funktionen fra tidyr uden at indlæse hele pakken.
+3. {4} `count(hashtags, sort = TRUE)` tæller og sorterer, størst først. `head(10)` beholder de ti første.
+4. {7} `reorder(hashtags, n)` sorterer kategorierne efter antal, så aksen bliver ordnet.
+5. {9} `coord_flip()` lægger søjlerne ned. `x = NULL` fjerner aksetitlen.
+:::
+::::
+:::::
+
+## Gem figuren {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev}
+```{pyodide}
+# p.save("retweets.png", width=8, height=5, dpi=300)
+print("Kør linjen lokalt. I browseren er der ingen mappe at gemme i")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den viser, hvordan man gemmer en figur. Linjen er sat ud af drift med `#`, fordi der ikke er nogen mappe at gemme i, når koden kører i browseren.
+
+1. {1} `p.save("retweets.png", width=8, height=5, dpi=300)` gemmer figuren `p` som en billedfil. Bredde og højde er i tommer, og `dpi` er opløsningen.
+2. Kør linjen lokalt eller i UCloud, efter I har gemt en figur som `p`, fx `p = (ggplot(...) + ...)`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+# ggsave("retweets.png", p, width = 8, height = 5, dpi = 300)
+print("Kør linjen lokalt")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R med `ggsave()`. Den er sat ud af drift med `#`. Lokalt gemmer `ggsave("retweets.png", p, width = 8, height = 5, dpi = 300)` figuren `p` som billedfil.
+:::
+::::
+:::::
+
+::: {.lille}
+`width` og `height` (i tommer) bestemmer, hvor stor teksten bliver i forhold til figuren. `dpi=300` til tryk, `dpi=150` til skærm. `.png` er pixels. `.pdf` og `.svg` er vektorgrafik og bliver ikke uskarpe: brug dem til artikler.
+:::
+
+## Opsamling
+
+- En figur er **ikke** et neutralt vindue. Akser, nævnere og udeladelser er valg.
+
+- **Formålet kommer først.** Spørgsmålet styrer figuren, ikke omvendt.
+
+- Figuren skal afspejle **kompleksiteten i data**, men ikke tilføje kompleksitet i fremstillingen.
+
+- Grammatikken er den samme hver gang: **data + mapping + geom**. Resten er finpudsning.
+
+- **Grim, dårlig, forkert**: tre ord til tre forskellige slags problemer.
+
+# Galleri: alle plottyper
+
+Et opslagsværk: find budskabet, og vælg geom derefter.
+
+## Vælg efter budskabet, ikke efter datatypen
+
+::: {.galleri-tabel}
+
+| Budskab | Spørgsmålet | Geoms |
+|---|---|---|
+| **Mængder** | Hvor meget af hver? | `geom_col` · `geom_bar` · `geom_point` · `geom_tile` |
+| **Fordelinger** | Hvordan spreder værdierne sig? | `geom_histogram` · `geom_density` · `geom_freqpoly` · `geom_boxplot` · `geom_violin` · `stat_ecdf` |
+| **Andele** | Hvor stor en del af helheden? | `geom_bar(position="fill")` · stablede søjler |
+| **Sammenhænge** | Hænger to variable sammen? | `geom_point` · `geom_jitter` · `geom_bin_2d` · `geom_smooth` · `geom_count` |
+| **Tidsserier** | Hvordan udvikler det sig? | `geom_line` · `geom_step` · `geom_area` |
+| **Usikkerhed** | Hvor sikre er tallene? | `geom_pointrange` · `geom_errorbar` · `geom_ribbon` |
+| **Annotation** | Hvad skal man lægge mærke til? | `geom_text` · `geom_label` · `geom_hline` · `annotate` |
+
+:::
+
+## Tabeller til galleriet {.kodelab}
+
+Tre små, aggregerede tabeller, som figurerne i galleriet bruger. Cellen kører af sig selv.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+# Aggregerede tabeller, som galleriet bruger
+pr  = tweets.groupby("maaned").size().reset_index(name="antal")
+uge = tweets.set_index("dato").resample("W").size().reset_index(name="antal")
+krydstabel = tweets.groupby(["maaned", "har_hashtag"]).size().reset_index(name="n")
+
+print(pr.head(2))
+print()
+print(uge.head(2))
+print()
+print(krydstabel.head(2))
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den laver tre små tabeller, som resten af galleriet bruger. Kør den først (den kører af sig selv).
+
+1. {2} `pr`: antal tweets per måned. `.size()` tæller rækker i hver gruppe, og `reset_index(name="antal")` laver resultatet til en tabel med kolonnen `antal`.
+2. {1} `uge`: antal tweets per uge. `.set_index("dato")` gør datoen til rækkenavne, og `.resample("W")` grupperer efter uge.
+3. {4} `krydstabel`: antal tweets for hver kombination af måned og `har_hashtag`.
+4. `print(...head(2))` viser de første to rækker af hver.
+:::
+::::
+
+### R
+
+:::: {.demo}
+```{webr}
+pr  <- tweets |> count(maaned, name = "antal")
+uge <- tweets |> mutate(uge = as.Date(cut(dato, "week"))) |> count(uge, name = "antal")
+krydstabel <- tweets |> count(maaned, har_hashtag, name = "n")
+
+head(pr, 3)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** De samme tre hjælpetabeller i R.
+
+1. {1} `count(maaned, name = "antal")` tæller tweets per måned.
+2. {2} `mutate(uge = as.Date(cut(dato, "week")))` laver en kolonne med ugens startdato. `count(uge, ...)` tæller per uge.
+3. {3} `count(maaned, har_hashtag, name = "n")` tæller for hver kombination.
+:::
+::::
+:::::
+
+## Mængder: `geom_col` {.kodelab}
+
+Søjler fra en aggregeret tabel. Standardvalget. Skal starte i nul.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(pr, aes(x="factor(maaned)", y="antal")) 
+ + geom_col()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Søjler fra den færdigtalte tabel `pr`: én søjle per måned, højden er `antal`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(pr, aes(x = factor(maaned), y = antal)) + geom_col()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R: `geom_col()` bruger y-værdien `antal` direkte.
+:::
+::::
+:::::
+
+## Mængder: `geom_bar` {.kodelab}
+
+Samme, men tæller selv rækkerne.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="factor(maaned)")) 
+ + geom_bar()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den samme figur som før, men `geom_bar()` tæller selv rækkerne i den fulde tabel `tweets`. Derfor er der ingen y.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = factor(maaned))) + geom_bar()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** `geom_bar()` i R tæller selv tweets per måned.
+:::
+::::
+:::::
+
+## Mængder: `geom_point` {.kodelab}
+
+Som dot plot: når skalaen er logaritmisk, eller når kategorinavnene er lange. Giver mening med et zoom, fordi der ingen længde er.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(pr, aes(x="antal", y="factor(maaned)")) 
+ + geom_point(size=3)).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et prikdiagram (*dot plot*): antal på x-aksen, måneder på y-aksen, ét punkt per måned. Det er godt, når kategorierne har lange navne, eller når aksen ikke starter i 0.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(pr, aes(x = antal, y = factor(maaned))) + geom_point(size = 3)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Prikdiagrammet i R. `aes(x = antal, y = factor(maaned))` vender akserne, og `geom_point(size = 3)` tegner punkterne.
+:::
+::::
+:::::
+
+## Mængder: `geom_tile` {.kodelab}
+
+Heatmap. Når to kategoriske variable krydses, og mængden er farven.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(krydstabel, aes(x="factor(maaned)", 
+                        y="har_hashtag", 
+                        fill="n"))
+ + geom_tile()
+ + theme(legend_position="none")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et **heatmap**: én flise per kombination af måned og hashtag/ikke hashtag. Farven viser antallet.
+
+1. `aes(x=..., y="har_hashtag", fill="n")`: måned på x, ja/nej på y, og antallet bestemmer fyldfarven.
+2. {5} `geom_tile()` tegner fliserne.
+3. {6} `theme(legend_position="none")` skjuler farveforklaringen. Den kan ikke tegnes i browserversionen af plotnine (se noten).
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(krydstabel, aes(x = factor(maaned),
+                       y = har_hashtag,
+                       fill = n)) +
+  geom_tile()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Heatmappet i R. `fill = n` bestemmer farven, og `geom_tile()` tegner fliserne. Her vises farveforklaringen.
+:::
+::::
+:::::
+
+::: {.lille}
+**Bemærk:** plotnine kan ikke tegne en **signaturforklaringen** i browseren (Har ikke svaret på hvorfor, endnu...). ggplot2-fanen har ikke problemet, og lokalt virker `fill="n"` også i plotnine.
+:::
+
+## Fordelinger: `geom_histogram` {.kodelab}
+
+Inddeler i intervaller og tæller. `bins` ændrer, hvad I ser.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+(ggplot(tweets, aes(x="retweets")) 
+ + geom_histogram(bins=40) 
+ + scale_x_log10()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et histogram over retweets med 40 intervaller og logaritmisk x-akse. Prøv at ændre `bins=40` og se, hvordan billedet ændrer sig.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(tweets, aes(x = retweets)) + geom_histogram(bins = 40) + scale_x_log10()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme histogram i R, skrevet på én linje.
+:::
+::::
+:::::
+
+## Fordelinger: `geom_density` {.kodelab}
+
+Glattet kurve. Pænere, men skjuler hvor få observationer der er i halerne.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="retweets")) 
+ + geom_density() 
+ + scale_x_log10()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** En **tæthedskurve**: en udglattet version af histogrammet. `geom_density()` regner selv kurven ud. Arealet under kurven er 1.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = retweets)) + geom_density() + scale_x_log10()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Tæthedskurven i R med `geom_density()`.
+:::
+::::
+:::::
+
+## Fordelinger: `geom_freqpoly` {.kodelab}
+
+Histogram som linje. God, når flere grupper skal sammenlignes.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="retweets")) 
+ + geom_freqpoly(bins=40) 
+ + scale_x_log10()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et histogram tegnet som en **linje** i stedet for søjler. `geom_freqpoly(bins=40)` er nyttig, når flere grupper skal sammenlignes i samme figur.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = retweets)) + geom_freqpoly(bins = 40) + scale_x_log10()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Linje-histogrammet i R med `geom_freqpoly(bins = 40)`.
+:::
+::::
+:::::
+
+## Fordelinger: `geom_boxplot` {.kodelab}
+
+Median, kvartiler, yderpunkter. Mange fordelinger på lidt plads.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="factor(maaned)", 
+                    y="retweets")) 
+ + geom_boxplot() 
+ + scale_y_log10()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et **boxplot** per måned.
+
+1. `aes(x="factor(maaned)", y="retweets")`: én kasse per måned.
+2. Kassen går fra 25 %- til 75 %-kvartilen, stregen i midten er medianen, og punkterne er ekstreme værdier.
+3. {5} `scale_y_log10()` er nødvendig, fordi fordelingen er så skæv.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = factor(maaned), y = retweets)) + geom_boxplot() + scale_y_log10()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Boxplottet per måned i R med `geom_boxplot()` og logaritmisk y-akse.
+:::
+::::
+:::::
+
+## Fordelinger: `geom_violin` {.kodelab}
+
+Som boxplot, men viser formen. Afslører toppuklede fordelinger, som boxplottet skjuler.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="factor(maaned)", 
+                    y="retweets")) 
+ + geom_violin() 
+ + scale_y_log10()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et **violinplot**: som et boxplot, men bredden viser, hvor mange tweets der ligger ved hver værdi. Så kan man se, om en fordeling har flere toppe.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = factor(maaned), y = retweets)) + geom_violin() + scale_y_log10()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Violinplottet i R med `geom_violin()`.
+:::
+::::
+:::::
+
+## Fordelinger: `stat_ecdf` {.kodelab}
+
+Kumuleret fordeling. Ingen valg af `bins`, og aflæsningen er præcis.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="retweets")) 
+ + stat_ecdf() 
+ + scale_x_log10()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** En **kumuleret fordeling** (ECDF). For hver værdi på x-aksen viser y-aksen, hvor stor en andel af tweets der har *højst* så mange retweets. Man skal ikke vælge `bins`.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = retweets)) + stat_ecdf() + scale_x_log10()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den kumulerede fordeling i R med `stat_ecdf()`.
+:::
+::::
+:::::
+
+## Andele: `position="stack"` {.kodelab}
+
+Viser **totalen** og delene på én gang. Kun den nederste del kan aflæses præcist.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+(ggplot(tweets, aes(x="factor(maaned)", 
+                    fill="har_hashtag")) 
+ + geom_bar()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** **Stablede** søjler: antal tweets per måned, opdelt efter om de har hashtag.
+
+1. {2} `fill="har_hashtag"` inde i `aes()` giver hver gruppe sin egen farve.
+2. {3} `geom_bar()` stabler grupperne oven på hinanden som standard (`position="stack"`).
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(tweets, aes(x = factor(maaned), fill = har_hashtag)) + geom_bar()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Stablede søjler i R: `fill = har_hashtag` og `geom_bar()`.
+:::
+::::
+:::::
+
+## Andele: `position="fill"` {.kodelab}
+
+Normaliseret til 1. Viser **andele**, men skjuler at december kun har 131 tweets og januar 477.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="factor(maaned)", 
+                    fill="har_hashtag")) 
+ + geom_bar(position="fill")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Stablede søjler, hvor hver søjle er strakt til 1. `position="fill"` viser **andele**: hvor stor en del af månedens tweets har hashtag. Hvor mange tweets der var i alt, kan ikke længere ses.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = factor(maaned), fill = har_hashtag)) + geom_bar(position = "fill")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Andels-søjlerne i R med `geom_bar(position = "fill")`.
+:::
+::::
+:::::
+
+## Andele: `position="dodge"` {.kodelab}
+
+Side om side. Grupperne bliver sammenlignelige, helheden forsvinder.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="factor(maaned)", 
+                    fill="har_hashtag")) 
+ + geom_bar(position="dodge")).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Søjler **side om side** i stedet for stablet. `position="dodge"` gør det let at sammenligne grupperne, men helheden forsvinder.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = factor(maaned), fill = har_hashtag)) + geom_bar(position = "dodge")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Søjler side om side i R med `geom_bar(position = "dodge")`.
+:::
+::::
+:::::
+
+## Andele: `coord_polar()`
+
+**Plotnine kan ikke lave lagkagediagrammer.** `coord_polar()` findes i ggplot2, men ikke i plotnine.
+
+Det er næppe et stort tab. Vi aflæser **længder** langt bedre end **arealer** og vinkler, så søjler er næsten altid en bedre løsning (Wilke 2019, kap. 17).
+
+## Sammenhænge: `geom_point` {.kodelab}
+
+Grundformen. Falder fra hinanden ved overlap.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+(ggplot(tweets, aes(x="antal_ord", 
+                    y="retweets"))
+ + geom_point(alpha=0.1) 
+ + scale_y_log10()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et punktdiagram: antal ord på x, retweets på y, ét punkt per tweet. `alpha=0.1` gør punkterne næsten gennemsigtige, så tætte områder bliver mørkere.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(tweets, aes(x = antal_ord, y = retweets)) +
+  geom_point(alpha = 0.1) + scale_y_log10()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Punktdiagrammet i R med `geom_point(alpha = 0.1)` og logaritmisk y-akse.
+:::
+::::
+:::::
+
+## Sammenhænge: `geom_jitter` {.kodelab}
+
+Tilfældig støj, så punkter på samme sted bliver synlige. Bruges ved diskrete værdier.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="antal_ord", 
+                    y="retweets"))
+ + geom_jitter(alpha=0.1, width=0.3) 
+ + scale_y_log10()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Som punktdiagrammet, men hvert punkt flyttes lidt tilfældigt til siden. `antal_ord` er hele tal, så mange punkter ligger præcis oven på hinanden. `width=0.3` styrer, hvor meget de må rykke sig vandret.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = antal_ord, y = retweets)) + geom_jitter(alpha = .1, width = .3) + scale_y_log10()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Jitter i R med `geom_jitter(alpha = .1, width = .3)`. `.1` er det samme som `0.1`.
+:::
+::::
+:::::
+
+## Sammenhænge: `geom_bin_2d` {.kodelab}
+
+To-dimensionelt histogram. Den rigtige løsning ved tusindvis af punkter.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="antal_ord", 
+                    y="retweets"))
+ + geom_bin_2d(bins=25)
+ + scale_y_log10()
+ + theme(legend_position="none")).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et to-dimensionelt histogram: planen deles i 25 × 25 felter, og farven viser, hvor mange tweets der ligger i hvert felt. Godt, når der er tusindvis af punkter. Farveforklaringen er skjult, ligesom ved heatmappet.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = antal_ord, y = retweets)) + geom_bin_2d(bins = 25) + scale_y_log10()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det to-dimensionelle histogram i R med `geom_bin_2d(bins = 25)`.
+:::
+::::
+:::::
+
+## Sammenhænge: `geom_count` {.kodelab}
+
+Punktets størrelse er antallet af observationer på stedet.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="antal_ord", 
+                    y="factor(maaned)")) 
+ + geom_count()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Punkter, hvor **størrelsen** viser, hvor mange tweets der ligger på præcis samme sted. `geom_count()` tæller selv.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = antal_ord, y = factor(maaned))) + geom_count()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Det samme i R med `geom_count()`.
+:::
+::::
+:::::
+
+## Sammenhænge: `geom_smooth` {.kodelab}
+
+En tilpasset kurve ovenpå. `method="lm"` giver en ret linje.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(tweets, aes(x="antal_ord", 
+                    y="retweets"))
+ + geom_point(alpha=0.08) 
+ + geom_smooth(method="lm", color="red")
+ + scale_y_log10()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et punktdiagram med en **tendenslinje** ovenpå.
+
+1. {4} `geom_point(alpha=0.08)` tegner punkterne svagt.
+2. {5} `geom_smooth(method="lm", color="red")` tilføjer en rød, ret linje (*lm* = lineær model) med et usikkerhedsbånd omkring.
+3. Lag lægges oven på hinanden i den rækkefølge, de står i.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(tweets, aes(x = antal_ord, y = retweets)) +
+ geom_point(alpha = .08) + geom_smooth(method = "lm", color = "red") + scale_y_log10()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Punkter og tendenslinje i R med `geom_smooth(method = "lm", color = "red")`.
+:::
+::::
+:::::
+
+## Tidsserier: `geom_line` {.kodelab}
+
+Forbinder punkterne. Antager, at der sker noget mellem målingerne.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+(ggplot(uge, aes(x="dato", y="antal")) 
+ + geom_line()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** En **linjefigur** over tid: antal tweets per uge fra tabellen `uge`. `geom_line()` forbinder punkterne i rækkefølge efter datoen.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(uge, aes(x = uge, y = antal)) + geom_line()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Linjefiguren i R. I R hedder datokolonnen `uge`.
+:::
+::::
+:::::
+
+## Tidsserier: `geom_step` {.kodelab}
+
+Trappe. Ærligere, når værdien er konstant indtil næste måling.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(uge, aes(x="dato", y="antal")) 
+ + geom_step()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** En **trappefigur**. `geom_step()` holder værdien vandret indtil næste måling, i stedet for at tegne en skrå linje imellem.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(uge, aes(x = uge, y = antal)) +
+  geom_step()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Trappefiguren i R. Bemærk, at `+` står sidst på første linje.
+:::
+::::
+:::::
+
+## Tidsserier: `geom_area` {.kodelab}
+
+Skygget areal. **Skal starte i nul**, ellers bryder den proportionelt blæk.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+
+(ggplot(uge, aes(x="dato", y="antal")) 
+ + geom_area()).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Et skygget **areal** under linjen med `geom_area()`. Arealet starter i 0, så det kan ikke zoomes på y-aksen.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+
+ggplot(uge, aes(x = uge, y = antal)) +
+  geom_area()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Arealfiguren i R med `geom_area()`.
+:::
+::::
+:::::
+
+## Usikkerhed og annotation: `geom_pointrange` {.kodelab}
+
+Estimat med interval. Den rigtige måde at vise et gennemsnit med usikkerhed.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+est = (tweets.groupby("maaned")["retweets"].agg(["mean", "sem"]).reset_index())
+est["lo"] = est["mean"] - 1.96 * est["sem"]
+est["hi"] = est["mean"] + 1.96 * est["sem"]
+
+(ggplot(est, aes(x="factor(maaned)", 
+                 y="mean", 
+                 ymin="lo", 
+                 ymax="hi"))
+ + geom_pointrange()).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Den viser gennemsnittet af retweets per måned med et 95 %-konfidensinterval.
+
+1. {1} `.agg(["mean", "sem"])` beregner gennemsnittet og standardfejlen (`sem`, *standard error of the mean*) per måned.
+2. {2} `est["lo"]` og `est["hi"]` er grænserne: gennemsnit minus og plus 1,96 standardfejl.
+3. `aes(..., ymin="lo", ymax="hi")` fortæller, hvor intervallet starter og slutter.
+4. {9} `geom_pointrange()` tegner et punkt for gennemsnittet og en lodret streg for intervallet.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+est <- tweets |>
+  group_by(maaned) |>
+  summarise(gns = mean(retweets), sem = sd(retweets) / sqrt(n())) |>
+  mutate(lo = gns - 1.96 * sem, hi = gns + 1.96 * sem)
+
+ggplot(est, aes(x = factor(maaned), y = gns, ymin = lo, ymax = hi)) + geom_pointrange()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Gennemsnit med interval i R.
+
+1. {3} `summarise(gns = mean(retweets), sem = sd(retweets) / sqrt(n()))`: standardfejlen er standardafvigelsen divideret med kvadratroden af antallet.
+2. `mutate(lo = ..., hi = ...)` beregner grænserne.
+3. {6} `geom_pointrange()` tegner punkt og interval.
+:::
+::::
+:::::
+
+## Usikkerhed og annotation: `geom_hline` / `geom_vline` {.kodelab}
+
+Referencelinje. Gennemsnittet, et nulpunkt, en dato hvor noget skete.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+(ggplot(pr, aes(x="factor(maaned)", 
+                y="antal"))
+ + geom_col()
+ + geom_hline(yintercept=pr["antal"].mean(), 
+              color="red", 
+              linetype="dashed")).show()
+
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Søjler med en vandret **referencelinje** for gennemsnittet.
+
+1. {4} `pr["antal"].mean()` beregner det gennemsnitlige antal tweets per måned.
+2. `geom_hline(yintercept=..., color="red", linetype="dashed")` tegner en rød, stiplet vandret linje i den højde.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(pr, aes(x = factor(maaned), y = antal)) + geom_col() +
+  geom_hline(yintercept = mean(pr$antal), color = "red", linetype = "dashed")
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Søjler og referencelinje i R. `mean(pr$antal)` giver højden til `geom_hline()`.
+:::
+::::
+:::::
+
+## Usikkerhed og annotation: `geom_text` / `geom_label` {.kodelab}
+
+Skriv værdien eller en kommentar direkte i figuren.
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+(ggplot(pr, aes(x="factor(maaned)", y="antal"))
+ + geom_col()
+ + geom_text(aes(label="antal"), 
+             va="bottom", 
+             size=7)).show()
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Søjler med tallet skrevet oven på hver søjle.
+
+1. {1} `geom_text(aes(label="antal"), ...)`: teksten, der skal skrives, er værdien i kolonnen `antal`.
+2. {4} `va="bottom"` placerer teksten lige over søjlens top (*vertical alignment*). `size=7` er skriftstørrelsen.
+:::
+::::
+
+### R
+
+:::: {.proev}
+```{webr}
+ggplot(pr, aes(x = factor(maaned), y = antal)) + geom_col() +
+  geom_text(aes(label = antal), vjust = -0.3, size = 3)
+```
+
+::: {.forklaring}
+**Hvad gør koden?** Tal oven på søjlerne i R. `vjust = -0.3` flytter teksten lidt op over søjlen, og `size = 3` er skriftstørrelsen.
+:::
+::::
+:::::
+
+# Øvelser
+
+Nu er det jeres tur.
+
+## Øvelse 1: vælg en geom {.opgave}
+
+::: {.opgavetekst}
+Tegn et **histogram** over antal ord pr. tweet.
+
+1. Udfyld hullet med den rigtige geom.
+2. Prøv bagefter at ændre `bins`.
+
+[3 min]{.timer tid=180}
+:::
+
+:::: {.oevelse}
+```{pyodide}
+p = (ggplot(tweets, aes(x="antal_ord"))
+     + geom_______(bins=20)
+     + theme(figure_size=(5.5, 3)))
+p
+```
+
+::: {.hint}
+Geomen hedder det samme som figurtypen på engelsk: `geom_histogram`.
+:::
+
+::: {.loesning}
+```python
+p = (ggplot(tweets, aes(x="antal_ord"))
+     + geom_histogram(bins=20)
+     + theme(figure_size=(5.5, 3)))
+p
+```
+:::
+
+```{pyodide}
+#| check: true
+try:
+    ok = type(result.layers[0].geom).__name__ == "geom_histogram"
+except Exception:
+    ok = False
+feedback = {"correct": ok, "message": "Rigtigt! geom_histogram inddeler i intervaller og tæller." if ok else "Ikke helt. Figuren skal have et lag med geom_histogram."}
+feedback
+```
+::::
+
+## Øvelse 2: inde i `aes()` {.opgave}
+
+::: {.opgavetekst}
+Farv punkterne efter, om tweetet **har et hashtag**.
+
+1. Hvilken kolonne skal styre farven?
+2. Hvorfor skal den stå *inde i* `aes()`?
+
+[3 min]{.timer tid=180}
+:::
+
+:::: {.oevelse}
+```{pyodide}
+p = (ggplot(tweets, aes(x="retweets", y="favorites", color="______"))
+     + geom_point(alpha=0.3)
+     + scale_x_log10() + scale_y_log10()
+     + theme(figure_size=(5.5, 3)))
+p
+```
+
+::: {.hint}
+Kolonnen blev lavet i dagens første celle og hedder `har_hashtag`.
+:::
+
+::: {.loesning}
+```python
+p = (ggplot(tweets, aes(x="retweets", y="favorites", color="har_hashtag"))
+     + geom_point(alpha=0.3)
+     + scale_x_log10() + scale_y_log10()
+     + theme(figure_size=(5.5, 3)))
+p
+```
+:::
+
+```{pyodide}
+#| check: true
+try:
+    ok = result.mapping.get("color") == "har_hashtag"
+except Exception:
+    ok = False
+feedback = {"correct": ok, "message": "Rigtigt! Farven styres af en variabel, så den hører hjemme i aes()." if ok else "Ikke helt. color skal kobles til kolonnen har_hashtag."}
+feedback
+```
+::::
+
+## Litteratur
+
+::: {.kilder}
+
+**Kirk, A.** (2019). *Data Visualisation: A Handbook for Data Driven Design.* 2. udg. London: SAGE.
+
+**Rettberg, J. W.** (2020). Ways of knowing with data visualizations. I: M. Engebretsen & H. Kennedy (red.), *Data Visualization in Society*. Amsterdam: Amsterdam University Press.
+
+**Lemercier, C. & Zalc, C.** (2019). *Quantitative Methods in the Humanities: An Introduction.* Oversat af Arthur Goldhammer. Charlottesville: University of Virginia Press.
+
+**Wilke, C. O.** (2019). *Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures.* Sebastopol, CA: O'Reilly. Frit tilgængelig på [clauswilke.com/dataviz](https://clauswilke.com/dataviz/).
+
+**Bergstrom, C. T. & West, J.** (2016). The Principle of Proportional Ink. *Calling Bullshit.* [callingbullshit.org](https://callingbullshit.org/tools/tools_proportional_ink.html).
+
+**Tufte, E. R.** (1983). *The Visual Display of Quantitative Information.* Cheshire, CT: Graphics Press.
+
+**Tukey, J. W.** (1977). *Exploratory Data Analysis.* Reading, MA: Addison-Wesley.
+
+**Wickham, H.** (2014). Tidy Data. *Journal of Statistical Software*, 59(10), 1-23.
+
+:::
+
+## Sidst i dag {.sidst}
+
+:::: {.kort-raekke}
+::: {.kol}
+**Det vigtigste**
+
+En figur er en række valg. Grammatikken er den samme hver gang: data + mapping + geom.
+:::
+
+::: {.kol}
+**Øvelser**
+
+Se [lektionens side](index.html) for dagens notebook og øvelser.
+:::
+
+::: {.kol}
+**Næste gang**
+
+[Lektion 5: Scraping og API](../05-scraping-og-api/index.html).
+:::
+::::
+
+[Tilbage til lektionens side](index.html) · [Alle lektioner](../../kursus/plan.html)
+
+[]{.aau-logo role="img" aria-label="Aalborg Universitet"}

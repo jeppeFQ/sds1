@@ -1,0 +1,12 @@
+# Ændres én gang om året. Bruges i tekst som {{< var semester >}}.
+semester: "Efterår 2026"
+kursus: "Social Data Science I: Dataanalyse med Python"
+ects: "10 ECTS"
+underviser: "Jeppe Fjeldgaard Qvist"
+moodle: "https://www.moodle.aau.dk/course/view.php?id=59527"
+ucloud: "https://cloud.sdu.dk"
+ekursus: "https://caldiss-aau.github.io/workshop_python-intro/"
+idebank: "https://docs.google.com/spreadsheets/d/1Pdfrz45V1wh774xkecmihCpRUDC597bYkdOP7qF0P_Y/edit"
+data: "https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/"
+aflevering: "fredag den 18. december 2026 kl. 10.00"
+mundtlig: "11.–15. januar 2027"

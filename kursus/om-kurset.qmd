@@ -1,0 +1,60 @@
+---
+title: "Om kurset"
+subtitle: "{{< var kursus >}} · {{< var ects >}}"
+---
+
+## Formål
+
+Formålet med modulet er, at I tilegner jer en anvendelsesorienteret forståelse for computationelle og dataintensive metoder. Fokus er på analyseteknikker, datahåndtering, datavisualisering og dataudforskning på strukturerede og ustrukturerede data, der er relevante for samfundsvidenskabelige problemstillinger.
+
+Kurset giver en indføring i computationel tænkning. Datahåndtering introduceres i Python, og derefter gennemgås en række udvalgte metoder, herunder klyngeanalyse, mapping-metoder og simple tekstanalyseteknikker. Den røde tråd er sammenhængen mellem valg af datasæt, analyse, visualisering og det samfundsvidenskabelige spørgsmål.
+
+## Hvad forventer vi af jer?
+
+- **Tid.** 10 ECTS svarer til 275 timers arbejde. Spred dem ud over semestret.
+- **Forberedelse.** Læs det, der står under *Forberedelse* på lektionens side. Gennemfør e-kurset [Introduktion til Python for Samfundsvidenskab]({{< var ekursus >}}) inden lektion 2.
+- **Skriv koden selv.** Man lærer at kode ved at kode. Brug øvelserne, og kør og ændr koden i slides.
+- **Byg portfolioen undervejs.** Eksamen bygger på en portfolio, I arbejder på gennem hele kurset. Se [Portfolio og eksamen](portfolio.qmd).
+- **AI.** Kurset er AI-positivt med klare forbehold: I skal kunne forstå, forklare og stå inde for alt, I afleverer.
+
+## Hvad kan I forvente af os?
+
+- Slides, øvelser og data ligger på denne side inden undervisningen.
+- Hver kodeboks i mine slides har en trinvis forklaring, I kan folde ud.
+- Svarark til øvelserne udleveres efter undervisningen.
+- Beskeder, afleveringer og litteratur, der ikke må ligge frit, findes på [Moodle]({{< var moodle >}}).
+
+## Undervisningsform
+
+Kurset afvikles som en kombination af forelæsninger, øvelser og e-læring. En typisk undervisningsgang veksler mellem korte oplæg, øvelser på papir, øvelser i grupper og kode, vi skriver sammen.
+
+## Læringsmål
+
+**Viden**
+
+- Viden om metoder og teknikker til at analysere og visualisere strukturerede datatyper med henblik på samfundsvidenskabelige analyser
+- Viden om strukturerede og ustrukturerede datatyper
+- Viden om relevante computervidenskabelige koncepter inden for dataintensive teknikker og metoder
+- Grundlæggende indsigt i nyere digitale metoder, deres grundbegreber, teoretiske ophav og praktiske anvendelse
+- Viden om metodernes samspil med sociale data og sociale fænomener
+
+**Færdigheder**
+
+- Kan gengive og redegøre for grundbegreber og centrale forståelser inden for nyere digitale metoder
+- Kan anvende nyere digitale metoder til dataudforskning
+- Kan reflektere over og analysere en aktuel samfundsvidenskabelig problemstilling eller tematik ved hjælp af nyere digitale metoder
+- Kan relatere, sammenligne og diskutere styrker og svagheder ved nyere digitale metoder og deres forskellige analysestrategier
+- Kan kritisk vurdere og vælge den passende analyseteknik til strukturerede datasæt
+
+**Kompetencer**
+
+- Kan udvælge, belyse, diskutere og analysere problemstillinger med inddragelse af relevante metodiske tilgange og digitale metoder
+- Kan identificere og diskutere udfordringer og løsninger i arbejdet med dataudforskningsteknikker
+
+## Undervisere
+
+- **Jeppe Fjeldgaard Qvist**: lektion 1–4 og 6–7
+- **Jakob Bruhn Krøjgaard Skelmose**: lektion 8 og 10
+- Øvrige undervisningsgange: se den enkelte lektion og Moodle.
+
+Kontaktoplysninger og beskeder findes på [Moodle]({{< var moodle >}}).

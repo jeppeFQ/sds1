@@ -1,0 +1,21 @@
+---
+title: "Messy data i praksis: lyd og multimodal"
+lektion: 9
+date: 2026-10-06
+description: "Lyd som datakilde: transskribering, repræsentation og analyse, og kombination med tekst og billeder."
+status: moodle       # klar | kommer | anden | moodle
+slides: false
+underviser: "Se Moodle"
+---
+
+::: {.lektion-knapper}
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+kl. 12.30–16.15
+
+## Om lektionen
+
+Tidligere har vi arbejdet med tekst- og billeddata. Nu udvider vi værktøjskassen og arbejder med lyd og multimodale data. Vi diskuterer, hvornår lyd kan være en relevant datakilde, og ser eksempler på, hvordan lyd kan transskriberes, repræsenteres og analyseres i Python. En vigtig pointe er, at analyse af lyd grundlæggende følger den samme arbejdsgang, som vi kender fra andre datatyper.
+
+Slides og notebook (diarization) ligger på [Moodle]({{< var moodle >}}).

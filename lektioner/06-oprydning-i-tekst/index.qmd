@@ -1,0 +1,51 @@
+---
+title: "Messy data i praksis: oprydning i tekst"
+lektion: 6
+date: 2026-09-22
+description: "Fra rå tekst til analysérbare datastrukturer: indlæsning, tokens, stopord, DTM og spaCy."
+status: klar        # klar | kommer | anden | moodle
+slides: true
+underviser: "Jeppe Fjeldgaard Qvist"
+litteratur:
+  - "Denny & Spirling (2017), s. 1–13"
+  - "Hunston (2002), s. 79–95"
+---
+
+::: {.lektion-knapper}
+[Åbn slides](slides.html){.primaer}
+
+[Læsevisning](slides.html?view=scroll)
+
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jeppe Fjeldgaard Qvist · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi ser på oprydning i tekst, eller mere specifikt: dimensionalitetsreduktion af tekstdata. Fokus er arbejdet med at gå fra rå tekst til analysérbare datastrukturer (*text preprocessing*). Vi bruger også moderne sprogmodeller fra spaCy. Formålet er at nå frem til datastrukturer, der kan analyseres med bl.a. PCA og k-means.
+
+**Efter lektionen kan I**
+
+- indlæse en besværlig tekstfil og forklare separator, tegnsæt og rækker, der skal springes over
+- gennemføre de typiske oprydningstrin og følge, hvad hvert trin gør ved tokens og typer
+- bygge en document-term matrix og forklare, hvad sparsity er
+
+## Forberedelse og litteratur
+
+- Denny, M. & Spirling, A. (2017): ["Text Preprocessing for Unsupervised Learning: Why It Matters, When It Misleads, and What to Do about It"](https://ssrn.com/abstract=2849145), SSRN. Fokusér på s. 1–13.
+- Hunston, S. (2002): "Methods in corpus linguistics: Beyond the concordance line." I *Corpora in Applied Linguistics*, s. 79–95. Cambridge University Press (tilgås via AUB).
+- Supplerende: Ledolter, J. & VanderVelde, L. (2022): "Clustering of documents." I *Analyzing textual information*, s. 97–109. SAGE.
+- Dokumentation: [spaCy 101](https://spacy.io/usage/spacy-101).
+
+## Materiale
+
+::: {.materiale}
+- [handout]{.type} [Dimensioner (PDF)](materiale/SDS1-l6-handout-dimensioner.pdf)
+- [handout]{.type} [Læs koden (PDF)](materiale/SDS1-l6-handout-kode.pdf)
+- [notebook]{.type} [Preprocessing (.ipynb)](materiale/SDS1-l6-nb-preprocessin.ipynb)
+- [opslag]{.type} [Pandas cheat sheet (PDF)](materiale/Pandas_Cheat_Sheet.pdf)
+- [data]{.type} [jobopslag_udsnit.csv]({{< var data >}}jobopslag_udsnit.csv)
+:::
+
+Svarark udleveres efter øvelserne.

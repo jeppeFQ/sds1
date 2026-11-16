@@ -1,0 +1,16 @@
+---
+title: "Workshops og seminardage"
+subtitle: "Arbejdsdage uden for de faste lektioner"
+listing:
+  id: workshops
+  contents: "*/index.qmd"
+  template: ../_extensions/sds1/lektionsliste.ejs
+  sort: "date"
+  date-format: "dddd D. MMMM YYYY"
+  fields: [lektion, title, date, description, status, slides]
+---
+
+Seminardagene er til for, at I kan arbejde med jeres eget datamateriale og få sparring. Indholdet holdes fleksibelt, så vi kan tilpasse det til holdets behov. Ekstra workshops i løbet af året dukker også op her.
+
+::: {#workshops}
+:::

@@ -1,0 +1,37 @@
+<%
+// Lektionsliste (forside, plan og workshops).
+// Felter fra hver lektions index.qmd: lektion, title, date, description,
+// status (klar | kommer | anden), slides (true/false), litteratur (liste), underviser.
+const md = s => String(s || '').replace(/\*([^*]+)\*/g, '<em>$1</em>');
+const etiket = { kommer: 'Kommer', anden: 'Anden underviser', moodle: 'Materiale på Moodle' };
+const visLitteratur = false;
+%>
+<ol class="lektionsliste">
+<% for (const item of items) {
+const status = item.status || 'klar';
+const nr = item.lektion !== undefined ? item.lektion : '';
+const mappe = item.path.replace(/index\.(qmd|html)$/, '');
+%>
+<li class="farve-<%= (Number(nr) || 0) % 6 %> status-<%= status %>" <%= metadataAttrs(item) %>>
+<span class="lektion-nr" aria-hidden="true"><%= nr %></span>
+<div>
+<div class="lektion-hoved">
+<a class="lektion-titel" href="<%- item.path %>"><% if (nr !== '') { %><span class="visually-hidden">Nr. <%= nr %>: </span><% } %><%= item.title %></a>
+<% if (item.date) { %><span class="lektion-dato"><%= item.date %></span><% } %>
+<% if (etiket[status]) { %><span class="lektion-etiket"><%= etiket[status] %></span><% } %>
+</div>
+<% if (item.description) { %><p class="lektion-beskrivelse"><%- md(item.description) %></p><% } %>
+<% if (visLitteratur && item.litteratur) { %>
+<p class="lektion-litteratur">Læs: <%- [].concat(item.litteratur).map(md).join(' · ') %></p>
+<% } %>
+<% if (status === 'klar' && item.slides) { %>
+<span class="lektion-links">
+<a href="<%- mappe %>slides.html">slides</a>
+<a href="<%- mappe %>slides.html?view=scroll">læsevisning</a>
+<a href="<%- item.path %>">materiale og øvelser</a>
+</span>
+<% } %>
+</div>
+</li>
+<% } %>
+</ol>

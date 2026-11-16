@@ -1,0 +1,50 @@
+---
+title: "Social Data Science I"
+listing:
+  id: lektioner                                   # samme navn som ::: {#lektioner}
+  contents: "lektioner/*/index.qmd"               # sti relativ til denne fil
+  template: _extensions/sds1/lektionsliste.ejs    # kursets egen opstilling
+  sort: "lektion"
+  date-format: "D. MMMM"
+  fields: [lektion, title, date, description, status, slides]
+---
+
+::: {.forside-hero style="background-image: linear-gradient(90deg, #fff 35%, rgba(255,255,255,0.55) 100%), url(assets/boelger/boelge-blaa.webp);"}
+
+::: {.forside-lede}
+Hvordan bliver tekst, billeder, lyd og opslag på nettet til data, man kan analysere? På SDS1 lærer I at hente, rydde op i, visualisere og analysere *messy* samfundsdata med Python. I lærer det ved selv at skrive koden, og alle mine slides kan køre koden direkte i browseren.
+:::
+
+::: {.forside-fakta}
+- {{< var ects >}}
+- 12 undervisningsgange og 2 seminardage
+- Mundtlig eksamen på baggrund af en portfolio
+- Python (med R ved siden af i slides)
+:::
+
+:::
+
+<!----
+::: {.genveje}
+[Lektionsplan<span>datoer, litteratur, slides</span>](kursus/plan.qmd)
+
+[Om kurset<span>mål, forventninger, undervisere</span>](kursus/om-kurset.qmd)
+
+[Portfolio og eksamen<span>formalia, datoer, opbygning</span>](kursus/portfolio.qmd)
+
+[Opgaver<span>øvelser og notebooks</span>](kursus/opgaver.qmd)
+
+[Værktøjer<span>UCloud, Python, slides</span>](kursus/vaerktoejer.qmd)
+
+[Moodle<span>beskeder og aflevering</span>]({{< var moodle >}})
+:::
+----> 
+
+## Lektioner
+
+::: {#lektioner}
+:::
+
+## Sådan bruger I slides
+
+Kodeboksene i slides kan redigeres og køres med **Run Code**. Under hver kodeboks ligger en lille fold-ud, **Forklaring af koden, trin for trin**, som forklarer koden linje for linje. Den er skrevet til jer, der aldrig har kodet før. Tryk <kbd>M</kbd> for menuen og <kbd>?</kbd> for alle genveje, eller vælg **læsevisning** nederst, hvis I vil læse slides som én lang side, fx på mobilen. [Mere om slides og værktøjer](kursus/vaerktoejer.qmd).

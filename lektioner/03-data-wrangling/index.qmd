@@ -1,0 +1,50 @@
+---
+title: "Data wrangling i Python: filer, datastrukturer og transformationer"
+lektion: 3
+date: 2026-09-10
+description: "Lister, tuples, dictionaries, løkker og betingelser. Derefter: kobl, stabl og omform tabeller med pandas."
+status: klar        # klar | kommer | anden | moodle
+slides: true
+underviser: "Jeppe Fjeldgaard Qvist"
+litteratur:
+  - "Severance (2016), kap. 1, 2 og 4"
+  - "McKinney (2022), kap. 8 (afsnit 8.2 og 8.3)"
+---
+
+::: {.lektion-knapper}
+[Åbn slides](slides.html){.primaer}
+
+[Læsevisning](slides.html?view=scroll)
+
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jeppe Fjeldgaard Qvist · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi gør Python-introen færdig (lister, tuples, dictionaries, løkker og `if`) og går så til data wrangling: at koble tabeller (`merge`), stable dem (`concat`) og skifte mellem langt og bredt format (`pivot`, `melt`).
+
+**Efter lektionen kan I**
+
+- vælge, ændre og gennemløbe elementer i lister og dictionaries
+- koble to tabeller og forudsige antallet af rækker ved de fire join-typer
+- omforme en tabel mellem langt og bredt format
+
+## Forberedelse og litteratur
+
+- Det vigtigste er e-kurset [Introduktion til Python for Samfundsvidenskab](https://caldiss-aau.github.io/workshop_python-intro/). Mængden af litteratur kan virke voldsom, så prioritér det.
+- [Severance (2016)](http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf), kapitel 1, 2 og 4.
+- [McKinney (2022)](https://wesmckinney.com/book/), kapitel 8, afsnit 8.2 og 8.3.
+
+## Materiale
+
+::: {.materiale}
+- [handout]{.type} [Øvelsesark (PDF)](materiale/SDS1-l3-handout.pdf)
+- [notebook]{.type} [Tweets som data (.ipynb)](materiale/SDS1-l3-nb_tweets-som-data.ipynb)
+- [data]{.type} [data_tweets_2016_kilde_a.csv]({{< var data >}}data_tweets_2016_kilde_a.csv)
+- [data]{.type} [data_tweets_2016_kilde_b.csv]({{< var data >}}data_tweets_2016_kilde_b.csv)
+- [data]{.type} [data_maaneder.csv]({{< var data >}}data_maaneder.csv)
+:::
+
+Svarark udleveres efter øvelserne.

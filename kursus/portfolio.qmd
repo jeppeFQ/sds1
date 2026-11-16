@@ -1,0 +1,72 @@
+---
+title: "Portfolio og eksamen"
+subtitle: "Mundtlig prøve på baggrund af et projekt"
+---
+
+## Kort fortalt
+
+| | |
+|---|---|
+| Prøveform | Mundtlig på baggrund af projekt (portfolio) |
+| Omfang | {{< var ects >}} |
+| Bedømmelse | 7-trins-skala, intern prøve |
+| Aflevering | {{< var aflevering >}} i Digital Eksamen |
+| Mundtligt forsvar | {{< var mundtlig >}} |
+
+Vurderingskriterierne følger universitetets eksamensordning. De officielle regler og eksamensinformation ligger på [Moodle]({{< var moodle >}}). Hvis noget her afviger fra Moodle, er det Moodle, der gælder.
+
+## Formalia for opgaven
+
+- **Format.** Opgaven skrives som en Python-notebook (`.ipynb`) og afleveres som **HTML**. I skal altså *rendere* notebooken. Vejledningen til konvertering ligger på Moodle.
+- **Omfang.** Teksten må højst fylde 10 normalsider (à 2.400 tegn), og koden må højst fylde 10 normalsider (à 2.400 tegn).
+- **Tegntælling.** Brug den obligatoriske ord- og tegntæller fra Moodle. Begge tal skal angives på opgaven.
+- **Portfolio-skema.** Skemaet fra Moodle følger jer gennem kurset.
+- **Python.** Det forventes, at I selv bruger Python i opgaven.
+
+## Hvor meget output skal med?
+
+Det er en del af opgaven at vælge, hvor meget output fra koden der bliver vist. Sæt en af disse linjer øverst i en kodecelle:
+
+```python
+#| output: false
+```
+
+```python
+#| output: true
+```
+
+::: {.forklaring titel="Hvad gør de to linjer?"}
+1. Linjer, der starter med `#|`, er instrukser til Quarto, som laver jeres HTML-fil. Python selv ser dem som kommentarer og springer dem over.
+2. `#| output: false` kører koden, men skjuler resultatet i den færdige HTML-fil. Brug den til mellemregninger og lange udskrifter.
+3. `#| output: true` viser resultatet. Det er standard, så linjen er kun nødvendig, hvis I har slået output fra for hele dokumentet.
+4. Linjen skal stå **øverst** i cellen, før al anden kode.
+:::
+
+## En god opbygning
+
+Der er ikke én rigtig skabelon, men en portfolio, der er let at følge, har typisk disse dele:
+
+1. **Spørgsmål.** Hvilket samfundsvidenskabeligt spørgsmål undersøger I, og hvorfor er det interessant?
+2. **Data.** Hvor kommer data fra, hvordan er de indsamlet, og hvad er en række? Hvilke valg og fravalg har I truffet?
+3. **Oprydning.** Hvad har I gjort ved data, i hvilken rækkefølge, og hvad betyder det for resultatet?
+4. **Analyse.** Metoderne fra kurset, brugt på jeres spørgsmål. Forklar hvert trin med ord, før eller efter koden.
+5. **Visualisering.** Få, gennemtænkte figurer med titler og aksetekster.
+6. **Diskussion.** Hvad kan I sige, hvad kan I ikke sige, og hvad ville I gøre anderledes?
+
+Skriv teksten til en læser, der ikke har set jeres data. Kommentér koden, så I selv kan forstå den til det mundtlige forsvar.
+
+## Eksempel på en tidligere portfolio
+
+På [Moodle]({{< var moodle >}}) ligger et eksempel på en tidligere opgave. Læg mærke til tre ting:
+
+1. Eksemplet bruger metoder, der ikke er pensum i år. Det er bevidst, så det ikke bliver en skabelon. Det, I skal tage med, er **formen**, ikke indholdet.
+2. Eksemplet har relativt lidt tekst. I må gerne skrive længere beskrivelser, også for jeres egen skyld, bare I holder jer inden for sidetallet.
+3. Eksemplet viser forholdsvis meget kode-output. Det er ikke et krav.
+
+## Find et datamateriale
+
+Brug [idébanken]({{< var idebank >}}) til inspiration: taler i Folketingssalen, jobopslag, filmanmeldelser, opslag på fora og sociale medier og meget andet. Seminardagene er til for, at I kan arbejde med jeres eget materiale og få sparring.
+
+## Brug af AI
+
+Kurset er AI-positivt med klare forbehold. Brug gerne AI som sparringspartner til at forstå fejlbeskeder og få forklaret kode. Men I skal selv kunne læse, forklare og stå inde for hver linje til det mundtlige forsvar. Reglerne om eksamenssnyd og plagiat står på Moodle.

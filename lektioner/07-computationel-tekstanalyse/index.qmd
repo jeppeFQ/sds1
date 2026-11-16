@@ -1,0 +1,56 @@
+---
+title: "Messy data i praksis: tekstanalyse"
+lektion: 7
+date: 2026-09-24
+description: "Overblik over computationel tekstanalyse: ordbøger og sentiment, sprogmodeller, PCA og k-means."
+status: klar        # klar | kommer | anden | moodle
+slides: true
+underviser: "Jeppe Fjeldgaard Qvist"
+litteratur:
+  - "Bonikowski & Nelson (2022)"
+  - "Macanovic (2022)"
+  - "Hunston (2002), s. 25–37"
+---
+
+::: {.lektion-knapper}
+[Åbn slides](slides.html){.primaer}
+
+[Læsevisning](slides.html?view=scroll)
+
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jeppe Fjeldgaard Qvist · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi skaber et overblik over mulighederne med computationel tekstanalyse. Fokusér ikke så meget på de metode-specifikke termer i teksterne, men på eksemplerne, mulighederne og udfordringerne. Vi ser også på, hvordan man analyserer tekst med ordbøger (*dictionary models*, fx sentimentanalyse) og med sprogmodeller i Python.
+
+**Efter lektionen kan I**
+
+- bygge og validere en simpel ordbog og forklare dens begrænsninger
+- forklare, hvad TF-IDF, PCA og k-means gør ved en document-term matrix
+- diskutere selektion, tilskæring og annotering af et korpus
+
+## Forberedelse og litteratur
+
+- Bonikowski, B. & Nelson, L. K. (2022): ["From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research."](https://doi.org/10.1177/00491241221123088) *Sociological Methods & Research*, 51(4), 1469–1483.
+- Macanovic, A. (2022): ["Text mining for social science: The state and the future of computational text analysis in sociology."](https://doi.org/10.1016/j.ssresearch.2022.102784) *Social Science Research*, 108, 102784.
+- Hunston, S. (2002): "The corpus as object: Design and purpose." I *Corpora in Applied Linguistics*, s. 25–37. Cambridge University Press (tilgås via AUB).
+- Supplerende: Thelwall, M. (2023): "Sentiment Analysis." I *The SAGE Handbook of Social Media Research Methods*.
+- Dokumentation: [spaCy 101](https://spacy.io/usage/spacy-101) og [asent](https://kennethenevoldsen.github.io/asent/index.html).
+
+## Materiale
+
+::: {.materiale}
+- [handout]{.type} [Ark 1: korpus (PDF)](materiale/l7-ark1-korpus.pdf)
+- [handout]{.type} [Ark 2: læs koden (PDF)](materiale/l7-ark2-laes-koden.pdf)
+- [notebook]{.type} [Tekstanalyse (.ipynb)](materiale/l7_nb_tekstanalyse.ipynb)
+- [notebook]{.type} [Sentiment med asent (.ipynb)](materiale/l7_nb_asent.ipynb)
+- [notebook]{.type} [Klynger (.ipynb)](materiale/l7_nb_klynger.ipynb)
+- [notebook]{.type} [Supplement: spaCy (.ipynb)](materiale/l7_spacy_supplement.ipynb)
+- [notebook]{.type} [Sådan er korpusset lavet, trin for trin (.ipynb)](materiale/l7_preprocess_dkparl_trinvis.ipynb)
+- [data]{.type} [ft_udsnit.csv]({{< var data >}}ft_udsnit.csv)
+:::
+
+Svarark udleveres efter øvelserne.

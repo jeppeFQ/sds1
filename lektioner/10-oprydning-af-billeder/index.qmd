@@ -1,0 +1,35 @@
+---
+title: "Messy data i praksis: oprydning af billeder"
+lektion: 10
+date: 2026-10-13
+description: "Billeder som data: use cases og præprocessering (greyscaling, resizing, feature extraction, augmentation)."
+status: anden        # klar | kommer | anden | moodle
+slides: false
+underviser: "Jakob Bruhn Krøjgaard Skelmose"
+litteratur:
+  - "Elgendy (2020), kap. 1"
+  - "Patel (2023)"
+---
+
+::: {.lektion-knapper}
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jakob Bruhn Krøjgaard Skelmose · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi introducerer billeder som datatype. Vi får en forståelse af billeder som data, taler om forskellige use cases, og ser på, hvordan billeder forberedes til analyse: *greyscaling*, *resizing*, *feature extraction* og *data augmentation*.
+
+## Forberedelse og litteratur
+
+- Elgendy, M. (2020): *Deep Learning for Vision Systems*, kapitel 1. Manning (tilgås via AUB).
+- Patel, M. (2023): ["The Complete Guide to Image Preprocessing Techniques in Python."](https://medium.com/@maahip1304/the-complete-guide-to-image-preprocessing-techniques-in-python-dca30804550c) Medium.
+
+## Materiale
+
+::: {.materiale}
+- [slides]{.type} [Slides (Google Slides)](https://docs.google.com/presentation/d/1Qj9mOgncGn8aRO7zNBSCs9G45wsyFLiw37AzZelfGKw/edit?usp=sharing)
+- [notebook]{.type} [Øvelser (Colab)](https://colab.research.google.com/drive/1oq-V-aCtRK3WfzbPzG_dd2-IRpuaI9BF?usp=sharing)
+- [notebook]{.type} [Følg med (Colab)](https://colab.research.google.com/drive/1spnXZjgcvYLtfNmtrh6vPs9bWtqd67dj?usp=sharing)
+:::

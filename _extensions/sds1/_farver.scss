@@ -1,0 +1,52 @@
+// =====================================================================
+//  SDS1 · AAU-farver og typografi — ÉT sted for hele kurset
+//  Bruges af både hjemmesiden (site.scss) og slides (slides.scss).
+//
+//  AAU Blå (#211A52) er AAU's primærfarve (samme farve som i logo og bølger).
+//  Sekundærfarverne herunder er PLADSHOLDERE: AAU's farveside kunne ikke
+//  læses automatisk, så værdierne er valgt, så de passer til AAU Blå og har
+//  tilstrækkelig kontrast. ERSTAT de seks grundfarver med de officielle
+//  HEX-værdier fra aaukommunikation.aau.dk → Design og skabeloner → Farver.
+//  Alt andet på site og slides følger automatisk med.
+//  Hver farve har tre trin:
+//    -dyb   : til tekst og baggrunde med hvid tekst (kontrast ≥ 4,5:1)
+//    (base) : til grafik, streger, ikoner
+//    -tone  : meget lys flade til bokse og fremhævninger
+// =====================================================================
+
+$aau-blaa:          #211A52 !default;   // primær · AAU Blå
+$aau-blaa-tone:     #ECEBF5 !default;
+
+$aau-lyseblaa:      #5295D4 !default;   // sekundær · fra aau.dk
+$aau-lyseblaa-dyb:  #2F6FB0 !default;
+$aau-lyseblaa-tone: #E6F0FA !default;
+
+$sek-turkis:        #1FA39A !default;   // PLADSHOLDER
+$sek-turkis-dyb:    #13756F !default;
+$sek-turkis-tone:   #E3F4F2 !default;
+
+$sek-orange:        #E8793F !default;   // PLADSHOLDER
+$sek-orange-dyb:    #B4501F !default;
+$sek-orange-tone:   #FCEDE4 !default;
+
+$sek-lilla:         #7A5CC0 !default;   // PLADSHOLDER
+$sek-lilla-dyb:     #5E449E !default;
+$sek-lilla-tone:    #EFEAF8 !default;
+
+$sek-gul:           #F2B53A !default;   // PLADSHOLDER
+$sek-gul-dyb:       #8A6100 !default;
+$sek-gul-tone:      #FDF4DF !default;
+
+// Neutrale
+$tekst:             #1C1B26 !default;
+$tekst-svag:        #55536A !default;   // 7,4:1 på hvid
+$linje:             #DCDBE6 !default;
+$flade:             #F6F6FA !default;
+
+// Rækkefølgen sektionsslides og lektionsnumre farves i
+$farvecyklus-dyb:  ($aau-blaa, $sek-turkis-dyb, $sek-orange-dyb, $aau-lyseblaa-dyb, $sek-lilla-dyb, $sek-gul-dyb) !default;
+$farvecyklus-tone: ($aau-blaa-tone, $sek-turkis-tone, $sek-orange-tone, $aau-lyseblaa-tone, $sek-lilla-tone, $sek-gul-tone) !default;
+
+// Typografi: Barlow er AAU's primære skrift, Arial den sekundære.
+$skrift:      "Barlow", Arial, "Helvetica Neue", sans-serif !default;
+$skrift-kode: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace !default;

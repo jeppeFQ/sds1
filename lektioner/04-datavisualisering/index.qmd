@@ -1,0 +1,47 @@
+---
+title: "Datavisualisering"
+lektion: 4
+date: 2026-09-15
+description: "Principper for gode figurer, gode og dårlige eksempler, og et galleri af figurtyper i plotnine og ggplot2."
+status: klar        # klar | kommer | anden | moodle
+slides: true
+underviser: "Jeppe Fjeldgaard Qvist"
+litteratur:
+  - "Kirk (2019), s. 61–94"
+---
+
+::: {.lektion-knapper}
+[Åbn slides](slides.html){.primaer}
+
+[Læsevisning](slides.html?view=scroll)
+
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jeppe Fjeldgaard Qvist · kl. 12.30–16.15
+
+## Om lektionen
+
+Vi taler om principper for datavisualisering, diskuterer formålet med at synliggøre kompleksitet og kigger på gode og dårlige eksempler. Slides indeholder et galleri af figurtyper, som I kan bruge som opslagsværk.
+
+**Efter lektionen kan I**
+
+- forklare, hvordan akser, andele og skalaer kan vildlede
+- bygge en figur lag for lag med *data + mapping + geom*
+- vælge en figurtype, der passer til spørgsmålet
+
+## Forberedelse og litteratur
+
+- Kirk, A. (2019): *Data Visualisation: A Handbook for Data Driven Design*. Sage, s. 61–94 (ligger på Moodle).
+
+## Materiale
+
+::: {.materiale}
+- [handout]{.type} [Øvelsesark (PDF)](materiale/SDS1-l4-handout.pdf)
+- [handout]{.type} [Figur-ark (PDF)](materiale/SDS1-l4-handout-figur.pdf)
+- [handout]{.type} [Tabeller (PDF)](materiale/SDS1-l4-tabeller.pdf)
+- [notebook]{.type} [Figurer (.ipynb)](materiale/SDS1-l4-nb-figurer.ipynb)
+- [data]{.type} [data_tweets_2016_kilde_a.csv]({{< var data >}}data_tweets_2016_kilde_a.csv)
+:::
+
+Svarark udleveres efter øvelserne.

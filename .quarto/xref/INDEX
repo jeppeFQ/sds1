@@ -1,0 +1,83 @@
+{
+  "index.qmd": {
+    "index.html": "0852983b"
+  },
+  "kursus/om-kurset.qmd": {
+    "om-kurset.html": "c0b591da"
+  },
+  "kursus/opgaver.qmd": {
+    "opgaver.html": "625d671b"
+  },
+  "kursus/plan.qmd": {
+    "plan.html": "d2a1d3b5"
+  },
+  "kursus/portfolio.qmd": {
+    "portfolio.html": "c9d041b7"
+  },
+  "kursus/vaerktoejer.qmd": {
+    "vaerktoejer.html": "5c897722"
+  },
+  "lektioner/01-messy-data-og-python/index.qmd": {
+    "index.html": "d9aa8ab2"
+  },
+  "lektioner/01-messy-data-og-python/slides.qmd": {
+    "slides.html": "220133f3"
+  },
+  "lektioner/02-intro-til-python/index.qmd": {
+    "index.html": "b04a41db"
+  },
+  "lektioner/02-intro-til-python/slides.qmd": {
+    "slides.html": "ef36c3d0"
+  },
+  "lektioner/03-data-wrangling/index.qmd": {
+    "index.html": "2a69e70c"
+  },
+  "lektioner/03-data-wrangling/slides.qmd": {
+    "slides.html": "8f2fd751"
+  },
+  "lektioner/04-datavisualisering/index.qmd": {
+    "index.html": "de60b964"
+  },
+  "lektioner/04-datavisualisering/slides.qmd": {
+    "slides.html": "043c85b1"
+  },
+  "lektioner/05-scraping-og-api/index.qmd": {
+    "index.html": "81df73a7"
+  },
+  "lektioner/06-oprydning-i-tekst/index.qmd": {
+    "index.html": "adc68307"
+  },
+  "lektioner/06-oprydning-i-tekst/slides.qmd": {
+    "slides.html": "fc668860"
+  },
+  "lektioner/07-computationel-tekstanalyse/index.qmd": {
+    "index.html": "99338d7d"
+  },
+  "lektioner/07-computationel-tekstanalyse/slides.qmd": {
+    "slides.html": "071071bc"
+  },
+  "lektioner/08-oprydning-af-data/index.qmd": {
+    "index.html": "1ce1cef3"
+  },
+  "lektioner/09-lyd-og-multimodal/index.qmd": {
+    "index.html": "b0abbbb1"
+  },
+  "lektioner/10-oprydning-af-billeder/index.qmd": {
+    "index.html": "e8327ea7"
+  },
+  "lektioner/11-dataanalyse-i-python-1/index.qmd": {
+    "index.html": "f1e094c0"
+  },
+  "lektioner/12-dataanalyse-i-python-2/index.qmd": {
+    "index.html": "ec02904f"
+  },
+  "workshops/index.qmd": {
+    "index.html": "c0ab28bf"
+  },
+  "workshops/seminardag-1/index.qmd": {
+    "index.html": "1fe517ff"
+  },
+  "workshops/seminardag-2/index.qmd": {
+    "index.html": "777c0041"
+  }
+}

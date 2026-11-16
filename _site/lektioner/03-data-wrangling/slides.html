@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="da"><head>
+<link href="../../assets/logo/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/sds1-skrift-2.0.0/skrift.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/sds1-slides-2.0.0/qrcode.js"></script>
+<script src="../../site_libs/quarto-contrib/sds1-slides-2.0.0/sds1.js"></script>
+<script src="../../site_libs/quarto-contrib/sds1-slides-2.0.0/figurer.js"></script>
+<link href="../../site_libs/quarto-contrib/sds1-slides-2.0.0/design.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
+
+  <meta name="author" content="Jeppe Fjeldgaard Qvist">
+  <title>SDS1 · Social Data Science I – Data wrangling i Python</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0a813a21a08b8748991494f24671a4dd.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+  <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script>(function(){var h=document.documentElement;h.dataset.accent="orange";try{var t=localStorage.getItem("sds1:tema");if(t==="moerk")h.dataset.tema="moerk";}catch(e){}})();</script>
+  <script>(function(){var h=document.documentElement;h.dataset.accent="orange";try{var t=localStorage.getItem("sds1:tema");if(t==="moerk")h.dataset.tema="moerk";}catch(e){}})();</script>
+<meta property="og:title" content="Data wrangling i Python – SDS1 · Social Data Science I">
+<meta property="og:description" content="Lektion 03">
+<meta property="og:site_name" content="SDS1 · Social Data Science I">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section class="quarto-title-block lay-titel center">
+  <div class="titel-ramme">
+    <div>
+      <p class="chip">Lektion 03</p>
+      <h1 class="title">Data wrangling i Python</h1>
+      <p class="titel-kursus">SDS1 · Social Data Science I</p>
+      <p class="titel-forfatter">Jeppe Fjeldgaard Qvist</p>
+      <span class="aau-logo" role="img" aria-label="Aalborg Universitet"></span>
+      <p class="titel-hjaelp"><kbd>→</kbd> næste slide · <kbd>M</kbd> menu · <kbd>F</kbd> fuld skærm · <kbd>?</kbd> alle genveje</p>
+    </div>
+    <div class="titel-qr">
+      <p class="qr-tekst">Åbn slides på din egen computer</p>
+      <div id="sds1-qr" role="img" aria-label="QR-kode med link til disse slides"></div>
+      <a id="sds1-link" href="#"></a>
+    </div>
+  </div>
+</section>
+<section class="slide level2 scrollable">
+<h2>I dag</h2>
+<ol type="1">
+<li><strong>Opsamling</strong> på øvelserne fra lektion 2.</li>
+<li><strong>Datastrukturer.</strong> Lister, tuples og dictionaries.</li>
+<li><strong>Kontrolstrukturer.</strong> Løkker og <code>if</code>-betingelser.</li>
+<li><strong>Data wrangling.</strong> Koble tabeller sammen og ændre deres form.</li>
+<li><strong>Øvelser.</strong></li>
+</ol>
+<div class="lille">
+<p>Litteratur: Severance, <em>Python for Everybody</em> · McKinney, <em>Python for Data Analysis</em> (kap. 8).</p>
+</div>
+</section>
+<section>
+<section class="title-slide slide level1 lay-sektion center" data-nr="01">
+<h1>Opsamling på lektion 2</h1>
+<p>Tre ting fra øvelserne, som er værd at tage med videre.</p>
+</section>
+<section class="slide level2 scrollable">
+<h2>Tre ting, der er værd at tage med videre</h2>
+<ol type="1">
+<li><p><strong>Metoder ændrer ikke originalen.</strong> <code>tekst.upper()</code> giver en ny tekst tilbage. Den gamle står uændret, medmindre I gemmer resultatet.</p></li>
+<li><p><strong>Store og små bogstaver er to forskellige ting.</strong> At tælle <code>regeringen</code> i den rå tekst gav <strong>0</strong>.</p></li>
+<li><p><strong>Manglende værdier kan være kodet, fremfor tomme (NA).</strong> <code>999</code> er ikke en alder. Maskinen “ser” det ikke, men giver 192 år i gennemsnit.</p></li>
+</ol>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Metoder returnerer noget nyt</h2>
+<p><code>tekst.upper()</code> ændrer ikke teksten. Den giver en <strong>ny</strong> tekst tilbage, som I selv skal gemme.</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Python</a></li><li><a href="#tabset-1-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle1">
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGVrc3QgPSBcImhlalwiXG5cbnRla3N0LnVwcGVyKCkgICAgICAjIHJlc3VsdGF0ZXQgZm9yc3ZpbmRlclxucHJpbnQodGVrc3QpXG5cbnRla3N0ID0gdGVrc3QudXBwZXIoKSAgICMgaGVyIGdlbW1lcyBkZXRcbnByaW50KHRla3N0KSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den viser, at en metode som <code>.upper()</code> ikke ændrer den oprindelige tekst. Den giver en <em>ny</em> tekst tilbage.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>tekst = "hej"</code> gemmer teksten <code>hej</code>.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>tekst.upper()</code> laver en ny tekst med store bogstaver, <code>HEJ</code>. Men vi gemmer den ingen steder, så den forsvinder igen.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>print(tekst)</code> viser derfor stadig <code>hej</code>.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>tekst = tekst.upper()</code> gemmer den nye tekst <strong>under det gamle navn</strong>. Nu peger <code>tekst</code> på <code>HEJ</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+Det andet <code>print(tekst)</code> viser <code>HEJ</code>.
+</li>
+</ol>
+</div></details>
+<div class="forslag">
+<p>Gem resultatet under et nyt navn i stedet, fx <code>stor = tekst.upper()</code>. Så har I begge versioner.</p>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle2">
+<div>
+<div id="webr-2" class="exercise-cell">
+
+</div>
+<script type="webr-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGVrc3QgPC0gXCJoZWpcIlxuXG50b3VwcGVyKHRla3N0KSAgICAgIyByZXN1bHRhdGV0IGZvcnN2aW5kZXJcbnByaW50KHRla3N0KVxuXG50ZWtzdCA8LSB0b3VwcGVyKHRla3N0KVxucHJpbnQodGVrc3QpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Det samme i R: <code>toupper()</code> laver en ny tekst, men ændrer ikke den gamle.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>tekst &lt;- "hej"</code> gemmer teksten.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>toupper(tekst)</code> laver <code>"HEJ"</code>. R viser resultatet på skærmen, fordi det står alene på en linje, men det bliver ikke <strong>gemt</strong>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>print(tekst)</code> viser derfor stadig <code>"hej"</code>.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>tekst &lt;- toupper(tekst)</code> gemmer den nye tekst under det gamle navn. Det andet <code>print(tekst)</code> viser <code>"HEJ"</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 lay-sektion center" data-nr="02">
+<h1>Datastrukturer</h1>
+<p>Tre måder at samle flere værdier på: lister, tuples og dictionaries.</p>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Lister</h2>
+<p>En <strong>liste</strong> er en række værdier i en bestemt rækkefølge. Værdierne kaldes <strong>elementer</strong> og behøver ikke have samme type.</p>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Python</a></li><li><a href="#tabset-2-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle3">
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFsID0gWzEwLCAyMCwgMzAsIDQwXVxub3JkID0gW1wiaHVzXCIsIFwiYmlsXCIsIFwiaGF2ZVwiXVxuYmxhbmRldCA9IFtcImh1c1wiLCAyLjAsIDUsIFsxMCwgMjBdXVxudG9tID0gW11cblxucHJpbnQodGFsKVxucHJpbnQobGVuKGJsYW5kZXQpKSAgICAjIGRlbiBcImluZHJlIGxpc3RlXCIgdMOmbGxlciBzb20gw6l0IGVsZW1lbnQifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver fire lister og viser, at en liste kan indeholde alt muligt.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>[10, 20, 30, 40]</code>: firkantede parenteser med elementer adskilt af komma er en <strong>liste</strong>.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>ord</code> er en liste af tekster. <code>blandet</code> blander tekst, kommatal, heltal og en liste inden i listen.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>tom = []</code> er en tom liste. Den kan fyldes senere.
+</li>
+<li data-linjer="7" tabindex="0">
+<code>len(blandet)</code> giver <code>4</code>. Den indre liste <code>[10, 20]</code> tæller som ét element.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle4">
+<div>
+<div id="webr-4" class="exercise-cell">
+
+</div>
+<script type="webr-4-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFsIDwtIGMoMTAsIDIwLCAzMCwgNDApXG5vcmQgPC0gYyhcImh1c1wiLCBcImJpbFwiLCBcImhhdmVcIilcbmJsYW5kZXQgPC0gbGlzdChcImh1c1wiLCAyLjAsIDUsIGMoMTAsIDIwKSlcbnRvbSA8LSBjKClcblxucHJpbnQodGFsKVxucHJpbnQobGVuZ3RoKGJsYW5kZXQpKSAgICMgZGVuIGluZHJlIHZla3RvciB0w6ZsbGVyIHNvbSDDiVQgZWxlbWVudCJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver det tætteste, R har på lister: <strong>vektorer</strong> med <code>c()</code> og <strong>lister</strong> med <code>list()</code>.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>c(10, 20, 30, 40)</code> er en vektor. Alle elementer i en vektor skal være af samme type.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>c("hus", "bil", "have")</code> er en vektor af tekst.
+</li>
+<li data-linjer="3" tabindex="0">
+Vil man blande typer, skal man bruge <code>list(...)</code>, som i <code>blandet</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>tom &lt;- c()</code> giver en tom værdi (R kalder den <code>NULL</code>).
+</li>
+<li data-linjer="7" tabindex="0">
+<code>length(blandet)</code> giver <code>4</code>. Den indre vektor <code>c(10, 20)</code> tæller som ét element.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>I har allerede mødt en liste: <code>.split()</code> gav en liste af ord i sidste øvelse. I R kræver <code>c()</code>, at alt har samme type. Skal typerne blandes, bruger man <code>list()</code>.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Hvert element har et nummer</h2>
+<div class="figur" data-figur="indeks" data-elementer="a,b,c,d,e,f" data-navn="t">
+
+</div>
+<ul>
+<li><strong>Python tæller fra 0, R tæller fra 1.</strong> Det er den forskel, der giver flest fejl, når man skifter sprog.</li>
+<li>Et <strong>slice</strong> <code>t[start:slut]</code> tager <code>start</code> med, men <strong>ikke</strong> <code>slut</code>. Træk i skyderne.</li>
+</ul>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Indeksering: hent ét element</h2>
+<p>Firkantede parenteser henter ét element. Læg mærke til sidste linje.</p>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Python</a></li><li><a href="#tabset-3-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle5">
+<div>
+<div id="pyodide-5" class="exercise-cell">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA9IFtcImFcIiwgXCJiXCIsIFwiY1wiLCBcImRcIiwgXCJlXCIsIFwiZlwiXVxuXG5wcmludCh0WzBdKSAgICAgIyBkZXQgRsOYUlNURSBlbGVtZW50XG5wcmludCh0WzJdKVxucHJpbnQodFstMV0pICAgICMgbmVnYXRpdnQgdGFsIHTDpmxsZXIgYmFnZnJhXG5wcmludChcImNcIiBpbiB0KSAjIGZpbmRlcyBkZW4/In0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den henter enkelte elementer ud af en liste med deres <strong>position</strong> (indeks).</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>t[0]</code> er det <strong>første</strong> element, <code>"a"</code>. Python begynder at tælle ved 0.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>t[2]</code> er det tredje element, <code>"c"</code>.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>t[-1]</code> tæller bagfra: det sidste element, <code>"f"</code>.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>"c" in t</code> spørger, om <code>"c"</code> findes i listen. Svaret er <code>True</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-3-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle6">
+<div>
+<div id="webr-6" class="exercise-cell">
+
+</div>
+<script type="webr-6-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA8LSBjKFwiYVwiLCBcImJcIiwgXCJjXCIsIFwiZFwiLCBcImVcIiwgXCJmXCIpXG5cbnByaW50KHRbMV0pICAgICAgICMgZGV0IEbDmFJTVEUgZWxlbWVudFxucHJpbnQodFszXSlcbnByaW50KHRbbGVuZ3RoKHQpXSlcbnByaW50KFwiY1wiICVpbiUgdClcblxucHJpbnQodFstMV0pICAgICAgIyBpIFIgYmV0eWRlciBtaW51cyBcImZqZXJuIGRldHRlIGVsZW1lbnRcIiJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den henter elementer ud af en vektor i R. R begynder at tælle ved 1.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>t[1]</code> er det første element, <code>"a"</code>. <code>t[3]</code> er det tredje, <code>"c"</code>.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>t[length(t)]</code> er det sidste: <code>length(t)</code> er 6, så det er <code>t[6]</code>.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>"c" %in% t</code> spørger, om <code>"c"</code> findes i vektoren: <code>TRUE</code>.
+</li>
+<li data-linjer="8" tabindex="0">
+<code>t[-1]</code> betyder i R <strong>alt undtagen det første element</strong>. Det er det modsatte af Python!
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p><code>t[-1]</code> betyder to forskellige ting: i Python <em>det sidste element</em>, i R <em>alt undtagen det første</em>.</p>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Slicing: hent flere elementer</h2>
+<p>Start er <strong>med</strong>, slut er <strong>ikke med</strong>. Antallet af elementer er altid <em>slut minus start</em>.</p>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Python</a></li><li><a href="#tabset-4-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle7">
+<div>
+<div id="pyodide-7" class="exercise-cell">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA9IFtcImFcIiwgXCJiXCIsIFwiY1wiLCBcImRcIiwgXCJlXCIsIFwiZlwiXVxuXG5wcmludCh0WzE6M10pICAgIyBmcmEgb2cgbWVkIDEsIHRpbCBtZW4gSUtLRSBtZWQgM1xucHJpbnQodFs6NF0pICAgICMgZnJhIGJlZ3luZGVsc2VuXG5wcmludCh0WzM6XSkgICAgIyB0aWwgZW5kZW5cbnByaW50KHRbOl0pICAgICAjIGVuIGtvcGkgYWYgaGVsZSBsaXN0ZW4ifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den henter <strong>flere</strong> elementer på én gang med et <em>slice</em>: <code>start:slut</code>.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>t[1:3]</code> starter ved position 1 (<code>"b"</code>) og stopper <strong>før</strong> position 3. Resultatet er <code>['b', 'c']</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>t[:4]</code> uden start betyder <em>fra begyndelsen</em>: <code>['a', 'b', 'c', 'd']</code>.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>t[3:]</code> uden slut betyder <em>til enden</em>: <code>['d', 'e', 'f']</code>.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>t[:]</code> uden noget er hele listen, som en kopi.
+</li>
+</ol>
+<p>Huskeregel: antallet af elementer i resultatet er altid <em>slut minus start</em>.</p>
+</div></details>
+</div>
+</div>
+<div id="tabset-4-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle8">
+<div>
+<div id="webr-8" class="exercise-cell">
+
+</div>
+<script type="webr-8-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA8LSBjKFwiYVwiLCBcImJcIiwgXCJjXCIsIFwiZFwiLCBcImVcIiwgXCJmXCIpXG5cbnByaW50KHRbMjozXSkgICAjIGkgUiBlciBCRUdHRSBlbmRlciBpbmtsdXNpdmVcbnByaW50KHRbMTo0XSlcbnByaW50KHRbNDpsZW5ndGgodCldKVxucHJpbnQodFtdKSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Flere elementer på én gang i R. Her er <strong>begge ender med</strong>.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>t[2:3]</code> giver element 2 og 3: <code>"b" "c"</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>t[1:4]</code> giver de første fire.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>t[4:length(t)]</code> giver fra nummer 4 til det sidste.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>t[]</code> med tom parentes giver hele vektoren.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Lister kan ændres</h2>
+<p>En liste er <strong>mutable</strong>: elementer kan udskiftes, tilføjes og fjernes. En tekst er <strong>immutable</strong> og må erstattes af en ny.</p>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Python</a></li><li><a href="#tabset-5-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle9">
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFsID0gWzE3LCAxMjNdXG50YWxbMV0gPSA1ICAgICAgICAgICAjIHZpcmtlclxucHJpbnQodGFsKSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den udskifter et element i en liste.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>tal = [17, 123]</code> laver en liste med to tal.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>tal[1] = 5</code> udskifter elementet på position 1 (det andet!) med 5.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>print(tal)</code> viser <code>[17, 5]</code>. Listen er ændret <em>på stedet</em>. Det kaldes, at listen er <strong>mutable</strong>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-5-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle10">
+<div>
+<div id="webr-10" class="exercise-cell">
+
+</div>
+<script type="webr-10-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFsIDwtIGMoMTcsIDEyMylcbnRhbFsyXSA8LSA1XG5wcmludCh0YWwpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den udskifter et element i en vektor i R.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>tal &lt;- c(17, 123)</code> laver vektoren.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>tal[2] &lt;- 5</code> udskifter det <strong>andet</strong> element (R tæller fra 1) med 5.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>print(tal)</code> viser <code>17 5</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Listemetoder</h2>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Python</a></li><li><a href="#tabset-6-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle11">
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA9IFtcImFcIiwgXCJiXCIsIFwiY1wiXVxuXG50LmFwcGVuZChcImRcIikgICAgICAgICMgdGlsZsO4aiDDqXQgZWxlbWVudCB0aWwgc2lkc3RcbnByaW50KHQpXG5cbnQuZXh0ZW5kKFtcImVcIiwgXCJmXCJdKSAjIHRpbGbDuGogYWxsZSBlbGVtZW50ZXIgZnJhIGVuIGFuZGVuIGxpc3RlXG5wcmludCh0KVxuXG50LnJlbW92ZShcImJcIikgICAgICAgICMgZmplcm4gZWZ0ZXIgdsOmcmRpXG5wcmludCh0KVxuXG54ID0gdC5wb3AoMCkgICAgICAgICAjIGZqZXJuIGVmdGVyIHBvc2l0aW9uLCBvZyBnaXYgdsOmcmRpZW4gdGlsYmFnZVxucHJpbnQoeCwgdCkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den bruger listens egne metoder til at tilføje og fjerne elementer.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>t.append("d")</code> sætter ét element på til sidst.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>t.extend(["e", "f"])</code> sætter <strong>alle</strong> elementerne fra en anden liste på til sidst.
+</li>
+<li data-linjer="9" tabindex="0">
+<code>t.remove("b")</code> fjerner elementet med <em>værdien</em> <code>"b"</code>.
+</li>
+<li data-linjer="12" tabindex="0">
+<code>x = t.pop(0)</code> fjerner elementet på <em>position</em> 0 og giver det tilbage, så vi kan gemme det som <code>x</code>.
+</li>
+<li data-linjer="13" tabindex="0">
+<code>print(x, t)</code> viser det fjernede element og resten af listen.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-6-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle12">
+<div>
+<div id="webr-12" class="exercise-cell">
+
+</div>
+<script type="webr-12-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA8LSBjKFwiYVwiLCBcImJcIiwgXCJjXCIpXG5cbnQgPC0gYyh0LCBcImRcIikgICAgICAgICAgICAjIHRpbGbDuGogdGlsIHNpZHN0XG5wcmludCh0KVxuXG50IDwtIGModCwgYyhcImVcIiwgXCJmXCIpKVxucHJpbnQodClcblxudCA8LSB0W3QgIT0gXCJiXCJdICAgICAgICAgICMgZmplcm4gZWZ0ZXIgdsOmcmRpXG5wcmludCh0KVxuXG54IDwtIHRbMV07IHQgPC0gdFstMV0gICAgICMgZmplcm4gZWZ0ZXIgcG9zaXRpb25cbnByaW50KHgpOyBwcmludCh0KSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Det samme i R. Vektorer har ingen metoder, så vi laver en ny vektor og gemmer den under samme navn.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>t &lt;- c(t, "d")</code> sætter <code>"d"</code> på til sidst.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>t &lt;- c(t, c("e", "f"))</code> sætter to elementer på.
+</li>
+<li data-linjer="9" tabindex="0">
+<code>t &lt;- t[t != "b"]</code> beholder alt, der <strong>ikke</strong> er <code>"b"</code>. <code>t != "b"</code> giver <code>TRUE</code>/<code>FALSE</code> for hvert element, og <code>t[...]</code> beholder dem med <code>TRUE</code>.
+</li>
+<li data-linjer="12" tabindex="0">
+<code>x &lt;- t[1]; t &lt;- t[-1]</code> gemmer det første element som <code>x</code> og fjerner det bagefter. Semikolon <code>;</code> adskiller to kommandoer på samme linje.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Fælden: listemetoder giver <code>None</code> tilbage</h2>
+<p>For tekst gav metoden en ny tekst tilbage. <strong>For lister er det omvendt:</strong> metoden ændrer listen på stedet og giver <code>None</code> tilbage.</p>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Python</a></li><li><a href="#tabset-7-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
+<div class="proev celle gaet" data-maerke="Prøv selv" data-celle="celle13" data-gaet="Linje 7 gemmer resultatet af u.sort() i u. Hvad skriver sidste linje ud?" data-valg="[1, 2, 3]|None|En fejl">
+<div>
+<div id="pyodide-13" class="exercise-cell">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA9IFszLCAxLCAyXVxuXG5wcmludCh0LnNvcnQoKSkgICAgIyBtZXRvZGVuIHJldHVybmVyZXIgTm9uZSAuLi5cbnByaW50KHQpICAgICAgICAgICAjIC4uLiBtZW4gbGlzdGVuIEVSIHNvcnRlcmV0XG5cbnUgPSBbMywgMSwgMl1cbnUgPSB1LnNvcnQoKSAgICAgICAjIEZPUktFUlQuLi4gbnUgZXIgdSBsaWcgTm9uZVxucHJpbnQodSkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den viser en klassisk fælde: listemetoder ændrer listen, men giver <code>None</code> tilbage.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>t.sort()</code> sorterer listen <strong>på stedet</strong>. Metoden giver ikke noget tilbage, kun <code>None</code> (Pythons ord for <em>ingenting</em>). Derfor viser <code>print(t.sort())</code> <code>None</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>print(t)</code> viser bagefter den sorterede liste <code>[1, 2, 3]</code>.
+</li>
+<li data-linjer="7" tabindex="0">
+<code>u = u.sort()</code> sorterer først <code>u</code>, men gemmer så <code>None</code> under navnet <code>u</code>. Listen er væk. <code>print(u)</code> viser <code>None</code>.
+</li>
+</ol>
+<p>Huskeregel: tekst-metoder giver en ny tekst tilbage (gem den!). Liste-metoder ændrer listen selv (gem <strong>ikke</strong> resultatet). Vil I have en sorteret kopi, brug <code>sorted(u)</code>.</p>
+</div></details>
+</div>
+</div>
+<div id="tabset-7-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle14">
+<div>
+<div id="webr-14" class="exercise-cell">
+
+</div>
+<script type="webr-14-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA8LSBjKDMsIDEsIDIpXG5cbnByaW50KHNvcnQodCkpICAgIyBzb3J0KCkgcmV0dXJuZXJlciBlbiBueSB2ZWt0b3IgLi4uXG5wcmludCh0KSAgICAgICAgICMgLi4uIG9nIGRlbiBnYW1sZSBzdMOlciB1w6ZuZHJldFxuXG50IDwtIHNvcnQodCkgICAgICMgc8OlZGFuIGdlbW1lcyByZXN1bHRhdGV0XG5wcmludCh0KSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> I R giver <code>sort()</code> en <strong>ny</strong> vektor tilbage, så det gamle er uændret.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>print(sort(t))</code> viser den sorterede vektor.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>print(t)</code> viser, at <code>t</code> stadig er usorteret.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>t &lt;- sort(t)</code> gemmer den sorterede vektor under navnet <code>t</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p><code>word = word.strip()</code> er rigtigt. <code>t = t.sort()</code> er forkert. <strong>Hvorfor?</strong></p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Aliasing: to navne, ét objekt</h2>
+<p><code>b = a</code> giver ikke en kopi. Det giver et <strong>nyt navn til den samme liste</strong>. Tryk <em>Næste trin</em>, før I kører koden.</p>
+<div class="to-kol">
+<div class="kol">
+<div class="figur" data-figur="alias">
+
+</div>
+</div>
+<div class="kol">
+<div class="panel-tabset">
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Python</a></li><li><a href="#tabset-8-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle15">
+<div>
+<div id="pyodide-15" class="exercise-cell">
+
+</div>
+<script type="pyodide-15-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYSA9IFsxLCAyLCAzXVxuYiA9IGEgICAgICAgICAgICMgSUtLRSBlbiBrb3BpXG5iWzBdID0gMTdcbnByaW50KGEpICAgICAgICAjIGEgZXIgb2dzw6Ugw6ZuZHJldCFcbnByaW50KGEgaXMgYilcblxuYyA9IFsxLCAyLCAzXVxuZCA9IGNbOl0gICAgICAgICMgZW4gcmlndGlnIGtvcGlcbmRbMF0gPSA5OVxucHJpbnQoYywgZCkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den viser, at <code>b = a</code> ikke laver en kopi, men et nyt navn til <strong>samme</strong> liste.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>a = [1, 2, 3]</code> laver en liste.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>b = a</code> giver listen et ekstra navn. Der er stadig kun én liste.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>b[0] = 17</code> ændrer listen via navnet <code>b</code>. Derfor er <code>a</code> også ændret: <code>[17, 2, 3]</code>.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>a is b</code> spørger, om de to navne peger på præcis det samme objekt: <code>True</code>.
+</li>
+<li data-linjer="8" tabindex="0">
+<code>d = c[:]</code> laver en rigtig kopi med et slice. Ændrer vi <code>d</code>, er <code>c</code> uændret.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-8-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle16">
+<div>
+<div id="webr-16" class="exercise-cell">
+
+</div>
+<script type="webr-16-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYSA8LSBjKDEsIDIsIDMpXG5iIDwtIGEgICAgICAgICAgIyBSIGxhdmVyIGVuIGtvcGlcbmJbMV0gPC0gMTdcbnByaW50KGEpICAgICAgICAjIGEgZXIgdcOmbmRyZXRcbnByaW50KGIpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> I R får man en kopi, når man ændrer.</p>
+<ol>
+<li data-linjer="2" tabindex="0">
+<code>b &lt;- a</code> giver <code>b</code> den samme værdi som <code>a</code>.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>b[1] &lt;- 17</code> ændrer <code>b</code>. I det øjeblik laver R en kopi, så <code>a</code> er uændret.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>print(a)</code> viser <code>1 2 3</code>, og <code>print(b)</code> viser <code>17 2 3</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>Her er sprogene fundamentalt forskellige: R kopierer, så snart man ændrer.</p>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Lister og tekst hænger sammen</h2>
+<p><code>.split()</code> laver en tekst om til en liste. <code>.join()</code> samler listen til en tekst igen.</p>
+<div class="panel-tabset">
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Python</a></li><li><a href="#tabset-9-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle17">
+<div>
+<div id="pyodide-17" class="exercise-cell">
+
+</div>
+<script type="pyodide-17-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicyA9IFwiZW4gc8OmdG5pbmcgbWVkIGZlbSBvcmRcIlxuXG50ID0gcy5zcGxpdCgpICAgICAgICAgICMgdGVrc3QgIC0+ICBsaXN0ZSBhZiBvcmRcbnByaW50KHQpXG5cbnByaW50KFwiIFwiLmpvaW4odCkpICAgICAjIGxpc3RlICAtPiAgdGVrc3QgaWdlblxucHJpbnQoXCItXCIuam9pbih0KSkgICAgICMgbWVkIGVuIGFuZGVuIGFkc2tpbGxlclxuXG5wcmludChsaXN0KFwic3BhbVwiKSkgICAgIyB0ZWtzdCAgLT4gIGxpc3RlIGFmIEVOS0VMVEUgdGVnbiJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den går fra tekst til liste og tilbage igen.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>s.split()</code> deler teksten ved mellemrum og giver en liste af ord.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>" ".join(t)</code> limer ordene sammen igen med et mellemrum imellem. Læg mærke til, at metoden kaldes på <strong>limen</strong> (<code>" "</code>), ikke på listen.
+</li>
+<li data-linjer="7" tabindex="0">
+<code>"-".join(t)</code> bruger bindestreg som lim.
+</li>
+<li data-linjer="9" tabindex="0">
+<code>list("spam")</code> deler teksten op i enkelte tegn: <code>['s', 'p', 'a', 'm']</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-9-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle18">
+<div>
+<div id="webr-18" class="exercise-cell">
+
+</div>
+<script type="webr-18-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicyA8LSBcImVuIHPDpnRuaW5nIG1lZCBmZW0gb3JkXCJcblxudCA8LSBzdHJzcGxpdChzLCBcIiBcIilbWzFdXSAgICAgIyB0ZWtzdCAtPiB2ZWt0b3IgYWYgb3JkXG5wcmludCh0KVxuXG5wcmludChwYXN0ZSh0LCBjb2xsYXBzZSA9IFwiIFwiKSlcbnByaW50KHBhc3RlKHQsIGNvbGxhcHNlID0gXCItXCIpKVxuXG5wcmludChzdHJzcGxpdChcInNwYW1cIiwgXCJcIilbWzFdXSkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Fra tekst til vektor og tilbage i R.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>strsplit(s, " ")</code> deler teksten ved mellemrum. Svaret er en <em>liste</em> (fordi man kan dele mange tekster på én gang), så <code>[[1]]</code> henter den første og eneste vektor ud.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>paste(t, collapse = " ")</code> limer ordene sammen med mellemrum. <code>collapse = "-"</code> bruger bindestreg.
+</li>
+<li data-linjer="9" tabindex="0">
+<code>strsplit("spam", "")[[1]]</code>: med en tom tekst som skilletegn deles teksten i enkelte tegn.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Tuples</h2>
+<p>En <strong>tuple</strong> er en liste, der <strong>ikke kan ændres</strong>. Derfor kan den bruges som nøgle i en dictionary, hvor intet må ændre sig bag ryggen på os.</p>
+<div class="panel-tabset">
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Python</a></li><li><a href="#tabset-10-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle19">
+<div>
+<div id="pyodide-19" class="exercise-cell">
+
+</div>
+<script type="pyodide-19-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidCA9IChcImFcIiwgXCJiXCIsIFwiY1wiKVxucHJpbnQodFswXSlcbnByaW50KHRbMTozXSlcblxuIyB0WzBdID0gXCJBXCIgICAgICAgICAgIyBmamVybiAjLXRlZ25ldDogVHlwZUVycm9yXG5cbmVuID0gKFwiYVwiLCkgICAgICAgICAgICMgw6l0IGVsZW1lbnQgS1LDhlZFUiBldCBrb21tYVxuaWtrZV9lbl90dXBsZSA9IChcImFcIikgIyB1ZGVuIGtvbW1hIGVyIGRldCBiYXJlIGVuIHRla3N0XG5wcmludCh0eXBlKGVuKSwgdHlwZShpa2tlX2VuX3R1cGxlKSkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver en <strong>tuple</strong>: en liste, der ikke kan ændres.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>t = ("a", "b", "c")</code>: runde parenteser og komma laver en tuple.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>t[0]</code> og <code>t[1:3]</code> virker som på en liste.
+</li>
+<li data-linjer="5" tabindex="0">
+Linjen <code># t[0] = "A"</code> er sat ud af drift med <code>#</code>. Fjern <code>#</code>, og I får en <code>TypeError</code>, fordi tuplen ikke kan ændres.
+</li>
+<li data-linjer="7" tabindex="0">
+<code>("a",)</code>: en tuple med ét element <strong>skal</strong> have et komma. Uden komma er <code>("a")</code> bare teksten <code>"a"</code> i en parentes. <code>type()</code> viser forskellen.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-10-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle20">
+<div>
+<div id="webr-20" class="exercise-cell">
+
+</div>
+<script type="webr-20-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBSIGhhciBpa2tlIHR1cGxlcy4gRGV0IHTDpnR0ZXN0ZSBlciBlbiBsaXN0ZSxcbiMgbWFuIGJlc2x1dHRlciBzaWcgZm9yIGlra2UgYXQgw6ZuZHJlLlxudCA8LSBsaXN0KFwiYVwiLCBcImJcIiwgXCJjXCIpXG5wcmludCh0W1sxXV0pXG5wcmludCh0WzI6M10pIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> R har ikke tuples. Det nærmeste er en liste, man lader være med at ændre.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>list("a", "b", "c")</code> laver en liste med tre elementer.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>t[[1]]</code> med <strong>dobbelte</strong> klammer henter selve elementet ud: <code>"a"</code>.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>t[2:3]</code> med enkelte klammer giver en mindre <em>liste</em> med element 2 og 3.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Dictionaries</h2>
+<p>En <strong>dictionary</strong> er som en liste, hvor indekset ikke er et tal, men en <strong>nøgle</strong> (<code>key</code>), typisk en tekst. Det, der ligger på pladsen, er <strong>værdien</strong> (<code>value</code>).</p>
+<div class="panel-tabset">
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Python</a></li><li><a href="#tabset-11-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-11-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle21">
+<div>
+<div id="pyodide-21" class="exercise-cell">
+
+</div>
+<script type="pyodide-21-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWxkZXIgPSB7XCJpZGFcIjogMzQsIFwib21hclwiOiA0MSwgXCJzYXJhXCI6IDI5fVxuXG5wcmludChhbGRlcltcIm9tYXJcIl0pICAgICAgICMgc2zDpSBvcCBtZWQgbsO4Z2xlblxuYWxkZXJbXCJuaWtvbGFqXCJdID0gNTIgICAgICAjIHRpbGbDuGogZXQgbnl0IHBhclxucHJpbnQoYWxkZXIpXG5cbnByaW50KGxlbihhbGRlcikpXG5wcmludChcImlkYVwiIGluIGFsZGVyKSAgICAgICMgdGpla2tlciBOw5hHTEVSXG5wcmludCgzNCBpbiBhbGRlcikgICAgICAgICAjIC4uLiBpa2tlIHbDpnJkaWVyISJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver en <strong>dictionary</strong>, hvor hver værdi slås op med en nøgle i stedet for et tal.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>{"ida": 34, "omar": 41, "sara": 29}</code>: krøllede parenteser og <code>nøgle: værdi</code>-par adskilt af komma.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>alder["omar"]</code> slår op med nøglen <code>"omar"</code> og giver <code>41</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>alder["nikolaj"] = 52</code> tilføjer et nyt par.
+</li>
+<li data-linjer="7" tabindex="0">
+<code>len(alder)</code> tæller parrene: 4.
+</li>
+<li data-linjer="8" tabindex="0">
+<code>"ida" in alder</code> spørger, om <code>"ida"</code> er en <strong>nøgle</strong>: <code>True</code>. <code>34 in alder</code> giver <code>False</code>, fordi <code>in</code> kun kigger på nøglerne, ikke på værdierne.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-11-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle22">
+<div>
+<div id="webr-22" class="exercise-cell">
+
+</div>
+<script type="webr-22-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWxkZXIgPC0gbGlzdChpZGEgPSAzNCwgb21hciA9IDQxLCBzYXJhID0gMjkpXG5cbnByaW50KGFsZGVyW1tcIm9tYXJcIl1dKVxuYWxkZXJbW1wibmlrb2xhalwiXV0gPC0gNTJcbnByaW50KG5hbWVzKGFsZGVyKSlcblxucHJpbnQobGVuZ3RoKGFsZGVyKSlcbnByaW50KFwiaWRhXCIgJWluJSBuYW1lcyhhbGRlcikpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Det nærmeste på en dictionary i R: en liste med navne.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>list(ida = 34, omar = 41, sara = 29)</code> laver en liste, hvor hvert element har et navn.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>alder[["omar"]]</code> slår op med navnet og giver <code>41</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>alder[["nikolaj"]] &lt;- 52</code> tilføjer et nyt element.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>names(alder)</code> viser alle navnene. <code>"ida" %in% names(alder)</code> tjekker, om navnet findes.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>Findes nøglen ikke, får I en <code>KeyError</code>. Det er ikke en fejl i koden, kun en besked om, at der ikke er nogen værdi at hente.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Hvorfor ikke bare bruge en liste?</h2>
+<div class="to-kol">
+<div class="kol">
+<p><strong>Liste</strong></p>
+<p>Maskinen må lede fra den ene ende. Dobbelt så lang liste, dobbelt så lang tid.</p>
+</div>
+<div class="kol">
+<p><strong>Dictionary</strong></p>
+<p>Python slår nøglen direkte op (en <em>hash-tabel</em>). Det tager omtrent lige lang tid med 10 og med 10 millioner nøgler.</p>
+</div>
+</div>
+<p>Med 19 ord og 8 stopord betyder det ingenting. Med 50.000 tekster og 10.000 stopord gør det. Derfor gemmes stopordslister som dictionaries eller <em>sets</em>, ikke som lister.</p>
+</section>
+<section class="slide level2 scrollable">
+<h2>Dictionary som tæller</h2>
+<p>Sidst talte I ét ord med <code>.count()</code>. Nu tæller vi <strong>alle</strong> ord på én gang. Resultatet er et <strong>histogram</strong>: hvor mange gange optræder hver værdi?</p>
+<div class="to-kol">
+<div class="kol">
+<div class="figur" data-figur="taeller" data-tekst="regeringen har fremlagt et nyt udspil regeringen mener">
+
+</div>
+</div>
+<div class="kol">
+<div class="panel-tabset">
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Python</a></li><li><a href="#tabset-12-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-12-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle23">
+<div>
+<div id="pyodide-23" class="exercise-cell">
+
+</div>
+<script type="pyodide-23-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGVrc3QgPSBcInJlZ2VyaW5nZW4gaGFyIGZyZW1sYWd0IGV0IG55dCB1ZHNwaWwgcmVnZXJpbmdlbiBtZW5lclwiXG5vcmRsaXN0ZSA9IHRla3N0LnNwbGl0KClcblxuYW50YWwgPSBkaWN0KClcbmZvciBvIGluIG9yZGxpc3RlOlxuICAgIGlmIG8gbm90IGluIGFudGFsOlxuICAgICAgICBhbnRhbFtvXSA9IDEgICAgICAgICMgZsO4cnN0ZSBnYW5nIHZpIHNlciBvcmRldFxuICAgIGVsc2U6XG4gICAgICAgIGFudGFsW29dID0gYW50YWxbb10gKyAxXG5wcmludChhbnRhbCkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den tæller, hvor mange gange hvert ord forekommer, med en dictionary som tæller.</p>
+<ol>
+<li data-linjer="2" tabindex="0">
+<code>tekst.split()</code> deler teksten i ord og gemmer listen som <code>ordliste</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>antal = dict()</code> laver en tom dictionary.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>for o in ordliste:</code> gennemgår ordene ét ad gangen.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>if o not in antal:</code> hvis ordet ikke er set før, gemmes det med tallet 1.
+</li>
+<li data-linjer="8" tabindex="0">
+<code>else:</code> ellers lægges 1 til det tal, der allerede står: <code>antal[o] = antal[o] + 1</code>.
+</li>
+<li data-linjer="10" tabindex="0">
+<code>print(antal)</code> viser fx <code>'regeringen': 2</code>, fordi ordet står to gange.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-12-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle24">
+<div>
+<div id="webr-24" class="exercise-cell">
+
+</div>
+<script type="webr-24-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGVrc3QgPC0gXCJyZWdlcmluZ2VuIGhhciBmcmVtbGFndCBldCBueXQgdWRzcGlsIHJlZ2VyaW5nZW4gbWVuZXJcIlxub3JkbGlzdGUgPC0gc3Ryc3BsaXQodGVrc3QsIFwiIFwiKVtbMV1dXG5cbnByaW50KHRhYmxlKG9yZGxpc3RlKSkgICAjIFIgaGFyIGVuIGluZGJ5Z2dldCBmdW5rdGlvbiB0aWwgbmV0b3AgZGV0dGUifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den tæller ordene i R med den indbyggede funktion <code>table()</code>.</p>
+<ol>
+<li data-linjer="2" tabindex="0">
+<code>strsplit(tekst, " ")[[1]]</code> deler teksten i ord.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>table(ordliste)</code> tæller, hvor mange gange hver værdi forekommer, og sorterer ordene alfabetisk. Det er præcis det, Python-løkken byggede op trin for trin.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 lay-sektion center" data-nr="03">
+<h1>Kontrolstrukturer</h1>
+<p>Gentag noget for hvert element, og gør kun noget, hvis en betingelse er opfyldt.</p>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Løkker</h2>
+<p>En <strong>løkke</strong> gentager de samme linjer for hvert element. <code>for</code> kører én gang pr. element. <code>while</code> kører, så længe en betingelse er sand, og altså for evigt, hvis den aldrig bliver falsk.</p>
+<div class="panel-tabset">
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Python</a></li><li><a href="#tabset-13-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle25">
+<div>
+<div id="pyodide-25" class="exercise-cell">
+
+</div>
+<script type="pyodide-25-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidmVubmVyID0gW1wiSWRhXCIsIFwiT21hclwiLCBcIlNhcmFcIl1cblxuZm9yIHZlbiBpbiB2ZW5uZXI6ICAgICAgICAgICAgIyAndmVuJyBlciBsw7hra2V2YXJpYWJsZW5cbiAgICBwcmludChcIkdvZHQgbnl0w6VyLFwiLCB2ZW4pIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> En <code>for</code>-løkke, der hilser på hver ven.</p>
+<ol>
+<li>
+<code>venner = [...]</code> er en liste med tre navne.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>for ven in venner:</code> tager første navn, kalder det <code>ven</code> og kører den indrykkede linje. Så det næste, og så videre.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>print("Godt nytår,", ven)</code> skriver hilsenen ud. Den køres tre gange, én gang per navn.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-13-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle26">
+<div>
+<div id="webr-26" class="exercise-cell">
+
+</div>
+<script type="webr-26-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidmVubmVyIDwtIGMoXCJJZGFcIiwgXCJPbWFyXCIsIFwiU2FyYVwiKVxuXG5mb3IgKHZlbiBpbiB2ZW5uZXIpIHtcbiAgY2F0KFwiR29kdCBueXTDpXIsXCIsIHZlbiwgXCJcXG5cIilcbn0ifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den samme løkke i R.</p>
+<ol>
+<li>
+<code>for (ven in venner) { ... }</code> kører koden i <code>{ }</code> én gang for hvert navn.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>cat("Godt nytår,", ven, "\n")</code> skriver hilsenen og en ny linje.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Løkkemønstre: før, undervejs, efter</h2>
+<p>De fleste løkker følger samme skabelon. Følg variablen <code>total</code> gennem løkken:</p>
+<div class="to-kol">
+<div class="kol">
+<ol type="1">
+<li><strong>Før:</strong> sæt en variabel.</li>
+<li><strong>Undervejs:</strong> opdater den for hvert element.</li>
+<li><strong>Efter:</strong> aflæs resultatet.</li>
+</ol>
+<div class="figur" data-figur="spor" data-tal="3,41,12,9,74,15" data-maal="sum">
+
+</div>
+</div>
+<div class="kol">
+<div class="panel-tabset">
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Python</a></li><li><a href="#tabset-14-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle27">
+<div>
+<div id="pyodide-27" class="exercise-cell">
+
+</div>
+<script type="pyodide-27-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFsID0gWzMsIDQxLCAxMiwgOSwgNzQsIDE1XVxuXG50b3RhbCA9IDAgICAgICAgICAgICAgICAgIyAxLiBmw7hyXG5mb3IgdCBpbiB0YWw6XG4gICAgdG90YWwgPSB0b3RhbCArIHQgICAgIyAyLiB1bmRlcnZlanMgKGVuICdha2t1bXVsYXRvcicpXG5wcmludChcIlN1bTpcIiwgdG90YWwpICAgICAjIDMuIGVmdGVyXG5cbnN0b2Vyc3RlID0gTm9uZVxuZm9yIHQgaW4gdGFsOlxuICAgIGlmIHN0b2Vyc3RlIGlzIE5vbmUgb3IgdCA+IHN0b2Vyc3RlOlxuICAgICAgICBzdG9lcnN0ZSA9IHRcbnByaW50KFwiU3TDuHJzdGU6XCIsIHN0b2Vyc3RlKSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> To løkker efter samme skabelon: sæt op før, opdater undervejs, aflæs efter.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>total = 0</code> er startværdien, <strong>før</strong> løkken går i gang.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>total = total + t</code> lægger hvert tal til den løbende sum. Sådan en variabel kaldes en <strong>akkumulator</strong>.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>print("Sum:", total)</code> aflæser resultatet <strong>efter</strong> løkken. Linjen er ikke rykket ind, så den køres kun én gang.
+</li>
+<li data-linjer="8" tabindex="0">
+<code>stoerste = None</code> betyder <em>intet fundet endnu</em>.
+</li>
+<li data-linjer="10" tabindex="0">
+<code>if stoerste is None or t &gt; stoerste:</code> hvis vi ikke har fundet noget endnu, eller tallet er større end det hidtil største, gemmes det.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-14-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle28">
+<div>
+<div id="webr-28" class="exercise-cell">
+
+</div>
+<script type="webr-28-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoidGFsIDwtIGMoMywgNDEsIDEyLCA5LCA3NCwgMTUpXG5cbnRvdGFsIDwtIDBcbmZvciAodCBpbiB0YWwpIHtcbiAgdG90YWwgPC0gdG90YWwgKyB0XG59XG5jYXQoXCJTdW06XCIsIHRvdGFsLCBcIlxcblwiKVxuXG5jYXQoXCJTdW0gKGluZGJ5Z2dldCk6XCIsIHN1bSh0YWwpLCBcIlxcblwiKVxuY2F0KFwiU3TDuHJzdGU6XCIsIG1heCh0YWwpLCBcIlxcblwiKSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Summen med en løkke i R, og så de indbyggede genveje.</p>
+<ol>
+<li data-linjer="3" tabindex="0">
+<code>total &lt;- 0</code> er startværdien. Inde i løkken lægges hvert tal til: <code>total &lt;- total + t</code>.
+</li>
+<li data-linjer="7" tabindex="0">
+<code>cat("Sum:", total, "\n")</code> aflæser resultatet efter løkken.
+</li>
+<li data-linjer="9" tabindex="0">
+<code>sum(tal)</code> og <code>max(tal)</code> giver det samme på én linje. I praksis bruger man dem.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>I praksis bruger man <code>sum()</code> og <code>max()</code>. Men mønstret er det samme i al kode, I kommer til at læse.</p>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2><code>if</code>: gør kun noget, hvis …</h2>
+<p><code>if</code> stiller et ja/nej-spørgsmål og kører kun de indrykkede linjer, hvis svaret er <code>True</code>. <strong>Indrykningen er ikke pynt. Den er syntaks.</strong></p>
+<div class="panel-tabset">
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Python</a></li><li><a href="#tabset-15-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle29">
+<div>
+<div id="pyodide-29" class="exercise-cell">
+
+</div>
+<script type="pyodide-29-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWxkZXIgPSAxN1xuXG5pZiBhbGRlciA+PSAxODpcbiAgICBwcmludChcIk15bmRpZ1wiKVxuZWxzZTpcbiAgICBwcmludChcIklra2UgbXluZGlnXCIpXG5cbnByaW50KFwiRGVubmUgbGluamUga8O4cmVzIGFsdGlkXCIpICAgIyBpa2tlIHJ5a2tldCBpbmQifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> En <code>if</code>-sætning, der vælger mellem to tekster.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>alder = 17</code> gemmer alderen.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>if alder &gt;= 18:</code> stiller spørgsmålet. Er det sandt, køres den indrykkede linje under.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>else:</code> er <em>ellers</em>. Den indrykkede linje under køres kun, hvis spørgsmålet var falsk. Her vises <code>Ikke myndig</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+Den sidste <code>print</code> er ikke rykket ind. Den hører hverken til <code>if</code> eller <code>else</code> og køres altid.
+</li>
+</ol>
+</div></details>
+<div class="forslag">
+<p>Skift <code>alder = 17</code> til <code>alder = 18</code>.</p>
+</div>
+</div>
+</div>
+<div id="tabset-15-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle30">
+<div>
+<div id="webr-30" class="exercise-cell">
+
+</div>
+<script type="webr-30-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWxkZXIgPC0gMTdcblxuaWYgKGFsZGVyID49IDE4KSB7XG4gIHByaW50KFwiTXluZGlnXCIpXG59IGVsc2Uge1xuICBwcmludChcIklra2UgbXluZGlnXCIpXG59XG5cbnByaW50KFwiRGVubmUgbGluamUga8O4cmVzIGFsdGlkXCIpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den samme <code>if</code>/<code>else</code> i R.</p>
+<ol>
+<li>
+<code>if (alder &gt;= 18) { ... }</code>: betingelsen står i runde parenteser, koden i krøllede.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>} else { ... }</code>: <code>else</code> skal stå på samme linje som den afsluttende <code>}</code>, ellers bliver R forvirret.
+</li>
+<li data-linjer="4" tabindex="0">
+Den sidste <code>print</code> står uden for begge blokke og køres altid.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2><code>elif</code>: flere end to muligheder</h2>
+<p>Betingelserne tjekkes <strong>oppefra og ned</strong>. Den første, der er sand, vinder. Resten springes over.</p>
+<div class="panel-tabset">
+<ul id="tabset-16" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-16-1">Python</a></li><li><a href="#tabset-16-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-16-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle31">
+<div>
+<div id="pyodide-31" class="exercise-cell">
+
+</div>
+<script type="pyodide-31-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGFsZGVyc2dydXBwZShhbGRlcik6XG4gICAgaWYgYWxkZXIgPCAxODpcbiAgICAgICAgcmV0dXJuIFwidW5kZXIgMThcIlxuICAgIGVsaWYgYWxkZXIgPCAzMDpcbiAgICAgICAgcmV0dXJuIFwiMTgtMjlcIlxuICAgIGVsaWYgYWxkZXIgPCA2MDpcbiAgICAgICAgcmV0dXJuIFwiMzAtNTlcIlxuICAgIGVsc2U6XG4gICAgICAgIHJldHVybiBcIjYwK1wiXG5cbmZvciBhIGluIFsxMiwgMjUsIDQ1LCA3MV06XG4gICAgcHJpbnQoYSwgXCItPlwiLCBhbGRlcnNncnVwcGUoYSkpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> En funktion med <code>elif</code>, der lægger en alder i en aldersgruppe, og en løkke, der prøver den på fire aldre.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>def aldersgruppe(alder):</code> laver funktionen.
+</li>
+<li data-linjer="3" tabindex="0">
+Betingelserne tjekkes <strong>oppefra og ned</strong>. Den første, der er sand, bestemmer svaret. <code>return</code> giver svaret tilbage og afslutter funktionen.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>elif</code> betyder <em>ellers hvis</em>. <code>else</code> fanger alt, der ikke passede ovenfor.
+</li>
+<li data-linjer="11" tabindex="0">
+<code>for a in [12, 25, 45, 71]:</code> prøver funktionen på fire aldre. <code>print(a, "-&gt;", aldersgruppe(a))</code> viser alder og gruppe.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-16-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle32">
+<div>
+<div id="webr-32" class="exercise-cell">
+
+</div>
+<script type="webr-32-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYWxkZXJzZ3J1cHBlIDwtIGZ1bmN0aW9uKGFsZGVyKSB7XG4gIGlmIChhbGRlciA8IDE4KSB7XG4gICAgXCJ1bmRlciAxOFwiXG4gIH0gZWxzZSBpZiAoYWxkZXIgPCAzMCkge1xuICAgIFwiMTgtMjlcIlxuICB9IGVsc2UgaWYgKGFsZGVyIDwgNjApIHtcbiAgICBcIjMwLTU5XCJcbiAgfSBlbHNlIHtcbiAgICBcIjYwK1wiXG4gIH1cbn1cblxuZm9yIChhIGluIGMoMTIsIDI1LCA0NSwgNzEpKSB7XG4gIGNhdChhLCBcIi0+XCIsIGFsZGVyc2dydXBwZShhKSwgXCJcXG5cIilcbn0ifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den samme aldersgruppe-funktion i R.</p>
+<ol>
+<li data-linjer="4" tabindex="0">
+<code>else if</code> er R’s ord for <code>elif</code>.
+</li>
+<li>
+Hver gren giver en tekst. Da det er det sidste, der sker i funktionen, bliver teksten givet tilbage.
+</li>
+<li data-linjer="14" tabindex="0">
+Løkken nederst prøver funktionen på fire aldre og skriver resultatet med <code>cat</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>Rækkefølgen er ikke ligegyldig: byt de to første om, og alle under 30, også børnene, havner i gruppen “18-29”.</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 lay-sektion center" data-nr="04">
+<h1>Data wrangling</h1>
+<p>Data ligger sjældent i én færdig tabel. Vi kobler tabeller sammen og ændrer deres form.</p>
+</section>
+<section class="slide level2">
+<h2>Hvad er data wrangling?</h2>
+<p>Tre operationer dækker det meste:</p>
+<div class="trin-kort">
+<div class="kol">
+<p><code>merge</code></p>
+<p>Kobl rækker fra to tabeller sammen ved hjælp af en <strong>nøgle</strong>.</p>
+</div>
+<div class="kol">
+<p><code>concat</code></p>
+<p>Stabl tabeller <strong>oven på hinanden</strong>.</p>
+</div>
+<div class="kol">
+<p><code>combine_first</code></p>
+<p><strong>Lap huller</strong> i én tabel med værdier fra en anden.</p>
+</div>
+<div class="kol">
+<p><code>pivot</code> / <code>melt</code></p>
+<p>Skift tabellens <strong>form</strong> mellem langt og bredt.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Hvorfor det fylder så meget</h2>
+<p>Registerdata er spredt ud: uddannelse ét sted, indkomst et andet, bopæl et tredje. Hver tabel har sin egen enhed og sin egen tidsopløsning.</p>
+<p>Hver kobling er et <strong>valg</strong>, ikke en teknikalitet. Hvem ryger ud? Hvem tælles med to gange?</p>
+<blockquote>
+<p>Derfor fylder wrangling typisk mere i et projekt end selve modellen.</p>
+</blockquote>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Vores data i dag</h2>
+<p>To små tabeller: <strong>personer</strong> (individdata) og <strong>kommuner</strong> (områdedata). Læg mærke til, hvad der <em>ikke</em> går op: <code>Aalborg</code> findes kun i den ene, <code>Esbjerg</code> kun i den anden.</p>
+<div class="panel-tabset">
+<ul id="tabset-17" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-17-1">Python</a></li><li><a href="#tabset-17-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-17-1">
+<div class="demo celle" data-maerke="Demo" data-celle="celle33">
+<div>
+<div id="pyodide-33" class="exercise-cell">
+
+</div>
+<script type="pyodide-33-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBwYW5kYXMgYXMgcGRcblxucGVyc29uZXIgPSBwZC5EYXRhRnJhbWUoe1xuICAgIFwiaWRcIjogICAgICBbMSwgMiwgMywgNCwgNV0sXG4gICAgXCJrb21tdW5lXCI6IFtcIkvDuGJlbmhhdm5cIiwgXCJBYXJodXNcIiwgXCJLw7hiZW5oYXZuXCIsIFwiT2RlbnNlXCIsIFwiQWFsYm9yZ1wiXSxcbiAgICBcImFsZGVyXCI6ICAgWzM0LCA0MSwgMjksIDUyLCA0NV1cbn0pXG5cbmtvbW11bmVyID0gcGQuRGF0YUZyYW1lKHtcbiAgICBcImtvbW11bmVcIjogICAgW1wiS8O4YmVuaGF2blwiLCBcIkFhcmh1c1wiLCBcIk9kZW5zZVwiLCBcIkVzYmplcmdcIl0sXG4gICAgXCJyZWdpb25cIjogICAgIFtcIkhvdmVkc3RhZGVuXCIsIFwiTWlkdGp5bGxhbmRcIiwgXCJTeWRkYW5tYXJrXCIsIFwiU3lkZGFubWFya1wiXSxcbiAgICBcImluZGJ5Z2dlcmVcIjogWzY2MDAwMCwgMzYwMDAwLCAyMTAwMDAsIDExNTAwMF1cbn0pXG5cbnByaW50KHBlcnNvbmVyKVxucHJpbnQoa29tbXVuZXIpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver to små tabeller, vi bruger resten af lektionen. Cellen kører af sig selv.</p>
+<ol>
+<li>
+<code>pd.DataFrame({...})</code> laver en tabel ud fra en dictionary. Hver <strong>nøgle</strong> bliver et kolonnenavn, og hver <strong>liste</strong> bliver kolonnens værdier.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>personer</code> har én række per person: id, kommune og alder.
+</li>
+<li data-linjer="9" tabindex="0">
+<code>kommuner</code> har én række per kommune: region og indbyggertal.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>print(...)</code> viser begge tabeller. Læg mærke til, at Aalborg kun står i <code>personer</code>, og Esbjerg kun i <code>kommuner</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-17-2">
+<div class="demo celle" data-maerke="Demo" data-celle="celle34">
+<div>
+<div id="webr-34" class="exercise-cell">
+
+</div>
+<script type="webr-34-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOmZhbHNlLCJldmFsIjp0cnVlfSwiY29kZSI6InBlcnNvbmVyIDwtIGRhdGEuZnJhbWUoXG4gIGlkICAgICAgPSBjKDEsIDIsIDMsIDQsIDUpLFxuICBrb21tdW5lID0gYyhcIkvDuGJlbmhhdm5cIiwgXCJBYXJodXNcIiwgXCJLw7hiZW5oYXZuXCIsIFwiT2RlbnNlXCIsIFwiQWFsYm9yZ1wiKSxcbiAgYWxkZXIgICA9IGMoMzQsIDQxLCAyOSwgNTIsIDQ1KVxuKVxuXG5rb21tdW5lciA8LSBkYXRhLmZyYW1lKFxuICBrb21tdW5lICAgID0gYyhcIkvDuGJlbmhhdm5cIiwgXCJBYXJodXNcIiwgXCJPZGVuc2VcIiwgXCJFc2JqZXJnXCIpLFxuICByZWdpb24gICAgID0gYyhcIkhvdmVkc3RhZGVuXCIsIFwiTWlkdGp5bGxhbmRcIiwgXCJTeWRkYW5tYXJrXCIsIFwiU3lkZGFubWFya1wiKSxcbiAgaW5kYnlnZ2VyZSA9IGMoNjYwMDAwLCAzNjAwMDAsIDIxMDAwMCwgMTE1MDAwKVxuKVxuXG5wcmludChwZXJzb25lcilcbnByaW50KGtvbW11bmVyKSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> De samme to tabeller i R.</p>
+<ol>
+<li>
+<code>data.frame(id = c(...), kommune = c(...), ...)</code> laver en tabel. Hver kolonne skrives som <code>navn = vektor</code>.
+</li>
+<li>
+Alle vektorer i samme tabel skal være lige lange.
+</li>
+<li data-linjer="13" tabindex="0">
+<code>print(personer)</code> og <code>print(kommuner)</code> viser tabellerne.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Koblingen afgør, hvem der er med</h2>
+<div class="figur" data-figur="join" data-noegle="kommune" data-venstrenavn="personer" data-hoejrenavn="kommuner" data-venstre="id,kommune,alder;1,København,34;2,Aarhus,41;3,København,29;4,Odense,52;5,Aalborg,45" data-hoejre="kommune,region;København,Hovedstaden;Aarhus,Midtjylland;Odense,Syddanmark;Esbjerg,Syddanmark">
+
+</div>
+<p>Skift <code>how</code> og se, hvilke rækker der overlever. (<code>indbyggere</code> er udeladt i figuren for pladsens skyld.)</p>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2><code>merge</code>: at koble på en nøgle</h2>
+<p>Standardvalget er <code>inner</code>: kun nøgler, der findes i <strong>begge</strong> tabeller, overlever.</p>
+<div class="panel-tabset">
+<ul id="tabset-18" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-18-1">Python</a></li><li><a href="#tabset-18-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-18-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle35">
+<div>
+<div id="pyodide-35" class="exercise-cell">
+
+</div>
+<script type="pyodide-35-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic2FtbGV0ID0gcGQubWVyZ2UocGVyc29uZXIsIGtvbW11bmVyLCBvbj1cImtvbW11bmVcIilcblxucHJpbnQoc2FtbGV0KVxucHJpbnQoXCJSw6Zra2VyIGbDuHI6XCIsIGxlbihwZXJzb25lciksIFwiLSBlZnRlcjpcIiwgbGVuKHNhbWxldCkpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den kobler de to tabeller sammen på kolonnen <code>kommune</code>.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>pd.merge(personer, kommuner, on="kommune")</code> finder rækker med samme kommune i begge tabeller og sætter dem ved siden af hinanden.
+</li>
+<li>
+Standard er en <em>inner join</em>: kun kommuner, der findes i <strong>begge</strong> tabeller, kommer med.
+</li>
+<li data-linjer="1" tabindex="0">
+<code>len(...)</code> tæller rækker før og efter: 5 personer ind, 4 rækker ud. Aalborg mangler i <code>kommuner</code> og forsvinder.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-18-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle36">
+<div>
+<div id="webr-36" class="exercise-cell">
+
+</div>
+<script type="webr-36-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoic2FtbGV0IDwtIG1lcmdlKHBlcnNvbmVyLCBrb21tdW5lciwgYnkgPSBcImtvbW11bmVcIilcblxucHJpbnQoc2FtbGV0KVxuY2F0KFwiUsOma2tlciBmw7hyOlwiLCBucm93KHBlcnNvbmVyKSwgXCItIGVmdGVyOlwiLCBucm93KHNhbWxldCksIFwiXFxuXCIpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den samme kobling i R.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>merge(personer, kommuner, by = "kommune")</code> kobler på kolonnen <code>kommune</code>. Også her er standard en <em>inner join</em>.
+</li>
+<li>
+<code>nrow(...)</code> tæller rækker. Igen bliver 5 til 4.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<p>Fem personer gik ind. Fire kom ud. <strong>Aalborg forsvandt</strong>, uden fejl og uden advarsel.</p>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>De fire join-typer</h2>
+<p><code>how=</code> bestemmer, hvilke nøgler der beholdes: <code>inner</code> (begge), <code>left</code> (venstre), <code>right</code> (højre), <code>outer</code> (alle).</p>
+<div class="panel-tabset">
+<ul id="tabset-19" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-19-1">Python</a></li><li><a href="#tabset-19-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-19-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle37">
+<div>
+<div id="pyodide-37" class="exercise-cell">
+
+</div>
+<script type="pyodide-37-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZm9yIGh2b3JkYW4gaW4gW1wiaW5uZXJcIiwgXCJsZWZ0XCIsIFwicmlnaHRcIiwgXCJvdXRlclwiXTpcbiAgICByID0gcGQubWVyZ2UocGVyc29uZXIsIGtvbW11bmVyLCBvbj1cImtvbW11bmVcIiwgaG93PWh2b3JkYW4pXG4gICAgcHJpbnQoaHZvcmRhbiwgXCItPlwiLCBsZW4ociksIFwicsOma2tlclwiKVxuXG5wcmludCgpXG5wcmludChwZC5tZXJnZShwZXJzb25lciwga29tbXVuZXIsIG9uPVwia29tbXVuZVwiLCBob3c9XCJsZWZ0XCIpKSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den prøver alle fire join-typer og tæller rækker for hver.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>for hvordan in ["inner", "left", "right", "outer"]:</code> gennemgår de fire typer.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>how=hvordan</code> bestemmer typen. Resultatet gemmes som <code>r</code>, og <code>len(r)</code> tæller rækkerne.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>print()</code> uden noget i giver en tom linje.
+</li>
+<li>
+Til sidst vises <em>left join</em>: alle personer er med, men Aalborg har <code>NaN</code> (manglende værdi) i <code>region</code> og <code>indbyggere</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-19-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle38">
+<div>
+<div id="webr-38" class="exercise-cell">
+
+</div>
+<script type="webr-38-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiY2F0KFwiaW5uZXIgLT5cIiwgbnJvdyhtZXJnZShwZXJzb25lciwga29tbXVuZXIsIGJ5ID0gXCJrb21tdW5lXCIpKSwgXCJcXG5cIilcbmNhdChcImxlZnQgIC0+XCIsIG5yb3cobWVyZ2UocGVyc29uZXIsIGtvbW11bmVyLCBieSA9IFwia29tbXVuZVwiLCBhbGwueCA9IFRSVUUpKSwgXCJcXG5cIilcbmNhdChcInJpZ2h0IC0+XCIsIG5yb3cobWVyZ2UocGVyc29uZXIsIGtvbW11bmVyLCBieSA9IFwia29tbXVuZVwiLCBhbGwueSA9IFRSVUUpKSwgXCJcXG5cIilcbmNhdChcIm91dGVyIC0+XCIsIG5yb3cobWVyZ2UocGVyc29uZXIsIGtvbW11bmVyLCBieSA9IFwia29tbXVuZVwiLCBhbGwgPSBUUlVFKSksIFwiXFxuXCIpXG5cbnByaW50KG1lcmdlKHBlcnNvbmVyLCBrb21tdW5lciwgYnkgPSBcImtvbW11bmVcIiwgYWxsLnggPSBUUlVFKSkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> De fire join-typer i R.</p>
+<ol>
+<li data-linjer="2" tabindex="0">
+<code>all.x = TRUE</code> beholder alle rækker fra den venstre tabel (<em>left</em>).
+</li>
+<li data-linjer="3" tabindex="0">
+<code>all.y = TRUE</code> beholder alle fra den højre (<em>right</em>).
+</li>
+<li data-linjer="4" tabindex="0">
+<code>all = TRUE</code> beholder alle fra begge (<em>outer</em>).
+</li>
+<li>
+Den sidste linje viser <em>left join</em>. Manglende værdier står som <code>NA</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>I dplyr hedder de <code>inner_join()</code>, <code>left_join()</code>, <code>right_join()</code> og <code>full_join()</code>.</p>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Fælden: dublerede nøgler</h2>
+<p>Er nøglen ikke unik i <strong>begge</strong> tabeller, ganges rækkerne sammen. Person 1 har to job og to kurser og bliver til <strong>fire</strong> rækker, uden fejlbesked.</p>
+<div class="panel-tabset">
+<ul id="tabset-20" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-20-1">Python</a></li><li><a href="#tabset-20-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-20-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle39">
+<div>
+<div id="pyodide-39" class="exercise-cell">
+
+</div>
+<script type="pyodide-39-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiQSA9IHBkLkRhdGFGcmFtZSh7XCJpZFwiOiBbMSwgMSwgMl0sIFwiam9iXCI6ICBbXCJsw6ZyZXJcIiwgXCJzw6ZsZ2VyXCIsIFwic3lnZXBsZWplcnNrZVwiXX0pXG5CID0gcGQuRGF0YUZyYW1lKHtcImlkXCI6IFsxLCAxLCAyXSwgXCJrdXJzdXNcIjogW1wiSVRcIiwgXCJsZWRlbHNlXCIsIFwiZsO4cnN0ZWhqw6ZscFwiXX0pXG5cbnJlc3VsdGF0ID0gcGQubWVyZ2UoQSwgQiwgb249XCJpZFwiKVxuXG5wcmludChyZXN1bHRhdClcbnByaW50KGxlbihBKSwgXCJ4XCIsIGxlbihCKSwgXCItPlwiLCBsZW4ocmVzdWx0YXQpLCBcInLDpmtrZXJcIikifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den viser, hvad der sker, når nøglen ikke er unik.</p>
+<ol>
+<li>
+Tabellerne <code>A</code> og <code>B</code> har begge id 1 to gange.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>pd.merge(A, B, on="id")</code> parrer <strong>alle</strong> kombinationer for id 1: 2 job gange 2 kurser = 4 rækker. Plus én række for id 2.
+</li>
+<li>
+Den sidste linje viser: 3 rækker og 3 rækker blev til 5. Ingen fejlbesked advarer om det.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-20-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle40">
+<div>
+<div id="webr-40" class="exercise-cell">
+
+</div>
+<script type="webr-40-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiQSA8LSBkYXRhLmZyYW1lKGlkID0gYygxLCAxLCAyKSwgam9iID0gYyhcImzDpnJlclwiLCBcInPDpmxnZXJcIiwgXCJzeWdlcGxlamVyc2tlXCIpKVxuQiA8LSBkYXRhLmZyYW1lKGlkID0gYygxLCAxLCAyKSwga3Vyc3VzID0gYyhcIklUXCIsIFwibGVkZWxzZVwiLCBcImbDuHJzdGVoasOmbHBcIikpXG5cbnJlc3VsdGF0IDwtIG1lcmdlKEEsIEIsIGJ5ID0gXCJpZFwiKVxuXG5wcmludChyZXN1bHRhdClcbmNhdChucm93KEEpLCBcInhcIiwgbnJvdyhCKSwgXCItPlwiLCBucm93KHJlc3VsdGF0KSwgXCJyw6Zra2VyXFxuXCIpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den samme fælde i R.</p>
+<ol>
+<li data-linjer="4" tabindex="0">
+<code>merge(A, B, by = "id")</code> parrer alle kombinationer, når nøglen står flere gange.
+</li>
+<li>
+<code>cat(nrow(A), "x", nrow(B), "-&gt;", nrow(resultat), ...)</code> viser, at 3 og 3 rækker giver 5.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<blockquote>
+<p>Gør det til en vane: <strong>tæl rækker før og efter hver kobling.</strong></p>
+</blockquote>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2><code>concat</code>: at “stable” data</h2>
+<p><code>merge</code> sætter tabeller ved siden af hinanden. <code>concat</code> lægger dem <strong>oven på</strong> hinanden, typisk når data kommer i årgange eller filer med samme kolonner.</p>
+<div class="panel-tabset">
+<ul id="tabset-21" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-21-1">Python</a></li><li><a href="#tabset-21-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-21-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle41">
+<div>
+<div id="pyodide-41" class="exercise-cell">
+
+</div>
+<script type="pyodide-41-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicnVuZGUxID0gcGQuRGF0YUZyYW1lKHtcImlkXCI6IFsxLCAyXSwgXCJzdmFyXCI6IFtcImphXCIsIFwibmVqXCJdfSlcbnJ1bmRlMiA9IHBkLkRhdGFGcmFtZSh7XCJpZFwiOiBbMywgNF0sIFwic3ZhclwiOiBbXCJqYVwiLCBcImphXCJdfSlcblxucHJpbnQocGQuY29uY2F0KFtydW5kZTEsIHJ1bmRlMl0pKVxucHJpbnQoKVxucHJpbnQocGQuY29uY2F0KFtydW5kZTEsIHJ1bmRlMl0sIGlnbm9yZV9pbmRleD1UcnVlKSkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den stabler to tabeller med samme kolonner oven på hinanden.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>runde1</code> og <code>runde2</code> har de samme kolonner: <code>id</code> og <code>svar</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>pd.concat([runde1, runde2])</code> lægger dem oven på hinanden. Tabellerne gives som en <strong>liste</strong> i firkantede parenteser.
+</li>
+<li>
+Læg mærke til rækkenumrene: 0, 1, 0, 1. Hver tabel har taget sit eget indeks med.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>ignore_index=True</code> giver nye, fortløbende numre: 0, 1, 2, 3.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-21-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle42">
+<div>
+<div id="webr-42" class="exercise-cell">
+
+</div>
+<script type="webr-42-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoicnVuZGUxIDwtIGRhdGEuZnJhbWUoaWQgPSBjKDEsIDIpLCBzdmFyID0gYyhcImphXCIsIFwibmVqXCIpKVxucnVuZGUyIDwtIGRhdGEuZnJhbWUoaWQgPSBjKDMsIDQpLCBzdmFyID0gYyhcImphXCIsIFwiamFcIikpXG5cbnByaW50KHJiaW5kKHJ1bmRlMSwgcnVuZGUyKSkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Stabler to tabeller i R.</p>
+<ol>
+<li data-linjer="4" tabindex="0">
+<code>rbind(runde1, runde2)</code> (<em>row bind</em>) lægger rækkerne fra <code>runde2</code> under rækkerne fra <code>runde1</code>.
+</li>
+<li>
+Kolonnerne skal have samme navne i begge tabeller.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>Se rækkenumrene i det første resultat: 0, 1, 0, 1. Indekset følger med fra hver tabel. <code>ignore_index=True</code> giver nye, fortløbende numre.</p>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2><code>combine_first</code>: at “lappe” huller</h2>
+<p>To kilder til samme oplysning, hvor den ene har huller. <code>combine_first</code> fylder hullerne, men lader eksisterende værdier stå.</p>
+<div class="panel-tabset">
+<ul id="tabset-22" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-22-1">Python</a></li><li><a href="#tabset-22-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-22-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle43">
+<div>
+<div id="pyodide-43" class="exercise-cell">
+
+</div>
+<script type="pyodide-43-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5wXG5cbnByaW1hZXIgPSBwZC5EYXRhRnJhbWUoe1wiYWxkZXJcIjogWzM0LjAsIG5wLm5hbiwgMjkuMF19LCBpbmRleD1bMSwgMiwgM10pXG5yZXNlcnZlID0gcGQuRGF0YUZyYW1lKHtcImFsZGVyXCI6IFszMy4wLCA0MS4wLCAzMC4wXX0sIGluZGV4PVsxLCAyLCAzXSlcblxucHJpbnQocHJpbWFlci5jb21iaW5lX2ZpcnN0KHJlc2VydmUpKSJ9
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den udfylder huller i én tabel med værdier fra en anden.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>import numpy as np</code> henter numpy. <code>np.nan</code> betyder <em>manglende værdi</em>.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>primaer</code> mangler alderen for person 2. <code>reserve</code> har alle tre aldre. <code>index=[1, 2, 3]</code> giver rækkerne numrene 1, 2 og 3, så de to tabeller kan matches.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>primaer.combine_first(reserve)</code> beholder alle værdier fra <code>primaer</code> og henter kun værdier fra <code>reserve</code>, hvor <code>primaer</code> har et hul.
+</li>
+<li>
+Resultatet er 34, 41, 29. Person 1 beholder 34, selvom reserven siger 33.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-22-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle44">
+<div>
+<div id="webr-44" class="exercise-cell">
+
+</div>
+<script type="webr-44-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeShkcGx5cilcblxucHJpbWFlciA8LSBjKDM0LCBOQSwgMjkpXG5yZXNlcnZlIDwtIGMoMzMsIDQxLCAzMClcblxucHJpbnQoY29hbGVzY2UocHJpbWFlciwgcmVzZXJ2ZSkpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Det samme i R med <code>coalesce()</code> fra dplyr.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>library(dplyr)</code> indlæser dplyr.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>NA</code> er R’s manglende værdi.
+</li>
+<li data-linjer="6" tabindex="0">
+<code>coalesce(primaer, reserve)</code> tager værdien fra <code>primaer</code>, og kun hvis den er <code>NA</code>, tager den værdien fra <code>reserve</code>. Resultatet er 34, 41, 29.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p>Rækkefølgen betyder noget: den tabel, I kalder metoden på, har forrang. Person 1 beholder sine 34 og får ikke reservens 33.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Samme data, to former</h2>
+<div class="figur" data-figur="omform" data-kol="kommune,aar,ledighed" data-raekker="København,2022,4.2;København,2023,3.8;Aarhus,2022,3.9;Aarhus,2023,3.5;Odense,2022,5.1;Odense,2023,4.7">
+
+</div>
+<p><strong>Langt:</strong> én række pr. observation. Sådan ligger data i registre. <strong>Bredt:</strong> én række pr. enhed. Sådan vil man ofte have data til en tabel eller figur.</p>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2>Det lange format</h2>
+<p>Seks rækker: én pr. kommune og år.</p>
+<div class="panel-tabset">
+<ul id="tabset-23" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-23-1">Python</a></li><li><a href="#tabset-23-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-23-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle45">
+<div>
+<div id="pyodide-45" class="exercise-cell">
+
+</div>
+<script type="pyodide-45-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGVkaWdoZWQgPSBwZC5EYXRhRnJhbWUoe1xuICAgIFwia29tbXVuZVwiOiAgW1wiS8O4YmVuaGF2blwiLCBcIkvDuGJlbmhhdm5cIiwgXCJBYXJodXNcIixcbiAgICAgICAgICAgICAgICAgXCJBYXJodXNcIiwgXCJPZGVuc2VcIiwgXCJPZGVuc2VcIl0sXG4gICAgXCJhYXJcIjogICAgICBbMjAyMiwgMjAyMywgMjAyMiwgMjAyMywgMjAyMiwgMjAyM10sXG4gICAgXCJsZWRpZ2hlZFwiOiBbNC4yLCAzLjgsIDMuOSwgMy41LCA1LjEsIDQuN11cbn0pXG5cbnByaW50KGxlZGlnaGVkKSAgICMgbGFuZ3QgZm9ybWF0OiA2IHLDpmtrZXIsIMOpbiBwZXIga29tbXVuZS3DpXIifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver en tabel med ledighed i <strong>langt format</strong>: én række per kommune og år.</p>
+<ol>
+<li>
+<code>pd.DataFrame({...})</code> laver tabellen med tre kolonner: kommune, år og ledighed.
+</li>
+<li>
+Hver kommune står to gange, én gang for hvert år. Derfor er der 6 rækker.
+</li>
+<li data-linjer="2" tabindex="0">
+Listen for <code>kommune</code> fylder to linjer. Det er tilladt i Python, så længe den står inden i parenteser.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-23-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle46">
+<div>
+<div id="webr-46" class="exercise-cell">
+
+</div>
+<script type="webr-46-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGVkaWdoZWQgPC0gZGF0YS5mcmFtZShcbiAga29tbXVuZSAgPSBjKFwiS8O4YmVuaGF2blwiLCBcIkvDuGJlbmhhdm5cIiwgXCJBYXJodXNcIixcbiAgICAgICAgICAgICAgIFwiQWFyaHVzXCIsIFwiT2RlbnNlXCIsIFwiT2RlbnNlXCIpLFxuICBhYXIgICAgICA9IGMoMjAyMiwgMjAyMywgMjAyMiwgMjAyMywgMjAyMiwgMjAyMyksXG4gIGxlZGlnaGVkID0gYyg0LjIsIDMuOCwgMy45LCAzLjUsIDUuMSwgNC43KVxuKVxuXG5wcmludChsZWRpZ2hlZCkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den samme lange tabel i R.</p>
+<ol>
+<li>
+<code>data.frame(...)</code> med tre kolonner og 6 rækker.
+</li>
+<li>
+<code>c(...)</code> kan godt fortsætte på næste linje, fordi parentesen ikke er lukket endnu.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2><code>pivot</code>: langt til bredt</h2>
+<p>Tre argumenter: hvad står i <strong>rækkerne</strong> (<code>index</code>), hvad bliver til <strong>kolonner</strong> (<code>columns</code>), og hvor står <strong>værdierne</strong> (<code>values</code>).</p>
+<div class="panel-tabset">
+<ul id="tabset-24" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-24-1">Python</a></li><li><a href="#tabset-24-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-24-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle47">
+<div>
+<div id="pyodide-47" class="exercise-cell">
+
+</div>
+<script type="pyodide-47-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYnJlZCA9IGxlZGlnaGVkLnBpdm90KGluZGV4PVwia29tbXVuZVwiLFxuICAgICAgICAgICAgICAgICAgICAgIGNvbHVtbnM9XCJhYXJcIixcbiAgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9XCJsZWRpZ2hlZFwiKVxucHJpbnQoYnJlZCkifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver den lange tabel om til bred med <code>pivot</code>.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>index="kommune"</code>: hvad der skal stå i <strong>rækkerne</strong>.
+</li>
+<li data-linjer="2" tabindex="0">
+<code>columns="aar"</code>: hvilken kolonne der skal blive til <strong>kolonnenavne</strong>.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>values="ledighed"</code>: hvilken kolonne der indeholder <strong>tallene</strong>.
+</li>
+<li>
+Resultatet har kommunerne som rækkenavne (indeks) og årene som kolonner.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-24-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle48">
+<div>
+<div id="webr-48" class="exercise-cell">
+
+</div>
+<script type="webr-48-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0aWR5cilcblxuYnJlZCA8LSBwaXZvdF93aWRlcihsZWRpZ2hlZCxcbiAgICAgICAgICAgICAgICAgICAgbmFtZXNfZnJvbSA9IGFhcixcbiAgICAgICAgICAgICAgICAgICAgdmFsdWVzX2Zyb20gPSBsZWRpZ2hlZClcbnByaW50KGJyZWQpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Fra langt til bredt i R med <code>pivot_wider()</code> fra tidyr.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>library(tidyr)</code> indlæser tidyr.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>names_from = aar</code>: årene bliver kolonnenavne.
+</li>
+<li data-linjer="5" tabindex="0">
+<code>values_from = ledighed</code>: ledighedstallene fylder cellerne.
+</li>
+<li>
+Inden i tidyr-funktioner skriver man kolonnenavne uden anførselstegn.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<p>Seks rækker blev til tre. Intet er gået tabt. Årstallet er gået fra at være <strong>data</strong> til at være et <strong>kolonnenavn</strong>.</p>
+</section>
+<section class="slide level2 kodelab lay-kodelab scrollable">
+<h2><code>melt</code>: bredt til langt</h2>
+<p><code>id_vars</code> er de kolonner, der identificerer enheden. Resten foldes sammen til to kolonner: variabelnavn og værdi.</p>
+<div class="panel-tabset">
+<ul id="tabset-25" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-25-1">Python</a></li><li><a href="#tabset-25-2">R</a></li></ul>
+<div class="tab-content">
+<div id="tabset-25-1">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle49">
+<div>
+<div id="pyodide-49" class="exercise-cell">
+
+</div>
+<script type="pyodide-49-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGFuZyA9IGJyZWQucmVzZXRfaW5kZXgoKS5tZWx0KFxuICAgIGlkX3ZhcnM9XCJrb21tdW5lXCIsXG4gICAgdmFyX25hbWU9XCJhYXJcIixcbiAgICB2YWx1ZV9uYW1lPVwibGVkaWdoZWRcIilcblxucHJpbnQobGFuZykifQ==
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Den laver den brede tabel tilbage til lang med <code>melt</code>.</p>
+<ol>
+<li data-linjer="1" tabindex="0">
+<code>bred.reset_index()</code> flytter kommunenavnene fra rækkenavnene (indekset) tilbage til en almindelig kolonne. Det er nødvendigt, fordi <code>pivot</code> havde lagt dem i indekset.
+</li>
+<li>
+<code>.melt(...)</code> folder kolonnerne sammen:
+<ul>
+<li><code>id_vars="kommune"</code>: den kolonne, der skal blive stående.</li>
+<li><code>var_name="aar"</code>: navnet på den nye kolonne med de gamle kolonnenavne (årene).</li>
+<li><code>value_name="ledighed"</code>: navnet på den nye kolonne med tallene.</li>
+</ul>
+</li>
+<li>
+Resultatet har igen 6 rækker.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+<div id="tabset-25-2">
+<div class="proev celle" data-maerke="Prøv selv" data-celle="celle50">
+<div>
+<div id="webr-50" class="exercise-cell">
+
+</div>
+<script type="webr-50-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJjYXB0aW9uIjoiUHLDuHYgc2VsdiIsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGFuZyA8LSBwaXZvdF9sb25nZXIoYnJlZCxcbiAgICAgICAgICAgICAgICAgICAgIGNvbHMgPSAta29tbXVuZSxcbiAgICAgICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gXCJhYXJcIixcbiAgICAgICAgICAgICAgICAgICAgIHZhbHVlc190byA9IFwibGVkaWdoZWRcIilcbnByaW50KGxhbmcpIn0=
+</script>
+</div>
+<details class="forklaring"><summary>Forklaring af koden, trin for trin</summary><div class="forklaring-indhold">
+<p><strong>Hvad gør koden?</strong> Fra bredt til langt i R med <code>pivot_longer()</code>.</p>
+<ol>
+<li data-linjer="2" tabindex="0">
+<code>cols = -kommune</code>: fold alle kolonner <strong>undtagen</strong> <code>kommune</code> sammen. Minus betyder <em>ikke</em>.
+</li>
+<li data-linjer="3" tabindex="0">
+<code>names_to = "aar"</code>: de gamle kolonnenavne kommer i kolonnen <code>aar</code>.
+</li>
+<li data-linjer="4" tabindex="0">
+<code>values_to = "ledighed"</code>: tallene kommer i kolonnen <code>ledighed</code>.
+</li>
+<li data-linjer="3" tabindex="0">
+Bemærk: <code>aar</code> er nu tekst (<code>&lt;chr&gt;</code>), fordi den kom fra kolonnenavne. Skal den bruges som tal, laves den om med <code>as.integer()</code>.
+</li>
+</ol>
+</div></details>
+</div>
+</div>
+</div>
+</div>
+<div class="lille">
+<p><code>reset_index()</code> skal til først, fordi <code>pivot</code> lagde kommunenavnet i indekset.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Opsamling</h2>
+<ul>
+<li><strong>Lister</strong> kan ændres. Python tæller fra 0, og slutindekset er ikke med.</li>
+<li><strong>Tuples</strong> kan ikke ændres og kan derfor bruges som nøgler.</li>
+<li><strong>Dictionaries</strong> kobler nøgle til værdi og er den rigtige struktur til at tælle.</li>
+<li><strong>Løkker</strong> har et fast mønster: før, undervejs, efter.</li>
+<li><strong><code>merge</code></strong> kobler på en nøgle. Hvilke rækker der overlever, er et fagligt valg.</li>
+<li><strong>Langt og bredt</strong> er samme data i to former.</li>
+</ul>
+</section></section>
+<section>
+<section class="title-slide slide level1 lay-sektion center" data-nr="05">
+<h1>Øvelser</h1>
+<p>Prøv selv. Cellerne fortæller, om svaret er rigtigt.</p>
+</section>
+<section class="slide level2 opgave lay-opgave scrollable">
+<h2>Øvelse 1: et slice</h2>
+<div class="opgavetekst">
+<p>Hent de <strong>tre midterste</strong> bogstaver: <code>c</code>, <code>d</code> og <code>e</code>.</p>
+<ol type="1">
+<li>Udfyld start og slut.</li>
+<li>Husk: slut er ikke med.</li>
+</ol>
+<p><span class="timer" data-time="180"></span></p>
+</div>
+<div class="oevelse celle" data-maerke="Øvelse" data-celle="celle51">
+<div>
+<div id="pyodide-51" class="exercise-cell">
+
+</div>
+<script type="pyodide-51-contents">
+eyJhdHRyIjp7ImNhcHRpb24iOiLDmHZlbHNlIiwiZWRpdCI6dHJ1ZSwiZW52aXIiOiJnbG9iYWwiLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNlbGxlNTEifSwiY29kZSI6InQgPSBbXCJhXCIsIFwiYlwiLCBcImNcIiwgXCJkXCIsIFwiZVwiLCBcImZcIiwgXCJnXCJdXG50W19fX19fXzpfX19fX19dIn0=
+</script>
+</div>
+<div class="hjaelp-panel" data-slags="hint">
+<p><code>c</code> står på plads 2. <code>e</code> står på plads 4, så slut skal være én højere.</p>
+</div>
+<div class="hjaelp-panel" data-slags="loesning">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span>, <span class="st">"f"</span>, <span class="st">"g"</span>]</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>t[<span class="dv">2</span>:<span class="dv">5</span>]</span></code><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<script type="exercise-check-celle51-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJlbnZpciI6Imdsb2JhbCIsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY2VsbGU1MSJ9LCJjb2RlIjoib2sgPSByZXN1bHQgPT0gW1wiY1wiLCBcImRcIiwgXCJlXCJdXG5mZWVkYmFjayA9IHtcImNvcnJlY3RcIjogb2ssIFwibWVzc2FnZVwiOiBcIlJpZ3RpZ3QhIFN0YXJ0IDIgZXIgbWVkLCBzbHV0IDUgZXIgaWtrZSBtZWQuXCIgaWYgb2sgZWxzZSBcIklra2UgaGVsdC4gUmVzdWx0YXRldCBza2FsIHbDpnJlIFsnYycsICdkJywgJ2UnXS5cIn1cbmZlZWRiYWNrIn0=
+</script>
+</div>
+</section>
+<section class="slide level2 opgave lay-opgave scrollable">
+<h2>Øvelse 2: behold alle personer</h2>
+<div class="opgavetekst">
+<p>Kobl <code>personer</code> og <code>kommuner</code>, så <strong>alle fem personer</strong> er med, også den fra Aalborg.</p>
+<ol type="1">
+<li>Vælg den rigtige <code>how</code>.</li>
+<li>Hvad står der i <code>region</code> for Aalborg?</li>
+</ol>
+<p><span class="timer" data-time="240"></span></p>
+</div>
+<div class="oevelse celle" data-maerke="Øvelse" data-celle="celle52">
+<div>
+<div id="pyodide-53" class="exercise-cell">
+
+</div>
+<script type="pyodide-53-contents">
+eyJhdHRyIjp7ImNhcHRpb24iOiLDmHZlbHNlIiwiZWRpdCI6dHJ1ZSwiZW52aXIiOiJnbG9iYWwiLCJldmFsIjp0cnVlLCJleGVyY2lzZSI6ImNlbGxlNTIifSwiY29kZSI6ImFsbGUgPSBwZC5tZXJnZShwZXJzb25lciwga29tbXVuZXIsIG9uPVwia29tbXVuZVwiLCBob3c9XCJfX19fX19cIilcbmFsbGUifQ==
+</script>
+</div>
+<div class="hjaelp-panel" data-slags="hint">
+<p><code>personer</code> er den <strong>venstre</strong> tabel i kaldet.</p>
+</div>
+<div class="hjaelp-panel" data-slags="loesning">
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>alle <span class="op">=</span> pd.merge(personer, kommuner, on<span class="op">=</span><span class="st">"kommune"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>alle</span></code><button title="Kopier til udklipsholder" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<script type="exercise-check-celle52-contents">
+eyJhdHRyIjp7ImNoZWNrIjp0cnVlLCJlZGl0Ijp0cnVlLCJlbnZpciI6Imdsb2JhbCIsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiY2VsbGU1MiJ9LCJjb2RlIjoidHJ5OlxuICAgIG9rID0gbGVuKHJlc3VsdCkgPT0gbGVuKHBlcnNvbmVyKSBhbmQgXCJBYWxib3JnXCIgaW4gbGlzdChyZXN1bHRbXCJrb21tdW5lXCJdKSBhbmQgXCJFc2JqZXJnXCIgbm90IGluIGxpc3QocmVzdWx0W1wia29tbXVuZVwiXSlcbmV4Y2VwdCBFeGNlcHRpb246XG4gICAgb2sgPSBGYWxzZVxuZmVlZGJhY2sgPSB7XCJjb3JyZWN0XCI6IG9rLCBcIm1lc3NhZ2VcIjogXCJSaWd0aWd0ISBBbGxlIGZlbSBwZXJzb25lciBlciBtZWQsIG9nIEFhbGJvcmcgaGFyIE5hTiBpIHJlZ2lvbi5cIiBpZiBvayBlbHNlIFwiSWtrZSBoZWx0LiBBbGxlIGZlbSBwZXJzb25lciBza2FsIG1lZCwgbWVuIGlra2Uga29tbXVuZXIgdWRlbiBwZXJzb25lci5cIn1cbmZlZWRiYWNrIn0=
+</script>
+</div>
+</section>
+<section class="slide level2 sidst lay-sidst">
+<h2>Sidst i dag</h2>
+<div class="kort-raekke">
+<div class="kol">
+<p><strong>Det vigtigste</strong></p>
+<p>Tæl rækker før og efter hver kobling. Det, der forsvinder, forsvinder uden advarsel.</p>
+</div>
+<div class="kol">
+<p><strong>Øvelser</strong></p>
+<p>Se <a href="index.html">lektionens side</a> for dagens notebook og øvelser.</p>
+</div>
+<div class="kol">
+<p><strong>Næste gang</strong></p>
+<p><a href="../04-datavisualisering/index.html">Lektion 4: Datavisualisering</a>.</p>
+</div>
+</div>
+<p><a href="index.html">Tilbage til lektionens side</a> · <a href="../../kursus/plan.html">Alle lektioner</a></p>
+<p><span class="aau-logo" role="img" aria-label="Aalborg Universitet"></span></p>
+
+
+<script type="webr-data">
+eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC42LjAvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyIsImRwbHlyIiwidGlkeXIiXSwicmVwb3MiOltdfSwicmVuZGVyX2RmIjoiZGVmYXVsdCJ9
+</script>
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwicGFuZGFzIiwibnVtcHkiXX19
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTUzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfNTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTUzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBleGVyY2lzZSBjb25maWd1cmF0aW9uXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKFxuICAgIHtcbiAgICAgIGlkOiBcInB5b2RpZGUtNTMtY29udGVudHNcIixcbiAgICAgIGVudmlyOiBgZXhlcmNpc2UtZW52LSR7YmxvY2suYXR0ci5leGVyY2lzZX1gLFxuICAgICAgZXJyb3I6IGZhbHNlLFxuICAgICAgY2FwdGlvbjogJ0V4ZXJjaXNlJyxcbiAgICB9LFxuICAgIGJsb2NrLmF0dHJcbiAgKTtcblxuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbnZpZXdvZiBfcHlvZGlkZV92YWx1ZV81MyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNTMsIHt9KTtcbl9weW9kaWRlX2ZlZWRiYWNrXzUzID0ge1xuICBjb25zdCB7IFB5b2RpZGVHcmFkZXIgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IGVtcHR5RmVlZGJhY2sgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTtcblxuICBjb25zdCBncmFkZXIgPSBuZXcgUHlvZGlkZUdyYWRlcihfcHlvZGlkZV92YWx1ZV81My5ldmFsdWF0b3IpO1xuICBjb25zdCBmZWVkYmFjayA9IGF3YWl0IGdyYWRlci5ncmFkZUV4ZXJjaXNlKCk7XG4gIGlmICghZmVlZGJhY2spIHJldHVybiBlbXB0eUZlZWRiYWNrO1xuICByZXR1cm4gZmVlZGJhY2s7XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS01MSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzUxID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01MS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIC8vIERlZmF1bHQgZXhlcmNpc2UgY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbihcbiAgICB7XG4gICAgICBpZDogXCJweW9kaWRlLTUxLWNvbnRlbnRzXCIsXG4gICAgICBlbnZpcjogYGV4ZXJjaXNlLWVudi0ke2Jsb2NrLmF0dHIuZXhlcmNpc2V9YCxcbiAgICAgIGVycm9yOiBmYWxzZSxcbiAgICAgIGNhcHRpb246ICdFeGVyY2lzZScsXG4gICAgfSxcbiAgICBibG9jay5hdHRyXG4gICk7XG5cbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG52aWV3b2YgX3B5b2RpZGVfdmFsdWVfNTEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUxLCB7fSk7XG5fcHlvZGlkZV9mZWVkYmFja181MSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlR3JhZGVyIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBlbXB0eUZlZWRiYWNrID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2Jyk7XG5cbiAgY29uc3QgZ3JhZGVyID0gbmV3IFB5b2RpZGVHcmFkZXIoX3B5b2RpZGVfdmFsdWVfNTEuZXZhbHVhdG9yKTtcbiAgY29uc3QgZmVlZGJhY2sgPSBhd2FpdCBncmFkZXIuZ3JhZGVFeGVyY2lzZSgpO1xuICBpZiAoIWZlZWRiYWNrKSByZXR1cm4gZW1wdHlGZWVkYmFjaztcbiAgcmV0dXJuIGZlZWRiYWNrO1xufVxuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTUwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV81MDtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTUwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNTAgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici01MC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTUwLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzUwID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl81MCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNDkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80OSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNDktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00OS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQ5ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl80OSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTQ4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80ODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTQ4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNDggPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00OC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTQ4LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzQ4ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80OCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNDciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80NyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNDctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00Ny1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQ3ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl80Nywge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTQ2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80NjtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTQ2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNDYgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00Ni1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTQ2LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzQ2ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80Niwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNDUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80NSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNDUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00NS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQ1ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl80NSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTQ0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80NDtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTQ0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNDQgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00NC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTQ0LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzQ0ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80NCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNDMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80MyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNDMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00My1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQzID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl80Mywge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTQyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80MjtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTQyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNDIgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00Mi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTQyLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzQyID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80Miwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNDEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80MSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtNDEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS00MS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQxID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl80MSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTQwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80MDtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTQwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNDAgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00MC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTQwLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzQwID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80MCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMzkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zOSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMzktY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0zOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzM5ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8zOSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTM4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8zODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTM4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMzggPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0zOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTM4LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzM4ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8zOCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMzciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zNyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMzctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0zNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzM3ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8zNywge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTM2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8zNjtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTM2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfMzYgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0zNi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTM2LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzM2ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8zNiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMzUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zNSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMzUtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0zNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzM1ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8zNSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTM0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8zNDtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTM0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6Il93ZWJyX3ZhbHVlXzM0ID0ge1xuICBjb25zdCB7IGhpZ2hsaWdodFIsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTM0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcIndlYnItMzQtY29udGVudHNcIixcbiAgICBlY2hvOiB0cnVlLFxuICAgIG91dHB1dDogdHJ1ZVxuICB9LCBibG9jay5hdHRyKTtcblxuICAvLyBFdmFsdWF0ZSB0aGUgcHJvdmlkZWQgUiBjb2RlXG4gIGNvbnN0IHJlc3VsdCA9IHdlYlJPanMucHJvY2Vzcyh7Y29kZTogYmxvY2suY29kZSwgb3B0aW9uc30sIHt9KTtcblxuICAvLyBFYXJseSB5aWVsZCB3aGlsZSB3ZSB3YWl0IGZvciB0aGUgZmlyc3QgZXZhbHVhdGlvbiBhbmQgcmVuZGVyXG4gIGlmIChvcHRpb25zLm91dHB1dCAmJiAhKFwiMzRcIiBpbiB3ZWJST2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgclwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChoaWdobGlnaHRSKGJsb2NrLmNvZGUpKTtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWdyb3cgc3Bpbm5lci1ncm93LXNtIG0tMiBwb3NpdGlvbi1hYnNvbHV0ZSB0b3AtMCBlbmQtMFwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChwcmVFbGVtKTtcbiAgICB9IGVsc2Uge1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItYm9yZGVyIHNwaW5uZXItYm9yZGVyLXNtXCI7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgfVxuXG4gICAgeWllbGQgY29udGFpbmVyO1xuICB9XG5cbiAgd2ViUk9qcy5yZW5kZXJlZE9qc1tcIjM0XCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMzMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMzMgPSB7XG4gIGNvbnN0IHsgaGlnaGxpZ2h0UHl0aG9uLCBiNjREZWNvZGV9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMzMtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICAvLyBEZWZhdWx0IGV2YWx1YXRpb24gY29uZmlndXJhdGlvblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7XG4gICAgaWQ6IFwicHlvZGlkZS0zMy1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjMzXCIgaW4gcHlvZGlkZU9qcy5yZW5kZXJlZE9qcykpIHtcbiAgICBjb25zdCBjb250YWluZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuICAgIGNvbnN0IHNwaW5uZXIgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpO1xuXG4gICAgaWYgKG9wdGlvbnMuZWNobykge1xuICAgICAgLy8gU2hvdyBvdXRwdXQgYXMgaGlnaGxpZ2h0ZWQgc291cmNlXG4gICAgICBjb25zdCBwcmVFbGVtID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcInByZVwiKTtcbiAgICAgIGNvbnRhaW5lci5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGVcIjtcbiAgICAgIHByZUVsZW0uY2xhc3NOYW1lID0gXCJzb3VyY2VDb2RlIHB5dGhvblwiO1xuICAgICAgcHJlRWxlbS5hcHBlbmRDaGlsZChoaWdobGlnaHRQeXRob24oYmxvY2suY29kZSkpO1xuICAgICAgc3Bpbm5lci5jbGFzc05hbWUgPSBcInNwaW5uZXItZ3JvdyBzcGlubmVyLWdyb3ctc20gbS0yIHBvc2l0aW9uLWFic29sdXRlIHRvcC0wIGVuZC0wXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHByZUVsZW0pO1xuICAgIH0gZWxzZSB7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ib3JkZXIgc3Bpbm5lci1ib3JkZXItc21cIjtcbiAgICAgIGNvbnRhaW5lci5hcHBlbmRDaGlsZChzcGlubmVyKTtcbiAgICB9XG5cbiAgICB5aWVsZCBjb250YWluZXI7XG4gIH1cblxuICBweW9kaWRlT2pzLnJlbmRlcmVkT2pzW1wiMzNcIl0gPSB0cnVlO1xuICB5aWVsZCBhd2FpdCByZXN1bHQ7XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMzIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzMyO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMzIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8zMiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTMyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMzItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMzIgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzMyLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0zMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzMxID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTMxLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMxLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMzAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzMwO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMzAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8zMCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTMwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMzAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMzAgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzMwLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzI5ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yOS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTI5LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzI5LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMjgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzI4O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMjgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yOCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTI4LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMjgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMjggPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzI4LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzI3ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yNy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTI3LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzI3LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMjYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzI2O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMjYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yNiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTI2LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMjYtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMjYgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzI2LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzI1ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yNS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTI1LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzI1LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMjQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzI0O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMjQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yNCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTI0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMjQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMjQgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzI0LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIzID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yMy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTIzLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIzLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMjIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzIyO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMjIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yMiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTIyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMjItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMjIgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzIyLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0yMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzIxID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTIxLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMjEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIxLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMjAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzIwO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMjAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yMCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTIwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMjAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMjAgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzIwLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xOSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzE5ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xOS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTE5LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzE5LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzE4O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xOCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTE4LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMTggPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzE4LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzE3ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xNy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTE3LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzE3LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzE2O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xNiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTE2LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMTYtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMTYgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzE2LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xNSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzE1ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xNS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTE1LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzE1LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzE0O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xNCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTE0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMTQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMTQgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzE0LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEzID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTEzLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEzLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzEyO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xMiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTEyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMTIgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzEyLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0xMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzExID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xMS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTExLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMTEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzExLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMTAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzEwO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMTAiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8xMCA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMTAgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzEwLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS05IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfOSA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtOS1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTktY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV85ID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl85LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtOCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfODtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItOC1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfOCA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfOCwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtNyIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTctY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS03LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfNywge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItd2lkZ2V0LTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJ7XG4gIC8vIFdhaXQgZm9yIG91dHB1dCB0byBiZSB3cml0dGVuIHRvIHRoZSBET00sIHRoZW4gdHJpZ2dlciB3aWRnZXQgcmVuZGVyaW5nXG4gIGF3YWl0IF93ZWJyX3ZhbHVlXzY7XG4gIGlmICh3aW5kb3cuSFRNTFdpZGdldHMpIHtcbiAgICB3aW5kb3cuSFRNTFdpZGdldHMuc3RhdGljUmVuZGVyKCk7XG4gIH1cbiAgaWYgKHdpbmRvdy5QYWdlZFRhYmxlRG9jKSB7XG4gICAgd2luZG93LlBhZ2VkVGFibGVEb2MuaW5pdEFsbCgpO1xuICB9XG59XG4ifSx7ImNlbGxOYW1lIjoid2Vici02IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfd2Vicl9lZGl0b3JfNiA9IHtcbiAgY29uc3QgeyBXZWJSRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLTYtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgd2Vici02LWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFdlYlJFeGVyY2lzZUVkaXRvcih3ZWJST2pzLndlYlJQcm9taXNlLCBibG9jay5jb2RlLCBvcHRpb25zKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl93ZWJyX3ZhbHVlXzYgPSB3ZWJST2pzLnByb2Nlc3MoX3dlYnJfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC00IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV80O1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItNCIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzQgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV80ID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl80LCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS0zIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMyA9IHtcbiAgY29uc3QgeyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IsIGI2NERlY29kZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtMy1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGBweW9kaWRlLTMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8zID0gcHlvZGlkZU9qcy5wcm9jZXNzKF9weW9kaWRlX2VkaXRvcl8zLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici13aWRnZXQtMiIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IntcbiAgLy8gV2FpdCBmb3Igb3V0cHV0IHRvIGJlIHdyaXR0ZW4gdG8gdGhlIERPTSwgdGhlbiB0cmlnZ2VyIHdpZGdldCByZW5kZXJpbmdcbiAgYXdhaXQgX3dlYnJfdmFsdWVfMjtcbiAgaWYgKHdpbmRvdy5IVE1MV2lkZ2V0cykge1xuICAgIHdpbmRvdy5IVE1MV2lkZ2V0cy5zdGF0aWNSZW5kZXIoKTtcbiAgfVxuICBpZiAod2luZG93LlBhZ2VkVGFibGVEb2MpIHtcbiAgICB3aW5kb3cuUGFnZWRUYWJsZURvYy5pbml0QWxsKCk7XG4gIH1cbn1cbiJ9LHsiY2VsbE5hbWUiOiJ3ZWJyLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF93ZWJyX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFdlYlJFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuICBjb25zdCBzY3JpcHRDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItMi1jb250ZW50c1xcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGJsb2NrID0gSlNPTi5wYXJzZShiNjREZWNvZGUoc2NyaXB0Q29udGVudCkpO1xuXG4gIGNvbnN0IG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHsgaWQ6IGB3ZWJyLTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgV2ViUkV4ZXJjaXNlRWRpdG9yKHdlYlJPanMud2ViUlByb21pc2UsIGJsb2NrLmNvZGUsIG9wdGlvbnMpO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3dlYnJfdmFsdWVfMiA9IHdlYlJPanMucHJvY2Vzcyhfd2Vicl9lZGl0b3JfMiwge30pO1xuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3B5b2RpZGVfZWRpdG9yXzEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEtY29udGVudHNcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBibG9jayA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKHNjcmlwdENvbnRlbnQpKTtcblxuICBjb25zdCBvcHRpb25zID0gT2JqZWN0LmFzc2lnbih7IGlkOiBgcHlvZGlkZS0xLWNvbnRlbnRzYCB9LCBibG9jay5hdHRyKTtcbiAgY29uc3QgZWRpdG9yID0gbmV3IFB5b2RpZGVFeGVyY2lzZUVkaXRvcihcbiAgICBweW9kaWRlT2pzLnB5b2RpZGVQcm9taXNlLFxuICAgIGJsb2NrLmNvZGUsXG4gICAgb3B0aW9uc1xuICApO1xuXG4gIHJldHVybiBlZGl0b3IuY29udGFpbmVyO1xufVxuX3B5b2RpZGVfdmFsdWVfMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMSwge30pO1xuIn0seyJjZWxsTmFtZSI6IndlYnItcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6IndlYlJPanMgPSB7XG4gIGNvbnN0IHsgV2ViUiwgQ2hhbm5lbFR5cGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWUuV2ViUjtcbiAgY29uc3Qge1xuICAgIFdlYlJFdmFsdWF0b3IsXG4gICAgV2ViUkVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gd2ViUiBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ3ZWJyLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICAvLyBJbml0aWFsaXNlIHdlYlIgYW5kIHNldHVwIGZvciBSIGNvZGUgZXZhbHVhdGlvblxuICBsZXQgd2ViUlByb21pc2UgPSAoYXN5bmMgKHdlYlIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHdlYlJgO1xuICAgIGF3YWl0IHdlYlIuaW5pdCgpO1xuXG4gICAgLy8gSW5zdGFsbCBwcm92aWRlZCBsaXN0IG9mIHBhY2thZ2VzXG4gICAgLy8gRW5zdXJlIHdlYlIgZGVmYXVsdCByZXBvIGlzIGluY2x1ZGVkXG4gICAgZGF0YS5wYWNrYWdlcy5yZXBvcy5wdXNoKFwiaHR0cHM6Ly9yZXBvLnItd2FzbS5vcmdcIilcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiB3ZWJSLmV2YWxSVm9pZChgXG4gICAgICAgIHdlYnI6Omluc3RhbGwocGtnLCByZXBvcyA9IHJlcG9zKVxuICAgICAgICBsaWJyYXJ5KHBrZywgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKVxuICAgICAgYCwgeyBlbnY6IHtcbiAgICAgICAgcGtnOiBwa2csXG4gICAgICAgIHJlcG9zOiBkYXRhLnBhY2thZ2VzLnJlcG9zLFxuICAgICAgfX0pO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIGNvbnN0IGFuYWx5c2lzID0gYXdhaXQgd2ViUi5GUy5hbmFseXplUGF0aChwYXRoKTtcbiAgICAgICAgaWYgKCFhbmFseXNpcy5leGlzdHMpIHtcbiAgICAgICAgICB0cnkge1xuICAgICAgICAgICAgYXdhaXQgd2ViUi5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3I6IFwiJHtlLm1lc3NhZ2V9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICByZXR1cm4gYXdhaXQgd2ViUi5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbnN0YWxsaW5nIHdlYlIgc2hpbXNgO1xuICAgIGF3YWl0IHdlYlIuZXZhbFJWb2lkKGB3ZWJyOjpzaGltX2luc3RhbGwoKWApO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBXZWJSIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFIod2ViUiwgZGF0YSk7XG5cbiAgICBzdGF0dXNUZXh0LnJlbW92ZSgpO1xuICAgIGlmIChzdGF0dXNDb250YWluZXIuY2hpbGRyZW4ubGVuZ3RoID09IDApIHtcbiAgICAgIHN0YXR1c0NvbnRhaW5lci5wYXJlbnROb2RlLnJlbW92ZSgpO1xuICAgIH1cbiAgICByZXR1cm4gd2ViUjtcbiAgfSkobmV3IFdlYlIoZGF0YS5vcHRpb25zKSk7XG5cbiAgLy8gS2VlcCB0cmFjayBvZiBpbml0aWFsIE9KUyBibG9jayByZW5kZXJcbiAgY29uc3QgcmVuZGVyZWRPanMgPSB7fTtcblxuICBjb25zdCBwcm9jZXNzID0gYXN5bmMgKGNvbnRleHQsIGlucHV0cykgPT4ge1xuICAgIGNvbnN0IHdlYlIgPSBhd2FpdCB3ZWJSUHJvbWlzZTtcbiAgICBjb25zdCBldmFsdWF0b3IgPSBuZXcgV2ViUkV2YWx1YXRvcih3ZWJSLCBjb250ZXh0KVxuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHByb2Nlc3MsXG4gICAgd2ViUlByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gIH07XG59XG4ifSx7ImNlbGxOYW1lIjoicHlvZGlkZS1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoicHlvZGlkZU9qcyA9IHtcbiAgY29uc3Qge1xuICAgIFB5b2RpZGVFdmFsdWF0b3IsXG4gICAgUHlvZGlkZUVudmlyb25tZW50TWFuYWdlcixcbiAgICBzZXR1cFB5dGhvbixcbiAgICBzdGFydFB5b2RpZGVXb3JrZXIsXG4gICAgYjY0RGVjb2RlLFxuICAgIGNvbGxhcHNlUGF0aCxcbiAgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc3RhdHVzQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLXN0YXR1c1wiKTtcbiAgY29uc3QgaW5kaWNhdG9yQ29udGFpbmVyID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJleGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaW5kaWNhdG9yQ29udGFpbmVyLmNsYXNzTGlzdC5yZW1vdmUoXCJkLW5vbmVcIik7XG5cbiAgbGV0IHN0YXR1c1RleHQgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiZGl2XCIpXG4gIHN0YXR1c1RleHQuY2xhc3NMaXN0ID0gXCJleGVyY2lzZS1sb2FkaW5nLWRldGFpbHNcIjtcbiAgc3RhdHVzVGV4dCA9IHN0YXR1c0NvbnRhaW5lci5hcHBlbmRDaGlsZChzdGF0dXNUZXh0KTtcbiAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBJbml0aWFsaXNlYDtcblxuICAvLyBIb2lzdCBpbmRpY2F0b3Igb3V0IGZyb20gZmluYWwgc2xpZGUgd2hlbiBydW5uaW5nIHVuZGVyIHJldmVhbFxuICBjb25zdCByZXZlYWxTdGF0dXMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCAuZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGlmIChyZXZlYWxTdGF0dXMpIHtcbiAgICByZXZlYWxTdGF0dXMucmVtb3ZlKCk7XG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgPiAuc2xpZGVzXCIpLmFwcGVuZENoaWxkKHJldmVhbFN0YXR1cyk7XG4gIH1cblxuICAvLyBNYWtlIGFueSByZXZlYWwgc2xpZGVzIHdpdGggbGl2ZSBjZWxscyBzY3JvbGxhYmxlXG4gIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmV2ZWFsIC5leGVyY2lzZS1jZWxsXCIpLmZvckVhY2goKGVsKSA9PiB7XG4gICAgZWwuY2xvc2VzdCgnc2VjdGlvbi5zbGlkZScpLmNsYXNzTGlzdC5hZGQoXCJzY3JvbGxhYmxlXCIpO1xuICB9KVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 0.7,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"normal","numbers":true,"hideMissingTitles":true},
+'chalkboard': {"buttons":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 6.0e-2,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script type="ojs-module-contents">
+    eyJjb250ZW50cyI6W119
+    </script>
+    <script type="module">
+    if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+    window._ojs.paths.runtimeToDoc = "../../lektioner/03-data-wrangling";
+    window._ojs.paths.runtimeToRoot = "../..";
+    window._ojs.paths.docToRoot = "../..";
+    window._ojs.selfContained = false;
+    window._ojs.runtime.interpretFromScriptTags();
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Kopieret!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Kopieret!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/jeppefq\.github\.io\/sds1\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

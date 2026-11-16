@@ -1,0 +1,50 @@
+---
+title: "Opgaver og øvelser"
+subtitle: "Alt øvelsesmateriale samlet ét sted"
+---
+
+Til de fleste lektioner hører der øvelser: **øvelsesark** på papir (PDF) og **notebooks** (`.ipynb`), som I åbner i UCloud. Svarark udleveres efter undervisningen.
+
+## Sådan åbner I en notebook
+
+1. Højreklik på notebook-linket, og vælg *Gem link som*.
+2. Start JupyterLab i [UCloud]({{< var ucloud >}}) (se [Værktøjer](vaerktoejer.qmd)), og upload filen.
+3. Kør cellerne oppefra og ned med <kbd>Shift</kbd> + <kbd>Enter</kbd>.
+
+## Oversigt
+
+| Lektion | Øvelsesark | Notebooks |
+|---|---|---|
+| [1 · Introduktion](../lektioner/01-messy-data-og-python/index.qmd) | [Tekst, billede og klassifikation](../lektioner/01-messy-data-og-python/materiale/SDS1_l1_handouts.pdf) | |
+| [2 · Intro til Python](../lektioner/02-intro-til-python/index.qmd) | [Gæt outputtet](../lektioner/02-intro-til-python/materiale/SDS1_l2_handout.pdf) · [Recap](../lektioner/02-intro-til-python/materiale/SDS1_l2_handout_recap.pdf) | [Tekst som data](../lektioner/02-intro-til-python/materiale/SDS1_l2_notebook.ipynb) |
+| [3 · Data wrangling](../lektioner/03-data-wrangling/index.qmd) | [Øvelsesark](../lektioner/03-data-wrangling/materiale/SDS1-l3-handout.pdf) | [Tweets som data](../lektioner/03-data-wrangling/materiale/SDS1-l3-nb_tweets-som-data.ipynb) |
+| [4 · Datavisualisering](../lektioner/04-datavisualisering/index.qmd) | [Øvelsesark](../lektioner/04-datavisualisering/materiale/SDS1-l4-handout.pdf) · [Figur-ark](../lektioner/04-datavisualisering/materiale/SDS1-l4-handout-figur.pdf) · [Tabeller](../lektioner/04-datavisualisering/materiale/SDS1-l4-tabeller.pdf) | [Figurer](../lektioner/04-datavisualisering/materiale/SDS1-l4-nb-figurer.ipynb) |
+| [6 · Oprydning i tekst](../lektioner/06-oprydning-i-tekst/index.qmd) | [Dimensioner](../lektioner/06-oprydning-i-tekst/materiale/SDS1-l6-handout-dimensioner.pdf) · [Læs koden](../lektioner/06-oprydning-i-tekst/materiale/SDS1-l6-handout-kode.pdf) | [Preprocessing](../lektioner/06-oprydning-i-tekst/materiale/SDS1-l6-nb-preprocessin.ipynb) |
+| [7 · Tekstanalyse](../lektioner/07-computationel-tekstanalyse/index.qmd) | [Ark 1: korpus](../lektioner/07-computationel-tekstanalyse/materiale/l7-ark1-korpus.pdf) · [Ark 2: læs koden](../lektioner/07-computationel-tekstanalyse/materiale/l7-ark2-laes-koden.pdf) | [Tekstanalyse](../lektioner/07-computationel-tekstanalyse/materiale/l7_nb_tekstanalyse.ipynb) · [Sentiment](../lektioner/07-computationel-tekstanalyse/materiale/l7_nb_asent.ipynb) · [Klynger](../lektioner/07-computationel-tekstanalyse/materiale/l7_nb_klynger.ipynb) |
+
+Øvelser til lektion 5 og 8–12 ligger på lektionens side eller på [Moodle]({{< var moodle >}}).
+
+## Data
+
+Datasættene fra slides ligger i mappen [`data/`](https://github.com/jeppeFQ/sds1/tree/main/data) og kan læses direkte i Python:
+
+```python
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/sales_data.csv"
+data = pd.read_csv(url)
+```
+
+::: {.forklaring}
+1. `import pandas as pd` henter biblioteket pandas og giver det kaldenavnet `pd`.
+2. `url = "..."` gemmer filens adresse som tekst. Adressen starter med `raw.githubusercontent.com`, fordi det er selve filen og ikke GitHubs webside om filen.
+3. `pd.read_csv(url)` henter filen fra nettet og læser den ind som en tabel, der gemmes som `data`.
+4. Skift `sales_data.csv` ud med et andet filnavn fra tabellen herunder for at hente et andet datasæt.
+:::
+
+| Fil | Indhold | Bruges i |
+|---|---|---|
+| `sales_data.csv` | Lille salgstabel | Lektion 1–2 |
+| `data_tweets_2016_kilde_a.csv`, `data_tweets_2016_kilde_b.csv`, `data_maaneder.csv` | Tweets fra 2016 i to overlappende udtræk og en månedstabel | Lektion 3–4 |
+| `jobopslag_udsnit.csv` | Udsnit af danske jobopslag fra efteråret 2023 | Lektion 6 |
+| `ft_udsnit.csv` | Udsnit af debatter i Folketinget 2007–2022 | Lektion 7 |

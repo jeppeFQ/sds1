@@ -1,0 +1,241 @@
+---
+title: "Messy data og Python"
+subtitle: "Lektion 01"
+author: "Jeppe Fjeldgaard Qvist"
+format: sds1-revealjs
+engine: markdown
+accent: gul
+pyodide:
+  packages:
+    - pandas
+---
+
+## I dag
+
+1. **Kurset.** Forventninger og formalia.
+2. **Øvelser.**
+3. **Oplæg** ved Helena.
+4. **Portfolio** og idéudveksling.
+5. **Kodning.** Hvorfor, og hvad er det egentlig?
+
+# Kurset
+
+Forventninger, formalia og de data, I selv kommer til at arbejde med.
+
+## Social Data Science: forventninger og formalia
+
+- **10 ECTS.** Det er 275 timer. Spred dem ud.
+- **Forelæsninger og seminardage.** Se [planen](../../kursus/plan.html).
+- **3 undervisere.**
+- **Mundtlig eksamen** på baggrund af en portfolio.
+- **AI-positivt**, med klare forbehold.
+
+## {.udsagn}
+
+Social **Data** Science
+
+Hvad tæller som data, når det, vi vil forstå, er mennesker og samfund?
+
+## Idébank
+
+Saml idéer til data her: [Idébanken](https://docs.google.com/spreadsheets/d/1Pdfrz45V1wh774xkecmihCpRUDC597bYkdOP7qF0P_Y/edit?gid=1185058094#gid=1185058094)
+
+:::: {.to-kol}
+::: {.kol}
+- Taler i folketingssalen
+- Nyhedsindlæg fra Horesta
+- Indlæg på incel-fora
+- Jobopslag
+:::
+
+::: {.kol}
+- Filmanmeldelser
+- Tweets / X
+- Reddit
+- Højreorienterede medier
+:::
+::::
+
+# Kodning
+
+En meget detaljeret opskrift, som en maskine kan følge. Igen og igen.
+
+## Kodning?!
+
+- Hvad er jeres erfaring, hvis I har nogen?
+- Hvordan forstår I "kodning"? Hvorfor bruger vi ikke bare Excel?
+- Hvis I har erfaring: var den god? Hvordan lærte I det bedst, og hvad var svært?
+
+[5 min]{.timer tid=300}
+
+## Når Excel kommer til kort
+
+:::: {.to-kol}
+::: {.kol}
+- Analysere **100.000-vis** af rækker.
+- **Gentage** den samme analyse hver måned med nye data. I Excel skal alle klik gentages.
+- **Dokumentere** præcist, hvad vi har gjort, så en kollega kan gøre det samme.
+- **Kombinere** data fra mange kilder.
+- Lave avancerede statistiske modeller.
+:::
+
+::: {.kol}
+**Peg og klik**
+
+"Bland ingredienserne."
+
+**Kode**
+
+"Tag 500 g mel. Tilsæt 3 dl vand. Rør i 2 minutter."
+
+Koden er en *meget detaljeret* opskrift. Derfor kan en anden, eller en maskine, følge den præcist.
+:::
+::::
+
+## Først idéen: del op, regn, saml
+
+::: {.figur figur="gruppe" kol="region,indkomst" raekker="Hovedstaden,15400;Syddanmark,18500;Midtjylland,66500;Midtjylland,41200;Midtjylland,21100;Sjælland,19400;Nordjylland,43700;Hovedstaden,22300"}
+:::
+
+Hvad er gennemsnitsindkomsten i hver region? De otte første personer i dagens datasæt. Tryk *Næste trin*.
+
+## Så koden: den samme idé på tre linjer {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.proev forslag="Skift `.mean()` ud med `.max()` eller `.count()`. Eller skift `\"region\"` ud med `\"uddannelse\"`."}
+```{pyodide}
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/borgerpanel.csv"
+panel = pd.read_csv(url)
+
+gennemsnit = panel.groupby("region")["indkomst"].mean()
+print(gennemsnit)
+```
+
+::: {.forklaring}
+I skal ikke kunne skrive det her endnu. I skal kunne se, at koden er en opskrift.
+
+1. {1} `import pandas as pd` henter **biblioteket** pandas: en værktøjskasse til tabeller, som andre har skrevet. `pd` er et kort kaldenavn.
+2. {3} Adressen på datafilen gemmes under navnet `url`. Tegnet `=` betyder *gem det til højre under navnet til venstre*.
+3. {4} `pd.read_csv(url)` læser filen og giver os en tabel (en **DataFrame**) med navnet `panel`.
+4. {6} `panel.groupby("region")` deler rækkerne op efter region. `["indkomst"]` vælger kolonnen, og `.mean()` regner gennemsnittet ud i hver gruppe. Det er de tre trin fra figuren.
+5. {7} `print(...)` viser resultatet: én linje pr. region.
+:::
+::::
+
+### R
+
+:::: {.proev forslag="Skift `FUN = mean` ud med `FUN = max`, eller skift `region` ud med `uddannelse`."}
+```{webr}
+url <- "https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/borgerpanel.csv"
+panel <- read.csv(url)
+
+aggregate(indkomst ~ region, data = panel, FUN = mean)
+```
+
+::: {.forklaring}
+Det samme som Python-versionen, skrevet i R.
+
+1. {1} Adressen på filen gemmes under navnet `url`. I R skriver man `<-` i stedet for `=`.
+2. {2} `read.csv(url)` læser filen og gemmer den som en tabel (en **data frame**) med navnet `panel`.
+3. {4} `aggregate(indkomst ~ region, ...)` betyder: *se på `indkomst` opdelt efter `region`*. `FUN = mean` siger, at vi vil have gennemsnittet i hver gruppe.
+:::
+::::
+:::::
+
+::: {.lille}
+Datasættet er syntetisk: 500 opdigtede personer. Tallene siger intet om virkeligheden.
+:::
+
+## Fire grunde til at skrive det ned som kode
+
+::::: {.trin-kort}
+:::: {.kol}
+Reproducerbar
+
+Koden er en komplet **log** over, hvad I har gjort ved data. *"Hvordan fik du resultatet?"* Sådan her.
+::::
+
+:::: {.fragment}
+Skalerbar
+
+Den samme kode virker på 100 rækker og på millioner. Det kræver bare mere tid og computerkraft.
+::::
+
+:::: {.fragment}
+Fleksibel
+
+Tusindvis af biblioteker: fra grundlæggende statistik til machine learning og kunstig intelligens.
+::::
+
+:::: {.fragment}
+Automatisk
+
+Skriv koden én gang. Kør den hver dag, uge eller måned. Næste års data kræver kun en ny `url`.
+::::
+:::::
+
+## {.udsagn}
+
+Kodning er **kommunikation med en maskine**.
+
+Den forstår kun det, der er utvetydigt og logisk struktureret. Derfor skal I på kurset oparbejde en *algoritmisk tænkning*.
+
+## Algoritmisk tænkning
+
+Hvad tænker I, når I hører ordet *algoritme*? [3 min]{.timer tid=180}
+
+::::: {.trin-kort}
+:::: {.fragment}
+Dekomposition
+
+Bryd et komplekst problem ned i mindre dele.
+::::
+
+:::: {.fragment}
+Mønstre
+
+Genkend ligheder på tværs af forskellige problemer.
+::::
+
+:::: {.fragment}
+Abstraktion
+
+Fokusér på det væsentlige, og ignorér resten.
+::::
+
+:::: {.fragment}
+Algoritmedesign
+
+Trin for trin-løsninger, der kan automatiseres.
+::::
+:::::
+
+## Sidst i dag {.sidst}
+
+:::: {.kort-raekke}
+::: {.kol}
+**Det vigtigste**
+
+Kode er en opskrift, der kan gentages, deles og skaleres.
+:::
+
+::: {.kol}
+**Til næste gang**
+
+Se [lektionens side](index.html) for litteratur og materiale.
+:::
+
+::: {.kol}
+**Næste gang**
+
+[Lektion 2: Intro til Python](../02-intro-til-python/index.html). Fra tanke til kode.
+:::
+::::
+
+[Tilbage til lektionens side](index.html) · [Alle lektioner](../../kursus/plan.html)
+
+[]{.aau-logo role="img" aria-label="Aalborg Universitet"}

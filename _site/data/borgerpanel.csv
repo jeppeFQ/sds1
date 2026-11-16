@@ -1,0 +1,501 @@
+id,alder,koen,region,uddannelse,indkomst,skaermtid,tillid
+1,77,kvinde,Hovedstaden,mellemlang videregående,15400,1.3,8
+2,61,mand,Syddanmark,grundskole,18500,0.7,7
+3,42,mand,Midtjylland,mellemlang videregående,66500,2.6,7
+4,27,kvinde,Midtjylland,kort videregående,41200,1.9,9
+5,64,mand,Midtjylland,mellemlang videregående,21100,2.0,10
+6,70,mand,Sjælland,grundskole,19400,1.4,6
+7,77,mand,Nordjylland,lang videregående,43700,0.8,8
+8,32,kvinde,Hovedstaden,grundskole,22300,1.8,8
+9,56,kvinde,Syddanmark,mellemlang videregående,31000,2.8,9
+10,22,kvinde,Hovedstaden,grundskole,13700,3.6,4
+11,77,mand,Nordjylland,mellemlang videregående,33200,1.6,4
+12,23,kvinde,Nordjylland,erhvervsfaglig,32900,1.8,3
+13,66,kvinde,Syddanmark,erhvervsfaglig,20500,1.7,7
+14,66,kvinde,Syddanmark,lang videregående,17400,1.0,6
+15,46,kvinde,Midtjylland,erhvervsfaglig,60200,0.3,5
+16,70,kvinde,Sjælland,erhvervsfaglig,20400,1.6,4
+17,21,mand,Midtjylland,kort videregående,30600,3.2,7
+18,72,kvinde,Midtjylland,grundskole,15700,1.2,3
+19,40,kvinde,Hovedstaden,mellemlang videregående,25400,2.9,5
+20,64,mand,Hovedstaden,lang videregående,55000,0.2,6
+21,25,kvinde,Midtjylland,erhvervsfaglig,23300,0.8,7
+22,73,kvinde,Midtjylland,lang videregående,46300,2.2,7
+23,27,kvinde,Syddanmark,gymnasial,32300,1.5,8
+24,75,kvinde,Hovedstaden,erhvervsfaglig,20500,1.2,6
+25,36,kvinde,Midtjylland,gymnasial,29000,4.0,6
+26,51,mand,Midtjylland,gymnasial,36200,1.1,6
+27,60,kvinde,Hovedstaden,mellemlang videregående,52900,1.1,5
+28,57,kvinde,Syddanmark,grundskole,22500,1.2,6
+29,52,mand,Midtjylland,lang videregående,41200,2.6,9
+30,77,mand,Hovedstaden,mellemlang videregående,19100,0.4,8
+31,55,mand,Hovedstaden,erhvervsfaglig,40500,1.4,8
+32,49,mand,Sjælland,kort videregående,33400,1.5,7
+33,22,mand,Sjælland,grundskole,12800,6.9,7
+34,32,kvinde,Syddanmark,mellemlang videregående,28100,2.3,7
+35,46,kvinde,Midtjylland,lang videregående,39500,2.0,5
+36,76,mand,Nordjylland,mellemlang videregående,22200,0.8,5
+37,50,mand,Syddanmark,grundskole,19500,1.9,4
+38,21,mand,Midtjylland,grundskole,11300,0.9,8
+39,30,mand,Nordjylland,mellemlang videregående,32800,6.2,6
+40,54,kvinde,Hovedstaden,erhvervsfaglig,25800,1.8,8
+41,26,kvinde,Syddanmark,lang videregående,51200,3.2,5
+42,75,mand,Hovedstaden,kort videregående,25300,1.0,6
+43,30,mand,Hovedstaden,kort videregående,40500,0.9,5
+44,64,mand,Syddanmark,mellemlang videregående,20500,2.8,8
+45,64,mand,Hovedstaden,lang videregående,44500,0.6,10
+46,55,mand,Midtjylland,erhvervsfaglig,39900,2.0,4
+47,53,kvinde,Syddanmark,kort videregående,42500,1.7,7
+48,48,mand,Hovedstaden,grundskole,23100,2.8,5
+49,30,kvinde,Syddanmark,lang videregående,27100,3.0,9
+50,34,kvinde,Midtjylland,lang videregående,73900,1.6,10
+51,45,mand,Syddanmark,grundskole,23800,0.9,5
+52,52,mand,Midtjylland,erhvervsfaglig,19500,3.4,9
+53,71,kvinde,Midtjylland,lang videregående,33200,0.6,7
+54,63,mand,Midtjylland,kort videregående,34500,3.7,5
+55,78,kvinde,Midtjylland,erhvervsfaglig,18300,0.4,6
+56,52,mand,Syddanmark,erhvervsfaglig,35900,1.1,9
+57,45,kvinde,Syddanmark,mellemlang videregående,48800,4.0,8
+58,65,kvinde,Midtjylland,mellemlang videregående,31600,0.8,7
+59,48,mand,Hovedstaden,grundskole,37900,1.5,6
+60,77,mand,Sjælland,erhvervsfaglig,23400,3.9,5
+61,51,kvinde,Midtjylland,mellemlang videregående,29100,0.5,8
+62,57,mand,Midtjylland,mellemlang videregående,62100,1.4,10
+63,76,kvinde,Midtjylland,mellemlang videregående,35600,0.3,7
+64,61,mand,Hovedstaden,mellemlang videregående,34700,2.9,5
+65,40,mand,Nordjylland,mellemlang videregående,17400,3.9,8
+66,70,kvinde,Nordjylland,mellemlang videregående,18100,3.7,8
+67,75,mand,Hovedstaden,erhvervsfaglig,13500,0.4,9
+68,52,mand,Midtjylland,grundskole,25400,2.2,4
+69,70,kvinde,Syddanmark,grundskole,22400,1.4,7
+70,35,mand,Hovedstaden,kort videregående,36300,4.3,5
+71,48,kvinde,Syddanmark,grundskole,38300,1.9,9
+72,67,kvinde,Midtjylland,lang videregående,21200,1.3,9
+73,29,kvinde,Sjælland,gymnasial,14900,1.6,6
+74,69,mand,Nordjylland,mellemlang videregående,21800,1.2,4
+75,74,mand,Sjælland,erhvervsfaglig,30500,0.8,10
+76,78,kvinde,Syddanmark,grundskole,22500,1.1,6
+77,27,kvinde,Hovedstaden,erhvervsfaglig,18500,0.3,8
+78,19,mand,Nordjylland,grundskole,15700,6.7,3
+79,40,kvinde,Hovedstaden,gymnasial,31100,1.3,7
+80,49,mand,Hovedstaden,grundskole,26500,0.6,8
+81,50,kvinde,Hovedstaden,lang videregående,61300,1.2,3
+82,21,mand,Syddanmark,erhvervsfaglig,18600,4.6,7
+83,59,kvinde,Midtjylland,erhvervsfaglig,28400,2.3,9
+84,48,mand,Hovedstaden,grundskole,17800,1.6,3
+85,39,kvinde,Hovedstaden,grundskole,39100,2.3,6
+86,47,mand,Syddanmark,kort videregående,47900,1.7,6
+87,52,kvinde,Midtjylland,erhvervsfaglig,37100,4.5,5
+88,31,kvinde,Syddanmark,erhvervsfaglig,41300,2.3,5
+89,64,mand,Syddanmark,gymnasial,43100,1.5,5
+90,79,mand,Sjælland,mellemlang videregående,46400,0.5,5
+91,40,kvinde,Nordjylland,lang videregående,78200,1.5,7
+92,64,mand,Hovedstaden,erhvervsfaglig,22100,1.1,7
+93,21,kvinde,Nordjylland,erhvervsfaglig,18800,1.5,4
+94,41,kvinde,Sjælland,erhvervsfaglig,49900,3.7,5
+95,52,kvinde,Syddanmark,gymnasial,23400,1.1,7
+96,67,kvinde,Syddanmark,erhvervsfaglig,14400,0.6,9
+97,37,mand,Midtjylland,mellemlang videregående,28600,1.9,9
+98,33,mand,Nordjylland,grundskole,36000,0.4,6
+99,71,kvinde,Hovedstaden,mellemlang videregående,25500,0.8,7
+100,35,mand,Syddanmark,grundskole,33200,0.5,4
+101,30,kvinde,Sjælland,erhvervsfaglig,32000,3.2,7
+102,66,mand,Hovedstaden,mellemlang videregående,19300,0.9,3
+103,23,kvinde,Syddanmark,erhvervsfaglig,31100,4.0,6
+104,61,kvinde,Midtjylland,lang videregående,40400,0.7,5
+105,46,kvinde,Sjælland,mellemlang videregående,28600,0.6,5
+106,66,kvinde,Hovedstaden,mellemlang videregående,18700,2.4,7
+107,70,mand,Syddanmark,erhvervsfaglig,50100,1.7,7
+108,42,mand,Sjælland,grundskole,18300,4.4,9
+109,33,kvinde,Syddanmark,kort videregående,14200,0.8,7
+110,29,mand,Midtjylland,gymnasial,34400,0.8,5
+111,62,mand,Syddanmark,lang videregående,33700,0.8,8
+112,44,mand,Midtjylland,lang videregående,65800,5.2,4
+113,67,kvinde,Syddanmark,erhvervsfaglig,27100,1.6,10
+114,63,mand,Hovedstaden,mellemlang videregående,32900,3.6,3
+115,79,kvinde,Hovedstaden,mellemlang videregående,33700,1.7,8
+116,70,kvinde,Hovedstaden,erhvervsfaglig,28500,1.1,8
+117,74,mand,Hovedstaden,grundskole,22600,0.3,5
+118,73,mand,Syddanmark,erhvervsfaglig,39600,1.2,6
+119,74,kvinde,Hovedstaden,erhvervsfaglig,18400,1.0,4
+120,79,mand,Midtjylland,mellemlang videregående,33300,3.2,7
+121,41,kvinde,Syddanmark,mellemlang videregående,38700,2.0,8
+122,37,mand,Sjælland,grundskole,13700,2.4,5
+123,54,mand,Midtjylland,lang videregående,63600,4.1,8
+124,69,kvinde,Hovedstaden,gymnasial,32800,0.4,8
+125,29,mand,Hovedstaden,gymnasial,44900,1.7,5
+126,79,kvinde,Hovedstaden,grundskole,16900,1.1,8
+127,36,kvinde,Syddanmark,erhvervsfaglig,19800,1.3,7
+128,35,mand,Sjælland,lang videregående,129000,1.3,7
+129,42,mand,Midtjylland,mellemlang videregående,23700,2.5,8
+130,18,kvinde,Syddanmark,erhvervsfaglig,18000,1.9,7
+131,42,mand,Nordjylland,lang videregående,51500,0.4,6
+132,26,kvinde,Syddanmark,lang videregående,31300,0.7,6
+133,67,kvinde,Syddanmark,kort videregående,34800,5.9,7
+134,66,mand,Sjælland,mellemlang videregående,19500,2.9,9
+135,57,mand,Hovedstaden,lang videregående,21600,1.5,8
+136,67,mand,Syddanmark,grundskole,19200,1.6,5
+137,28,kvinde,Syddanmark,kort videregående,38000,3.4,7
+138,34,mand,Sjælland,mellemlang videregående,33000,2.9,5
+139,72,kvinde,Midtjylland,erhvervsfaglig,41900,0.4,9
+140,76,mand,Syddanmark,erhvervsfaglig,22800,1.5,9
+141,34,kvinde,Syddanmark,erhvervsfaglig,31800,2.5,10
+142,32,mand,Midtjylland,lang videregående,27800,0.3,9
+143,25,kvinde,Hovedstaden,lang videregående,20900,2.4,6
+144,63,mand,Midtjylland,grundskole,15500,1.6,6
+145,58,mand,Nordjylland,mellemlang videregående,25300,0.8,6
+146,29,mand,Hovedstaden,mellemlang videregående,67200,2.4,8
+147,56,mand,Hovedstaden,erhvervsfaglig,18800,1.9,9
+148,64,mand,Midtjylland,erhvervsfaglig,20800,0.8,2
+149,36,mand,Hovedstaden,erhvervsfaglig,50500,2.6,7
+150,21,kvinde,Hovedstaden,mellemlang videregående,22400,2.9,7
+151,31,mand,Nordjylland,erhvervsfaglig,36100,1.4,7
+152,54,kvinde,Hovedstaden,mellemlang videregående,14700,0.5,8
+153,50,kvinde,Syddanmark,mellemlang videregående,24300,1.4,5
+154,39,mand,Hovedstaden,lang videregående,50100,1.2,9
+155,52,mand,Syddanmark,mellemlang videregående,18400,3.1,7
+156,58,kvinde,Hovedstaden,grundskole,27200,1.5,6
+157,76,mand,Sjælland,gymnasial,22600,1.4,6
+158,72,kvinde,Midtjylland,kort videregående,22600,1.2,6
+159,60,mand,Hovedstaden,grundskole,22600,3.2,6
+160,37,mand,Syddanmark,erhvervsfaglig,39500,1.6,8
+161,42,kvinde,Syddanmark,erhvervsfaglig,30300,1.5,4
+162,76,mand,Midtjylland,gymnasial,32400,2.5,6
+163,38,mand,Hovedstaden,grundskole,34100,1.1,5
+164,46,kvinde,Sjælland,grundskole,46700,4.2,6
+165,79,mand,Midtjylland,gymnasial,18000,1.0,6
+166,42,kvinde,Hovedstaden,lang videregående,44500,2.3,4
+167,66,kvinde,Nordjylland,erhvervsfaglig,19100,1.0,7
+168,30,mand,Hovedstaden,lang videregående,48700,3.5,9
+169,42,kvinde,Hovedstaden,grundskole,19700,2.3,5
+170,21,kvinde,Midtjylland,kort videregående,33900,2.2,7
+171,70,kvinde,Hovedstaden,erhvervsfaglig,24500,0.4,5
+172,21,mand,Midtjylland,mellemlang videregående,26900,1.4,7
+173,69,mand,Syddanmark,lang videregående,40600,1.3,7
+174,70,kvinde,Nordjylland,erhvervsfaglig,20600,2.7,9
+175,28,mand,Nordjylland,mellemlang videregående,24400,1.3,6
+176,18,mand,Hovedstaden,gymnasial,17000,3.5,8
+177,77,kvinde,Sjælland,mellemlang videregående,22700,0.3,5
+178,58,kvinde,Hovedstaden,erhvervsfaglig,38400,2.3,6
+179,54,kvinde,Sjælland,grundskole,22200,0.5,6
+180,55,kvinde,Hovedstaden,erhvervsfaglig,24700,2.6,3
+181,64,kvinde,Syddanmark,grundskole,33100,0.8,5
+182,54,kvinde,Syddanmark,mellemlang videregående,45200,1.8,8
+183,65,mand,Sjælland,erhvervsfaglig,27000,1.4,5
+184,46,mand,Nordjylland,erhvervsfaglig,79100,0.6,4
+185,19,kvinde,Hovedstaden,kort videregående,17400,4.6,4
+186,21,mand,Syddanmark,erhvervsfaglig,46700,4.0,7
+187,64,kvinde,Syddanmark,lang videregående,43100,0.8,6
+188,29,kvinde,Hovedstaden,mellemlang videregående,46400,4.0,7
+189,24,mand,Syddanmark,mellemlang videregående,26600,2.1,1
+190,61,kvinde,Midtjylland,grundskole,38600,0.4,5
+191,27,mand,Hovedstaden,erhvervsfaglig,18900,5.2,5
+192,73,kvinde,Midtjylland,erhvervsfaglig,35400,1.6,8
+193,37,kvinde,Midtjylland,mellemlang videregående,37400,3.2,8
+194,47,mand,Syddanmark,grundskole,36500,1.1,7
+195,44,mand,Syddanmark,grundskole,21500,0.6,2
+196,42,kvinde,Midtjylland,mellemlang videregående,40700,2.9,8
+197,56,kvinde,Nordjylland,erhvervsfaglig,22700,3.1,9
+198,69,mand,Hovedstaden,erhvervsfaglig,24000,0.2,5
+199,33,kvinde,Hovedstaden,grundskole,22200,5.8,7
+200,20,kvinde,Midtjylland,grundskole,16600,1.4,7
+201,63,mand,Sjælland,erhvervsfaglig,24200,3.3,6
+202,55,mand,Syddanmark,erhvervsfaglig,19300,1.2,7
+203,45,kvinde,Hovedstaden,lang videregående,39900,2.0,6
+204,78,mand,Syddanmark,mellemlang videregående,47300,0.8,7
+205,38,mand,Sjælland,gymnasial,78800,0.5,6
+206,44,mand,Sjælland,mellemlang videregående,25400,0.5,7
+207,71,mand,Hovedstaden,grundskole,16800,0.5,10
+208,36,kvinde,Hovedstaden,mellemlang videregående,38300,1.4,5
+209,79,kvinde,Sjælland,erhvervsfaglig,28800,0.2,9
+210,41,mand,Sjælland,mellemlang videregående,21200,1.3,7
+211,63,kvinde,Hovedstaden,lang videregående,16500,1.8,7
+212,53,mand,Syddanmark,lang videregående,46000,4.3,3
+213,66,kvinde,Hovedstaden,erhvervsfaglig,47200,1.5,8
+214,72,mand,Midtjylland,grundskole,38000,0.7,4
+215,27,kvinde,Hovedstaden,grundskole,22900,1.4,4
+216,63,kvinde,Hovedstaden,erhvervsfaglig,49600,0.4,6
+217,43,kvinde,Hovedstaden,grundskole,24200,1.5,6
+218,39,mand,Nordjylland,erhvervsfaglig,17900,1.5,5
+219,65,kvinde,Syddanmark,lang videregående,36900,1.5,10
+220,41,mand,Hovedstaden,erhvervsfaglig,45500,3.5,8
+221,28,kvinde,Midtjylland,erhvervsfaglig,29300,3.4,10
+222,57,mand,Midtjylland,mellemlang videregående,27700,0.6,5
+223,76,mand,Syddanmark,mellemlang videregående,28800,0.2,5
+224,56,kvinde,Midtjylland,erhvervsfaglig,34800,0.4,10
+225,37,mand,Midtjylland,erhvervsfaglig,31800,1.0,4
+226,25,mand,Hovedstaden,kort videregående,31700,3.1,7
+227,34,kvinde,Syddanmark,mellemlang videregående,38400,1.0,6
+228,53,mand,Nordjylland,grundskole,38800,2.2,6
+229,34,mand,Syddanmark,mellemlang videregående,35000,1.5,4
+230,64,mand,Sjælland,grundskole,22900,4.0,5
+231,41,mand,Hovedstaden,kort videregående,37000,3.2,10
+232,25,mand,Hovedstaden,lang videregående,45500,0.5,7
+233,58,kvinde,Sjælland,gymnasial,13900,2.1,9
+234,66,kvinde,Syddanmark,mellemlang videregående,49700,0.6,6
+235,73,mand,Midtjylland,erhvervsfaglig,49900,0.1,7
+236,27,mand,Midtjylland,gymnasial,24700,3.7,8
+237,68,kvinde,Hovedstaden,erhvervsfaglig,35200,0.9,8
+238,23,kvinde,Syddanmark,gymnasial,17600,5.9,6
+239,75,mand,Midtjylland,erhvervsfaglig,32900,2.3,7
+240,52,kvinde,Midtjylland,kort videregående,23600,1.1,9
+241,28,kvinde,Sjælland,mellemlang videregående,33700,0.4,7
+242,66,mand,Nordjylland,mellemlang videregående,40000,0.4,3
+243,68,mand,Nordjylland,lang videregående,28000,1.8,6
+244,56,mand,Midtjylland,erhvervsfaglig,20100,1.8,5
+245,45,mand,Hovedstaden,lang videregående,36800,0.7,4
+246,55,mand,Hovedstaden,lang videregående,33500,0.8,9
+247,65,kvinde,Midtjylland,erhvervsfaglig,25500,4.5,9
+248,23,kvinde,Hovedstaden,grundskole,14400,2.2,5
+249,18,mand,Hovedstaden,erhvervsfaglig,36700,1.8,6
+250,53,mand,Hovedstaden,mellemlang videregående,31500,0.2,10
+251,69,kvinde,Nordjylland,kort videregående,34300,0.3,6
+252,49,mand,Hovedstaden,gymnasial,14900,3.1,6
+253,19,kvinde,Hovedstaden,lang videregående,26700,6.0,8
+254,18,kvinde,Nordjylland,mellemlang videregående,50200,2.2,9
+255,55,mand,Syddanmark,grundskole,18400,0.8,7
+256,65,mand,Syddanmark,mellemlang videregående,36200,0.9,9
+257,51,kvinde,Midtjylland,erhvervsfaglig,68800,0.9,5
+258,31,mand,Nordjylland,erhvervsfaglig,28800,1.9,8
+259,34,mand,Nordjylland,erhvervsfaglig,52300,2.2,6
+260,46,kvinde,Syddanmark,erhvervsfaglig,22200,5.3,5
+261,26,mand,Nordjylland,lang videregående,30700,1.9,8
+262,46,kvinde,Midtjylland,mellemlang videregående,34300,0.8,10
+263,27,kvinde,Midtjylland,erhvervsfaglig,22500,1.5,7
+264,60,mand,Sjælland,erhvervsfaglig,34100,2.6,9
+265,63,mand,Syddanmark,grundskole,12500,0.9,6
+266,71,mand,Hovedstaden,erhvervsfaglig,18000,0.2,4
+267,30,kvinde,Midtjylland,mellemlang videregående,52800,1.5,8
+268,66,mand,Hovedstaden,erhvervsfaglig,29800,0.7,5
+269,69,kvinde,Sjælland,mellemlang videregående,37400,1.6,6
+270,31,mand,Midtjylland,erhvervsfaglig,54500,2.7,10
+271,73,kvinde,Hovedstaden,mellemlang videregående,15200,3.4,3
+272,32,mand,Nordjylland,grundskole,7800,1.2,7
+273,35,mand,Nordjylland,grundskole,48600,1.8,7
+274,44,mand,Syddanmark,erhvervsfaglig,18400,3.4,7
+275,68,kvinde,Midtjylland,lang videregående,38700,0.7,6
+276,40,mand,Syddanmark,mellemlang videregående,18600,1.0,7
+277,67,mand,Hovedstaden,gymnasial,9400,0.4,5
+278,62,kvinde,Hovedstaden,erhvervsfaglig,28500,2.6,10
+279,54,kvinde,Midtjylland,grundskole,30600,2.1,7
+280,51,kvinde,Midtjylland,mellemlang videregående,25500,1.0,9
+281,48,kvinde,Syddanmark,lang videregående,15900,0.6,7
+282,45,mand,Hovedstaden,mellemlang videregående,39200,3.3,9
+283,36,mand,Hovedstaden,mellemlang videregående,69000,4.3,8
+284,55,kvinde,Syddanmark,erhvervsfaglig,15800,0.8,4
+285,21,kvinde,Sjælland,mellemlang videregående,38100,1.2,10
+286,41,kvinde,Sjælland,erhvervsfaglig,33900,3.9,10
+287,45,mand,Syddanmark,mellemlang videregående,17200,0.8,9
+288,71,kvinde,Nordjylland,gymnasial,34800,0.7,4
+289,73,mand,Midtjylland,mellemlang videregående,31500,0.3,5
+290,64,kvinde,Sjælland,gymnasial,24200,1.2,2
+291,29,kvinde,Midtjylland,erhvervsfaglig,45500,4.4,5
+292,67,mand,Midtjylland,erhvervsfaglig,28400,3.3,10
+293,66,kvinde,Nordjylland,erhvervsfaglig,46000,2.8,9
+294,79,mand,Midtjylland,gymnasial,56900,1.5,5
+295,55,mand,Syddanmark,kort videregående,34900,3.5,4
+296,60,kvinde,Midtjylland,mellemlang videregående,39700,0.8,6
+297,37,mand,Hovedstaden,gymnasial,21400,4.4,8
+298,58,mand,Hovedstaden,mellemlang videregående,61100,0.5,8
+299,49,kvinde,Midtjylland,mellemlang videregående,22000,1.6,10
+300,65,kvinde,Syddanmark,lang videregående,31900,1.9,6
+301,21,kvinde,Syddanmark,lang videregående,33600,3.3,7
+302,57,mand,Midtjylland,lang videregående,38500,0.9,6
+303,54,kvinde,Hovedstaden,lang videregående,31900,1.8,7
+304,77,mand,Midtjylland,lang videregående,46600,2.6,7
+305,79,kvinde,Hovedstaden,lang videregående,28700,1.5,7
+306,43,mand,Midtjylland,lang videregående,18500,4.1,8
+307,50,mand,Syddanmark,erhvervsfaglig,48500,0.4,6
+308,40,kvinde,Midtjylland,grundskole,49500,0.3,6
+309,21,mand,Midtjylland,lang videregående,27900,0.7,6
+310,23,mand,Hovedstaden,erhvervsfaglig,44000,1.1,9
+311,23,kvinde,Hovedstaden,lang videregående,29000,3.4,10
+312,76,kvinde,Sjælland,lang videregående,23300,1.5,10
+313,43,mand,Midtjylland,mellemlang videregående,24700,0.1,8
+314,23,mand,Sjælland,erhvervsfaglig,48900,2.9,7
+315,34,mand,Sjælland,mellemlang videregående,56100,3.0,5
+316,74,mand,Hovedstaden,lang videregående,45500,1.2,5
+317,64,kvinde,Midtjylland,gymnasial,17600,1.2,6
+318,39,mand,Midtjylland,lang videregående,55900,0.6,5
+319,39,kvinde,Hovedstaden,mellemlang videregående,22800,2.3,8
+320,79,mand,Hovedstaden,lang videregående,41000,0.5,8
+321,43,mand,Sjælland,erhvervsfaglig,25200,3.8,4
+322,26,mand,Sjælland,lang videregående,29700,1.6,7
+323,59,kvinde,Midtjylland,gymnasial,22000,1.7,8
+324,32,mand,Syddanmark,mellemlang videregående,14900,1.9,9
+325,57,mand,Midtjylland,lang videregående,21200,1.2,8
+326,67,mand,Syddanmark,erhvervsfaglig,26700,1.8,8
+327,53,kvinde,Hovedstaden,grundskole,17200,3.2,7
+328,42,kvinde,Midtjylland,lang videregående,57100,0.6,6
+329,55,kvinde,Sjælland,kort videregående,50700,2.0,7
+330,45,mand,Sjælland,erhvervsfaglig,17200,4.3,7
+331,55,mand,Hovedstaden,lang videregående,23500,1.0,6
+332,30,kvinde,Sjælland,mellemlang videregående,30200,1.5,7
+333,65,mand,Midtjylland,lang videregående,81500,1.3,7
+334,27,kvinde,Syddanmark,mellemlang videregående,23100,1.2,8
+335,35,mand,Syddanmark,gymnasial,31900,1.4,6
+336,71,mand,Midtjylland,kort videregående,15100,0.7,7
+337,50,mand,Sjælland,erhvervsfaglig,22000,3.8,3
+338,54,mand,Midtjylland,erhvervsfaglig,37000,2.8,10
+339,60,kvinde,Nordjylland,grundskole,22800,1.4,8
+340,66,kvinde,Nordjylland,gymnasial,30400,1.4,7
+341,23,mand,Nordjylland,erhvervsfaglig,27400,1.3,10
+342,40,mand,Nordjylland,grundskole,25300,3.4,8
+343,63,mand,Hovedstaden,erhvervsfaglig,28800,0.7,8
+344,48,mand,Syddanmark,erhvervsfaglig,52200,2.4,8
+345,46,kvinde,Syddanmark,mellemlang videregående,34000,2.5,10
+346,74,mand,Midtjylland,erhvervsfaglig,35600,1.7,7
+347,77,kvinde,Midtjylland,erhvervsfaglig,22200,0.5,4
+348,74,mand,Hovedstaden,grundskole,22200,1.3,4
+349,21,mand,Hovedstaden,gymnasial,14900,0.6,9
+350,54,kvinde,Sjælland,erhvervsfaglig,13800,2.1,6
+351,26,kvinde,Hovedstaden,grundskole,19200,2.1,7
+352,60,kvinde,Syddanmark,gymnasial,27300,0.4,6
+353,33,kvinde,Hovedstaden,erhvervsfaglig,24200,3.0,8
+354,22,kvinde,Midtjylland,gymnasial,27900,1.8,5
+355,58,mand,Hovedstaden,gymnasial,19600,1.8,7
+356,39,kvinde,Syddanmark,mellemlang videregående,20000,1.6,3
+357,75,mand,Hovedstaden,erhvervsfaglig,14400,0.6,6
+358,53,kvinde,Midtjylland,erhvervsfaglig,39200,2.0,4
+359,24,mand,Hovedstaden,mellemlang videregående,21600,0.6,7
+360,45,kvinde,Midtjylland,mellemlang videregående,34600,2.2,7
+361,69,kvinde,Syddanmark,mellemlang videregående,17900,0.5,7
+362,37,kvinde,Hovedstaden,kort videregående,22400,2.4,7
+363,59,mand,Sjælland,grundskole,24500,0.7,3
+364,61,kvinde,Sjælland,lang videregående,59300,1.8,5
+365,36,mand,Nordjylland,mellemlang videregående,22000,3.3,7
+366,32,mand,Midtjylland,lang videregående,22100,0.6,8
+367,64,mand,Sjælland,gymnasial,25000,0.3,7
+368,74,mand,Hovedstaden,grundskole,22300,1.6,3
+369,42,mand,Nordjylland,lang videregående,34400,1.6,10
+370,30,mand,Hovedstaden,erhvervsfaglig,44100,1.1,6
+371,50,mand,Midtjylland,lang videregående,21300,1.9,10
+372,62,mand,Hovedstaden,mellemlang videregående,23700,0.8,8
+373,54,kvinde,Sjælland,gymnasial,26700,0.6,9
+374,48,mand,Midtjylland,mellemlang videregående,24500,0.2,8
+375,30,kvinde,Nordjylland,erhvervsfaglig,31500,4.0,6
+376,63,kvinde,Hovedstaden,mellemlang videregående,32200,2.9,6
+377,52,mand,Sjælland,mellemlang videregående,31000,3.1,9
+378,43,mand,Midtjylland,mellemlang videregående,84800,3.2,6
+379,59,kvinde,Hovedstaden,erhvervsfaglig,20100,1.2,3
+380,39,mand,Syddanmark,grundskole,22400,5.6,6
+381,28,kvinde,Hovedstaden,erhvervsfaglig,32700,1.3,7
+382,57,kvinde,Midtjylland,mellemlang videregående,25100,2.7,8
+383,34,kvinde,Midtjylland,lang videregående,40800,3.0,9
+384,77,mand,Hovedstaden,erhvervsfaglig,33200,0.9,10
+385,38,kvinde,Midtjylland,erhvervsfaglig,32000,5.2,4
+386,60,mand,Hovedstaden,lang videregående,52100,3.1,10
+387,30,mand,Hovedstaden,gymnasial,21300,3.2,8
+388,18,kvinde,Nordjylland,mellemlang videregående,24100,2.5,7
+389,79,kvinde,Syddanmark,lang videregående,65100,0.6,5
+390,19,mand,Hovedstaden,mellemlang videregående,32400,1.6,7
+391,18,kvinde,Syddanmark,grundskole,28500,0.6,7
+392,31,mand,Midtjylland,mellemlang videregående,24600,0.3,7
+393,22,kvinde,Syddanmark,grundskole,19300,1.0,5
+394,39,mand,Midtjylland,erhvervsfaglig,46200,3.4,5
+395,64,mand,Syddanmark,lang videregående,39500,0.7,6
+396,27,mand,Syddanmark,mellemlang videregående,18900,3.1,8
+397,79,mand,Hovedstaden,gymnasial,14600,0.4,7
+398,77,mand,Sjælland,mellemlang videregående,26400,1.1,9
+399,42,mand,Syddanmark,kort videregående,57400,4.9,5
+400,34,mand,Syddanmark,mellemlang videregående,39700,1.1,9
+401,24,kvinde,Hovedstaden,mellemlang videregående,21900,0.7,10
+402,46,kvinde,Hovedstaden,mellemlang videregående,34000,2.7,7
+403,52,mand,Midtjylland,mellemlang videregående,35000,2.4,9
+404,26,kvinde,Hovedstaden,grundskole,11800,5.7,4
+405,78,mand,Hovedstaden,erhvervsfaglig,23400,1.5,10
+406,36,mand,Syddanmark,grundskole,21400,1.8,7
+407,55,mand,Hovedstaden,erhvervsfaglig,28400,0.9,9
+408,51,kvinde,Syddanmark,erhvervsfaglig,21600,3.3,7
+409,60,mand,Hovedstaden,erhvervsfaglig,33700,0.2,4
+410,43,kvinde,Syddanmark,erhvervsfaglig,25900,2.1,8
+411,71,kvinde,Hovedstaden,gymnasial,17400,2.3,6
+412,23,kvinde,Sjælland,lang videregående,69900,1.8,9
+413,58,mand,Nordjylland,grundskole,21500,1.6,5
+414,64,kvinde,Syddanmark,erhvervsfaglig,16900,1.6,1
+415,66,mand,Midtjylland,mellemlang videregående,49900,2.9,7
+416,78,mand,Hovedstaden,gymnasial,36000,1.8,6
+417,74,mand,Sjælland,erhvervsfaglig,17500,1.6,8
+418,32,mand,Syddanmark,erhvervsfaglig,24100,1.0,5
+419,41,kvinde,Hovedstaden,lang videregående,37900,3.2,6
+420,31,kvinde,Syddanmark,grundskole,20100,3.4,6
+421,24,mand,Hovedstaden,grundskole,12800,2.2,5
+422,64,kvinde,Midtjylland,erhvervsfaglig,18800,2.3,8
+423,75,mand,Syddanmark,mellemlang videregående,63100,0.4,6
+424,46,mand,Sjælland,lang videregående,32500,2.1,6
+425,73,kvinde,Hovedstaden,erhvervsfaglig,20900,2.0,5
+426,20,kvinde,Hovedstaden,lang videregående,44300,2.8,7
+427,65,mand,Midtjylland,mellemlang videregående,26300,3.2,10
+428,20,mand,Hovedstaden,lang videregående,25600,1.0,7
+429,57,kvinde,Nordjylland,lang videregående,26900,1.2,6
+430,78,kvinde,Sjælland,lang videregående,39100,2.2,7
+431,42,kvinde,Syddanmark,grundskole,27100,2.6,8
+432,62,mand,Hovedstaden,lang videregående,59400,0.6,7
+433,66,mand,Hovedstaden,mellemlang videregående,26600,0.8,8
+434,49,mand,Nordjylland,grundskole,41500,0.1,7
+435,44,kvinde,Hovedstaden,grundskole,26700,1.4,8
+436,27,mand,Hovedstaden,grundskole,18300,5.3,7
+437,61,mand,Sjælland,erhvervsfaglig,34400,2.5,4
+438,74,mand,Hovedstaden,grundskole,24000,0.8,6
+439,41,kvinde,Midtjylland,erhvervsfaglig,33200,0.6,5
+440,41,kvinde,Midtjylland,gymnasial,19900,3.9,8
+441,29,mand,Syddanmark,grundskole,22100,0.9,9
+442,38,mand,Midtjylland,grundskole,22900,7.7,6
+443,56,mand,Sjælland,grundskole,32900,0.4,8
+444,66,mand,Midtjylland,lang videregående,61000,0.5,8
+445,75,kvinde,Hovedstaden,mellemlang videregående,38300,0.5,6
+446,68,mand,Hovedstaden,mellemlang videregående,40700,1.8,10
+447,49,kvinde,Syddanmark,lang videregående,62300,2.6,6
+448,19,mand,Hovedstaden,erhvervsfaglig,38400,0.6,5
+449,29,kvinde,Syddanmark,lang videregående,32000,4.6,6
+450,52,mand,Syddanmark,mellemlang videregående,21900,1.6,9
+451,56,mand,Nordjylland,erhvervsfaglig,31700,1.8,5
+452,39,mand,Hovedstaden,mellemlang videregående,59500,2.0,5
+453,54,kvinde,Hovedstaden,erhvervsfaglig,18700,0.3,9
+454,78,mand,Syddanmark,gymnasial,14600,0.9,7
+455,64,kvinde,Midtjylland,grundskole,24200,1.6,6
+456,37,mand,Hovedstaden,lang videregående,32200,2.0,6
+457,78,kvinde,Sjælland,erhvervsfaglig,34500,1.5,7
+458,36,mand,Syddanmark,mellemlang videregående,33900,2.2,5
+459,26,kvinde,Hovedstaden,erhvervsfaglig,36600,5.8,7
+460,58,mand,Hovedstaden,grundskole,27700,1.2,7
+461,63,mand,Sjælland,erhvervsfaglig,33400,1.4,6
+462,74,mand,Syddanmark,grundskole,13500,3.1,7
+463,23,kvinde,Nordjylland,mellemlang videregående,22600,2.9,8
+464,57,mand,Midtjylland,erhvervsfaglig,14100,1.7,3
+465,77,kvinde,Hovedstaden,mellemlang videregående,20300,2.0,5
+466,52,mand,Hovedstaden,grundskole,20600,0.8,8
+467,71,mand,Midtjylland,grundskole,25000,0.7,6
+468,25,kvinde,Syddanmark,grundskole,14200,1.8,8
+469,18,kvinde,Hovedstaden,lang videregående,62900,2.9,10
+470,33,kvinde,Midtjylland,erhvervsfaglig,45500,2.9,10
+471,74,mand,Midtjylland,kort videregående,18000,0.9,9
+472,67,kvinde,Syddanmark,erhvervsfaglig,13700,3.2,7
+473,63,kvinde,Hovedstaden,gymnasial,13800,0.5,9
+474,26,kvinde,Sjælland,grundskole,25000,2.0,5
+475,76,mand,Midtjylland,kort videregående,16100,0.2,7
+476,76,mand,Sjælland,erhvervsfaglig,21900,0.4,6
+477,41,kvinde,Sjælland,lang videregående,50200,0.6,6
+478,76,mand,Sjælland,mellemlang videregående,32100,1.2,5
+479,33,mand,Hovedstaden,mellemlang videregående,42700,3.1,8
+480,57,kvinde,Sjælland,grundskole,15300,2.0,3
+481,49,kvinde,Hovedstaden,erhvervsfaglig,39100,2.7,3
+482,36,mand,Midtjylland,grundskole,31800,2.9,8
+483,30,kvinde,Hovedstaden,lang videregående,54000,2.9,8
+484,75,kvinde,Midtjylland,gymnasial,30200,0.4,8
+485,70,kvinde,Hovedstaden,erhvervsfaglig,16400,2.0,6
+486,67,mand,Nordjylland,gymnasial,9700,3.0,7
+487,39,kvinde,Hovedstaden,grundskole,28600,8.4,5
+488,63,kvinde,Midtjylland,lang videregående,71000,0.5,6
+489,77,mand,Sjælland,kort videregående,19000,2.8,5
+490,26,mand,Hovedstaden,erhvervsfaglig,19800,2.2,10
+491,66,mand,Syddanmark,mellemlang videregående,33600,1.8,5
+492,55,mand,Midtjylland,erhvervsfaglig,45500,1.2,10
+493,47,kvinde,Syddanmark,lang videregående,54500,2.9,5
+494,68,mand,Syddanmark,mellemlang videregående,19700,1.4,5
+495,55,mand,Sjælland,grundskole,21400,3.7,9
+496,32,kvinde,Sjælland,erhvervsfaglig,23000,1.4,8
+497,59,kvinde,Syddanmark,grundskole,30700,2.8,7
+498,34,mand,Midtjylland,erhvervsfaglig,38600,2.1,5
+499,40,kvinde,Hovedstaden,erhvervsfaglig,21500,4.3,8
+500,45,mand,Hovedstaden,mellemlang videregående,25300,0.5,5

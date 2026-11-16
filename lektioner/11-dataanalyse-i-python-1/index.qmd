@@ -1,0 +1,21 @@
+---
+title: "Dataanalyse i Python 1"
+lektion: 11
+date: 2026-10-20
+description: "Fra enkelte værktøjer til et samlet projekt: opbygning af en god notebook og ansvarlig brug af AI."
+status: moodle       # klar | kommer | anden | moodle
+slides: false
+underviser: "Se Moodle"
+---
+
+::: {.lektion-knapper}
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+kl. 12.30–16.15
+
+## Om lektionen
+
+De sidste to lektioner bygger bro mellem kursets enkelte værktøjer og jeres afsluttende eksamensprojekt. Vi ser på, hvordan man binder forskellige data science-teknikker sammen i ét projekt for at besvare et samfundsvidenskabeligt spørgsmål. Vi har også fokus på håndværket bag et godt eksamensprojekt: best practices for opbygning og formidling i en Python-notebook, konstruktiv og ansvarlig brug af AI som sparringspartner, og praktiske tips til projektarbejdet.
+
+Dagens notebook ligger på [Moodle]({{< var moodle >}}).

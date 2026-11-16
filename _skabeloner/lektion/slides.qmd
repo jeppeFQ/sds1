@@ -1,0 +1,183 @@
+---
+title: "TITEL PÅ LEKTIONEN"
+subtitle: "Lektion 99"          # vises som mærkat på titelslidet
+author: "Jeppe Fjeldgaard Qvist"
+format: sds1-revealjs
+engine: markdown
+accent: lyseblaa               # lektionens farve: lyseblaa | turkis | orange | lilla | gul
+pyodide:
+  packages:
+    - pandas
+---
+
+<!-- SKABELON. Slet det, I ikke skal bruge. Alle byggeklodser er vist én gang.
+     Regler: ét budskab pr. slide · vis begrebet før syntaksen · brug ikke ### inde i bokse. -->
+
+## I dag
+
+1. **Første del.** Én linje.
+2. **Anden del.** Én linje.
+3. **Øvelser.**
+
+# Navn på første del
+
+Én linje om, hvad der kommer. (Et `#` giver et sektionsslide med nummer.)
+
+## {.udsagn}
+
+Én sætning eller ét tal, **meget stort**.
+
+## Indhold: tekst ved siden af en figur
+
+:::: {.to-kol}
+::: {.kol}
+Tekst til venstre. Ord fra ordlisten får en forklaring ved hover: [DataFrame]{.ord}.
+
+- Punkt
+- Punkt
+:::
+
+::: {.figur figur="gennemsnit" vaerdier="2,4,9" enhed=""}
+:::
+::::
+
+## Kodelab: Demo (kører af sig selv) {.kodelab}
+
+::::: {.panel-tabset}
+### Python
+
+:::: {.demo}
+```{pyodide}
+import pandas as pd
+
+panel = pd.read_csv("https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/borgerpanel.csv")
+panel["alder"].describe()
+```
+
+::: {.forklaring}
+1. {1} Hent pandas.
+2. {3} Læs datasættet.
+3. {4} `.describe()` giver en hurtig oversigt over kolonnen.
+:::
+::::
+
+### R
+
+:::: {.demo}
+```{webr}
+panel <- read.csv("https://raw.githubusercontent.com/jeppeFQ/sds1/main/data/borgerpanel.csv")
+summary(panel$alder)
+```
+
+::: {.forklaring}
+1. {1} Læs datasættet.
+2. {2} `summary()` giver en hurtig oversigt over kolonnen.
+:::
+::::
+:::::
+
+## Kodelab: Prøv selv {.kodelab}
+
+:::: {.proev forslag="Skift `alder` ud med `indkomst`."}
+```{pyodide}
+print(panel["alder"].mean())
+```
+
+::: {.forklaring}
+1. {1} Gennemsnittet af kolonnen `alder`.
+:::
+::::
+
+## Kodelab: gæt først {.kodelab}
+
+:::: {.proev gaet="Hvad skriver Python ud?" valg="5|23|En fejl"}
+```{pyodide}
+print("2" + "3")
+```
+
+::: {.forklaring}
+1. {1} Anførselstegn betyder tekst. `+` sætter to tekster sammen.
+:::
+::::
+
+## Kodelab: skyder i stedet for at taste {.kodelab}
+
+```{ojs}
+//| echo: false
+viewof graense = sds1.skyder({ label: "Alder over", min: 18, max: 79, value: 40, enhed: "år" })
+```
+
+:::: {.demo}
+```{pyodide}
+#| input:
+#|   - graense
+over = panel["alder"] > graense
+print("Antal:", over.sum())
+```
+
+::: {.forklaring}
+1. {1} Sammenlign hele kolonnen med tallet fra skyderen.
+2. {2} `True` tæller som 1, så summen er antallet.
+:::
+::::
+
+## Opgave: Øvelse med automatisk tjek {.opgave}
+
+::: {.opgavetekst}
+Find den **højeste** alder i panelet.
+
+[2 min]{.timer tid=120}
+:::
+
+:::: {.oevelse}
+```{pyodide}
+panel["alder"].______()
+```
+
+::: {.hint}
+Metoden hedder det samme som den indbyggede funktion for *største værdi*.
+:::
+
+::: {.loesning}
+```python
+panel["alder"].max()
+```
+:::
+
+```{pyodide}
+#| check: true
+rigtigt = panel["alder"].max()
+try:
+    ok = int(result) == int(rigtigt)
+except Exception:
+    ok = False
+feedback = {"correct": ok, "message": "Rigtigt!" if ok else "Ikke helt. Prøv igen."}
+feedback
+```
+::::
+
+## Sidst i dag {.sidst}
+
+:::: {.kort-raekke}
+::: {.kol}
+**Det vigtigste**
+
+Én eller to sætninger.
+:::
+
+::: {.kol}
+**Øvelser**
+
+[Notebook med dagens øvelser](materiale/FILNAVN.ipynb)
+:::
+
+::: {.kol}
+**Næste gang**
+
+[Lektion XX: Titel](../XX-mappe/index.html)
+:::
+::::
+
+[Tilbage til lektionens side](index.html)
+
+[]{.aau-logo role="img" aria-label="Aalborg Universitet"}

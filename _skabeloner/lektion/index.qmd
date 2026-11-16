@@ -1,0 +1,44 @@
+---
+title: "TITEL PÅ LEKTIONEN"
+lektion: 99                # nummeret, der vises i listerne (og sorteres efter)
+date: 2027-09-01
+description: "Én sætning om, hvad lektionen handler om. Vises på forsiden og i planen."
+status: kommer             # klar | kommer | anden | moodle
+slides: true               # true, når slides.qmd er klar (viser slides-links i listerne)
+underviser: "Jeppe Fjeldgaard Qvist"
+litteratur:                # kort form; vises i lektionsplanen
+  - "Forfatter (år), kap. X"
+---
+
+::: {.lektion-knapper}
+[Åbn slides](slides.html){.primaer}
+
+[Læsevisning](slides.html?view=scroll)
+
+[Alle lektioner](../../kursus/plan.qmd)
+:::
+
+**Underviser:** Jeppe Fjeldgaard Qvist · kl. 12.30–16.15
+
+## Om lektionen
+
+Et par linjer om indholdet.
+
+**Efter lektionen kan I**
+
+- ...
+- ...
+
+## Forberedelse og litteratur
+
+- Fuld henvisning med link.
+
+## Materiale
+
+::: {.materiale}
+- [handout]{.type} [Øvelsesark (PDF)](materiale/FILNAVN.pdf)
+- [notebook]{.type} [Øvelser (.ipynb)](materiale/FILNAVN.ipynb)
+- [data]{.type} [FILNAVN.csv]({{< var data >}}FILNAVN.csv)
+:::
+
+Svarark udleveres efter øvelserne.

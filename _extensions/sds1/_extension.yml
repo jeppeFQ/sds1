@@ -1,0 +1,45 @@
+title: SDS1 — kursusformat
+author: Jeppe Fjeldgaard Qvist
+version: 2.0.0
+quarto-required: ">=1.6.0"
+contributes:
+  formats:
+    # Brug i slides:  format: sds1-revealjs
+    revealjs:
+      ojs-engine: true                     # påkrævet af quarto-live
+      filters:
+        - celler.lua                       # Demo / Prøv selv / Øvelse (skal stå før live.lua)
+        - ../r-wasm/live/live.lua          # kør Python (Pyodide) og R (webR) i browseren
+        - forklaring.lua                   # ::: {.forklaring} → fold-ud-boks med linjefokus
+        - sds1.lua                         # designsystem: layouts, accent, ordliste, resources/
+      theme: [slides.scss]
+      template-partials: [title-slide.html]
+      html-math-method: mathml             # formler uden MathJax fra et CDN
+      lang: da
+      width: 1280
+      height: 720
+      margin: 0.06
+      center: false
+      scrollable: true
+      auto-animate-duration: 0.7
+      slide-number: c/t
+      show-slide-number: all
+      hash-type: number
+      transition: none
+      background-transition: none
+      controls-layout: edges
+      controls-tutorial: false
+      navigation-mode: linear
+      progress: true
+      menu:
+        side: left
+        width: normal
+        numbers: true
+        hideMissingTitles: true
+      chalkboard:
+        buttons: false
+      preview-links: auto
+      code-copy: true
+      code-line-numbers: false
+      highlight-style: a11y
+      pdf-separate-fragments: false
