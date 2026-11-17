@@ -7,7 +7,7 @@
     ]
   },
   {
-    "listing": "/kursus/plan.html",
+    "listing": "/index.html",
     "items": [
       "/lektioner/01-messy-data-og-python/index.html",
       "/lektioner/02-intro-til-python/index.html",
@@ -24,7 +24,7 @@
     ]
   },
   {
-    "listing": "/index.html",
+    "listing": "/kursus/plan.html",
     "items": [
       "/lektioner/01-messy-data-og-python/index.html",
       "/lektioner/02-intro-til-python/index.html",
